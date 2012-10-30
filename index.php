@@ -11,4 +11,4 @@
 <body id="nothing" class="empty">
 	
 	<!-- TODO: Place body contents here -->
-	<p style="font-size: 24px; color:#3a3; text-align:center;"><code>// TODO: Put some implimentation here</code></p>
+	<p style="font-size: 24px; color:#3a3; text-align:center;"><code>// TODO: Put some implementation here</code></p>
