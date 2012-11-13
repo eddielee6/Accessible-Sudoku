@@ -1,0 +1,261 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Accessible Sudoku</title>
+        <style type="text/css">
+
+        html, body { margin: 0px; padding: 0px; }
+
+        div { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; -ms-box-sizing: border-box; }
+
+        body {
+          background: url(img/bg.png), -webkit-radial-gradient(rgba(255, 255, 255, 1.0), rgba(255, 255, 255, 0.5));
+          background: url(img/bg.png);
+          background: url(img/bg.png), radial-gradient(center, circle, rgba(255, 255, 255, 1.0) 0%, rgba(255, 255, 255, 0.5) 100%);
+        }
+
+        table {
+          border-radius: 5px;
+        }
+
+        td {
+          background: #FFF;
+          border: 2px solid black;
+        }
+
+        #grid {
+            position: relative;
+            width: 543px;
+            height: 543px;
+            margin: 5px auto 0px;
+            margin-bottom: 30px;
+            border-radius: 4px;
+            padding: 7px 9px;
+            border-radius: 7px;
+            -moz-border-radius: 7px;
+
+            background: rgba(0, 0, 0, 0.4);
+            box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.1), 0px 0px 30px rgba(0, 0, 0, 0.8);
+            -moz-box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.1), 0px 0px 30px rgba(0, 0, 0, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        #grid-overlay {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .row .block:last-child {
+            margin-right: 0px;
+        }
+
+        .block {
+            margin-top: 2px;
+            margin-right: 2px;
+            float: left;
+            width: 173px;
+            background: #00A480;
+            border: 1px solid #00A480;
+            border-radius: 3px;
+            -moz-border-radius: 3px;
+            box-shadow: 0px 0px 160px rgba(255, 255, 255, 0.1);
+            -moz-box-shadow: 0px 0px 160px rgba(255, 255, 255, 0.1);
+        }
+
+        .block div {
+            box-shadow: inset 4px 4px 6px rgba(0, 0, 0, 0.05);
+            -moz-box-shadow: inset 4px 4px 6px rgba(0, 0, 0, 0.05);
+            background: -moz-linear-gradient(90deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.0));
+            background: -webkit-linear-gradient(90deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.0));
+            background-color: white;
+            float: left;
+            margin: 1px;
+            width: 55px;
+            height: 55px;
+            line-height: 55px;
+            font-size: 38px;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 2px;
+            -moz-border-radius: 2px;
+            text-align: center;
+            color: #333;
+            text-shadow: 0px 0px 1px rgba(0, 0, 0, 1.0);
+        }
+
+        .block div.highlighted {
+          background: url("img/cellHighlighted.png");
+        }
+
+        .block div.highlighted.chrome {
+          background: -moz-linear-gradient(270deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.0));
+          background: -webkit-linear-gradient(270deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.0));
+          background-color: #F60;
+          border: 2px solid #8b3800;
+          color: #FFF !important;
+          font-weight: bold;
+          text-shadow: 0px 0px 2px rgba(0, 0, 0, 1.0);
+        }
+
+        #text-wrapper {
+            background: rgba(0, 0, 0, 0.2);
+            width: 100%;
+            margin: 20px 0px;
+            box-shadow: inset 0px 3px 10px rgba(0, 0, 0, 0.4), 0px 0px 1px rgba(0, 0, 0, 0.5), 0px -1px 0px rgba(255, 255, 255, 0.1);
+
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-width: 1px 0px;
+            padding: 5px;
+            -webkit-tap-highlight-color: rgba(0,0,0,0);
+        }
+
+        input {
+          color: white;
+          margin: 10px 0px;
+          background: none;
+          text-align: center;
+          font-weight: bold;
+          font-size: 2em;
+          width: 100%;
+          outline: none;
+          border: none;
+          text-shadow: 0px 0px 10px black;
+        }
+
+        </style>
+
+        <script type="text/javascript" src="jquery.js"></script>
+        <script type="text/javascript" src="namespace.js"></script>
+        <script type="text/javascript" src="globalVars.js"></script>
+        <script type="text/javascript" src="tablefill.js"></script>
+        <script type="text/javascript" src="movecell.js"></script>
+        <script type="text/javascript" src="changegrid.js"></script>
+        <script type="text/javascript" src="sudoku.js"></script>
+        <script type="text/javascript" src="jinput.js"></script>
+
+    </head>
+    <body>
+
+    <div id="grid">
+      <div id="row1" class="row">
+        <div class="block">
+          <div id="a1" class="r1 c1"></div>
+          <div id="a2" class="r1 c2"></div>
+          <div id="a3" class="r1 c3"></div>
+          <div id="b1" class="r2 c1"></div>
+          <div id="b2" class="r2 c2"></div>
+          <div id="b3" class="r2 c3"></div>
+          <div id="c1" class="r3 c1"></div>
+          <div id="c2" class="r3 c2"></div>
+          <div id="c3" class="r3 c3"></div>
+        </div>
+        <div class="block">
+          <div id="a4" class="r4 c4"></div>
+          <div id="a5" class="r4 c5"></div>
+          <div id="a6" class="r4 c6"></div>
+          <div id="b4" class="r5 c4"></div>
+          <div id="b5" class="r5 c5"></div>
+          <div id="b6" class="r5 c6"></div>
+          <div id="c4" class="r6 c4"></div>
+          <div id="c5" class="r6 c5"></div>
+          <div id="c6" class="r6 c6"></div>
+        </div>
+        <div class="block">
+          <div id="a7" class="r7 c7"></div>
+          <div id="a8" class="r7 c8"></div>
+          <div id="a9" class="r7 c9"></div>
+          <div id="b7" class="r8 c7"></div>
+          <div id="b8" class="r8 c7"></div>
+          <div id="b9" class="r8 c8"></div>
+          <div id="c7" class="r9 c7"></div>
+          <div id="c8" class="r9 c8"></div>
+          <div id="c9" class="r9 c9"></div>
+        </div>
+      </div>
+
+      <div id="row2" class="row">
+        <div class="block">
+          <div id="d1" class="r4 c1"></div>
+          <div id="d2" class="r4 c2"></div>
+          <div id="d3" class="r4 c3"></div>
+          <div id="e1" class="r5 c1"></div>
+          <div id="e2" class="r5 c2"></div>
+          <div id="e3" class="r5 c3"></div>
+          <div id="f1" class="r6 c1"></div>
+          <div id="f2" class="r6 c2"></div>
+          <div id="f3" class="r6 c3"></div>
+        </div>
+        <div class="block">
+          <div id="d4" class="r4 c4"></div>
+          <div id="d5" class="r4 c5"></div>
+          <div id="d6" class="r4 c6"></div>
+          <div id="e4" class="r5 c4"></div>
+          <div id="e5" class="r5 c5"></div>
+          <div id="e6" class="r5 c6"></div>
+          <div id="f4" class="r6 c4"></div>
+          <div id="f5" class="r6 c5"></div>
+          <div id="f6" class="r6 c6"></div>
+        </div>
+        <div class="block">
+          <div id="d7" class="r4 c1"></div>
+          <div id="d8" class="r4 c2"></div>
+          <div id="d9" class="r4 c3"></div>
+          <div id="e7" class="r5 c1"></div>
+          <div id="e8" class="r5 c2"></div>
+          <div id="e9" class="r5 c3"></div>
+          <div id="f7" class="r6 c1"></div>
+          <div id="f8" class="r6 c2"></div>
+          <div id="f9" class="r6 c3"></div>
+        </div>
+      </div>
+
+      <div id="row3" class="row">
+        <div class="block">
+          <div id="g1" class="r7 c1"></div>
+          <div id="g2" class="r7 c2"></div>
+          <div id="g3" class="r7 c3"></div>
+          <div id="h1" class="r8 c1"></div>
+          <div id="h2" class="r8 c2"></div>
+          <div id="h3" class="r8 c3"></div>
+          <div id="i1" class="r9 c1"></div>
+          <div id="i2" class="r9 c2"></div>
+          <div id="i3" class="r9 c3"></div>
+        </div>
+        <div class="block">
+          <div id="g4" class="r7 c4"></div>
+          <div id="g5" class="r7 c5"></div>
+          <div id="g6" class="r7 c6"></div>
+          <div id="h4" class="r8 c4"></div>
+          <div id="h5" class="r8 c5"></div>
+          <div id="h6" class="r8 c6"></div>
+          <div id="i4" class="r9 c4"></div>
+          <div id="i5" class="r9 c5"></div>
+          <div id="i6" class="r9 c6"></div>
+        </div>
+        <div class="block">
+          <div id="g7" class="r7 c7"></div>
+          <div id="g8" class="r7 c8"></div>
+          <div id="g9" class="r7 c9"></div>
+          <div id="h7" class="r8 c7"></div>
+          <div id="h8" class="r8 c8"></div>
+          <div id="h9" class="r8 c9"></div>
+          <div id="i7" class="r9 c7"></div>
+          <div id="i8" class="r9 c8"></div>
+          <div id="i9" class="r9 c9"></div>
+        </div>
+      </div>
+
+
+      <div id="grid-overlay"></div>
+    </div>
+
+
+	<div align="center" id="text-wrapper"><input type="text" id="inputbox" aria-live="alert"></div>
+        <br><br>
+        <div id="doing"></div>
+    </body>
+</html>
