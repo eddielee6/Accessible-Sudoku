@@ -1,0 +1,17 @@
+Web-based Sudoku game accessible by desktop screen-reader
+
+Description
+
+Sudoku is a fun game, though unfortunately has been difficult to make accessible. The goal of this
+project is to build a web-based Sudoku game playable by a person using a desktop screen-reader or
+other assistive device. Guidelines exist for building accessible websites, such as the World Wide Web
+Consortium’s (W3C) Web Accessibility Initiative (WAI), and should be adhered to when building the
+game.
+
+The key challenge is interface design for the game. How might a person using a screen-reader and
+keyboard know the state of the Sudoku board and be able to access it effectively?
+
+Requirements
+
+1. Build accessible Sudoku game.
+2. Demonstrate usable with desktop screen-reader.

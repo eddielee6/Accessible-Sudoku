@@ -1,0 +1,153 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Accessible Sudoku</title>
+        <style type="text/css">
+        tbody, colgroup {
+        border: 5px solid green;
+        }
+
+        td {
+        border: 2px solid black;
+        }
+
+        .highlighted { background: yellow; }
+        </style>
+	
+        <script type="text/javascript" src="jquery.js"></script>
+        <script type="text/javascript" src="namespace.js"></script>
+        <script type="text/javascript" src="globalVars.js"></script>
+        <script type="text/javascript" src="tablefill.js"></script>
+        <script type="text/javascript" src="movecell.js"></script>
+        <script type="text/javascript" src="changegrid.js"></script>
+        <script type="text/javascript" src="sudoku.js"></script>
+        <script type="text/javascript" src="jinput.js"></script>
+
+    </head>
+    <body>
+               <table border="1" width="500" align="center" rules="groups">
+                <colgroup span="3">
+                <colgroup span="3">
+                <colgroup span="3">
+                <tbody>
+
+                   <tr bgcolor="#fffeef">
+                       <td align="center" width="10%"><font size="10"><div id="a1">&nbsp;</div></font></td>
+                       <td align="center" width="10%"><font size="10"><div id="a2">&nbsp;</div></font></td>
+                       <td align="center" width="10%"><font size="10"><div id="a3">&nbsp;</div></font></td>
+                       <td align="center" width="10%"><font size="10"><div id="a4">&nbsp;</div></font></td>
+                       <td align="center" width="10%"><font size="10"><div id="a5">&nbsp;</div></font></td>
+                       <td align="center" width="10%"><font size="10"><div id="a6">&nbsp;</div></font></td>
+                       <td align="center" width="10%"><font size="10"><div id="a7">&nbsp;</div></font></td>
+                       <td align="center" width="10%"><font size="10"><div id="a8">&nbsp;</div></font></td>
+                       <td align="center" width="10%"><font size="10"><div id="a9">&nbsp;</div></font></td>
+
+                   </tr>
+                   <tr>
+                       <td align="center" width="10%"><font size="10"><div id="b1">&nbsp;</div></font></td>
+                       <td align="center" width="10%"><font size="10"><div id="b2">&nbsp;</div></font></td>
+                       <td align="center" width="10%"><font size="10"><div id="b3">&nbsp;</div></font></td>
+                       <td align="center" width="10%"><font size="10"><div id="b4">&nbsp;</div></font></td>
+                       <td align="center" width="10%"><font size="10"><div id="b5">&nbsp;</div></font></td>
+                       <td align="center" width="10%"><font size="10"><div id="b6">&nbsp;</div></font></td>
+                       <td align="center" width="10%"><font size="10"><div id="b7">&nbsp;</div></font></td>
+                       <td align="center" width="10%"><font size="10"><div id="b8">&nbsp;</div></font></td>
+                       <td align="center" width="10%"><font size="10"><div id="b9">&nbsp;</div></font></td>
+
+                   </tr>
+                   <tr>
+                       <td align="center" width="10%"><font size="10"><div id="c1">&nbsp;</div></font></td>
+                       <td align="center" width="10%"><font size="10"><div id="c2">&nbsp;</div></font></td>
+                       <td align="center" width="10%"><font size="10"><div id="c3">&nbsp;</div></font></td>
+                       <td align="center" width="10%"><font size="10"><div id="c4">&nbsp;</div></font></td>
+                       <td align="center" width="10%"><font size="10"><div id="c5">&nbsp;</div></font></td>
+                       <td align="center" width="10%"><font size="10"><div id="c6">&nbsp;</div></font></td>
+                       <td align="center" width="10%"><font size="10"><div id="c7">&nbsp;</div></font></td>
+                       <td align="center" width="10%"><font size="10"><div id="c8">&nbsp;</div></font></td>
+                       <td align="center" width="10%"><font size="10"><div id="c9">&nbsp;</div></font></td>
+
+                   </tr>
+                </tbody>
+                <tbody>
+                   <tr>
+                       <td align="center" width="10%"><font size="10"><div id="d1">&nbsp;</div></font></td>
+                       <td align="center" width="10%"><font size="10"><div id="d2">&nbsp;</div></font></td>
+                       <td align="center" width="10%"><font size="10"><div id="d3">&nbsp;</div></font></td>
+                       <td align="center" width="10%"><font size="10"><div id="d4">&nbsp;</div></font></td>
+                       <td align="center" width="10%"><font size="10"><div id="d5">&nbsp;</div></font></td>
+                       <td align="center" width="10%"><font size="10"><div id="d6">&nbsp;</div></font></td>
+                       <td align="center" width="10%"><font size="10"><div id="d7">&nbsp;</div></font></td>
+                       <td align="center" width="10%"><font size="10"><div id="d8">&nbsp;</div></font></td>
+                       <td align="center" width="10%"><font size="10"><div id="d9">&nbsp;</div></font></td>
+
+                   </tr>
+                   <tr>
+                       <td align="center" width="10%"><font size="10"><div id="e1">&nbsp;</div></font></td>
+                       <td align="center" width="10%"><font size="10"><div id="e2">&nbsp;</div></font></td>
+                       <td align="center" width="10%"><font size="10"><div id="e3">&nbsp;</div></font></td>
+                       <td align="center" width="10%"><font size="10"><div id="e4">&nbsp;</div></font></td>
+                       <td align="center" width="10%"><font size="10"><div id="e5">&nbsp;</div></font></td>
+                       <td align="center" width="10%"><font size="10"><div id="e6">&nbsp;</div></font></td>
+                       <td align="center" width="10%"><font size="10"><div id="e7">&nbsp;</div></font></td>
+                       <td align="center" width="10%"><font size="10"><div id="e8">&nbsp;</div></font></td>
+                       <td align="center" width="10%"><font size="10"><div id="e9">&nbsp;</div></font></td>
+
+                   </tr>
+                   <tr>
+                       <td align="center" width="10%"><font size="10"><div id="f1">&nbsp;</div></font></td>
+                       <td align="center" width="10%"><font size="10"><div id="f2">&nbsp;</div></font></td>
+                       <td align="center" width="10%"><font size="10"><div id="f3">&nbsp;</div></font></td>
+                       <td align="center" width="10%"><font size="10"><div id="f4">&nbsp;</div></font></td>
+                       <td align="center" width="10%"><font size="10"><div id="f5">&nbsp;</div></font></td>
+                       <td align="center" width="10%"><font size="10"><div id="f6">&nbsp;</div></font></td>
+                       <td align="center" width="10%"><font size="10"><div id="f7">&nbsp;</div></font></td>
+                       <td align="center" width="10%"><font size="10"><div id="f8">&nbsp;</div></font></td>
+                       <td align="center" width="10%"><font size="10"><div id="f9">&nbsp;</div></font></td>
+
+                   </tr>
+                   </tbody>
+                  <tbody>
+                   <tr>
+                       <td align="center" width="10%"><font size="10"><div id="g1">&nbsp;</div></font></td>
+                       <td align="center" width="10%"><font size="10"><div id="g2">&nbsp;</div></font></td>
+                       <td align="center" width="10%"><font size="10"><div id="g3">&nbsp;</div></font></td>
+                       <td align="center" width="10%"><font size="10"><div id="g4">&nbsp;</div></font></td>
+                       <td align="center" width="10%"><font size="10"><div id="g5">&nbsp;</div></font></td>
+                       <td align="center" width="10%"><font size="10"><div id="g6">&nbsp;</div></font></td>
+                       <td align="center" width="10%"><font size="10"><div id="g7">&nbsp;</div></font></td>
+                       <td align="center" width="10%"><font size="10"><div id="g8">&nbsp;</div></font></td>
+                       <td align="center" width="10%"><font size="10"><div id="g9">&nbsp;</div></font></td>
+
+                   </tr>
+                   <tr>
+                       <td align="center" width="10%"><font size="10"><div id="h1">&nbsp;</div></font></td>
+                       <td align="center" width="10%"><font size="10"><div id="h2">&nbsp;</div></font></td>
+                       <td align="center" width="10%"><font size="10"><div id="h3">&nbsp;</div></font></td>
+                       <td align="center" width="10%"><font size="10"><div id="h4">&nbsp;</div></font></td>
+                       <td align="center" width="10%"><font size="10"><div id="h5">&nbsp;</div></font></td>
+                       <td align="center" width="10%"><font size="10"><div id="h6">&nbsp;</div></font></td>
+                       <td align="center" width="10%"><font size="10"><div id="h7">&nbsp;</div></font></td>
+                       <td align="center" width="10%"><font size="10"><div id="h8">&nbsp;</div></font></td>
+                       <td align="center" width="10%"><font size="10"><div id="h9">&nbsp;</div></font></td>
+
+                   </tr>
+                   <tr>
+                       <td align="center" width="10%"><font size="10"><div id="i1">&nbsp;</div></font></td>
+                       <td align="center" width="10%"><font size="10"><div id="i2">&nbsp;</div></font></td>
+                       <td align="center" width="10%"><font size="10"><div id="i3">&nbsp;</div></font></td>
+                       <td align="center" width="10%"><font size="10"><div id="i4">&nbsp;</div></font></td>
+                       <td align="center" width="10%"><font size="10"><div id="i5">&nbsp;</div></font></td>
+                       <td align="center" width="10%"><font size="10"><div id="i6">&nbsp;</div></font></td>
+                       <td align="center" width="10%"><font size="10"><div id="i7">&nbsp;</div></font></td>
+                       <td align="center" width="10%"><font size="10"><div id="i8">&nbsp;</div></font></td>
+                       <td align="center" width="10%"><font size="10"><div id="i9">&nbsp;</div></font></td>
+
+                   </tr>
+                   </tbody>
+        </table>
+	<div align="center"><input type="text" id="inputbox" aria-live="alert" style="border:none;width:100%;text-align:center;font-weight:bold;font-size:2em"></div>
+        <br><br>
+        <div id="doing"></div>
+    </body>
+</html>
