@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+
+	<head>
+	
+		<title>HTML5 local storage test</title>
+		
+	<body>
+	
+	<header>
+		<h1 id="header" contenteditable="true">This header is editable</h1>
+	</header>
+	
+	<script>
+	
+		function hasStorageSupport() {
+			
+			try { return 'localStorage' in window && window['localStorage'] !== null; } 
+			catch (e) { return false; }
+		
+		}
+		
+		if (hasStorageSupport()) {
+			
+			var headerInstance = document.getElementById("header");
+			
+			// Save the content when the user unfocuses from the editable header.
+			headerInstance.onblur = function() {
+				localStorage.setItem('headerContent', headerInstance.innerHTML);
+			}
+			
+			// Get the previously saved content, if any.
+			if (localStorage.getItem('headerContent') != null) {
+				headerInstance.innerHTML = localStorage.getItem('headerContent');
+			}
+			
+		} else {
+		
+			alert('No storage supported in your busted ass browser.');
+			
+		}
+	
+	</script>
