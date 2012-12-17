@@ -1,7 +1,6 @@
-var ChangeGrid = namespace("AccessibleSudoku.ChangeGrid");
+window.ChangeGrid = {};
 
-ChangeGrid.fillCurrentCell = function(number)
-{
+ChangeGrid.fillCurrentCell = function(number) {
     var curRowIndex= ChangeGrid.getRowCoordinate(cell);
     var curColIndex = ChangeGrid.getColCoordinate(cell);
     var isValidCell = Sudoku.canFillPoint(curRowIndex, curColIndex); //bool to get if its a valid cell
@@ -29,51 +28,49 @@ ChangeGrid.fillCurrentCell = function(number)
     {
         ChangeGrid.output("Can't overwrite a grid number");
     }
-    
-}
-ChangeGrid.getRowCoordinate = function(cellnumber)
-{
+};
+
+ChangeGrid.getRowCoordinate = function(cellnumber) {
     var row=cellnumber.charAt(0);
     var firstRow='a';
     var curRowIndex=row.charCodeAt(0)-firstRow.charCodeAt(0);
     return curRowIndex;
-}
-ChangeGrid.getColCoordinate = function(cellnumber)
-{
+};
+
+ChangeGrid.getColCoordinate = function(cellnumber) {
     var col=cellnumber.charAt(1);
 
     var firstCol='1';
     var curColIndex=col.charCodeAt(0)-firstCol.charCodeAt(0);
 
     return curColIndex;
-}
-ChangeGrid.getRowCharacter = function(number)
-{
+};
+
+ChangeGrid.getRowCharacter = function(number) {
     var firstRow='a';
     var curRowChar=firstRow.charCodeAt(0)+number;
     return String.fromCharCode(curRowChar);
-}
-ChangeGrid.getColCharacter = function(number)
-{
+};
+
+ChangeGrid.getColCharacter = function(number) {
     var firstCol='0';
     var curColChar=number+firstCol.charCodeAt(0)+1;
     return String.fromCharCode(curColChar);
-}
-ChangeGrid.getCurrentRowIndex = function()
-{
+};
+
+ChangeGrid.getCurrentRowIndex = function() {
     return ChangeGrid.getRowCoordinate(cell);
-}
-ChangeGrid.getCurrentColIndex = function()
-{
+};
+
+ChangeGrid.getCurrentColIndex = function() {
     return ChangeGrid.getColCoordinate(cell);
-}
-ChangeGrid.output = function(textoutput)
-{
+};
+
+ChangeGrid.output = function(textoutput) {
     $("#inputbox").val(textoutput);
-}
-ChangeGrid.getCurrentBoxIndex = function()
-{
+};
+
+ChangeGrid.getCurrentBoxIndex = function() {
     var boxIndex = 3 * (parseInt(ChangeGrid.getCurrentRowIndex() / 3)) + parseInt(ChangeGrid.getCurrentColIndex() / 3);
     return boxIndex;
-}
-
+};

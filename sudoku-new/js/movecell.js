@@ -1,9 +1,6 @@
-var MoveCell = namespace("AccessibleSudoku.MoveCell");
+window.MoveCell = {};
 
-var isChrome = /Chrome/.test(navigator.userAgent);
-
-MoveCell.move = function (movt) 
-{        
+MoveCell.move = function (movt) {        
     var row = cell.charAt(0);
     var col = cell.charAt(1);
     var newRownum;
@@ -70,24 +67,17 @@ MoveCell.move = function (movt)
             }
     }
     MoveCell.moveBetweenCells(cell, cellnew);
+};
 
-}
 
-
-MoveCell.color = function (cell, colr){
+MoveCell.color = function (cell, colr) {
     var cellNode = document.getElementById(cell);
     var num = cellNode.innerHTML;
     if (colr === 0) {
         $(cellNode).removeClass('highlighted');
-        if (isChrome) {
-            $(cellNode).removeClass('chrome');
-        }
                     
     } else if (colr === 1) {
         $(cellNode).addClass('highlighted');
-        if (isChrome) {
-            $(cellNode).addClass('chrome');
-        }
 
         var outstring = "";
         if (crossedBox === 1) {
@@ -101,11 +91,9 @@ MoveCell.color = function (cell, colr){
             ChangeGrid.output(outstring + num);
         }
     }
+};
 
-}
-MoveCell.moveBetweenCells = function (cellold, cellnew)
-{
-
+MoveCell.moveBetweenCells = function (cellold, cellnew) {
     if (cellnew === "beep")
     {
         ChangeGrid.output("Beep");
@@ -116,5 +104,4 @@ MoveCell.moveBetweenCells = function (cellold, cellnew)
         MoveCell.color(cellnew, 1);
         cell = cellnew;
     }
-
-}
+};
