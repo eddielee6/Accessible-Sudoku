@@ -4,9 +4,9 @@
 	<head>
 	
 		<title>JavaScript Objects</title>
-		<!-- json2.js is used because the native JSON parse functions aren't available on all browsers -->
 		<script type="text/javascript" src="json2.js"></script>
-		<script type="text/javascript" src="game.js"></script>
+		<script type="text/javascript" src="knockout.js"></script>
+		<script type="text/javascript" src="board.js"></script>
 	
 	<body>
 	
@@ -14,7 +14,7 @@
 		<p>
 			<script type="text/javascript">
 			
-				var game_instance = new Game();
+				var game_instance = new Board();
 				
 				var json_data = JSON.stringify(game_instance);
 				
@@ -22,3 +22,45 @@
 				
 			</script>
 		</p>
+		
+		<hr />
+		
+		
+		
+		<!-- START OF KNOCKOUT STUFF, NOTHING TO DO WITH THE JSON CRAP ABOVE -->
+		
+		<h1>Knockout:</h1>
+		
+		<table>
+			<tbody>
+				<tr data-bind="foreach: cells">
+					<td data-bind="text: value"></td>
+				</tr>
+			</tbody>
+		</table>
+		
+		<script type="text/javascript">
+		
+		// Each cell
+		function Cell(value) {
+			var self = this;
+			self.value = value;
+		}
+		
+		// The View Model
+		function BoardViewModel() {
+		
+			var self = this;
+		
+			// The array of cells
+			self.cells = ko.observableArray([
+				new Cell("1"),
+				new Cell("2"),
+				new Cell("3")
+			]);
+			
+		}
+		
+		ko.applyBindings(new BoardViewModel());
+		
+		</script>	
