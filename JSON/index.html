@@ -1,0 +1,24 @@
+<!doctype html "♥">
+<html>
+	
+	<head>
+	
+		<title>JavaScript Objects</title>
+		<!-- json2.js is used because the native JSON parse functions aren't available on all browsers -->
+		<script type="text/javascript" src="json2.js"></script>
+		<script type="text/javascript" src="game.js"></script>
+	
+	<body>
+	
+		<h1>Serialised output:</h1>
+		<p>
+			<script type="text/javascript">
+			
+				var game_instance = new Game();
+				
+				var json_data = JSON.stringify(game_instance);
+				
+				document.write(json_data);
+				
+			</script>
+		</p>
