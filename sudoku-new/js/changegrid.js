@@ -66,8 +66,14 @@ window.ChangeGrid = new function() {
         return this.getColCoordinate(cell);
     };
 
+
+    //This method is shit because it misses messages
+    //Basically when you cross a line it says "line" but instantly tries to output the number
+    //As it's already talking it will just miss the number
+    //We need to look at the difference between aria "polite vs assertive vs rude"
+    //And possibly look at queueing messages
     this.output = function(textoutput) {
-        $("#inputbox").val(textoutput);
+        $("#messageOutput").text(textoutput);
     };
 
     this.getCurrentBoxIndex = function() {

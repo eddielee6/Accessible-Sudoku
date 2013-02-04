@@ -1,5 +1,13 @@
 @import "vender/normalize.css";
 
+//Mixins
+.visuallyHidden {
+    text-indent: -9999px;
+}
+
+
+//Styles
+
 #grid {
     position: relative;
     width: 543px;
@@ -26,4 +34,13 @@
 .block div.highlighted {
   background-color: #F60;
   color: #FFF;
+}
+
+//Hide the output for the screen reader message
+//All read these...
+//http://alistapart.com/article/fir
+//http://stackoverflow.com/questions/1755656/displaynone-vs-visibilityhidden-vs-text-indent9999-how-screen-reader-behave-w
+//http://css-discuss.incutio.com/wiki/Screenreader_Visibility
+#messageOutput {
+    .visuallyHidden;
 }

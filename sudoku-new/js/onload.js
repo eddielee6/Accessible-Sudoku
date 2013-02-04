@@ -34,7 +34,7 @@ $(function () {
     var tCounter = 0;           //used to count the number of times the user has consecutively executed the t command (toggle)
     var hCounter = 0;           //used to count the number of times the user has consecutively executed the h command (help)
 
-    $("#inputbox").keydown(function (e) {
+    $(window).keydown(function (e) {
         if (Sudoku.checkSolved()) {     //check on every kepress to see if the board is solved, if so on any keypress it should refill itself with a new puzzle
             TableFill.fillGrid();
             return true;
