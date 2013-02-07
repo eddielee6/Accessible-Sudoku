@@ -1,5 +1,5 @@
 <?php 
 	
-	header("Location: http://aad.arronjeffery.me/sudoku-new/");
+	header("Location: sudoku-new");
 	
 ?>
