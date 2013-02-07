@@ -1,5 +1,21 @@
 $(function () {
 
+
+
+    //Will need moving--------
+
+
+    $("#themeSwitch li").click(function() {
+        $("html").removeClass().addClass($(this).attr("data-theme-name"));
+    });
+
+
+
+    //End-----------
+
+
+
+
     cell='a1';
     boardLength = 9;
 

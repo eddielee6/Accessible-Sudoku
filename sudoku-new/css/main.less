@@ -6,35 +6,57 @@
 }
 
 
-//Styles
+//Standard styles
+body {
+    background: green;
+    color: #fcfcfc;
+}
 
-#grid {
+.gameGrid {
     position: relative;
     width: 543px;
     height: 543px;
+
+    .square {
+        float: left;
+        width: 173px;
+        border: 1px solid #000;
+    }
+
+    .cell {
+        border: 1px solid #eee;
+        float: left;
+        width: 55px;
+        height: 55px;
+        line-height: 55px;
+        font-size: 38px;
+        text-align: center;
+    }
+
+    .cell.highlighted {
+      background-color: #F60;
+      color: #FFF;
+    }
+
 }
 
-.block {
-    float: left;
-    width: 173px;
-    border: 1px solid #000;
+//Alternate Themes
+//Consistant structure should only be declared in the standard theme
+.dark-on-light {
+    body {
+        background: #2b2f33;
+        color: #fcfcfc;
+    }
 }
 
-.block div {
-    border: 1px solid #eee;
-    float: left;
-    width: 55px;
-    height: 55px;
-    line-height: 55px;
-    font-size: 38px;
-    text-align: center;
-    color: #333;
+.light-on-dark {
+    body {
+        background: #fcfcfc;
+        color: #2b2f33;
+    }
+
 }
 
-.block div.highlighted {
-  background-color: #F60;
-  color: #FFF;
-}
 
 //Hide the output for the screen reader message
 //All read these...
