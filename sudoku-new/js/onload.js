@@ -399,7 +399,7 @@ $(function () {
             }
             controlSwitch = false;
         }
-        return false;
+        //return false;
     });
 
     $("#inputbox").blur(function () {                            //make sure that the user's cursor is always on the output textbox, this way their screen reader will always read whatever we print to it
