@@ -1,12 +1,22 @@
 @import "vender/normalize.css";
 
+
 //Mixins
 .visuallyHidden {
     text-indent: -9999px;
 }
 
 
-//Standard styles
+//Standard style
+@cellSize: 40px;
+@cellFontSize: @cellSize * 0.7;
+@squareSize: ((@cellSize + 2) * 3); // 2 for borders, 3 for cell count
+@boardSize: ((@squareSize + 2)* 3); // 2 for borders, 3 for square count
+
+@primaryBorderColour: #333;
+@secondaryBorderColour: #EEE;
+
+
 body {
     background: green;
     color: #fcfcfc;
@@ -14,22 +24,24 @@ body {
 
 .gameGrid {
     position: relative;
-    width: 543px;
-    height: 543px;
+    width: @boardSize;
+    border: 1px solid @primaryBorderColour;
+    margin: 0 auto;
+    overflow: hidden; //to clear
 
     .square {
+        border: 1px solid @primaryBorderColour;
         float: left;
-        width: 173px;
-        border: 1px solid #000;
+        width: @squareSize;
     }
 
     .cell {
-        border: 1px solid #eee;
+        border: 1px solid @secondaryBorderColour;
         float: left;
-        width: 55px;
-        height: 55px;
-        line-height: 55px;
-        font-size: 38px;
+        width: @cellSize;
+        height: @cellSize;
+        line-height: @cellSize;
+        font-size: @cellFontSize;
         text-align: center;
     }
 
@@ -40,29 +52,67 @@ body {
 
 }
 
+#messageOutput {
+    .visuallyHidden;
+}
+
+
 //Alternate Themes
 //Consistant structure should only be declared in the standard theme
-.dark-on-light {
+html.dark-on-light {
     body {
         background: #2b2f33;
         color: #fcfcfc;
     }
 }
 
-.light-on-dark {
+html.light-on-dark {
     body {
         background: #fcfcfc;
         color: #2b2f33;
     }
-
 }
 
+html.bigger {
+    @cellSize: 55px;
+    @cellFontSize: @cellSize * 0.7;
+    @squareSize: ((@cellSize + 2) * 3); // 2 for borders, 3 for cell count
+    @boardSize: ((@squareSize + 2)* 3); // 2 for borders, 3 for square count
 
-//Hide the output for the screen reader message
-//All read these...
-//http://alistapart.com/article/fir
-//http://stackoverflow.com/questions/1755656/displaynone-vs-visibilityhidden-vs-text-indent9999-how-screen-reader-behave-w
-//http://css-discuss.incutio.com/wiki/Screenreader_Visibility
-#messageOutput {
-    .visuallyHidden;
+    .gameGrid {
+        width: @boardSize;
+
+        .square {
+            width: @squareSize;
+        }
+
+        .cell {
+            width: @cellSize;
+            height: @cellSize;
+            line-height: @cellSize;
+            font-size: @cellFontSize;
+        }
+    }
+}
+
+html.biggest {
+    @cellSize: 70px;
+    @cellFontSize: @cellSize * 0.7;
+    @squareSize: ((@cellSize + 2) * 3); // 2 for borders, 3 for cell count
+    @boardSize: ((@squareSize + 2)* 3); // 2 for borders, 3 for square count
+
+    .gameGrid {
+        width: @boardSize;
+
+        .square {
+            width: @squareSize;
+        }
+
+        .cell {
+            width: @cellSize;
+            height: @cellSize;
+            line-height: @cellSize;
+            font-size: @cellFontSize;
+        }
+    }
 }

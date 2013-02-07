@@ -6,7 +6,13 @@ $(function () {
 
 
     $("#themeSwitch li").click(function() {
-        $("html").removeClass().addClass($(this).attr("data-theme-name"));
+        var validSizeThemes = "normal dark-on-light light-on-dark";
+        $("html").removeClass(validSizeThemes).addClass($(this).attr("data-theme-name"));
+    });
+
+    $("#sizeSwitch li").click(function() {
+        var validSizeThemes = "standard bigger biggest";
+        $("html").removeClass(validSizeThemes).addClass($(this).attr("data-theme-name"));
     });
 
 
