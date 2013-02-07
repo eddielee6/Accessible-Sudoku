@@ -1,6 +1,33 @@
 @import "vender/normalize.css";
 
 
+//Fonts - these do all 250kb... so remember to remove unused styles
+@font-face{
+    font-family: "opendyslexic";
+    src: url('../fonts/OpenDyslexic-Regular.otf');
+    font-style: normal;
+    font-weight: normal;
+}
+@font-face{
+    font-family: "opendyslexic";
+    src: url('../fonts/OpenDyslexic-Italic.otf');
+    font-style: italic;
+    font-weight: normal;
+}
+@font-face{
+    font-family: "opendyslexic";
+    src: url('../fonts/OpenDyslexic-Bold.otf');
+    font-weight: bold;
+    font-style: normal;
+}
+@font-face{
+    font-family: "opendyslexic";
+    src: url('../fonts/OpenDyslexic-BoldItalic.otf');
+    font-weight: bold;
+    font-style: italic;
+}
+
+
 //Mixins
 .visuallyHidden {
     text-indent: -9999px;
@@ -70,6 +97,12 @@ html.light-on-dark {
     body {
         background: #fcfcfc;
         color: #2b2f33;
+    }
+}
+
+html.dyslexic {
+    body {
+        font-family: opendyslexic;
     }
 }
 

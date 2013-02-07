@@ -15,7 +15,10 @@ $(function () {
         $("html").removeClass(validSizeThemes).addClass($(this).attr("data-theme-name"));
     });
 
-
+    $("#fontSwitch li").click(function() {
+        var validSizeThemes = "standard-font dyslexic";
+        $("html").removeClass(validSizeThemes).addClass($(this).attr("data-theme-name"));
+    });
 
     //End-----------
 
