@@ -2,6 +2,10 @@ $(function () {
     
     //Will need moving--------
 
+    var sudokuGameController = new SudokuGameController();
+
+    
+
     var initAccessibilityControls = function() {
         var localStorage = new LocalStorageRepository();
 
