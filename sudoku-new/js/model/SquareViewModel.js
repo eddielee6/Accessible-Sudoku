@@ -1,5 +1,5 @@
 var SquareViewModel = function() {
 
 	//Array of CellViewModel
-	this.Cells = null;
+	this.Cells = ko.observableArray();
 };

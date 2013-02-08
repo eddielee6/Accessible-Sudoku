@@ -1,5 +1,5 @@
 var SudokuViewModel = function() {
-	this.SolutionValue;
-	this.OrigionalValue;
-	this.CurrentValue;
+	this.SolutionValue = ko.observable();
+	this.OrigionalValue = ko.observable();
+	this.CurrentValue = ko.observable();
 };
