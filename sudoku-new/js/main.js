@@ -8,7 +8,6 @@ $(function () {
         $("html").addClass("desktop");
     }
     
-
     window.menuController = new MenuController();
 
 
