@@ -1,7 +1,7 @@
 window.TableFill = new function() {
 
 	// Make an instance of the Sudoku game.
-	var gameInstance = new SudokuGameModel();
+	var gameInstance = new SudokuViewModel();
 	
 	// TODO: Populate the view model with the generated data, etc..
     
