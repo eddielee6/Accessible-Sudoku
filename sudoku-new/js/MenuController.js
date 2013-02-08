@@ -29,6 +29,14 @@ MenuController = function() {
     };
 
     var initMenuScreen = function() {
+        var localStorage = new LocalStorageRepository();
+
+        if(localStorage.GetValueForKey("gameSave") == null) {
+            $("#buttonContinue").hide();
+        }
+
+        $("#menuTitle ul li:visible").first().addClass("selected");
+
         $("#menuTitle ul li").mouseover(function() {
             $("#menuTitle ul li").removeClass("selected");
             $(this).addClass("selected");
@@ -62,15 +70,15 @@ MenuController = function() {
                 switch(evt.which) {
                     case 38: // w
                     case 87: // up
-                        if(currentlySelected.prev().length) {
-                            currentlySelected.prev().addClass("selected");
+                        if(currentlySelected.prev(":visible").length) {
+                            currentlySelected.prev(":visible").addClass("selected");
                             currentlySelected.removeClass("selected");
                         }
                         break;
                     case 40: // s
                     case 83: // down
-                        if(currentlySelected.next().length) {
-                            currentlySelected.next().addClass("selected");
+                        if(currentlySelected.next(":visible").length) {
+                            currentlySelected.next(":visible").addClass("selected");
                             currentlySelected.removeClass("selected");
                         }
                         break
