@@ -47,6 +47,11 @@ MenuController = function() {
             $("#gameScreen").show();
         };
 
+        var optionsButtonAction = function() {
+            $("section.screen").hide();
+            $("#optionsScreen").show();
+        };
+
         var helpButtonAction = function() {
             $("section.screen").hide();
             $("#helpScreen").show();
@@ -54,6 +59,10 @@ MenuController = function() {
 
         $("#buttonContinue").click(function() {
 
+        });
+
+        $("#buttonOptions").click(function() {
+            optionsButtonAction();
         });
 
         $("#buttonNew").click(function() {
@@ -88,6 +97,9 @@ MenuController = function() {
                                 break;
                             case "newGame":
                                 newGameButtonAction();
+                                break;
+                            case "options":
+                                optionsButtonAction();
                                 break;
                             case "help":
                                 helpButtonAction();
