@@ -1,14 +1,5 @@
 Generator = function() {
 	
-	this.Square = function(across, down, region, value, index) 
-	{
-		this.across = across;
-		this.down = down;
-		this.region = region;
-		this.value = value;
-		this.index = index;
-	}
-	
 	this.getAcrossFromNumber = function(n) 
 	{
 		var k = n % 9;
@@ -59,7 +50,7 @@ Generator = function() {
 	this.Item = function(n, v)
 	{
 		n += 1;
-		var square = new Generator.Square();
+		var square = new Square();
 		square.across = Math.floor(this.getAcrossFromNumber(n));
 		square.down = Math.floor(this.getDownFromNumber(n));
 		square.region = Math.floor(this.getRegionFromNumber(n));
@@ -137,13 +128,16 @@ Generator = function() {
 			
 				//Head back to the previous square to try again
 				c -= 1;
-				squares[c] = new Generator.Square();
+				squares[c] = new Square();
 			
 			}
 		}
-		squares = this.removeSquaresFromCompletedGrid(squares);
-		var output = this.returnRows(squares);
-		return output;
+		
+		var startingSquares = this.removeSquaresFromCompletedGrid(squares);
+		
+		var board = getBoardObject(squares, startingSquares);
+		//var output = this.returnRows(squares);
+		return board;
 	}
 
 	this.removeSquaresFromCompletedGrid = function(squares)
@@ -156,7 +150,7 @@ Generator = function() {
 				squares[i].value = 0;
 			}
 		}
-		return squares
+		return squares;
 	}
 
 	/*
@@ -178,6 +172,51 @@ Generator = function() {
 			}
 			output.push(row);	
 		}
+		
 		return output;
 	}
 };
+
+var Square = function(across, down, region, value, index) 
+{
+	this.across = across;
+	this.down = down;
+	this.region = region;
+	this.value = value;
+	this.index = index;
+}
+	
+function getBoardObject(completed, starting)
+{
+	var count = 0;
+	var board = new Object();
+	board.squares = new Array();
+	
+	for(var h=0; h<3; h++)
+	{
+		for(var i=0; i<3; i++)
+		{
+			var square = new Array();
+			for(var j=0; j<3; j++)
+			{
+				for(var k=0; k<3; k++)
+				{
+					var cell = new CellViewModel();
+					cell.solvedValue = completed[count].value;
+					cell.originalValue = starting[count].value;
+					cell.currentValue = starting[count].value;
+					square.push(cell);
+					count++;
+				}	
+				count += 6;
+			}
+			board.squares.push(square);
+			count = (3 * (i+1)) + (27*h);
+		}
+		count = 27 * (h+1);
+	}	
+	return board;
+
+}
+	
+

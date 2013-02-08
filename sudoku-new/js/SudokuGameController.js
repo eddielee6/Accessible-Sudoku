@@ -26,7 +26,7 @@ SudokuGameController = function () {
 	};
 
 	var tick = function() {
-		viewModel.elapsed++;
+		//viewModel.elapsed++;
 	};
 
 	var init = new function() {
