@@ -42,35 +42,33 @@ MenuController = function() {
             $(this).addClass("selected");
         });
 
-        var newGameButtonAction = function() {
-            $("section.screen").hide();
-            $("#gameScreen").show();
+        var triggerSelectedAction = function() {
+            var currentlySelected = $(".mainMenu li.selected");
+            currentlySelected.addClass("animated bounceOutRight");
+            setTimeout(function() {
+                switch(currentlySelected.attr("data-action")) {
+                    case "continue":
+                        $("section.screen").hide();
+                        $("#gameScreen").show();
+                        break;
+                    case "newGame":
+                        $("section.screen").hide();
+                        $("#gameScreen").show();
+                        break;
+                    case "options":
+                        $("section.screen").hide();
+                        $("#optionsScreen").show();
+                        break;
+                    case "help":
+                        $("section.screen").hide();
+                        $("#helpScreen").show();
+                        break;
+                }
+            }, 500);
         };
 
-        var optionsButtonAction = function() {
-            $("section.screen").hide();
-            $("#optionsScreen").show();
-        };
-
-        var helpButtonAction = function() {
-            $("section.screen").hide();
-            $("#helpScreen").show();
-        };
-
-        $("#buttonContinue").click(function() {
-
-        });
-
-        $("#buttonOptions").click(function() {
-            optionsButtonAction();
-        });
-
-        $("#buttonNew").click(function() {
-            newGameButtonAction();
-        });
-
-        $("#buttonHelp").click(function() {
-            helpButtonAction();
+        $(".mainMenu li").click(function() {
+            triggerSelectedAction();
         });
 
         $(window).keydown(function(evt) {
@@ -92,19 +90,7 @@ MenuController = function() {
                         }
                         break
                     case 13:
-                        switch(currentlySelected.attr("data-action")) {
-                            case "continue":
-                                break;
-                            case "newGame":
-                                newGameButtonAction();
-                                break;
-                            case "options":
-                                optionsButtonAction();
-                                break;
-                            case "help":
-                                helpButtonAction();
-                                break;
-                        }
+                        triggerSelectedAction();
                         break;
                 }
             }
