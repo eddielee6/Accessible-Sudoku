@@ -63,10 +63,18 @@ body {
     color: #fcfcfc;
 }
 
+.mobile {
+    body {
+        background: #f17200;
+    }
+}
+
 
 // Screens
 .screen {
     display: none;
+    width: 700px;
+    margin: 0 auto;
 }
 
 #gameScreen {
@@ -111,9 +119,7 @@ body {
 }
 
 #menuScreen {
-    margin: 30px;
     display: block;
-    text-align: center;
 
     .mainMenu {
         list-style: none;
@@ -121,11 +127,12 @@ body {
         padding: 0;
 
         li {
-            width: 500px;
+            width: 80%;
             border: 1px solid #FFF;
-            margin: 0.8em auto;
+            margin: 0 auto 0.8em;
             padding: 0.4em;
             cursor: pointer;
+            text-align: center;
 
             font-size: 2em;
             font-weight: bold;
@@ -169,44 +176,49 @@ body {
 
     #themeSwitch {
         .theme-default {
-            background: transparent url('../img/icon-theme-default@1x.png') center center no-repeat;
+            background: url('../img/icon-theme-default@1x.png') no-repeat;
         }
         .theme-white {
-            background: transparent url('../img/icon-theme-white@1x.png') center center no-repeat;
+            background: url('../img/icon-theme-white@1x.png') no-repeat;
         }
         .theme-black {
-            background: transparent url('../img/icon-theme-black@1x.png') center center no-repeat;
+            background: url('../img/icon-theme-black@1x.png') no-repeat;
         }
     }
 
     #sizeSwitch {
         .size-normal {
-            background: transparent url('../img/icon-size-normal@1x.png') center center no-repeat;
+            background: url('../img/icon-size-normal@1x.png') no-repeat;
         }
 
         .size-bigger {
-            background: transparent url('../img/icon-size-bigger@1x.png') center center no-repeat;
+            background: url('../img/icon-size-bigger@1x.png') no-repeat;
         }
 
         .size-biggest {
-            background: transparent url('../img/icon-size-biggest@1x.png') center center no-repeat;
+            background: url('../img/icon-size-biggest@1x.png') no-repeat;
         }
     }
 
     #fontSwitch {
         .font-normal {
-            background: transparent url('../img/icon-font-normal@1x.png') center center no-repeat;
+            background: url('../img/icon-font-normal@1x.png') no-repeat;
         }
 
         .font-dy {
-            background: transparent url('../img/icon-font-dy@1x.png') center center no-repeat;
+            background: url('../img/icon-font-dy@1x.png') no-repeat;
         }
     }
 }
 
 .ledge {
-    background-color: rgba(0,0,0,0.5);
+    background-color: #580301;
     height: 10px;
+}
+
+.logoWrapper {
+    margin: 30px;
+    text-align: center;
 }
 
 .desktop {
@@ -232,12 +244,20 @@ html.dark-on-light {
         background: #2b2f33;
         color: #fcfcfc;
     }
+
+    .ledge {
+        background: #fcfcfc;
+    }
 }
 
 html.light-on-dark {
     body {
         background: #fcfcfc;
         color: #2b2f33;
+    }
+
+    .ledge {
+        background: #2b2f33;
     }
 }
 
@@ -319,16 +339,21 @@ html.biggest {
 
 //Media queries
 @media screen and (max-width: 710px) {
-    #menuScreen {
-        margin: 30px 10px;
+    .screen {
+        width: 100%;
+    }
 
-        .logo{
+    .logoWrapper{
+        margin: 20px;
+        img {
             width: 90%;
             height: auto;
         }
+    }
 
+    #menuScreen {
         .mainMenu li {
-            width: 80%;
+            width: 60%;
             font-size: 1.5em;
         }
     }
@@ -343,7 +368,6 @@ html.biggest {
 @media screen and (max-width: 500px) {
     #menuScreen {
         .mainMenu li {
-            width: 60%;
             font-size: 1.2em;
         }
     }
