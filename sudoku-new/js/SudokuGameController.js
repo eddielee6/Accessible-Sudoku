@@ -6,6 +6,7 @@ SudokuGameController = function () {
 	var initSudokuControls = function() {
 		$(window).keydown(function(evt) {
             if($("#gameScreen").is(":visible")) {
+            	
             }
         });
 	};
