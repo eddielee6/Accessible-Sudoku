@@ -169,8 +169,8 @@ function getBoardObject(completed, starting)
 					var rand = getRan(10);
 					if(rand < 5)
 					{
-						cell.OriginalValue = 0;
-						cell.CurrentValue(0);
+						cell.OriginalValue = "";
+						cell.CurrentValue("");
 					} else {
 						cell.OriginalValue = starting[count].value;
 						cell.CurrentValue(starting[count].value);
