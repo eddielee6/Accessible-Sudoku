@@ -34,7 +34,7 @@
 
 	    <div id="ledge"><p>Put some useful shit here</p></div>
 
-      <section id="loadingScreen">
+      <section id="menuScreen">
         <div id="logoWrapper">
           <div id="logo" class="animated bounceInDown"></div>
           	<div id="wrapper">
@@ -78,7 +78,7 @@
         
         <div class="gameGrid" data-bind="foreach: Squares">
           <div class="square" data-bind="foreach: Cells">
-            <div class="cell" data-bind="text: OriginalValue"></div>
+            <div class="cell" data-bind="text: SolutionValue"></div>
           </div>
         </div>
         
