@@ -2,11 +2,15 @@ SudokuGameController = function () {
 	var sender = this;
 	var localStorage = new LocalStorageRepository();
 	var viewModel = new SudokuViewModel();
+	var generater = new Generator();
 
 	this.StartNewGame = function() {
 		localStorage.SetValueForKey("gameSave", "TEMP");
 		this.BindToView();
 		console.log("new game");
+	
+		// Get stuff from generate.
+		viewModel.board = generater.generateGrid();
 	};
 
 	this.LoadSavedGame = function(savedGame) {

@@ -1,4 +1,4 @@
-window.Generator = new function() {
+Generator = function() {
 	
 	this.Square = function(across, down, region, value, index) 
 	{
