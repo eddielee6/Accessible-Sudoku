@@ -22,7 +22,6 @@ SudokuGameController = function () {
 	};
 
 	var bindToView = function() {
-		console.log(sender.viewModel);
 		ko.applyBindings(sender.viewModel);
 	};
 
