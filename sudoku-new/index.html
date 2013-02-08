@@ -31,27 +31,29 @@
     <body>
 
 	    <div id="ledge">
-		    <nav id="theme">
+		    <nav id="themeSwitch">
+          <span>Theme:</span>
 		    	<ul>
-		    		<span>Theme:</span>
-		    		<li><div data-theme-name="normal" id="theme-default" class="icon"></div></li>
-		    		<li><div data-theme-name="dark-on-light" id="theme-white" class="icon"></div></li>
-		    		<li><div data-theme-name="light-on-dark" id="theme-black" class="icon"></div></li>
+		    		<li data-theme-name="normal" class="icon theme-default"></li>
+		    		<li data-theme-name="dark-on-light" class="icon theme-white"></li>
+		    		<li data-theme-name="light-on-dark" class="icon theme-black"></li>
 		    	</ul>
 		    </nav>
-		    <nav id="size">
+
+		    <nav id="sizeSwitch">
+          <span>Size:</span>
 		    	<ul>
-		    		<span>Size:</span>
-		    		<li><div id="size-normal" class="icon"></div></li>
-		    		<li><div id="size-bigger" class="icon"></div></li>
-		    		<li><div id="size-biggest" class="icon"></div></li>
+		    		<li data-theme-name="standard" class="icon size-normal"></li>
+		    		<li data-theme-name="bigger" class="icon size-bigger"></li>
+		    		<li data-theme-name="biggest" class="icon size-biggest"></li>
 		    	</ul>
 		    </nav>
-		    <nav id="font">
+
+		    <nav id="fontSwitch">
+          <span>Font:</span>
 		    	<ul>
-		    		<span>Font:</span>
-		    		<li><div id="font-normal" class="icon"></div></li>
-		    		<li><div id="font-dy" class="icon"></div></li>
+		    		<li data-theme-name="standard-font" class="icon font-normal"></li>
+		    		<li data-theme-name="dyslexic" class="icon font-dy"></li>
 		    	</ul>
 		    </nav>
 	    </div>

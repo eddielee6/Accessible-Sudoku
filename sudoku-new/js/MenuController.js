@@ -6,7 +6,7 @@ MenuController = function() {
         $("html").addClass(localStorage.GetValueForKey("size"));
         $("html").addClass(localStorage.GetValueForKey("font"));
 
-        $("nav#theme li").click(function() {
+        $("#themeSwitch li").click(function() {
             var validSizeThemes = "normal dark-on-light light-on-dark";
             var newTheme = $(this).attr("data-theme-name");
             localStorage.SetValueForKey("theme", newTheme);

@@ -251,18 +251,51 @@ html.dyslexic {
 	display: block;
 	background-color: rgba(0,0,0,0.3);
 	padding: 10px;
+
+    .icon {
+        background-color: red;
+        width: 24px;
+        height: 24px;
+    }
+
+    #themeSwitch {
+        .theme-default {
+            background: transparent url('../img/icon-theme-default@1x.png') center center no-repeat;
+        }
+        .theme-white {
+            background: transparent url('../img/icon-theme-white@1x.png') center center no-repeat;
+        }
+        .theme-black {
+            background: transparent url('../img/icon-theme-black@1x.png') center center no-repeat;
+        }
+    }
+
+    #sizeSwitch {
+        .size-normal {
+            background: transparent url('../img/icon-size-normal@1x.png') center center no-repeat;
+        }
+
+        .size-bigger {
+            background: transparent url('../img/icon-size-bigger@1x.png') center center no-repeat;
+        }
+
+        .size-biggest {
+            background: transparent url('../img/icon-size-biggest@1x.png') center center no-repeat;
+        }
+    }
+
+    #fontSwitch {
+        .font-normal {
+            background: transparent url('../img/icon-font-normal@1x.png') center center no-repeat;
+        }
+
+        .font-dy {
+            background: transparent url('../img/icon-font-dy@1x.png') center center no-repeat;
+        }
+    }
 }
 
-#ledge p {
-	margin: 0;
-	display: block;
-}
 
-#ledge .icon {
-	background-color: red;
-	width: 24px;
-	height: 24px;
-}
 
 #ledge nav {
 	display: inline-block;
@@ -286,38 +319,6 @@ html.dyslexic {
 
 #ledge nav ul li {
 	display: inline-block;
-}
-
-#ledge nav#theme ul li div#theme-default {
-	background: transparent url('../img/icon-theme-default@1x.png') center center no-repeat;
-}
-
-#ledge nav#theme ul li div#theme-white {
-	background: transparent url('../img/icon-theme-white@1x.png') center center no-repeat;
-}
-
-#ledge nav#theme ul li div#theme-black {
-	background: transparent url('../img/icon-theme-black@1x.png') center center no-repeat;
-}
-
-#ledge nav#size ul li div#size-normal {
-	background: transparent url('../img/icon-size-normal@1x.png') center center no-repeat;
-}
-
-#ledge nav#size ul li div#size-bigger {
-	background: transparent url('../img/icon-size-bigger@1x.png') center center no-repeat;
-}
-
-#ledge nav#size ul li div#size-biggest {
-	background: transparent url('../img/icon-size-biggest@1x.png') center center no-repeat;
-}
-
-#ledge nav#font ul li div#font-normal {
-	background: transparent url('../img/icon-font-normal@1x.png') center center no-repeat;
-}
-
-#ledge nav#font ul li div#font-dy {
-	background: transparent url('../img/icon-font-dy@1x.png') center center no-repeat;
 }
 
 #logoWrapper {
