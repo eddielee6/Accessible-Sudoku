@@ -133,6 +133,7 @@ Generator = function() {
 		var board = getBoardObject(squares, squares);
 		return board;
 	}
+};
 
 var Square = function(across, down, region, value, index) 
 {
@@ -186,7 +187,6 @@ function getBoardObject(completed, starting)
 		count = 27 * (h+1);
 	}	
 	return squares;
-
 }
 	
 
