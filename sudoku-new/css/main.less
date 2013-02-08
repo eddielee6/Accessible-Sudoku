@@ -116,7 +116,7 @@ html.dyslexic {
     }
 }
 
-@media screen and (min-width: 660px) {
+@media screen and (min-width: 661px) {
     html.bigger {
         @cellSize: 55px;
         @cellFontSize: @cellSize * 0.7;
@@ -163,7 +163,24 @@ html.dyslexic {
 }
 
 .mobileTheme {
-    background: pink;
+    width: 100%;
+    padding-top: 1%;
+    border: none;
+    background: @primaryBorderColour;
+
+    .square {
+        width: 32%;
+        margin: 0 0 1% 1%;
+        border: none;
+        background: @secondaryBorderColour;
+    }
+
+    .cell {
+        width: 32.3%;
+        margin: 0.5%;
+        border: none;
+        background: green;
+    }
 }
 
 
