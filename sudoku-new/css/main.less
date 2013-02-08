@@ -114,46 +114,56 @@ html.dyslexic {
     }
 }
 
-html.bigger {
-    @cellSize: 55px;
-    @cellFontSize: @cellSize * 0.7;
-    @squareSize: ((@cellSize + 2) * 3); // 2 for borders, 3 for cell count
-    @boardSize: ((@squareSize + 2)* 3); // 2 for borders, 3 for square count
+@media screen and (min-width: 660px) {
+    html.bigger {
+        @cellSize: 55px;
+        @cellFontSize: @cellSize * 0.7;
+        @squareSize: ((@cellSize + 2) * 3); // 2 for borders, 3 for cell count
+        @boardSize: ((@squareSize + 2)* 3); // 2 for borders, 3 for square count
 
-    .gameGrid {
-        width: @boardSize;
+        .gameGrid {
+            width: @boardSize;
 
-        .square {
-            width: @squareSize;
+            .square {
+                width: @squareSize;
+            }
+
+            .cell {
+                width: @cellSize;
+                height: @cellSize;
+                line-height: @cellSize;
+                font-size: @cellFontSize;
+            }
         }
+    }
 
-        .cell {
-            width: @cellSize;
-            height: @cellSize;
-            line-height: @cellSize;
-            font-size: @cellFontSize;
+    html.biggest {
+        @cellSize: 70px;
+        @cellFontSize: @cellSize * 0.7;
+        @squareSize: ((@cellSize + 2) * 3); // 2 for borders, 3 for cell count
+        @boardSize: ((@squareSize + 2)* 3); // 2 for borders, 3 for square count
+
+        .gameGrid {
+            width: @boardSize;
+
+            .square {
+                width: @squareSize;
+            }
+
+            .cell {
+                width: @cellSize;
+                height: @cellSize;
+                line-height: @cellSize;
+                font-size: @cellFontSize;
+            }
         }
     }
 }
 
-html.biggest {
-    @cellSize: 70px;
-    @cellFontSize: @cellSize * 0.7;
-    @squareSize: ((@cellSize + 2) * 3); // 2 for borders, 3 for cell count
-    @boardSize: ((@squareSize + 2)* 3); // 2 for borders, 3 for square count
 
-    .gameGrid {
-        width: @boardSize;
-
-        .square {
-            width: @squareSize;
-        }
-
-        .cell {
-            width: @cellSize;
-            height: @cellSize;
-            line-height: @cellSize;
-            font-size: @cellFontSize;
-        }
+//Media queries
+@media screen and (max-width: 660px) {
+    #sizeSwitch {
+        display: none;
     }
 }
