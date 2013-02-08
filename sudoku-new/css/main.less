@@ -48,12 +48,14 @@
 body {
 	height: 100%;
 	background-color: #580301;
-	background: -ms-linear-gradient(bottom, #580301 0%, #F17200 100%);
-	background: -moz-linear-gradient(bottom, #580301 0%, #F17200 100%);
-	background: -o-linear-gradient(bottom, #580301 0%, #F17200 100%);
-	background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #580301), color-stop(1, #F17200));
-	background: -webkit-linear-gradient(bottom, #580301 0%, #F17200 100%);
-	background: linear-gradient(to top, #580301 0%, #F17200 100%);
+	background: rgb(241,114,0);
+    background: -moz-linear-gradient(top,  rgba(241,114,0,1) 0%, rgba(88,3,1,1) 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(241,114,0,1)), color-stop(100%,rgba(88,3,1,1)));
+    background: -webkit-linear-gradient(top,  rgba(241,114,0,1) 0%,rgba(88,3,1,1) 100%);
+    background: -o-linear-gradient(top,  rgba(241,114,0,1) 0%,rgba(88,3,1,1) 100%);
+    background: -ms-linear-gradient(top,  rgba(241,114,0,1) 0%,rgba(88,3,1,1) 100%);
+    background: linear-gradient(to bottom,  rgba(241,114,0,1) 0%,rgba(88,3,1,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f17200', endColorstr='#580301',GradientType=0 );
 	background-repeat: no-repeat;
 	background-attachment: fixed;
     color: #fcfcfc;
