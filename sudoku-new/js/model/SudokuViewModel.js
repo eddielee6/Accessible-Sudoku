@@ -7,10 +7,10 @@ var SudokuViewModel = function() {
 	this.currentlyHighlightedCell = null;
 	
 	// The elapsed seconds taken so far, saved with the game.
-	this.elapsed = 0;
+	this.elapsed = null;
 	
 	// The elapsed seconds since the last save.
-	this.lastSaved = 0;
+	this.lastSaved = null;
 	
 	//Array of SquareViewModel
 	this.Squares = null;
