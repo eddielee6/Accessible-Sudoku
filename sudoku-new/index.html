@@ -33,33 +33,7 @@
     </head>
     <body>
 
-	    <div id="ledge">
-	    	<span>Theme:</span>
-		    <nav id="themeSwitch">
-		    	<ul>
-		    		<li data-theme-name="normal" class="icon theme-default"></li>
-		    		<li data-theme-name="dark-on-light" class="icon theme-white"></li>
-		    		<li data-theme-name="light-on-dark" class="icon theme-black"></li>
-		    	</ul>
-		    </nav>
-		    
-		    <span>Size:</span>
-		    <nav id="sizeSwitch">
-		    	<ul>
-		    		<li data-theme-name="standard" class="icon size-normal"></li>
-		    		<li data-theme-name="bigger" class="icon size-bigger"></li>
-		    		<li data-theme-name="biggest" class="icon size-biggest"></li>
-		    	</ul>
-		    </nav>
-
-		    <span>Font:</span>
-		    <nav id="fontSwitch">
-		    	<ul>
-		    		<li data-theme-name="standard-font" class="icon font-normal"></li>
-		    		<li data-theme-name="dyslexic" class="icon font-dy"></li>
-		    	</ul>
-		    </nav>
-	    </div>
+	    <div class="ledge"></div>
 
       <section id="menuScreen" class="screen">
           <img src="img/logo@1x.png" width="650" height="231" class="logo animated bounceInDown" />
@@ -85,6 +59,26 @@
 
       <section id="optionsScreen" class="screen">
         <h1>Options!</h1>
+
+        <span>Theme:</span>
+        <ul id="themeSwitch">
+          <li data-theme-name="normal" class="icon theme-default"></li>
+          <li data-theme-name="dark-on-light" class="icon theme-white"></li>
+          <li data-theme-name="light-on-dark" class="icon theme-black"></li>
+        </ul>
+        
+        <span>Size:</span>
+        <ul id="sizeSwitch">
+          <li data-theme-name="standard" class="icon size-normal"></li>
+          <li data-theme-name="bigger" class="icon size-bigger"></li>
+          <li data-theme-name="biggest" class="icon size-biggest"></li>
+        </ul>
+
+        <span>Font:</span>
+        <ul id="fontSwitch">
+          <li data-theme-name="standard-font" class="icon font-normal"></li>
+          <li data-theme-name="dyslexic" class="icon font-dy"></li>
+        </ul>
       </section>
 
       <div class="backdrop"></div>
