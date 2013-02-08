@@ -36,9 +36,9 @@
 		    <nav id="theme">
 		    	<ul>
 		    		<span>Theme:</span>
-		    		<li><div id="theme-default" class="icon"></div></li>
-		    		<li><div id="theme-white" class="icon"></div></li>
-		    		<li><div id="theme-black" class="icon"></div></li>
+		    		<li><div data-theme-name="normal" id="theme-default" class="icon"></div></li>
+		    		<li><div data-theme-name="dark-on-light" id="theme-white" class="icon"></div></li>
+		    		<li><div data-theme-name="light-on-dark" id="theme-black" class="icon"></div></li>
 		    	</ul>
 		    </nav>
 		    <nav id="size">
@@ -75,47 +75,20 @@
           		</div>
           	</div>
         </div>
-        <div id="backdrop">
-	        <div id="oriential"></div>
-        </div>
       </section>
 	    
       <section id="gameScreen">
-        
-        <!--<ul id="themeSwitch">
-          <li data-theme-name="normal">Normal</li>
-          <li data-theme-name="dark-on-light">Dark on Light</li>
-          <li data-theme-name="light-on-dark">Light on Dark</li>
-        </ul>
-
-        <ul id="sizeSwitch">
-          <li data-theme-name="standard">Standard</li>
-          <li data-theme-name="bigger">Bigger</li>
-          <li data-theme-name="biggest">Biggest</li>
-        </ul>
-
-        <ul id="fontSwitch">
-          <li data-theme-name="standard-font">Standard</li>
-          <li data-theme-name="dyslexic">Dyslexic</li>
-        </ul>-->
-        
-        
         <div class="gameGrid" data-bind="foreach: Squares">
           <div class="square" data-bind="foreach: Cells">
             <div class="cell" data-bind="text: OriginalValue, style: { background: IsSelected() ? 'red' : 'transparent' }"></div>
           </div>
         </div>
-        
-<!--      -->
-        <!-- Someone lookup polite vs assertive vs rude vs alert -->
-        <!-- http://stackoverflow.com/questions/3670570/getting-screen-reader-to-read-new-content-added-with-javascript -->
-        <div id="messageOutput" aria-live="assertive"> 
-
-        </div>
-        
-        <div id="backdrop">
-	        <div id="oriential"></div>
-        </div>
       </section>
+
+      <div id="backdrop">
+        <div id="oriential"></div>
+      </div>
+
+      <div id="messageOutput" aria-live="assertive"></div>
   </body>
 </html>
