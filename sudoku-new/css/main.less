@@ -73,7 +73,8 @@ body {
 // Screens
 .screen {
     display: none;
-    width: 700px;
+    max-width: 700px;
+    width: 90%;
     margin: 0 auto;
 }
 
@@ -127,7 +128,7 @@ body {
         padding: 0;
 
         li {
-            width: 80%;
+            width: 75%;
             border: 1px solid #FFF;
             margin: 0 auto 0.8em;
             padding: 0.4em;
@@ -339,10 +340,6 @@ html.biggest {
 
 //Media queries
 @media screen and (max-width: 710px) {
-    .screen {
-        width: 100%;
-    }
-
     .logoWrapper{
         margin: 20px;
         img {
@@ -353,7 +350,6 @@ html.biggest {
 
     #menuScreen {
         .mainMenu li {
-            width: 60%;
             font-size: 1.5em;
         }
     }
