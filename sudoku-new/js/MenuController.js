@@ -28,7 +28,12 @@ MenuController = function() {
         });
     };
 
+    var initMenuScreen = function() {
+        $("#menuTitle ul li").first().attr("data-selected", "yes");
+    };
+
     var init = new function() {
     	initAccessibilityControls();
+        initMenuScreen();
     };
 };
