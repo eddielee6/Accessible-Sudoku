@@ -1,6 +1,7 @@
 SudokuGameController = function () {
 	var sender = this;
 	var localStorage = new LocalStorageRepository();
+	var viewModel = new SudokuViewModel();
 
 	this.StartNewGame = function() {
 
