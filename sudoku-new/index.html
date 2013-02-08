@@ -39,8 +39,8 @@
         <img src="img/logo@1x.png" width="650" height="231" />
       </div>
 
-      <section id="menuScreen" class="screen">
-  				<ul class="mainMenu animated bounceInUp">
+      <section id="menuScreen" class="screen animated bounceInUp">
+  				<ul class="mainMenu">
   					<li id="buttonContinue" data-action="continue">Continue</li>
   					<li id="buttonNew" data-action="newGame">New Game</li>
             <li id="buttonOptions" data-action="options">Options</li>
@@ -48,7 +48,7 @@
   				</ul>
       </section>
 	    
-      <section id="gameScreen" class="screen">
+      <section id="gameScreen" class="screen animated bounceInUp">
         <div class="gameGrid" data-bind="foreach: Squares">
           <div class="square" data-bind="foreach: Cells">
             <div class="cell" data-bind="text: OriginalValue, style: { background: IsSelected() ? 'red' : 'transparent' }"></div>
@@ -56,11 +56,11 @@
         </div>
       </section>
 
-      <section id="helpScreen" class="screen">
+      <section id="helpScreen" class="screen animated bounceInUp">
         <h1>Help!</h1>
       </section>
 
-      <section id="optionsScreen" class="screen">
+      <section id="optionsScreen" class="screen animated bounceInUp">
         <h1>Options!</h1>
 
         <span>Theme:</span>
