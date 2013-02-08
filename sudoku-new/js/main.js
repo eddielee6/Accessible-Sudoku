@@ -3,7 +3,10 @@ $(function () {
     //Will need moving--------
 
 
-
+    setTimeout(function() {
+        $("#loadingScreen").hide();
+        $("#gameScreen").show();
+    }, 2000);
 
 
 
