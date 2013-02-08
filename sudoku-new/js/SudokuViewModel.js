@@ -1,5 +1,9 @@
 var SudokuViewModel = function() {
 	this.Squares = ko.observableArray();
+	this.currentSelection = {
+		square: 0,
+		cell: 0
+	}
 };
 
 var SquareViewModel = function() {

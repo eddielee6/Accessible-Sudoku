@@ -4,9 +4,73 @@ SudokuGameController = function () {
 	this.viewModel;
 
 	var initSudokuControls = function() {
+		sender.viewModel.Squares[0].Cells[0].IsSelected(true);
+		
 		$(window).keydown(function(evt) {
             if($("#gameScreen").is(":visible")) {
+            	var cell = sender.viewModel.currentSelection.cell;
+            	var square = sender.viewModel.currentSelection.square;
+            	sender.viewModel.Squares[square].Cells[cell].IsSelected(false);
             	
+            	switch(evt.which)
+            	{
+            		case 40: //down
+            		 	
+            			break;
+            		case 37: //left
+            			if((square % 3 == 0) && (cell % 3 == 0))
+            			{
+            				square+=2;
+            				cell--;
+            				sender.viewModel.currentSelection.square+=2;
+            				sender.viewModel.currentSelection.cell--;
+            				sender.viewModel.Squares[square].Cells[cell].IsSelected(true);
+            			}
+            			else if(cell % 3 == 0)
+            			{
+            				square--;
+            				cell+=2;
+            				sender.viewModel.currentSelection.square--;
+            				sender.viewModel.currentSelection.cell +=2;
+            				sender.viewModel.Squares[square].Cells[cell].IsSelected(true);
+            			} else {
+            				cell--;
+            				sender.viewModel.currentSelection.cell--;
+            				sender.viewModel.Squares[square].Cells[cell].IsSelected(true);
+            			}
+            			break;
+            		case 38: //up
+            			
+            			break;
+            		case 39: //right
+            			if(((square + 1) % 3 == 0) && (square != 0) && ((cell+1) % 3 == 0))
+            			{
+            				square-=2;
+            				cell++;
+            				sender.viewModel.currentSelection.square-=2;
+            				sender.viewModel.currentSelection.cell++;
+            				sender.viewModel.Squares[square].Cells[cell].IsSelected(true);
+            			}
+            			else if((cell + 1) % 3 == 0 && cell != 0)
+            			{
+            				//sender.viewModel.Squares[square].Cells[cell].IsSelected(false);
+            				square++;
+            				cell-=2;
+            				sender.viewModel.currentSelection.square++;
+            				sender.viewModel.currentSelection.cell -=2;
+            				sender.viewModel.Squares[square].Cells[cell].IsSelected(true);
+            			} else
+            			{
+            				//var cell = sender.viewModel.currentSelection.cell;
+            				//var square = sender.viewModel.currentSelection.square;
+            				//sender.viewModel.Squares[square].Cells[cell].IsSelected(false);
+            				cell++;
+            				sender.viewModel.currentSelection.cell++;
+            				sender.viewModel.Squares[square].Cells[cell].IsSelected(true);
+            				
+            			}
+            		default: 
+            	}
             }
         });
 	};
@@ -37,7 +101,7 @@ SudokuGameController = function () {
 	};
 
 	var init = new function() {
-		initSudokuControls();
+		
 
 		sender.viewModel = new SudokuViewModel();
 		sender.viewModel.version = 1.0;
@@ -48,6 +112,6 @@ SudokuGameController = function () {
 		} else {
 			sender.StartNewGame();
 		}
-		setInterval(tick, 1000);
+		initSudokuControls();
 	};
 };
