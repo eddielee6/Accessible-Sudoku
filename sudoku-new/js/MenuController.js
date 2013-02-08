@@ -29,7 +29,60 @@ MenuController = function() {
     };
 
     var initMenuScreen = function() {
-        $("#menuTitle ul li").first().attr("data-selected", "yes");
+        $("#menuTitle ul li").mouseover(function() {
+            $("#menuTitle ul li").removeClass("selected");
+            $(this).addClass("selected");
+        });
+
+        var newGameButtonAction = function() {
+            $("#menuScreen").hide();
+            $("#gameScreen").show();
+        };
+
+        $("#buttonContinue").click(function() {
+
+        });
+
+        $("#buttonNew").click(function() {
+            newGameButtonAction();
+        });
+
+        $("#buttonHelp").click(function() {
+
+        });
+
+        $(window).keydown(function(evt) {
+            if($("#menuScreen").is(":visible")) {
+                var currentlySelected = $("#menuTitle ul li.selected");
+                switch(evt.which) {
+                    case 38: // w
+                    case 87: // up
+                        if(currentlySelected.prev().length) {
+                            currentlySelected.prev().addClass("selected");
+                            currentlySelected.removeClass("selected");
+                        }
+                        break;
+                    case 40: // s
+                    case 83: // down
+                        if(currentlySelected.next().length) {
+                            currentlySelected.next().addClass("selected");
+                            currentlySelected.removeClass("selected");
+                        }
+                        break
+                    case 13:
+                        switch(currentlySelected.attr("data-action")) {
+                            case "continue":
+                                break;
+                            case "newGame":
+                                newGameButtonAction();
+                                break;
+                            case "help":
+                                break;
+                        }
+                        break;
+                }
+            }
+        });
     };
 
     var init = new function() {

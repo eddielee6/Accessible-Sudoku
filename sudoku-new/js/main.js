@@ -3,8 +3,8 @@ $(function () {
     //Will need moving--------
 
 
-    $("#menuScreen").hide();
-    $("#gameScreen").show();
+    // $("#menuScreen").hide();
+    // $("#gameScreen").show();
 
     window.menuController = new MenuController();
 
@@ -64,7 +64,7 @@ $(function () {
     var tCounter = 0;           //used to count the number of times the user has consecutively executed the t command (toggle)
     var hCounter = 0;           //used to count the number of times the user has consecutively executed the h command (help)
 
-    $(window).keydown(function (e) {
+    /*$(window).keydown(function (e) {
         if (Sudoku.checkSolved()) {     //check on every kepress to see if the board is solved, if so on any keypress it should refill itself with a new puzzle
             TableFill.fillGrid();
             return true;
@@ -430,7 +430,7 @@ $(function () {
             controlSwitch = false;
         }
         //return false;
-    });
+    });*/
 
     $("#inputbox").blur(function () {                            //make sure that the user's cursor is always on the output textbox, this way their screen reader will always read whatever we print to it
         setTimeout(function () { $("#inputbox").focus(); }, 5);  //and we always capture every keystroke the user makes
