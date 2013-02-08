@@ -2,7 +2,13 @@ SudokuGameController = function () {
 	var sender = this;
 	var localStorage = new LocalStorageRepository();
 	this.viewModel;
-	
+
+	var initSudokuControls = function() {
+		$(window).keydown(function(evt) {
+            if($("#gameScreen").is(":visible")) {
+            }
+        });
+	};
 
 	this.StartNewGame = function() {
 		console.log("new game");
@@ -30,6 +36,8 @@ SudokuGameController = function () {
 	};
 
 	var init = new function() {
+		initSudokuControls();
+
 		sender.viewModel = new SudokuViewModel();
 		sender.viewModel.version = 1.0;
 
