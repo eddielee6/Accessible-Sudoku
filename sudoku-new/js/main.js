@@ -2,6 +2,10 @@ $(function () {
     
     //Will need moving--------
 
+
+    $("#menuScreen").hide();
+    $("#gameScreen").show();
+
     window.menuController = new MenuController();
 
 
