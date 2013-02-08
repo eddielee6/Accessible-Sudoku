@@ -76,12 +76,22 @@ body {
     width: @boardSize;
     border: 1px solid @primaryBorderColour;
     margin: 0 auto;
+    margin-top: 50px;
     overflow: hidden; //to clear
+    box-shadow: 0px 0px 20px #fff;
 
     .square {
         border: 1px solid @primaryBorderColour;
         float: left;
         width: @squareSize;
+    }
+    
+    .even {
+	    background-color: #e66800;
+    }
+    
+    .odd {
+	    background-color: #640f01;
     }
 
     .cell {
