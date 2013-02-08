@@ -2,7 +2,11 @@ $(function () {
     
     //Will need moving--------
 
-
+    if(navigator.userAgent.toLowerCase().match(/mobile/i)) {
+        $("html").addClass("mobile");
+    } else {
+        $("html").addClass("desktop");
+    }
     
 
     window.menuController = new MenuController();

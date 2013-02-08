@@ -35,10 +35,10 @@ MenuController = function() {
             $("#buttonContinue").hide();
         }
 
-        $(".mainMenu ul li:visible").first().addClass("selected");
+        $(".mainMenu li:visible").first().addClass("selected");
 
-        $(".mainMenu ul li").mouseover(function() {
-            $(".mainMenu ul li").removeClass("selected");
+        $(".mainMenu li").mouseover(function() {
+            $(".mainMenu li").removeClass("selected");
             $(this).addClass("selected");
         });
 
@@ -75,7 +75,7 @@ MenuController = function() {
 
         $(window).keydown(function(evt) {
             if($("#menuScreen").is(":visible")) {
-                var currentlySelected = $(".mainMenu ul li.selected");
+                var currentlySelected = $(".mainMenu li.selected");
                 switch(evt.which) {
                     case 38: // w
                     case 87: // up

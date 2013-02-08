@@ -6,6 +6,7 @@
 
         <title>Accessible Sudoku</title>
 
+        <link rel="stylesheet" href="css/vender/normalize.css" />
         <link rel="stylesheet" href="css/vender/animate.css" />
         <link rel="stylesheet/less" type="text/css" href="css/main.less" />
 
@@ -61,23 +62,13 @@
 	    </div>
 
       <section id="menuScreen" class="screen">
-        <div id="logoWrapper">
-          <div id="logo" class="animated bounceInDown"></div>
-          	<div id="wrapper">
-          		<div id="inner" class="menu animated bounceInUp">
-          			
-          			<nav class="mainMenu">
-          				<ul>
-          					<li id="buttonContinue" data-action="continue">Continue</li>
-          					<li id="buttonNew" data-action="newGame">New Game</li>
-                    <li id="buttonOptions" data-action="options">Options</li>
-          					<li id="buttonHelp" data-action="help">Help</li>
-          				</ul>
-          			</nav>
-          			
-          		</div>
-          	</div>
-        </div>
+          <img src="img/logo@1x.png" width="650" height="231" class="logo animated bounceInDown" />
+  				<ul class="mainMenu animated bounceInUp">
+  					<li id="buttonContinue" data-action="continue">Continue</li>
+  					<li id="buttonNew" data-action="newGame">New Game</li>
+            <li id="buttonOptions" data-action="options">Options</li>
+  					<li id="buttonHelp" data-action="help">Help</li>
+  				</ul>
       </section>
 	    
       <section id="gameScreen" class="screen">
