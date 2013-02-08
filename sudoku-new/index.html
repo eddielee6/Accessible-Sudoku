@@ -56,7 +56,7 @@
 		    </nav>
 	    </div>
 
-      <section id="menuScreen">
+      <section id="menuScreen" class="screen">
         <div id="logoWrapper">
           <div id="logo" class="animated bounceInDown"></div>
           	<div id="wrapper">
@@ -75,12 +75,16 @@
         </div>
       </section>
 	    
-      <section id="gameScreen">
+      <section id="gameScreen" class="screen">
         <div class="gameGrid" data-bind="foreach: Squares">
           <div class="square" data-bind="foreach: Cells">
             <div class="cell" data-bind="text: OriginalValue, style: { background: IsSelected() ? 'red' : 'transparent' }"></div>
           </div>
         </div>
+      </section>
+
+      <section id="helpScreen" class="screen">
+        <h1>Help!</h1>
       </section>
 
       <div id="backdrop">
