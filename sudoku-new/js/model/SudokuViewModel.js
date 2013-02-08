@@ -15,7 +15,7 @@ var SudokuViewModel = function() {
 	// The elapsed seconds since the last save.
 	this.lastSaved = 0;
 	
-	// The array that contains the current grid contents.
-	this.board = null;
+	//Array of SquareViewModel
+	this.Squares = null;
 	
 }
