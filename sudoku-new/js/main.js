@@ -4,9 +4,8 @@ $(function () {
 
 
     window.sudokuGameController = new SudokuGameController();
-
-
-    var initMobileGridManager = function() {
+    
+    /*var initMobileGridManager = function() {
         $(window).resize(function() {
             if (document.documentElement.clientWidth < 660) {
                 $(".gameGrid .square, .gameGrid .cell").each(function() {
@@ -17,7 +16,7 @@ $(function () {
             }
         });
     };
-    initMobileGridManager();
+    initMobileGridManager();*/
 
 
     var initAccessibilityControls = function() {
