@@ -63,8 +63,7 @@ body {
 }
 
 ::selection,
-::-moz-selection 
- {
+::-moz-selection {
 	color: #fff;
 	background-color: #580301;
 }
@@ -116,22 +115,21 @@ body {
     padding: 10px;
 
     nav {
-
         display: inline-block;
         vertical-align: middle;
         margin-right: 70px;
-    }
 
-    nav ul {
-        margin: 0;
-        list-style: none;
-        display: inline-block;
-        padding: 3px;
-    }
+        ul {
+            margin: 0;
+            list-style: none;
+            display: inline-block;
+            padding: 3px;
 
-    nav ul li {
-        display: inline-block;
-        cursor: pointer;
+            li {
+                display: inline-block;
+                cursor: pointer;
+            }
+        }
     }
 
     .icon {
@@ -292,13 +290,18 @@ html.dyslexic {
         display: none;
     }
 
+    #ledge {
+        display: none;
+    }
+
     .gameGrid {
         .mobileTheme;
     }
+
+
 }
 
-
-//Initially hidden screens
+// Screens
 .screen {
     display: none;
 }
@@ -336,32 +339,27 @@ html.dyslexic {
 	width: 600px;
 }
 
-nav#menuTitle {
-	
-}
+.mainMenu {
+	ul {
+        list-style: none;
 
-nav#menuTitle ul {
-	list-style: none;
-}
+        li {
+            width: 500px;
 
-nav#menuTitle ul li {
-	width: 500px;
-	border-color: rgba(255,255,255,1);
-	border-style: solid;
-	border-width: 1px;
-	margin-bottom: 20px;
-	text-align: center;
-	padding: 15px;
-	cursor: pointer;
-}
+            border: 1px solid #FFF;
 
-nav#menuTitle ul li.selected {
-	background-color: rgba(255, 255, 255, 0.3);
-}
+            margin-bottom: 20px;
+            text-align: center;
+            padding: 15px;
+            cursor: pointer;
 
-nav#menuTitle ul li span {
-	font-size: 32px;
-	font-family: opendyslexic;
-	font-weight: bold;
-	text-shadow: 1px 1px 0px #000;
+            font-size: 32px;
+            font-weight: bold;
+            text-shadow: 1px 1px 0px #000;
+
+            &.selected {
+                background-color: rgba(255, 255, 255, 0.3);
+            }
+        }
+    }
 }
