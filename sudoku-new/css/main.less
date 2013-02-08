@@ -61,6 +61,16 @@ body {
     color: #fcfcfc;
 }
 
+::selection {
+	color: #fff;
+	background-color: #580301;
+}
+
+::-moz-selection {
+	color: #fff;
+	background-color: #580301;
+}
+
 .gameGrid {
     position: relative;
     width: @boardSize;
@@ -249,4 +259,41 @@ html.dyslexic {
 	background: transparent url('../img/logo@1x.png') center center no-repeat;
 	width: 650px;
 	height: 231px;
+}
+
+#loadingScreen #wrapper {
+	margin-top: 50px;
+}
+
+#loadingScreen #wrapper #inner {
+	margin: 0 auto;
+	width: 600px;
+}
+
+nav#menuTitle {
+	
+}
+
+nav#menuTitle ul {
+	list-style: none;
+}
+
+nav#menuTitle ul li {
+	width: 500px;
+	border-color: rgba(255,255,255,1);
+	border-style: solid;
+	border-width: 1px;
+	margin-bottom: 20px;
+	text-align: center;
+	padding: 15px;
+}
+
+nav#menuTitle ul li:hover {
+	background-color: rgba(255, 255, 255, 0.3);
+	cursor: pointer;
+}
+
+nav#menuTitle ul li span {
+	font-size: 32px;
+	font-family: opendyslexic;
 }
