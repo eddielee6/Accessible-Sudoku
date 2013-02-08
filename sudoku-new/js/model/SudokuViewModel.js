@@ -16,6 +16,6 @@ var SudokuViewModel = function() {
 	this.lastSaved = 0;
 	
 	// The array that contains the current grid contents.
-	this.board = new Array(this._size);
+	this.board = null;
 	
 }
