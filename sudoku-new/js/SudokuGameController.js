@@ -2,7 +2,7 @@ SudokuGameController = function () {
 	var sender = this;
 	var localStorage = new LocalStorageRepository();
 	var viewModel = null;
-	var generater = new Generator();
+	var generator = new Generator();
 
 	this.StartNewGame = function() {
 		console.log("new game");
@@ -19,17 +19,14 @@ SudokuGameController = function () {
 	this.LoadSavedGame = function(savedGame) {
 		console.log("load game");
 		sender.BindToView();
-		
 	};
 
 	this.BindToView = function() {
-		alert(sender.viewModel.version);
 		ko.applyBindings(this.viewModel);
 	};
 
 	var tick = function() {
 		viewModel.elapsed++;
-		document.title = viewModel.elapsed;
 	};
 
 	var init = new function() {
