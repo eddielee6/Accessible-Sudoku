@@ -35,10 +35,12 @@ window.Sudoku = new function() {
 		//the game has one board loaded at a time
 		//this function cycles through the currently selected board
 		//boards are pre-loaded in globalVars.js
-		puzzleNumber = (puzzleNumber+1) % boards.length;
-		board = this.copyBoard(boards[puzzleNumber]);
-		solvedBoard = solvedBoards[puzzleNumber];
-		originalBoard = board;
+		//puzzleNumber = (puzzleNumber+1) % boards.length;
+		//board = this.copyBoard(boards[puzzleNumber]);
+		//solvedBoard = solvedBoards[puzzleNumber];
+		//originalBoard = board;
+		board = Generator.generateGrid();
+		return;
 	};
 
 	this.point = function(row, col) {

@@ -141,18 +141,25 @@ window.Generator = new function() {
 			
 			}
 		}
-		return squares;	
+		
+		var output = returnRows(squares);
+		return output;
 	}
 };
-/*
-var squares = Generator.generateGrid();
-var output = "";
-for(var i=0; i<squares.length; i++)
+
+function returnRows(squares)
 {
-	output += squares[i].value + " ";
-	if((i+1) % 9 == 0)
+	var pos = 0;
+	var output = new Array();
+	for(var i=0; i<9; i++)
 	{
-		output += "<br />";
+		var row = new Array();
+		for(var j=0; j<9; j++)
+		{
+			row.push(squares[pos].value);
+			pos++;
+		}
+		output.push(row);	
 	}
+	return output;
 }
-document.write(output);*/
