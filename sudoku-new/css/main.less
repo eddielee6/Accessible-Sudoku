@@ -63,12 +63,6 @@ body {
     color: #fcfcfc;
 }
 
-.mobile {
-    body {
-        background: #f17200;
-    }
-}
-
 
 // Screens
 .screen {
@@ -222,14 +216,19 @@ body {
     text-align: center;
 }
 
-.desktop {
+.backdrop {
+    position: absolute;
+    z-index: -100;
+    bottom: 0;
+    width: 100%;
+    height: 412px;
+    background: transparent url('../img/shadow-backdrop@1x.png');
+}
+
+.mobile {
     .backdrop {
-        position: absolute;
-        z-index: -100;
-        bottom: 0;
-        width: 100%;
-        height: 412px;
-        background: transparent url('../img/shadow-backdrop@1x.png');
+        height: 352px;
+        background-position: -205px 0;
     }
 }
 
