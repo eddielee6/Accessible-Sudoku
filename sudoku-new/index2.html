@@ -47,12 +47,14 @@
           <li data-theme-name="dyslexic">Dyslexic</li>
         </ul>
 
-       <!-- <div class="gameGrid" data-bind="foreach: Square">
-          <div class="square" data-bind="foreach: Cell">
+        <h1 data-bind="text: version"></h1>
+
+        <div class="gameGrid" data-bind="foreach: Squares">
+          <div class="square" data-bind="foreach: Cells">
             <div class="cell" data-bind="text: currentValue"></div>
           </div>
-        </div>-->
-
+        </div>
+<!-- 
         <div class="gameGrid">
 
             <div class="square">
@@ -157,7 +159,7 @@
               <div id="i9" class="cell r9 c9"></div>
             </div>
 
-        </div>
+        </div>-->
 
         <!-- Someone lookup polite vs assertive vs rude vs alert -->
         <!-- http://stackoverflow.com/questions/3670570/getting-screen-reader-to-read-new-content-added-with-javascript -->

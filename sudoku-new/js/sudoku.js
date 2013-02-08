@@ -39,7 +39,8 @@ window.Sudoku = new function() {
 		//board = this.copyBoard(boards[puzzleNumber]);
 		//solvedBoard = solvedBoards[puzzleNumber];
 		//originalBoard = board;
-		board = Generator.generateGrid();
+		var generator = new Generator();
+		board = generator.generateGrid();
 	};
 
 	this.point = function(row, col) {

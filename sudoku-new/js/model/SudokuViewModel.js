@@ -1,10 +1,10 @@
 var SudokuViewModel = function() {
 	
 	// The file format version, used to distinguish between game versions.
-	this.version;
+	this.version = null;
 	
 	// The currently highlighted cell, saved with the game and rehighlighted when the game is reloaded.
-	this.currentlyHighlightedCell;
+	this.currentlyHighlightedCell = null;
 
 	// The elapsed seconds taken so far, saved with the game.
 	this.elapsed = null;
@@ -13,6 +13,6 @@ var SudokuViewModel = function() {
 	this.lastSaved = null;
 	
 	//Array of SquareViewModel
-	this.Squares;
+	this.Squares = null;
 	
 }
