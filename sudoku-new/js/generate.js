@@ -130,50 +130,9 @@ Generator = function() {
 			}
 		}
 		
-		//var startingSquares = this.removeSquaresFromCompletedGrid(squares);
-		
 		var board = getBoardObject(squares, squares);
-		//var output = this.returnRows(squares);
 		return board;
 	}
-/*
-	this.removeSquaresFromCompletedGrid = function(sq)
-	{
-		var input = sq;
-		for(var i=0; i<81; i++)
-		{
-			var rand = this.getRan(10);
-			if(rand < 5)
-			{
-				input[i].value = 0;
-			}
-		}
-		return input;
-	}*/
-
-	/*
- 	* Takes flat array of 81 squares and returns 9x9 grid
- 	* If changes are made to the board storage structure then 
- 	* change this function accordingly
- 	*/
-	this.returnRows = function(squares)
-	{
-		var pos = 0;
-		var output = new Array();
-		for(var i=0; i<9; i++)
-		{
-			var row = new Array();
-			for(var j=0; j<9; j++)
-			{
-				row.push(squares[pos].value);
-				pos++;
-			}
-			output.push(row);	
-		}
-		
-		return output;
-	}
-};
 
 var Square = function(across, down, region, value, index) 
 {
