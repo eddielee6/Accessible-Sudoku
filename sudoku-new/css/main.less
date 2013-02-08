@@ -230,21 +230,14 @@ html.dyslexic {
 // Arron's crap
 // - - -
 
-#backdrop {
-	opacity: 0.3;
-	z-index:-100;
-	position:fixed;
-	width: 100%;
-	height: 412px;
-	bottom:0px;
-	padding-top: 4px;
-}
+.backdrop {
+    position: absolute;
+    bottom: 0px;
+    z-index: -100;
+    width: 100%;
+    height: 412px;
 
-#backdrop #oriential {
-	display: block;
-	background: transparent url('../img/shadow-backdrop@1x.png');
-	width: 1920px;
-	height: 412px;
+    background: transparent url('../img/shadow-backdrop@1x.png') no-repeat left bottom;
 }
 
 #ledge {
@@ -305,6 +298,7 @@ html.dyslexic {
 
 #ledge nav {
 	display: inline-block;
+    vertical-align: middle;
 }
 
 #ledge nav ul {
@@ -329,7 +323,8 @@ html.dyslexic {
 }
 
 #logoWrapper {
-	padding: 40px;}
+	padding: 40px;
+}
 
 #logoWrapper #logo {
 	margin: 0 auto;
@@ -345,10 +340,6 @@ html.dyslexic {
 #menuScreen #wrapper #inner {
 	margin: 0 auto;
 	width: 600px;
-}
-
-nav#menuTitle {
-	
 }
 
 nav#menuTitle ul {
