@@ -141,25 +141,43 @@ window.Generator = new function() {
 			
 			}
 		}
-		
-		var output = returnRows(squares);
+		squares = this.removeSquaresFromCompletedGrid(squares);
+		var output = this.returnRows(squares);
+		return output;
+	}
+
+	this.removeSquaresFromCompletedGrid = function(squares)
+	{
+		for(var i=0; i<81; i++)
+		{
+			var rand = this.getRan(10);
+			if(rand < 5)
+			{
+				squares[i].value = 0;
+			}
+		}
+		return squares
+	}
+
+	/*
+ 	* Takes flat array of 81 squares and returns 9x9 grid
+ 	* If changes are made to the board storage structure then 
+ 	* change this function accordingly
+ 	*/
+	this.returnRows = function(squares)
+	{
+		var pos = 0;
+		var output = new Array();
+		for(var i=0; i<9; i++)
+		{
+			var row = new Array();
+			for(var j=0; j<9; j++)
+			{
+				row.push(squares[pos].value);
+				pos++;
+			}
+			output.push(row);	
+		}
 		return output;
 	}
 };
-
-function returnRows(squares)
-{
-	var pos = 0;
-	var output = new Array();
-	for(var i=0; i<9; i++)
-	{
-		var row = new Array();
-		for(var j=0; j<9; j++)
-		{
-			row.push(squares[pos].value);
-			pos++;
-		}
-		output.push(row);	
-	}
-	return output;
-}

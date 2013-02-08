@@ -40,7 +40,6 @@ window.Sudoku = new function() {
 		//solvedBoard = solvedBoards[puzzleNumber];
 		//originalBoard = board;
 		board = Generator.generateGrid();
-		return;
 	};
 
 	this.point = function(row, col) {
