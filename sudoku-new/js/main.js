@@ -2,6 +2,8 @@ $(function () {
     
     //Will need moving--------
 
+    window.menuController = new MenuController();
+
 
     window.sudokuGameController = new SudokuGameController();
     
