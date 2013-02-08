@@ -13,6 +13,6 @@ var SudokuViewModel = function() {
 	this.lastSaved = null;
 	
 	//Array of SquareViewModel
-	this.Squares = ko.observableArray();
+	this.Squares = null;
 	
 }

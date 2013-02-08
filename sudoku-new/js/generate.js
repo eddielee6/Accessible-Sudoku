@@ -189,33 +189,33 @@ var Square = function(across, down, region, value, index)
 function getBoardObject(completed, starting)
 {
 	var count = 0;
-	var board = new Object();
-	board.squares = new Array();
+	var squares = new Array();
 	
 	for(var h=0; h<3; h++)
 	{
 		for(var i=0; i<3; i++)
 		{
 			var square = new Array();
+			square.Cells = new Array();
 			for(var j=0; j<3; j++)
 			{
 				for(var k=0; k<3; k++)
 				{
 					var cell = new CellViewModel();
-					cell.solvedValue = completed[count].value;
-					cell.originalValue = starting[count].value;
-					cell.currentValue = starting[count].value;
-					square.push(cell);
+					cell.SolutionValue = completed[count].value;
+					cell.OriginalValue = starting[count].value;
+					cell.CurrentValue(starting[count].value);
+					square.Cells.push(cell);
 					count++;
 				}	
 				count += 6;
 			}
-			board.squares.push(square);
+			squares.push(square);
 			count = (3 * (i+1)) + (27*h);
 		}
 		count = 27 * (h+1);
 	}	
-	return board;
+	return squares;
 
 }
 	

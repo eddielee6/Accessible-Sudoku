@@ -3,14 +3,14 @@ $(function () {
     //Will need moving--------
 
 
-    setTimeout(function() {
+    //setTimeout(function() {
         $("#loadingScreen").hide();
         $("#gameScreen").show();
-    }, 2000);
+    //}, 2000);
 
 
 
-    var sudokuGameController = new SudokuGameController();
+    window.sudokuGameController = new SudokuGameController();
 
 
     var initMobileGridManager = function() {
@@ -89,7 +89,7 @@ $(function () {
 	//Taken from jinput.js
 
 
-	TableFill.fillGrid(); //fill the grid initially and greet the player
+	//TableFill.fillGrid(); //fill the grid initially and greet the player
     ChangeGrid.output("Welcome to Accessible Sudoku! Press h for help or begin playing");
 
     var controlSwitch = false;  //used to detect if the user has pressed one of a series of commands (r, c, or b)

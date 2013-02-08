@@ -1,5 +1,5 @@
 var CellViewModel = function() {
-	this.SolutionValue = ko.observable();
-	this.OrigionalValue = ko.observable();
+	this.SolutionValue;
+	this.OriginalValue;
 	this.CurrentValue = ko.observable();
 };

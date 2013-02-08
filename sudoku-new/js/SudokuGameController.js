@@ -1,28 +1,29 @@
 SudokuGameController = function () {
 	var sender = this;
 	var localStorage = new LocalStorageRepository();
-	var viewModel = null;
-	var generator = new Generator();
+	this.viewModel;
+	
 
 	this.StartNewGame = function() {
 		console.log("new game");
 
-		sender.viewModel.elapsed = 0;
-		sender.viewModel.Squares = null; //bind here
+		var generator = new Generator();
+
+		sender.viewModel.Squares = generator.generateGrid();
 
 		localStorage.SetValueForKey("gameSave", "TEMP");
 
-		sender.BindToView();
-
+		bindToView();
 	};
 
 	this.LoadSavedGame = function(savedGame) {
 		console.log("load game");
-		sender.BindToView();
+		sender.StartNewGame();
 	};
 
-	this.BindToView = function() {
-		ko.applyBindings(this.viewModel);
+	var bindToView = function() {
+		console.log(sender.viewModel);
+		ko.applyBindings(sender.viewModel);
 	};
 
 	var tick = function() {
@@ -41,5 +42,4 @@ SudokuGameController = function () {
 		}
 		setInterval(tick, 1000);
 	};
-	
 };

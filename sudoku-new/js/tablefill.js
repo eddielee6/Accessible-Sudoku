@@ -1,6 +1,6 @@
 window.TableFill = new function() {
     
-    this.fillGrid = function() {
+    /*(this.fillGrid = function() {
         Sudoku.loadNextBoard();
         gridnum=board;
         
@@ -31,5 +31,5 @@ window.TableFill = new function() {
         }
         MoveCell.color(cell,1);
         $("#inputbox").focus();
-    };
+    };*/
 };
