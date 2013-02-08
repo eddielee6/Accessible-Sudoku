@@ -59,10 +59,7 @@ Generator = function() {
 		return square;	
 	}
 	
-	this.getRan = function(high)
-	{
-		return Math.floor(Math.random() * high);
-	}
+	
 	
 	this.checkForConflicts = function(squares, test)
 	{
@@ -103,7 +100,7 @@ Generator = function() {
 			//If we haven't exhausted all possibilities for the current square...
 			if(available[c].length != 0)
 			{
-				var index = this.getRan(available[c].length);
+				var index = getRan(available[c].length);
 				var z = available[c][index];
 				var test = this.Item(c, z);
 				var conflicts = this.checkForConflicts(squares, test); 
@@ -133,25 +130,26 @@ Generator = function() {
 			}
 		}
 		
-		var startingSquares = this.removeSquaresFromCompletedGrid(squares);
+		//var startingSquares = this.removeSquaresFromCompletedGrid(squares);
 		
-		var board = getBoardObject(squares, startingSquares);
+		var board = getBoardObject(squares, squares);
 		//var output = this.returnRows(squares);
 		return board;
 	}
-
-	this.removeSquaresFromCompletedGrid = function(squares)
+/*
+	this.removeSquaresFromCompletedGrid = function(sq)
 	{
+		var input = sq;
 		for(var i=0; i<81; i++)
 		{
 			var rand = this.getRan(10);
 			if(rand < 5)
 			{
-				squares[i].value = 0;
+				input[i].value = 0;
 			}
 		}
-		return squares;
-	}
+		return input;
+	}*/
 
 	/*
  	* Takes flat array of 81 squares and returns 9x9 grid
@@ -185,6 +183,11 @@ var Square = function(across, down, region, value, index)
 	this.value = value;
 	this.index = index;
 }
+
+function getRan(high)
+{
+	return Math.floor(Math.random() * high);
+}
 	
 function getBoardObject(completed, starting)
 {
@@ -203,8 +206,16 @@ function getBoardObject(completed, starting)
 				{
 					var cell = new CellViewModel();
 					cell.SolutionValue = completed[count].value;
-					cell.OriginalValue = starting[count].value;
-					cell.CurrentValue(starting[count].value);
+					var rand = getRan(10);
+					if(rand < 5)
+					{
+						cell.OriginalValue = 0;
+						cell.CurrentValue(0);
+					} else {
+						cell.OriginalValue = starting[count].value;
+						cell.CurrentValue(starting[count].value);
+					}
+					
 					square.Cells.push(cell);
 					count++;
 				}	
