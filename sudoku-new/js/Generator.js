@@ -177,7 +177,7 @@ Generator = function() {
 		}
 
 		var newGame = new SudokuViewModel();
-		newGame.currentSelection = { square: 0, cell: 0 };
+		newGame.CurrentSelection = { square: 0, cell: 0 };
 		newGame.Squares = getSquares(squares, squares);
 
 		return newGame;
