@@ -15,11 +15,56 @@ SudokuGameController = function () {
             	switch(evt.which)
             	{
             		case 40: //down
-            		 	
+            			//Wrap back to the first square
+            			//(Remove if wrap round not required)
+            			if(square == 8 && cell == 8)
+            			{
+            				square = 0;
+            				cell = 0;
+            				sender.viewModel.currentSelection.square = 0;
+            				sender.viewModel.currentSelection.cell = 0;
+            			}
+            			//Do we need to go into the next row of squares
+            			else if((square == 6 || square == 7) && (cell == 8))
+            			{
+            				cell = 0;
+            				square -= 5;
+            				sender.viewModel.currentSelection.square -= 5;
+            				sender.viewModel.currentSelection.cell = 0;
+            			}
+            			//Do we need to go back up to the next row? (not requiring a change into the next row of squares)
+            			else if((square >= 6 && square <= 8) && (cell == 6 || cell == 7))
+            			{
+            				square -= 6;
+            				cell -= 5;
+            				sender.viewModel.currentSelection.square -= 6;
+            				sender.viewModel.currentSelection.cell -= 5;	
+            			}
+            			//Do we need to go down into the square below?
+            		 	else if(cell >= 6 && square <= 6)
+            		 	{
+            		 		cell -= 6;
+            		 		square += 3;
+            		 		sender.viewModel.currentSelection.square += 3;
+            				sender.viewModel.currentSelection.cell -= 6;
+            		 	}
+            		 	//Otherwise, just move to the next cell below
+            		 	else
+            		 	{
+            		 		cell += 3;
+            		 		sender.viewModel.currentSelection.cell += 3;
+            		 	}
             			break;
             		case 37: //left
+            			if(square == 0 && cell == 0)
+            			{
+            				square = 8;
+            				cell = 8;
+            				sender.viewModel.currentSelection.square = 8;
+            				sender.viewModel.currentSelection.cell = 8;	
+            			}
             			//Do we need to move up from square 3 or 6? (zero indexed)
-            			if(((square == 6) || (square == 3)) && (cell == 0))
+            			else if(((square == 6) || (square == 3)) && (cell == 0))
             			{
             				square--;
             				cell = 8;
@@ -53,8 +98,17 @@ SudokuGameController = function () {
             			
             			break;
             		case 39: //right
+            			//Do we need to wrap back to the first square?
+            			//(Remove if wrap round not required)
+            			if(square == 8 && cell == 8)
+            			{
+            				square = 0;
+            				cell = 0;
+            				sender.viewModel.currentSelection.square = 0;
+            				sender.viewModel.currentSelection.cell = 0;
+            			}
             			//Do we need to drop to drop down from squares 2 or 5? (zero indexed)
-            			if(((square == 2) || (square == 5)) && (cell == 8))
+            			else if(((square == 2) || (square == 5)) && (cell == 8))
             			{
             				square++;
             				cell = 0;
