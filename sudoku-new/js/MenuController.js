@@ -13,6 +13,10 @@ MenuController = function() {
             $(this).addClass("selected");
         });
         
+        $("html").addClass(localStorage.GetValueForKey("Theme"));
+        $("html").addClass(localStorage.GetValueForKey("Text Size"));
+        $("html").addClass(localStorage.GetValueForKey("Font Style"));
+        
         var triggerSelectedAction = function() {
             
             var currentlySelected = $(".optionsMenu li.selected");
@@ -29,18 +33,37 @@ MenuController = function() {
             
             // The next value
             var new_screen_value = null;
+            var hasFound = null;
             
             // Tries to find the next value, comparing the current value on screen with whats next in the array.
             for (var i = 0; i < attribute_split.length; i++) 
             {
-                if (attribute_split[i] == screen_value) {
-                	if (i < attribute_split.length - 1) {
-                    	new_screen_value = attribute_split[i + 1];
-                    	/* - - - localStorage.SetValueForKey(key, new_screen_value); - - - <-- this would require the localStorage keys to be changed */
-                    } else {
-	                    new_screen_value = attribute_split[0];
-	                    /* - - - localStorage.SetValueForKey(key, new_screen_value); - - - <-- this would require the localStorage keys to be changed */
-                    }
+            	// To replace break;
+            	if (!hasFound)
+            	{
+            		// Remove all classes
+	            	$("html").removeClass(attribute_split[i]);
+	            	
+	            	// If whatever is in the current loop equals whatever is on the screen then..
+	                if (attribute_split[i] == screen_value) {
+	                
+	                	// If it's not the end item..
+	                	if (i < attribute_split.length - 1) {	
+	                	
+	                    	new_screen_value = attribute_split[i + 1];
+	                    	localStorage.SetValueForKey(key, new_screen_value);
+	                    	$("html").addClass(new_screen_value);
+	                    	hasFound = true;
+	                    	
+	                    } else {
+	                    
+		                    new_screen_value = attribute_split[0];
+		                    localStorage.SetValueForKey(key, new_screen_value);
+		                    $("html").addClass(new_screen_value);
+		                    hasFound = true;
+		                    
+	                    }
+	                }
                 }
             }
             
@@ -79,9 +102,7 @@ MenuController = function() {
             }
         });
 
-        /*$("html").addClass(localStorage.GetValueForKey("theme"));
-        $("html").addClass(localStorage.GetValueForKey("size"));
-        $("html").addClass(localStorage.GetValueForKey("font"));
+        /*
 
         $("#themeSwitch li").click(function() {
             var validSizeThemes = "normal dark-on-light light-on-dark";
