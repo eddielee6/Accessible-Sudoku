@@ -89,6 +89,8 @@ Generator = function() {
 	{
 		var count = 0;
 		var squares = ko.observableArray();
+		var rowIndex = 0;
+		var colIndex = 0;
 		
 		for(var h=0; h<3; h++)
 		{
@@ -111,12 +113,16 @@ Generator = function() {
 							cell.OriginalValue = starting[count].value;
 							cell.CurrentValue(starting[count].value);
 						}
-						
+						cell.rowIndex = rowIndex;
+						cell.colIndex = colIndex;
 						square.Cells.push(cell);
+						colIndex++;
 						count++;
 					}	
 					count += 6;
 				}
+				colIndex = 0;
+				rowIndex++;
 				squares.push(square);
 				count = (3 * (i+1)) + (27*h);
 			}
