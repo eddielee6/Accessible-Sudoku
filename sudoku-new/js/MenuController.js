@@ -101,29 +101,6 @@ MenuController = function() {
                 }
             }
         });
-
-        /*
-
-        $("#themeSwitch li").click(function() {
-            var validSizeThemes = "normal dark-on-light light-on-dark";
-            var newTheme = $(this).attr("data-theme-name");
-            localStorage.SetValueForKey("theme", newTheme);
-            $("html").removeClass(validSizeThemes).addClass(newTheme);
-        });
-
-        $("#sizeSwitch li").click(function() {
-            var validSizeThemes = "standard bigger biggest";
-            var newSizeTheme = $(this).attr("data-theme-name")
-            localStorage.SetValueForKey("size", newSizeTheme);
-            $("html").removeClass(validSizeThemes).addClass(newSizeTheme);
-        });
-
-        $("#fontSwitch li").click(function() {
-            var validSizeThemes = "standard-font dyslexic";
-            var newFont = $(this).attr("data-theme-name")
-            localStorage.SetValueForKey("font", newFont);
-            $("html").removeClass(validSizeThemes).addClass(newFont);
-        });*/
     };
 
     var initMenuScreen = function() {
@@ -133,63 +110,17 @@ MenuController = function() {
             $("#buttonContinue").hide();
         }
 
+        //Mouse input
         $(".mainMenu li:visible").first().addClass("selected");
-
         $(".mainMenu li").mouseover(function() {
             $(".mainMenu li").removeClass("selected");
             $(this).addClass("selected");
         });
-
-        var triggerSelectedAction = function() {
-            var currentlySelected = $(".mainMenu li.selected");
-            currentlySelected.addClass("animated bounceOutRight");
-            setTimeout(function() {
-                $("#menuScreen").addClass("animated bounceOutRight");
-                setTimeout(function() {
-                    //Reset menu
-                    $(".mainMenu li").removeClass("selected");
-                    removeAnimations($("#menuScreen li"));
-                    $("#menuScreen li").show();
-
-                    //Perform action
-                    switch(currentlySelected.attr("data-action")) {
-                        case "continue":
-                            var existingGame = ko.mapping.fromJS(JSON.parse(localStorage.GetValueForKey("gameSave")));
-                            sender.sudokuGameController.StartGame(existingGame);
-
-                            $("section.screen").hide();
-                            $("#gameScreen").addClass("animated bounceInLeft");
-                            $("#gameScreen").show();
-                            break;
-                        case "newGame":
-                            var gameGenerator = new Generator();
-                            var newGame = gameGenerator.GenerateNewGame();
-                            localStorage.SetValueForKey("gameSave", ko.toJSON(newGame));
-                            sender.sudokuGameController.StartGame(newGame);
-
-                            $("section.screen").hide();
-                            $("#gameScreen").addClass("animated bounceInLeft");
-                            $("#gameScreen").show();
-                            break;
-                        case "options":
-                            $("section.screen").hide();
-                            $("#optionsScreen").addClass("animated bounceInLeft");
-                            $("#optionsScreen").show();
-                            break;
-                        case "help":
-                            $("section.screen").hide();
-                            $("#helpScreen").addClass("animated bounceInLeft");
-                            $("#helpScreen").show();
-                            break;
-                    }
-                }, 400);
-            }, 100);
-        };
-
         $(".mainMenu li").click(function() {
             triggerSelectedAction();
         });
 
+        //Keyboard input
         $(window).keydown(function(evt) {
             if($("#menuScreen").is(":visible")) {
                 var currentlySelected = $(".mainMenu li.selected");
@@ -214,30 +145,72 @@ MenuController = function() {
                 }
             }
         });
+
+        var triggerSelectedAction = function() {
+            var currentlySelected = $(".mainMenu li.selected");
+            currentlySelected.addClass("animated bounceOutRight");
+            setTimeout(function() {
+                $("#menuScreen").addClass("animated bounceOutRight");
+                setTimeout(function() {
+                    $("section.screen").hide();
+                    switch(currentlySelected.attr("data-action")) {
+                        case "continue":
+                            var existingGame = ko.mapping.fromJSON(localStorage.GetValueForKey("gameSave"));
+                            sender.sudokuGameController.StartGame(existingGame);
+                            $("#gameScreen").addClass("animated bounceInLeft").show();
+                            break;
+
+                        case "newGame":
+                            var gameGenerator = new Generator();
+                            var newGame = gameGenerator.GenerateNewGame();
+                            localStorage.SetValueForKey("gameSave", ko.toJSON(newGame));
+                            sender.sudokuGameController.StartGame(newGame);
+                            $("#gameScreen").addClass("animated bounceInLeft").show();
+                            break;
+
+                        case "options":
+                            $("#optionsScreen").addClass("animated bounceInLeft").show();
+                            break;
+
+                        case "help":
+                            $("#helpScreen").addClass("animated bounceInLeft").show();
+                            break;
+                    }
+                }, 400);
+            }, 100);
+        };
     };
 
     var initMainMenuButton = function() {
-        var navigateToMenu = function() {
-            if(!$("#menuScreen:visible").length) {
-                $(".screen:visible").first().addClass("animated bounceOutLeft");
-                setTimeout(function() {
-                    removeAnimations($(".screen"));
-                    $(".screen").hide();
-                    $("#menuScreen").show().addClass("animated bounceInRight");
-                    $(".mainMenu li:visible").first().addClass("selected"); //Select first item
-                }, 400);
-            }
-        };
-
+        //Mouse input
         $(".screen header .back").click(function() {
             navigateToMenu();
         });
 
+        //Keyboard input
         $(window).keydown(function(evt) {
             if(evt.which == 27) { //Esc
-                navigateToMenu();
+                if(!$("#menuScreen:visible").length) {
+                    navigateToMenu();
+                }
             }
         });
+
+        var navigateToMenu = function() {
+            //Reset main menu
+            $(".mainMenu li").removeClass("selected");
+            removeAnimations($("#menuScreen li"));
+            $("#menuScreen li").show();
+
+            //Show menu
+            $(".screen:visible").first().addClass("animated bounceOutLeft");
+            setTimeout(function() {
+                removeAnimations($(".screen"));
+                $(".screen").hide();
+                $("#menuScreen").show().addClass("animated bounceInRight");
+                $(".mainMenu li:visible").first().addClass("selected"); //Select first item
+            }, 400);
+        };
     };
 
     var init = new function() {
