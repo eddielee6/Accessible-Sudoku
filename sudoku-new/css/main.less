@@ -97,22 +97,17 @@ body {
             font-size: 1.5em;
             font-weight: bold;
             background-color: rgba(255, 255, 255, 0.2);
+            overflow: hidden; //to clear
             .noSelect;
 
-             .left {
-                display: inline-block;
-                padding-left: 10px;
+            .left {
                 float: left;
+                margin-left: 0.2em;
             }
             
             .right {
-                display: inline-block;
-                padding-right: 10px;
                 float: right;
-            }
-            
-            .clearfix {
-                clear: both;
+                margin-right: 0.2em;
             }
         }
     }
@@ -146,6 +141,8 @@ body {
         overflow: hidden; //to clear
         box-shadow: 0px 0px 20px #fff;
 
+        font-size: 1.5em;
+
         .squareWrapper {
             width: 33.33333333333333%;
             padding-bottom: 33.33333333333333%;
@@ -170,13 +167,23 @@ body {
                         top: 0; bottom: 0; left: 0; right: 0;
 
                         border: 1px solid @secondaryBorderColour;
-                        
-
-                        font-size: 1em;
                         text-align: center;
 
                         &.selected {
                             background: red;
+                        }
+
+                        &:before {
+                            content: '';
+                            display: inline-block;
+                            height: 100%; 
+                            vertical-align: middle;
+                            margin-right: -0.25em;
+                        }
+
+                        .cellValue {
+                            display: inline-block;
+                            vertical-align: middle;
                         }
                     }
 
@@ -302,58 +309,14 @@ html.Dyslexic {
 
 html.Bigger {
     body {
-        font-size: 125%;
+        font-size: 115%;
     }
-
-    // @cellSize: 55px;
-    // @cellFontSize: @cellSize * 0.7;
-    // @squareSize: ((@cellSize + 2) * 3); // 2 for borders, 3 for cell count
-    // @boardSize: ((@squareSize + 2)* 3); // 2 for borders, 3 for square count
-
-    // #gameScreen {
-    //     .gameGrid {
-    //         width: @boardSize;
-
-    //         .square {
-    //             width: @squareSize;
-    //         }
-
-    //         .cell {
-    //             width: @cellSize;
-    //             height: @cellSize;
-    //             line-height: @cellSize;
-    //             font-size: @cellFontSize;
-    //         }
-    //     }
-    // }
 }
 
 html.Biggest {
     body {
-        font-size: 150%;
+        font-size: 130%;
     }
-
-    // @cellSize: 70px;
-    // @cellFontSize: @cellSize * 0.7;
-    // @squareSize: ((@cellSize + 2) * 3); // 2 for borders, 3 for cell count
-    // @boardSize: ((@squareSize + 2)* 3); // 2 for borders, 3 for square count
-
-    // #gameScreen {
-    //     .gameGrid {
-    //         width: @boardSize;
-
-    //         .square {
-    //             width: @squareSize;
-    //         }
-
-    //         .cell {
-    //             width: @cellSize;
-    //             height: @cellSize;
-    //             line-height: @cellSize;
-    //             font-size: @cellFontSize;
-    //         }
-    //     }
-    // }
 }
 
 
@@ -367,17 +330,29 @@ html.Biggest {
         }
     }
 
-    #menuScreen {
-        .mainMenu li {
+    .screen {
+        .menu li {
             font-size: 1.5em;
+        }
+    }
+
+    #gameScreen {
+        .gameGrid {
+            font-size: 1.2em;
         }
     }
 }
 
 @media screen and (max-width: 500px) {
-    #menuScreen {
-        .mainMenu li {
-            font-size: 1.2em;
+    .screen {
+        .menu li {
+            font-size: 1.1em;
+        }
+    }
+
+    #gameScreen {
+        .gameGrid {
+            font-size: 0.9em;
         }
     }
 }

@@ -60,7 +60,9 @@
           <div class="squareWrapper">
             <div class="square" data-bind="foreach: Cells">
               <div class="cellWrapper">
-                <div class="cell" data-bind="text: CurrentValue, css: { selected: IsSelected() }"></div>
+                <div class="cell">
+                  <div class="cellValue" data-bind="text: CurrentValue, css: { selected: IsSelected() }"></div>
+                </div>
               </div>
             </div>
           </div>
@@ -81,9 +83,18 @@
         </header>
         
         <ul class="optionsMenu menu">
-        	<li data-action="theme" data-options="Default,Dark,Light"><span class="left">Theme</span><span class="right">Default</span><div class="clearfix"></div></li>
-        	<li data-action="size" data-options="Normal,Bigger,Biggest"><span class="left">Text Size</span><span class="right">Normal</span><div class="clearfix"></div></li>
-        	<li data-action="font" data-options="Helvetica,Dyslexic"><span class="left">Font Style</span><span class="right">Helvetica</span><div class="clearfix"></div></li>
+        	<li data-action="theme" data-options="Default,Dark,Light">
+            <span class="left">Theme</span>
+            <span class="right">Default</span>
+          </li>
+        	<li data-action="size" data-options="Normal,Bigger,Biggest">
+            <span class="left">Text Size</span>
+            <span class="right">Normal</span>
+          </li>
+        	<li data-action="font" data-options="Helvetica,Dyslexic">
+            <span class="left">Font Style</span>
+            <span class="right">Helvetica</span>
+          </li>
         </ul>
       </section>
 
