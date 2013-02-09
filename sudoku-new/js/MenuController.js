@@ -14,7 +14,7 @@ MenuController = function() {
         });
         
         $("html").addClass(localStorage.GetValueForKey("Theme"));
-        $("html").addClass(localStorage.GetValueForKey("Text Size"));
+        $("html").addClass(localStorage.GetValueForKey("Text Size")); //TODO: Change these to valid keys
         $("html").addClass(localStorage.GetValueForKey("Font Style"));
         
         var triggerSelectedAction = function() {
@@ -28,7 +28,7 @@ MenuController = function() {
             var attribute_split = attribute.split(",");
             
             // Gets the current value thats shown on screen.
-            var key = $(currentlySelected).children()[0].innerHTML;
+            var key = $(currentlySelected).children()[0].innerHTML; //TODO: Remove dependance on view for key
             var screen_value = $(currentlySelected).children()[1].innerHTML;
             
             // The next value
