@@ -12,10 +12,9 @@
     font-style: normal;
 }
 
-
 //Mixins
 .visuallyHidden {
-    text-indent: -9999px;
+    text-indent: -99999px;
     position: absolute;
 }
 
@@ -39,10 +38,6 @@
 
 
 //Standard style
-@cellSize: 40px;
-@cellFontSize: @cellSize * 0.7;
-@squareSize: ((@cellSize + 2) * 3); // 2 for borders, 3 for cell count
-@boardSize: ((@squareSize + 2)* 3); // 2 for borders, 3 for square count
 
 @primaryBorderColour: #333;
 @secondaryBorderColour: #EEE;
@@ -85,12 +80,12 @@ body {
         padding: 0;
 
         li {
-            width: 75%;
+            width: 70%;
             margin: 0 auto 0.8em;
             padding: 0.4em;
             cursor: pointer;
             text-align: center;
-            font-size: 2em;
+            font-size: 1.5em;
             font-weight: bold;
             background-color: rgba(255, 255, 255, 0.2);
 
@@ -126,45 +121,61 @@ body {
 
 #gameScreen {
     .gameGrid {
+
+        &div, div {
+            box-sizing:border-box;
+            -moz-box-sizing:border-box;
+            -webkit-box-sizing:border-box;
+        }
+
         position: relative;
-        width: @boardSize;
+        width: 90%;
         border: 1px solid @primaryBorderColour;
         margin: 0 auto;
         margin-top: 50px;
         overflow: hidden; //to clear
         box-shadow: 0px 0px 20px #fff;
 
-        .square {
-            border: 1px solid @primaryBorderColour;
+        .squareWrapper {
+            width: 33.33333333333333%;
+            padding-bottom: 33.33333333333333%;
+            position: relative;
             float: left;
-            width: @squareSize;
-        }
-        
-        .even {
-            background-color: #e66800;
-        }
-        
-        .odd {
-            background-color: #640f01;
-        }
 
-        .cell {
-            border: 1px solid @secondaryBorderColour;
-            float: left;
-            width: @cellSize;
-            height: @cellSize;
-            line-height: @cellSize;
-            font-size: @cellFontSize;
-            text-align: center;
+            .square {
+                position: absolute;
+                top: 0; bottom: 0; left: 0; right: 0;
 
-            &.selected {
-                background: red;
+                border: 1px solid @primaryBorderColour;
+                
+
+                .cellWrapper {
+                    width: 33.33333333333333%;
+                    padding-bottom: 33.33333333333333%;
+                    position: relative;
+                    float: left;
+
+                    .cell {
+                        position: absolute;
+                        top: 0; bottom: 0; left: 0; right: 0;
+
+                        border: 1px solid @secondaryBorderColour;
+                        
+
+                        font-size: 1em;
+                        text-align: center;
+
+                        &.selected {
+                            background: red;
+                        }
+                    }
+
+                    .cell.highlighted {
+                      background-color: #F60;
+                      color: #FFF;
+                    }
+                }
             }
-        }
-
-        .cell.highlighted {
-          background-color: #F60;
-          color: #FFF;
         }
     }
 }
@@ -280,72 +291,59 @@ html.Dyslexic {
 }
 
 html.Bigger {
-    @cellSize: 55px;
-    @cellFontSize: @cellSize * 0.7;
-    @squareSize: ((@cellSize + 2) * 3); // 2 for borders, 3 for cell count
-    @boardSize: ((@squareSize + 2)* 3); // 2 for borders, 3 for square count
-
-    #gameScreen {
-        .gameGrid {
-            width: @boardSize;
-
-            .square {
-                width: @squareSize;
-            }
-
-            .cell {
-                width: @cellSize;
-                height: @cellSize;
-                line-height: @cellSize;
-                font-size: @cellFontSize;
-            }
-        }
+    body {
+        font-size: 125%;
     }
+
+    // @cellSize: 55px;
+    // @cellFontSize: @cellSize * 0.7;
+    // @squareSize: ((@cellSize + 2) * 3); // 2 for borders, 3 for cell count
+    // @boardSize: ((@squareSize + 2)* 3); // 2 for borders, 3 for square count
+
+    // #gameScreen {
+    //     .gameGrid {
+    //         width: @boardSize;
+
+    //         .square {
+    //             width: @squareSize;
+    //         }
+
+    //         .cell {
+    //             width: @cellSize;
+    //             height: @cellSize;
+    //             line-height: @cellSize;
+    //             font-size: @cellFontSize;
+    //         }
+    //     }
+    // }
 }
 
 html.Biggest {
-    @cellSize: 70px;
-    @cellFontSize: @cellSize * 0.7;
-    @squareSize: ((@cellSize + 2) * 3); // 2 for borders, 3 for cell count
-    @boardSize: ((@squareSize + 2)* 3); // 2 for borders, 3 for square count
-
-    #gameScreen {
-        .gameGrid {
-            width: @boardSize;
-
-            .square {
-                width: @squareSize;
-            }
-
-            .cell {
-                width: @cellSize;
-                height: @cellSize;
-                line-height: @cellSize;
-                font-size: @cellFontSize;
-            }
-        }
-    }
-}
-
-.mobileTheme {
-    width: 100%;
-    padding-top: 1%;
-    border: none;
-    background: @primaryBorderColour;
-
-    .square {
-        width: 32%;
-        margin: 0 0 1% 1%;
-        border: none;
-        background: @secondaryBorderColour;
+    body {
+        font-size: 150%;
     }
 
-    .cell {
-        width: 32.3%;
-        margin: 0.5%;
-        border: none;
-        background: green;
-    }
+    // @cellSize: 70px;
+    // @cellFontSize: @cellSize * 0.7;
+    // @squareSize: ((@cellSize + 2) * 3); // 2 for borders, 3 for cell count
+    // @boardSize: ((@squareSize + 2)* 3); // 2 for borders, 3 for square count
+
+    // #gameScreen {
+    //     .gameGrid {
+    //         width: @boardSize;
+
+    //         .square {
+    //             width: @squareSize;
+    //         }
+
+    //         .cell {
+    //             width: @cellSize;
+    //             height: @cellSize;
+    //             line-height: @cellSize;
+    //             font-size: @cellFontSize;
+    //         }
+    //     }
+    // }
 }
 
 
@@ -362,12 +360,6 @@ html.Biggest {
     #menuScreen {
         .mainMenu li {
             font-size: 1.5em;
-        }
-    }
-
-    #gameScreen {
-        .gameGrid {
-            .mobileTheme;
         }
     }
 }

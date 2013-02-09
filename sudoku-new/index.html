@@ -57,8 +57,12 @@
           <h1>Temp Title</h1>
         </header>
         <div class="gameGrid" data-bind="foreach: Squares">
-          <div class="square" data-bind="foreach: Cells">
-            <div class="cell" data-bind="text: CurrentValue, css: { selected: IsSelected() }"></div>
+          <div class="squareWrapper">
+            <div class="square" data-bind="foreach: Cells">
+              <div class="cellWrapper">
+                <div class="cell" data-bind="text: CurrentValue, css: { selected: IsSelected() }"></div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
