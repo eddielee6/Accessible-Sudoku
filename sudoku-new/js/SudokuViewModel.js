@@ -12,6 +12,7 @@ var CellViewModel = function() {
 	this.OriginalValue;
 	this.RowIndex;
 	this.ColIndex;
+	this.isEditable;
 	this.CurrentValue = ko.observable();
 	this.IsSelected = ko.observable(false);
 };

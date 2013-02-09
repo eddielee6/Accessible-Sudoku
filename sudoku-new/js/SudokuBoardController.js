@@ -28,6 +28,8 @@ SudokuBoardController = function() {
             		case 104:
             		case 105:
             			var key = getKeyPressed(evt.which);
+            			if(sender.viewModel.Squares()[square].Cells()[cell].OriginalValue != "")
+            			alert("original");
 						sender.viewModel.Squares()[square].Cells()[cell].CurrentValue(key);
 						sender.viewModel.Squares()[square].Cells()[cell].CurrentValue.valueHasMutated();
             			break;
@@ -203,6 +205,8 @@ SudokuBoardController = function() {
 		var cell = sender.viewModel.CurrentSelection.cell;
 		return sender.viewModel.Squares[square].Cells[cell].currentValue;
 	};
+	
+	
 
 	var init = new function() {
             sender.viewModel = new SudokuViewModel();
@@ -212,6 +216,7 @@ SudokuBoardController = function() {
 };
 
 function getKeyPressed(code)
+//TODO: Refactor
 {
 	switch(code)
 	{

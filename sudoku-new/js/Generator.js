@@ -109,9 +109,11 @@ Generator = function() {
 						{
 							cell.OriginalValue = "";
 							cell.CurrentValue("");
+							cell.isEditable = true;
 						} else {
 							cell.OriginalValue = starting[count].value;
 							cell.CurrentValue(starting[count].value);
+							cell.isEditable = false;
 						}
 						cell.rowIndex = rowIndex;
 						cell.colIndex = colIndex;

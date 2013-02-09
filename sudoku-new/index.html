@@ -60,7 +60,7 @@
           <div class="squareWrapper">
             <div class="square" data-bind="foreach: Cells">
               <div class="cellWrapper">
-                <div class="cell" data-bind="css: { selected: IsSelected() }">
+                <div class="cell" data-bind="css: { selected: IsSelected(), editable: IsEditable() }">
                   <div class="cellValue" data-bind="text: CurrentValue"></div>
                 </div>
               </div>
