@@ -47,10 +47,6 @@
 
 
 //Standard style
-
-@primaryBorderColour: #333;
-@secondaryBorderColour: #EEE;
-
 body {
 	height: 100%;
     font-size: 100%;
@@ -125,6 +121,8 @@ body {
 }
 
 #gameScreen {
+    @primaryBorderColour: #333;
+    @secondaryBorderColour: #EEE;
     .gameGrid {
 
         &div, div {
@@ -139,8 +137,7 @@ body {
         margin: 0 auto;
         margin-top: 50px;
         overflow: hidden; //to clear
-        box-shadow: 0px 0px 20px #fff;
-
+        background-color: rgb(206, 115, 51);
         font-size: 1.5em;
 
         .squareWrapper {
@@ -212,7 +209,7 @@ body {
 }
 
 .backdrop {
-    position: absolute;
+    position: fixed;
     z-index: -100;
     bottom: 0;
     width: 100%;
