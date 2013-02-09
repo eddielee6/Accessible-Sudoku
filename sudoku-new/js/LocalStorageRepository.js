@@ -1,7 +1,11 @@
 LocalStorageRepository = function() {
 
 	this.IsAvailable = function() {
-		return Modernizr.localstorage;
+		try {
+			return 'localStorage' in window && window['localStorage'] !== null;
+		} catch (e) {
+			return false;
+		}
 	};
 
 	this.SetValueForKey = function(key, value) {
