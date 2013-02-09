@@ -13,16 +13,17 @@ MenuController = function() {
             $(this).addClass("selected");
         });
         
-        $("html").addClass(localStorage.GetValueForKey("Theme"));
-        $("html").addClass(localStorage.GetValueForKey("Text Size")); //TODO: Change these to valid keys
-        $("html").addClass(localStorage.GetValueForKey("Font Style"));
+        $("html").addClass(localStorage.GetValueForKey("theme"));
+        $("html").addClass(localStorage.GetValueForKey("size")); //TODO: Change these to valid keys
+        $("html").addClass(localStorage.GetValueForKey("font")); //TODONE: I think they're valid now, well they're what they was before I changed them.
         
         var triggerSelectedAction = function() {
             
             var currentlySelected = $(".optionsMenu li.selected");
-                    
+            
             // Gets the comma-seperated values from the data-options attrib.
             var attribute = $(currentlySelected).data("options");
+            var attribute_action = $(currentlySelected).data("action"); // TODONE: The data-action is the new key, that fits with the .GetValueForKey's above.
             
             // Splits them up into an array, seperated by ','
             var attribute_split = attribute.split(",");
@@ -51,14 +52,14 @@ MenuController = function() {
 	                	if (i < attribute_split.length - 1) {	
 	                	
 	                    	new_screen_value = attribute_split[i + 1];
-	                    	localStorage.SetValueForKey(key, new_screen_value);
+	                    	localStorage.SetValueForKey(attribute_action, new_screen_value);
 	                    	$("html").addClass(new_screen_value);
 	                    	hasFound = true;
 	                    	
 	                    } else {
 	                    
 		                    new_screen_value = attribute_split[0];
-		                    localStorage.SetValueForKey(key, new_screen_value);
+		                    localStorage.SetValueForKey(attribute_action, new_screen_value);
 		                    $("html").addClass(new_screen_value);
 		                    hasFound = true;
 		                    
