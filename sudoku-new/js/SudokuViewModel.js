@@ -1,6 +1,6 @@
 var SudokuViewModel = function() {
 	this.Squares = ko.observableArray();
-	this.currentSelection; //Rename to add capital C as is public
+	this.CurrentSelection;
 };
 
 var SquareViewModel = function() {

@@ -213,10 +213,16 @@ body {
 
 //Alternate Themes
 //Consistant structure should only be declared in the standard theme
-html.Dark {
+html.Dark { //Dark text on light background
     body {
         background: #fcfcfc;
         color: #2b2f33;
+    }
+
+    ::selection,
+    ::-moz-selection {
+        color: #fcfcfc;
+        background-color: #2b2f33;
     }
 
     .ledge {
@@ -226,19 +232,29 @@ html.Dark {
     &.desktop {
         .screen {
             .menu {
+                li {
+                    background-color: rgba(43, 47, 51, 0.5);
+                }
+
                 li.selected {
                     color: #2b2f33;
-                    background-color: rgba(255, 255, 255, 0.6);
+                    background-color: rgba(43, 47, 51, 0.3);
                 }
             }
         }
     }
 }
 
-html.Light {
+html.Light { //Light text on dark background
     body {
         background: #2b2f33;
         color: #fcfcfc;
+    }
+
+    ::selection,
+    ::-moz-selection {
+        color: #2b2f33;
+        background-color: #fcfcfc;
     }
 
     .ledge {
