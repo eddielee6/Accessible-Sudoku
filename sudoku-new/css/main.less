@@ -239,6 +239,21 @@ body {
     text-align: center;
 }
 
+.logo {
+	margin: 0 auto;
+	width: 650px;
+	height: 231px;
+	background: transparent url('../img/logo@1x.png') center center no-repeat;
+}
+
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) { 
+   	
+   	.logo {
+	   	background: transparent url('../img/logo@2x.png') center center no-repeat;
+	   	background-size: 650px 231px;
+   	}
+}
+
 .backdrop {
     position: absolute;
     z-index: -100;
