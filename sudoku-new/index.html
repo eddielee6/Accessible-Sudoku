@@ -19,6 +19,7 @@
         <script type="text/javascript" src="//use.typekit.net/yvr4tfh.js"></script> <!-- 100% can't use, incompatible licence -->
         <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
         
+        <script type="text/javascript" src="js/utilityFunctions.js"></script>
         <script type="text/javascript" src="js/LocalStorageRepository.js"></script>
         <script type="text/javascript" src="js/SudokuViewModel.js"></script>
         <script type="text/javascript" src="js/generate.js"></script>
@@ -41,7 +42,7 @@
         <img src="img/logo@1x.png" width="650" height="231" />
       </div>
 
-      <section id="menuScreen" class="screen animated bounceInUp">
+      <section id="menuScreen" class="screen animated bounceInLeft">
   				<ul class="mainMenu">
   					<li data-action="continue">Continue</li>
   					<li data-action="newGame">New Game</li>
@@ -50,7 +51,7 @@
   				</ul>
       </section>
 	    
-      <section id="gameScreen" class="screen animated bounceInUp">
+      <section id="gameScreen" class="screen">
         <div class="gameGrid" data-bind="foreach: Squares">
           <div class="square" data-bind="foreach: Cells">
             <div class="cell" data-bind="text: OriginalValue, style: { background: IsSelected() ? 'red' : 'transparent' }"></div>
@@ -58,12 +59,18 @@
         </div>
       </section>
 
-      <section id="helpScreen" class="screen animated bounceInUp">
-        <h1>Help!</h1>
+      <section id="helpScreen" class="screen">
+        <header>
+          <div class="back">&#9664; menu</div>
+          <h1>Help</h1>
+        </header>
       </section>
 
-      <section id="optionsScreen" class="screen animated bounceInUp">
-        <h1>Options!</h1>
+      <section id="optionsScreen" class="screen">
+        <header>
+          <div class="back">&#9664; menu</div>
+          <h1>Options</h1>
+        </header>
 
         <span>Theme:</span>
         <ul id="themeSwitch">

@@ -46,25 +46,38 @@ MenuController = function() {
             var currentlySelected = $(".mainMenu li.selected");
             currentlySelected.addClass("animated bounceOutRight");
             setTimeout(function() {
-                switch(currentlySelected.attr("data-action")) {
-                    case "continue":
-                        $("section.screen").hide();
-                        $("#gameScreen").show();
-                        break;
-                    case "newGame":
-                        $("section.screen").hide();
-                        $("#gameScreen").show();
-                        break;
-                    case "options":
-                        $("section.screen").hide();
-                        $("#optionsScreen").show();
-                        break;
-                    case "help":
-                        $("section.screen").hide();
-                        $("#helpScreen").show();
-                        break;
-                }
-            }, 500);
+                $("#menuScreen").addClass("animated bounceOutRight");
+                setTimeout(function() {
+                    //Reset menu
+                    $(".mainMenu li").removeClass("selected");
+                    removeAnimations($("#menuScreen li"));
+                    $("#menuScreen li").show();
+
+                    //Perform action
+                    switch(currentlySelected.attr("data-action")) {
+                        case "continue":
+                            $("section.screen").hide();
+                            $("#gameScreen").addClass("animated bounceInLeft");
+                            $("#gameScreen").show();
+                            break;
+                        case "newGame":
+                            $("section.screen").hide();
+                            $("#gameScreen").addClass("animated bounceInLeft");
+                            $("#gameScreen").show();
+                            break;
+                        case "options":
+                            $("section.screen").hide();
+                            $("#optionsScreen").addClass("animated bounceInLeft");
+                            $("#optionsScreen").show();
+                            break;
+                        case "help":
+                            $("section.screen").hide();
+                            $("#helpScreen").addClass("animated bounceInLeft");
+                            $("#helpScreen").show();
+                            break;
+                    }
+                }, 400);
+            }, 100);
         };
 
         $(".mainMenu li").click(function() {
@@ -97,8 +110,21 @@ MenuController = function() {
         });
     };
 
+    var initMenuButton = function() {
+        $(".screen header .back").click(function() {
+            $(".screen:visible").first().addClass("animated bounceOutLeft");
+            setTimeout(function() {
+                removeAnimations($(".screen"));
+                $(".screen").hide();
+                $("#menuScreen").show().addClass("animated bounceInRight");
+                $(".mainMenu li:visible").first().addClass("selected"); //Select first item
+            }, 400);
+        });
+    };
+
     var init = new function() {
     	initAccessibilityControls();
         initMenuScreen();
+        initMenuButton();
     };
 };

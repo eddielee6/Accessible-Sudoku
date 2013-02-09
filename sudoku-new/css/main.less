@@ -30,6 +30,18 @@
     text-indent: -9999px;
 }
 
+.gradientBackground(@start, @end) {
+    background: @end;
+    background-image: -moz-linear-gradient(top, @start 0%, @end 100%);
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, @start), color-stop(100%, @end));
+    background-image: -webkit-linear-gradient(top, @start 0%, @end 100%);
+    background-image: -o-linear-gradient(top, @start 0%, @end 100%);
+    background-image: -ms-linear-gradient(top, @start 0%, @end 100%);
+    background-image: linear-gradient(to bottom, @start 0%, @end 100%);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
 ::selection,
 ::-moz-selection {
     color: #fff;
@@ -49,18 +61,8 @@
 body {
 	height: 100%;
     font-size: 100%;
-	background-color: #580301;
-	background: rgb(241,114,0);
-    background: -moz-linear-gradient(top,  rgba(241,114,0,1) 0%, rgba(88,3,1,1) 100%);
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(241,114,0,1)), color-stop(100%,rgba(88,3,1,1)));
-    background: -webkit-linear-gradient(top,  rgba(241,114,0,1) 0%,rgba(88,3,1,1) 100%);
-    background: -o-linear-gradient(top,  rgba(241,114,0,1) 0%,rgba(88,3,1,1) 100%);
-    background: -ms-linear-gradient(top,  rgba(241,114,0,1) 0%,rgba(88,3,1,1) 100%);
-    background: linear-gradient(to bottom,  rgba(241,114,0,1) 0%,rgba(88,3,1,1) 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f17200', endColorstr='#580301',GradientType=0 );
-	background-repeat: no-repeat;
-	background-attachment: fixed;
     color: #fcfcfc;
+    .gradientBackground(rgb(241,114,0), rgb(88,3,1));
 }
 
 
@@ -70,6 +72,23 @@ body {
     max-width: 700px;
     width: 90%;
     margin: 0 auto;
+
+    header {
+        overflow: hidden;
+        margin-bottom: 1em;
+
+        h1 {
+            text-align: center;
+            font-size: 2em;
+            margin: 0;
+        }
+
+        .back {
+            line-height: 2em;
+            float: left;
+            cursor: pointer;
+        }
+    }
 }
 
 #gameScreen {
