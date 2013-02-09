@@ -6,13 +6,13 @@
         <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
         <meta name="apple-mobile-web-app-status-bar-style" content="black" />
 
+        <title>Sudoku</title>
+
         <link rel="icon" type="image/png" href="img/favicon.png" />
         <link rel="apple-touch-icon" sizes="57x57" href="img/apple-favicon-iphone.png" />
         <link rel="apple-touch-icon" sizes="114x114" href="img/apple-favicon-iphone.png" />
         <link rel="apple-touch-icon" sizes="72x72" href="img/apple-favicon-ipad.png" />
         <link rel="apple-touch-icon" sizes="144x144" href="img/apple-favicon-ipad.png" />
-
-        <title>Sudoku</title>
 
         <link rel="stylesheet" href="css/vender/normalize.css" />
         <link rel="stylesheet" href="css/vender/animate.css" />
@@ -22,9 +22,7 @@
         <script type="text/javascript" src="js/vender/jquery-1.9.0.min.js"></script>
         <script type="text/javascript" src="js/vender/knockout-2.2.1.js"></script>
         <script type="text/javascript" src="js/vender/knockout.mapping-2.4.1.js"></script>
-
-
-        
+  
         <script type="text/javascript" src="js/utilityFunctions.js"></script>
         <script type="text/javascript" src="js/LocalStorageRepository.js"></script>
         <script type="text/javascript" src="js/SudokuViewModel.js"></script>
@@ -32,13 +30,7 @@
         <script type="text/javascript" src="js/VoiceOverManager.js"></script>
         <script type="text/javascript" src="js/MenuController.js"></script>
         <script type="text/javascript" src="js/SudokuGameController.js"></script>
-        <script type="text/javascript" src="js/main.js"></script>
-
-        <!--<script type="text/javascript" src="js/tablefill.js"></script>
-        <script type="text/javascript" src="js/movecell.js"></script>
-        <script type="text/javascript" src="js/changegrid.js"></script>
-        <script type="text/javascript" src="js/sudoku.js"></script>-->
-        
+        <script type="text/javascript" src="js/main.js"></script>        
     </head>
     <body>
 
@@ -83,33 +75,12 @@
           <div class="back">&#9664; menu</div>
           <h1>Options</h1>
         </header>
-
-        <!--<span>Theme:</span>
-        <ul id="themeSwitch">
-          <li data-theme-name="normal" class="icon theme-default"></li>
-          <li data-theme-name="dark-on-light" class="icon theme-white"></li>
-          <li data-theme-name="light-on-dark" class="icon theme-black"></li>
-        </ul>
-        
-        <span>Size:</span>
-        <ul id="sizeSwitch">
-          <li data-theme-name="standard" class="icon size-normal"></li>
-          <li data-theme-name="bigger" class="icon size-bigger"></li>
-          <li data-theme-name="biggest" class="icon size-biggest"></li>
-        </ul>
-
-        <span>Font:</span>
-        <ul id="fontSwitch">
-          <li data-theme-name="standard-font" class="icon font-normal"></li>
-          <li data-theme-name="dyslexic" class="icon font-dy"></li>
-        </ul>-->
         
         <ul class="optionsMenu">
         	<li data-action="theme" data-options="Default,Dark,Light"><span class="left">Theme</span><span class="right">Default</span><div class="clearfix"></div></li>
         	<li data-action="textSize" data-options="Normal,Bigger,Biggest"><span class="left">Text Size</span><span class="right">Normal</span><div class="clearfix"></div></li>
         	<li data-action="fontStyle" data-options="Helvetica,Dyslexic"><span class="left">Font Style</span><span class="right">Helvetica</span><div class="clearfix"></div></li>
         </ul>
-        
       </section>
 
       <div class="backdrop"></div>
