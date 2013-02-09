@@ -12,7 +12,7 @@ $(function () {
 
 
     var menuController = new MenuController();
-    var sudokuGameController = new SudokuGameController();
+    
     
     var initMobileGridManager = function() {
         $(window).resize(function() {

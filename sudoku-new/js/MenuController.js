@@ -1,11 +1,65 @@
 MenuController = function() {
     var sender = this;
+    var sudokuGameController;
     this.voiceOverManager;
 
 	var initOptionsScreen = function() {
         var localStorage = new LocalStorageRepository();
+        
+        $(".optionsMenu li").first().addClass("selected");
+        
+        $(".optionsMenu li").mouseover(function() {
+            $(".optionsMenu li").removeClass("selected");
+            $(this).addClass("selected");
+        });
+        
+        var triggerSelectedAction = function() {
+            var currentlySelected = $(".optionsMenu li.selected");
+            
+            //Perform action
+            switch(currentlySelected.attr("data-action")) {
+                case "theme":
+                    alert('Clicked the theme button');
+                    break;
+                case "textSize":
+                    alert('Clicked the text size button');
+                    break;
+                case "fontStyle":
+                    alert('Clicked the font style button');
+                    break;
+            }
+        };
+        
+        $(".optionsMenu li").click(function() {
+            triggerSelectedAction();
+        });
+        
+        $(window).keydown(function(evt) {
+            if($("#optionsScreen").is(":visible")) {
+                var currentlySelected = $(".optionsMenu li.selected");
+                switch(evt.which) {
+                    case 38: // w
+                    case 87: // up
+                        if(currentlySelected.prev(":visible").length) {
+                            currentlySelected.prev(":visible").addClass("selected");
+                            currentlySelected.removeClass("selected");
+                        }
+                        break;
+                    case 40: // s
+                    case 83: // down
+                        if(currentlySelected.next(":visible").length) {
+                            currentlySelected.next(":visible").addClass("selected");
+                            currentlySelected.removeClass("selected");
+                        }
+                        break
+                    case 13:
+                        triggerSelectedAction();
+                        break;
+                }
+            }
+        });
 
-        $("html").addClass(localStorage.GetValueForKey("theme"));
+        /*$("html").addClass(localStorage.GetValueForKey("theme"));
         $("html").addClass(localStorage.GetValueForKey("size"));
         $("html").addClass(localStorage.GetValueForKey("font"));
 
@@ -28,7 +82,7 @@ MenuController = function() {
             var newFont = $(this).attr("data-theme-name")
             localStorage.SetValueForKey("font", newFont);
             $("html").removeClass(validSizeThemes).addClass(newFont);
-        });
+        });*/
     };
 
     var initMenuScreen = function() {
@@ -59,11 +113,22 @@ MenuController = function() {
                     //Perform action
                     switch(currentlySelected.attr("data-action")) {
                         case "continue":
+                            var existingGame = JSON.parse(localStorage.GetValueForKey("gameSave"));
+                            console.log(existingGame);
+                            sudokuGameController = new SudokuGameController(existingGame);
+
                             $("section.screen").hide();
                             $("#gameScreen").addClass("animated bounceInLeft");
                             $("#gameScreen").show();
                             break;
                         case "newGame":
+                            var gameGenerator = new Generator();
+                            var newGame = new SudokuViewModel();
+                            newGame.Squares = gameGenerator.generateGrid();
+                            localStorage.SetValueForKey("gameSave", ko.toJSON(newGame));
+                            console.log(localStorage.GetValueForKey("gameSave"));
+                            sudokuGameController = new SudokuGameController(newGame);
+
                             $("section.screen").hide();
                             $("#gameScreen").addClass("animated bounceInLeft");
                             $("#gameScreen").show();
