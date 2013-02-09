@@ -1,3 +1,78 @@
 function removeAnimations (element) {
-	$(element).removeClass("animated flip flipInX flipOutX flipInY flipOutY fadeIn fadeInUp fadeInDown fadeInLeft fadeInRight fadeInUpBig fadeInDownBig fadeInLeftBig fadeInRightBig fadeOut fadeOutUp fadeOutDown fadeOutLeft fadeOutRight fadeOutUpBig fadeOutDownBig fadeOutLeftBig fadeOutRightBigbounceIn bounceInDown bounceInUp bounceInLeft bounceInRight bounceOut bounceOutDown bounceOutUp bounceOutLeft bounceOutRight rotateIn rotateInDownLeft rotateInDownRight rotateInUpLeft rotateInUpRight rotateOut rotateOutDownLeft rotateOutDownRight rotateOutUpLeft rotateOutUpRight lightSpeedIn lightSpeedOut hinge rollIn rollOut");
+	$(element).removeClass("animated " +
+		//Attention seekers
+		"flash " +
+		"bounce " +
+		"shake " +
+		"tada " +
+		"swing " +
+		"wobble " +
+		"wiggle " +
+		"pulse " +
+
+		//Flippers
+		"flip " +
+		"flipInX " +
+		"flipOutX " +
+		"flipInY " +
+		"flipOutY " +
+
+		//Fading entrances
+		"fadeIn " +
+		"fadeInUp " +
+		"fadeInDown " +
+		"fadeInLeft " +
+		"fadeInRight " +
+		"fadeInUpBig " +
+		"fadeInDownBig " +
+		"fadeInLeftBig " +
+		"fadeInRightBig " +
+
+		//Fading exits
+		"fadeOut " +
+		"fadeOutUp " +
+		"fadeOutDown " +
+		"fadeOutLeft " +
+		"fadeOutRight " +
+		"fadeOutUpBig " +
+		"fadeOutDownBig " +
+		"fadeOutLeftBig " +
+		"fadeOutRightBig " +
+
+		//Bouncing entrances
+		"bounceIn " +
+		"bounceInDown " +
+		"bounceInUp " +
+		"bounceInLeft " +
+		"bounceInRight " +
+
+		//Bouncing exits
+		"bounceOut " +
+		"bounceOutDown " +
+		"bounceOutUp " +
+		"bounceOutLeft " +
+		"bounceOutRight " +
+
+		//Rotating entrances
+		"rotateIn " +
+		"rotateInDownLeft " +
+		"rotateInDownRight " +
+		"rotateInUpLeft " +
+		"rotateInUpRight " +
+
+		//Rotating exits
+		"rotateOut " +
+		"rotateOutDownLeft " +
+		"rotateOutDownRight " +
+		"rotateOutUpLeft " +
+		"rotateOutUpRight " +
+
+		//Lightspeed
+		"lightSpeedIn " +
+		"lightSpeedOut " +
+
+		//Specials
+		"hinge " +
+		"rollIn " +
+		"rollOut");
 }
