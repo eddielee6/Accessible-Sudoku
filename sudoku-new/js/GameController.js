@@ -157,7 +157,7 @@ GameController = function() {
                     switch(currentlySelected.attr("data-action")) {
                         case "continue":
                             var existingGame = ko.mapping.fromJSON(localStorage.GetValueForKey("gameSave"));
-                            sender.sudokuGameController.StartGame(existingGame);
+                            sender.sudokuBoardController.StartGame(existingGame);
                             $("#gameScreen").addClass("animated bounceInLeft").show();
                             break;
 
@@ -165,7 +165,7 @@ GameController = function() {
                             var gameGenerator = new Generator();
                             var newGame = gameGenerator.GenerateNewGame();
                             localStorage.SetValueForKey("gameSave", ko.toJSON(newGame));
-                            sender.sudokuGameController.StartGame(newGame);
+                            sender.sudokuBoardController.StartGame(newGame);
                             $("#gameScreen").addClass("animated bounceInLeft").show();
                             break;
 
