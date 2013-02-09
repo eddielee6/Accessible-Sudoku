@@ -8,7 +8,11 @@ $(function () {
     }
 
     //Initialize game
-    var game = new GameController();
+    SudokuGame = {
+        voiceOverManager: new VoiceOverManager(),
+        game: new GameController()
+    };
+    
     
     // var initMobileGridManager = function() {
     //     $(window).resize(function() {

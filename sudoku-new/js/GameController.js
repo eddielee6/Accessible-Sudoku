@@ -1,7 +1,6 @@
 GameController = function() {
     var sender = this;
     var sudokuBoardController;
-    var voiceOverManager;
 
     var loadUserPreferences = function() {
         var localStorage = new LocalStorageRepository();
@@ -216,7 +215,6 @@ GameController = function() {
     };
 
     var init = new function() {
-        voiceOverManager = new VoiceOverManager();
         sudokuBoardController = new SudokuBoardController();
 
         loadUserPreferences();
