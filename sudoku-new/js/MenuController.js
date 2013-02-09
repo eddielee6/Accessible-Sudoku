@@ -1,5 +1,8 @@
 MenuController = function() {
-	var initAccessibilityControls = function() {
+    var sender = this;
+    this.voiceOverManager;
+
+	var initOptionsScreen = function() {
         var localStorage = new LocalStorageRepository();
 
         $("html").addClass(localStorage.GetValueForKey("theme"));
@@ -110,7 +113,7 @@ MenuController = function() {
         });
     };
 
-    var initMenuButton = function() {
+    var initMainMenuButton = function() {
         var navigateToMenu = function() {
             if(!$("#menuScreen:visible").length) {
                 $(".screen:visible").first().addClass("animated bounceOutLeft");
@@ -135,8 +138,10 @@ MenuController = function() {
     };
 
     var init = new function() {
-    	initAccessibilityControls();
+        this.voiceOverManager = new VoiceOverManager();
+
+    	initOptionsScreen();
         initMenuScreen();
-        initMenuButton();
+        initMainMenuButton();
     };
 };

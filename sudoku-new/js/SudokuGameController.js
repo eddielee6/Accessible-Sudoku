@@ -199,16 +199,10 @@ SudokuGameController = function () {
 	};
 
 	var bindToView = function() {
-		ko.applyBindings(sender.viewModel);
-	};
-
-	var tick = function() {
-		//viewModel.elapsed++;
+	     ko.applyBindings(sender.viewModel);
 	};
 
 	var init = new function() {
-		
-
 		sender.viewModel = new SudokuViewModel();
 		sender.viewModel.version = 1.0;
 
