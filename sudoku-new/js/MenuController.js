@@ -5,7 +5,12 @@ MenuController = function() {
 	var initOptionsScreen = function() {
         var localStorage = new LocalStorageRepository();
         
-        var currentlySelected = $(".optionsMenu li:visible").first().addClass("selected");
+        $(".optionsMenu li:visible").first().addClass("selected");
+        
+        $(".optionsMenu li").mouseover(function() {
+            $(".optionsMenu li").removeClass("selected");
+            $(this).addClass("selected");
+        });
 
         /*$("html").addClass(localStorage.GetValueForKey("theme"));
         $("html").addClass(localStorage.GetValueForKey("size"));
