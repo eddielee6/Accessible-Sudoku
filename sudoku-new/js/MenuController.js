@@ -112,13 +112,15 @@ MenuController = function() {
 
     var initMenuButton = function() {
         var navigateToMenu = function() {
-            $(".screen:visible").first().addClass("animated bounceOutLeft");
-            setTimeout(function() {
-                removeAnimations($(".screen"));
-                $(".screen").hide();
-                $("#menuScreen").show().addClass("animated bounceInRight");
-                $(".mainMenu li:visible").first().addClass("selected"); //Select first item
-            }, 400);
+            if(!$("#menuScreen:visible").length) {
+                $(".screen:visible").first().addClass("animated bounceOutLeft");
+                setTimeout(function() {
+                    removeAnimations($(".screen"));
+                    $(".screen").hide();
+                    $("#menuScreen").show().addClass("animated bounceInRight");
+                    $(".mainMenu li:visible").first().addClass("selected"); //Select first item
+                }, 400);
+            }
         };
 
         $(".screen header .back").click(function() {
