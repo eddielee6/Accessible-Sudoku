@@ -11,6 +11,27 @@ MenuController = function() {
             $(".optionsMenu li").removeClass("selected");
             $(this).addClass("selected");
         });
+        
+        var triggerSelectedAction = function() {
+            var currentlySelected = $(".optionsMenu li.selected");
+            
+            //Perform action
+            switch(currentlySelected.attr("data-action")) {
+                case "theme":
+                    alert('Clicked the theme button');
+                    break;
+                case "textSize":
+                    alert('Clicked the text size button');
+                    break;
+                case "fontStyle":
+                    alert('Clicked the font style button');
+                    break;
+            }
+        };
+        
+        $(".optionsMenu li").click(function() {
+            triggerSelectedAction();
+        });
 
         /*$("html").addClass(localStorage.GetValueForKey("theme"));
         $("html").addClass(localStorage.GetValueForKey("size"));
