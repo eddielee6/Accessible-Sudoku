@@ -29,7 +29,6 @@ MenuController = function() {
             var attribute_split = attribute.split(",");
             
             // Gets the current value thats shown on screen.
-            var key = $(currentlySelected).children()[0].innerHTML; //TODO: Remove dependance on view for key
             var screen_value = $(currentlySelected).children()[1].innerHTML;
             
             // The next value
