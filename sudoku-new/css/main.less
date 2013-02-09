@@ -28,6 +28,7 @@
 //Mixins
 .visuallyHidden {
     text-indent: -9999px;
+    position: absolute;
 }
 
 .gradientBackground(@start, @end) {
@@ -263,6 +264,28 @@ body {
 //Consistant structure should only be declared in the standard theme
 html.dark-on-light {
     body {
+        background: #fcfcfc;
+        color: #2b2f33;
+    }
+
+    .ledge {
+        background: #2b2f33;
+    }
+
+    &.desktop {
+        #menuScreen {
+            .mainMenu {
+                li.selected {
+                    color: #2b2f33;
+                    background-color: rgba(255, 255, 255, 0.6);
+                }
+            }
+        }
+    }
+}
+
+html.light-on-dark {
+    body {
         background: #2b2f33;
         color: #fcfcfc;
     }
@@ -270,16 +293,16 @@ html.dark-on-light {
     .ledge {
         background: #fcfcfc;
     }
-}
 
-html.light-on-dark {
-    body {
-        background: #fcfcfc;
-        color: #2b2f33;
-    }
-
-    .ledge {
-        background: #2b2f33;
+    &.desktop {
+        #menuScreen {
+            .mainMenu {
+                li.selected {
+                    color: #2b2f33;
+                    background-color: rgba(255, 255, 255, 0.6);
+                }
+            }
+        }
     }
 }
 

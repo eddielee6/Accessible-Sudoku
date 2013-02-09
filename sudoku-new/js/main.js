@@ -32,39 +32,39 @@ $(function () {
 
 
 
-    cell='a1';
-    boardLength = 9;
+ //    cell='a1';
+ //    boardLength = 9;
 
-    //board is stored as a 9x9 array of numbers; 0 denotes blank
-    //store sample boards in an array
-    boards = new Array;
-    originalBoard = new Array;
-	solvedBoards = new Array;
+ //    //board is stored as a 9x9 array of numbers; 0 denotes blank
+ //    //store sample boards in an array
+ //    boards = new Array;
+ //    originalBoard = new Array;
+	// solvedBoards = new Array;
 	
-	//--------------adding boards
-	boards.push([[7,9,6,3,0,0,9,0,4],[9,8,2,0,4,6,0,7,0],[0,0,4,2,0,0,6,8,0],[0,2,8,1,0,4,3,0,0],[4,0,7,6,0,8,5,0,1],[1,6,9,7,3,5,0,4,0],[0,0,0,9,5,7,8,3,2],[8,9,0,4,1,2,0,5,6],[2,7,0,0,0,3,4,1,9]]);
-	solvedBoards.push([[7,5,6,3,8,1,9,2,4],[9,8,2,5,4,6,1,7,3],[3,1,4,2,7,9,6,8,5],[5,2,8,1,9,4,3,6,7],[4,3,7,6,2,8,5,9,1],[1,6,9,7,3,5,2,4,8],[6,4,1,9,5,7,8,3,2],[8,9,3,4,1,2,7,5,6],[2,7,5,8,6,3,4,1,9]]);
+	// //--------------adding boards
+	// boards.push([[7,9,6,3,0,0,9,0,4],[9,8,2,0,4,6,0,7,0],[0,0,4,2,0,0,6,8,0],[0,2,8,1,0,4,3,0,0],[4,0,7,6,0,8,5,0,1],[1,6,9,7,3,5,0,4,0],[0,0,0,9,5,7,8,3,2],[8,9,0,4,1,2,0,5,6],[2,7,0,0,0,3,4,1,9]]);
+	// solvedBoards.push([[7,5,6,3,8,1,9,2,4],[9,8,2,5,4,6,1,7,3],[3,1,4,2,7,9,6,8,5],[5,2,8,1,9,4,3,6,7],[4,3,7,6,2,8,5,9,1],[1,6,9,7,3,5,2,4,8],[6,4,1,9,5,7,8,3,2],[8,9,3,4,1,2,7,5,6],[2,7,5,8,6,3,4,1,9]]);
 
 	
 
-	puzzleNumber = -1;
+	// puzzleNumber = -1;
 	
-	crossedBox=0;
+	// crossedBox=0;
 
 
 
 
 
-	//Taken from jinput.js
+	// //Taken from jinput.js
 
 
-	//TableFill.fillGrid(); //fill the grid initially and greet the player
-    ChangeGrid.output("Welcome to Accessible Sudoku! Press h for help or begin playing");
+	// //TableFill.fillGrid(); //fill the grid initially and greet the player
+ //    ChangeGrid.output("Welcome to Accessible Sudoku! Press h for help or begin playing");
 
-    var controlSwitch = false;  //used to detect if the user has pressed one of a series of commands (r, c, or b)
-    var controlSwitchRCB = "x"; //used to store the previous command if controlSwitch = true
-    var tCounter = 0;           //used to count the number of times the user has consecutively executed the t command (toggle)
-    var hCounter = 0;           //used to count the number of times the user has consecutively executed the h command (help)
+ //    var controlSwitch = false;  //used to detect if the user has pressed one of a series of commands (r, c, or b)
+ //    var controlSwitchRCB = "x"; //used to store the previous command if controlSwitch = true
+ //    var tCounter = 0;           //used to count the number of times the user has consecutively executed the t command (toggle)
+ //    var hCounter = 0;           //used to count the number of times the user has consecutively executed the h command (help)
 
     /*$(window).keydown(function (e) {
         if (Sudoku.checkSolved()) {     //check on every kepress to see if the board is solved, if so on any keypress it should refill itself with a new puzzle
@@ -434,8 +434,8 @@ $(function () {
         //return false;
     });*/
 
-    $("#inputbox").blur(function () {                            //make sure that the user's cursor is always on the output textbox, this way their screen reader will always read whatever we print to it
-        setTimeout(function () { $("#inputbox").focus(); }, 5);  //and we always capture every keystroke the user makes
-    });
+    // $("#inputbox").blur(function () {                            //make sure that the user's cursor is always on the output textbox, this way their screen reader will always read whatever we print to it
+    //     setTimeout(function () { $("#inputbox").focus(); }, 5);  //and we always capture every keystroke the user makes
+    // });
 
 });
