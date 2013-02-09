@@ -55,6 +55,10 @@
       </section>
 	    
       <section id="gameScreen" class="screen">
+        <header>
+          <div class="back">&#9664; menu</div>
+          <h1>Options</h1>
+        </header>
         <div class="gameGrid" data-bind="foreach: Squares">
           <div class="square" data-bind="foreach: Cells">
             <div class="cell" data-bind="text: OriginalValue, style: { background: IsSelected() ? 'red' : 'transparent' }"></div>
