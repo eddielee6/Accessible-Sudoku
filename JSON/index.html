@@ -33,7 +33,7 @@
 		
 		<table>
 			<tbody>
-				<tr data-bind="foreach: cells">
+				<tr data-bind="foreach: cells, valueUpdate: 'afterkeyDown'">
 					<td data-bind="text: value"></td>
 				</tr>
 			</tbody>

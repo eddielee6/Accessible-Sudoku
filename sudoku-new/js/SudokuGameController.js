@@ -14,6 +14,21 @@ SudokuGameController = function () {
             	
             	switch(evt.which)
             	{
+            		// a number key was pressed
+            		case 96:
+            		case 97:
+            		case 98:
+            		case 99:
+            		case 100:
+            		case 101:
+            		case 102:
+            		case 103:
+            		case 104:
+            		case 105:
+            			var key = getKeyPressed(evt.which);
+						sender.viewModel.Squares[square].Cells[cell].CurrentValue(key);
+						sender.viewModel.Squares[square].Cells[cell].CurrentValue.valueHasMutated();
+            			break;
             		case 40: //down
             			//Wrap back to the first square
             			//(Remove if wrap round not required)
@@ -180,6 +195,14 @@ SudokuGameController = function () {
             }
         });
 	};
+	
+	
+	
+	this.getCurrentCellValue = function() {
+		var square = sender.viewModel.currentSelection.square;
+		var cell = sender.viewModel.currentSelection.cell;
+		return sender.viewModel.Squares[square].Cells[cell].currentValue;
+	};
 
 	this.StartNewGame = function() {
 		console.log("new game");
@@ -215,3 +238,40 @@ SudokuGameController = function () {
 		initSudokuControls();
 	};
 };
+
+function getKeyPressed(code)
+{
+	switch(code)
+	{
+		case 96:
+			return "";
+			break;
+        case 97:
+            return 1;
+			break;
+        case 98:
+            return 2;
+			break;
+        case 99:
+            return 3;
+			break;
+        case 100:
+            return 4;
+			break;
+        case 101:
+            return 5;
+			break;
+        case 102:
+            return 6;
+			break;
+        case 103:
+            return 7;
+			break;
+        case 104:
+            return 8;
+			break;
+        case 105:
+            return 9;
+			break;	
+	}	
+}
