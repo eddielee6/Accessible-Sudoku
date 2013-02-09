@@ -1,4 +1,4 @@
-MenuController = function() {
+GameController = function() {
     var sender = this;
     var sudokuGameController;
     this.voiceOverManager;
