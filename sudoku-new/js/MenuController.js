@@ -24,6 +24,7 @@ MenuController = function() {
             var attribute_split = attribute.split(",");
             
             // Gets the current value thats shown on screen.
+            var key = $(currentlySelected).children()[0].innerHTML;
             var screen_value = $(currentlySelected).children()[1].innerHTML;
             
             // The next value
@@ -35,8 +36,10 @@ MenuController = function() {
                 if (attribute_split[i] == screen_value) {
                 	if (i < attribute_split.length - 1) {
                     	new_screen_value = attribute_split[i + 1];
+                    	/* - - - localStorage.SetValueForKey(key, new_screen_value); - - - <-- this would require the localStorage keys to be changed */
                     } else {
 	                    new_screen_value = attribute_split[0];
+	                    /* - - - localStorage.SetValueForKey(key, new_screen_value); - - - <-- this would require the localStorage keys to be changed */
                     }
                 }
             }
