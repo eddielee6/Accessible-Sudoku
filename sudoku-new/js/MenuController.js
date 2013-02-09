@@ -1,5 +1,6 @@
 MenuController = function() {
     var sender = this;
+    var sudokuGameController;
     this.voiceOverManager;
 
 	var initOptionsScreen = function() {
@@ -112,11 +113,22 @@ MenuController = function() {
                     //Perform action
                     switch(currentlySelected.attr("data-action")) {
                         case "continue":
+                            var existingGame = JSON.parse(localStorage.GetValueForKey("gameSave"));
+                            console.log(existingGame);
+                            sudokuGameController = new SudokuGameController(existingGame);
+
                             $("section.screen").hide();
                             $("#gameScreen").addClass("animated bounceInLeft");
                             $("#gameScreen").show();
                             break;
                         case "newGame":
+                            var gameGenerator = new Generator();
+                            var newGame = new SudokuViewModel();
+                            newGame.Squares = gameGenerator.generateGrid();
+                            localStorage.SetValueForKey("gameSave", ko.toJSON(newGame));
+                            console.log(localStorage.GetValueForKey("gameSave"));
+                            sudokuGameController = new SudokuGameController(newGame);
+
                             $("section.screen").hide();
                             $("#gameScreen").addClass("animated bounceInLeft");
                             $("#gameScreen").show();

@@ -1,7 +1,6 @@
-SudokuGameController = function () {
+SudokuGameController = function(gameData) {
 	var sender = this;
 	var localStorage = new LocalStorageRepository();
-	this.viewModel;
 
 	var initSudokuControls = function() {
 		sender.viewModel.Squares[0].Cells[0].IsSelected(true);
@@ -181,37 +180,10 @@ SudokuGameController = function () {
         });
 	};
 
-	this.StartNewGame = function() {
-		console.log("new game");
-
-		var generator = new Generator();
-
-		sender.viewModel.Squares = generator.generateGrid();
-
-		localStorage.SetValueForKey("gameSave", "TEMP");
-
-		bindToView();
-	};
-
-	this.LoadSavedGame = function(savedGame) {
-		console.log("load game");
-		sender.StartNewGame();
-	};
-
-	var bindToView = function() {
-	     ko.applyBindings(sender.viewModel);
-	};
-
 	var init = new function() {
-		sender.viewModel = new SudokuViewModel();
-		sender.viewModel.version = 1.0;
+            sender.viewModel = gameData;
+            ko.applyBindings(sender.viewModel);
 
-		var savedGame = localStorage.GetValueForKey("gameSave");
-		if(savedGame != null) {
-			sender.LoadSavedGame(savedGame);
-		} else {
-			sender.StartNewGame();
-		}
 		initSudokuControls();
 	};
 };
