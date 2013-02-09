@@ -14,7 +14,6 @@ SudokuGameController = function() {
             	var cell = sender.viewModel.currentSelection.cell;
             	var square = sender.viewModel.currentSelection.square;
             	sender.viewModel.Squares()[square].Cells()[cell].IsSelected(false);
-            	
             	switch(evt.which)
             	{
             		// a number key was pressed
@@ -29,8 +28,8 @@ SudokuGameController = function() {
             		case 104:
             		case 105:
             			var key = getKeyPressed(evt.which);
-						sender.viewModel.Squares[square].Cells[cell].CurrentValue(key);
-						sender.viewModel.Squares[square].Cells[cell].CurrentValue.valueHasMutated();
+						sender.viewModel.Squares()[square].Cells()[cell].CurrentValue(key);
+						sender.viewModel.Squares()[square].Cells()[cell].CurrentValue.valueHasMutated();
             			break;
             		case 40: //down
             			//Wrap back to the first square
