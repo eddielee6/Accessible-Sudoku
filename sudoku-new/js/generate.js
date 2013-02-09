@@ -1,17 +1,15 @@
 Generator = function() {
 	
-	this.getAcrossFromNumber = function(n) 
-	{
+	var getAcrossFromNumber = function(n) {
 		var k = n % 9;
 		if (k==0)
 			return 9;
 		else return k;
 	}
 	
-	this.getDownFromNumber = function(n)
-	{
+	var getDownFromNumber = function(n) {
 		var k;
-		if(this.getAcrossFromNumber(n) == 9)
+		if(getAcrossFromNumber(n) == 9)
 			k = n / 9;
 		else
 			k = n / 9 + 1;
@@ -20,11 +18,10 @@ Generator = function() {
 		return k;
 	}
 	
-	this.getRegionFromNumber = function(n)
-	{
+	var getRegionFromNumber = function(n) {
 		var k;
-    	var a = this.getAcrossFromNumber(n);
-    	var d = this.getDownFromNumber(n);
+    	var a = getAcrossFromNumber(n);
+    	var d = getDownFromNumber(n);
 
     	if (1 <= a && a < 4 && 1 <= d && d < 4)
      		k = 1;
@@ -47,22 +44,18 @@ Generator = function() {
     	return k;
 	}
 	
-	this.Item = function(n, v)
-	{
+	var item = function(n, v) {
 		n += 1;
 		var square = new Square();
-		square.across = Math.floor(this.getAcrossFromNumber(n));
-		square.down = Math.floor(this.getDownFromNumber(n));
-		square.region = Math.floor(this.getRegionFromNumber(n));
+		square.across = Math.floor(getAcrossFromNumber(n));
+		square.down = Math.floor(getDownFromNumber(n));
+		square.region = Math.floor(getRegionFromNumber(n));
 		square.value = v;
 		square.index = n - 1;
 		return square;	
 	}
 	
-	
-	
-	this.checkForConflicts = function(squares, test)
-	{
+	var checkForConflicts = function(squares, test) {
 		for(var i=0; i<squares.length; i++)
 		{	
 			if( (squares[i].across != undefined && squares[i].across == test.across) 
@@ -77,9 +70,62 @@ Generator = function() {
 		}
 		return false;	
 	}
-	
-	this.generateGrid = function()
+
+	var Square = function(across, down, region, value, index) 
 	{
+		this.across = across;
+		this.down = down;
+		this.region = region;
+		this.value = value;
+		this.index = index;
+	}
+
+	var getRan = function (high)
+	{
+		return Math.floor(Math.random() * high);
+	}
+		
+	var getSquares = function (completed, starting)
+	{
+		var count = 0;
+		var squares = ko.observableArray();
+		
+		for(var h=0; h<3; h++)
+		{
+			for(var i=0; i<3; i++)
+			{
+				var square = new SquareViewModel();
+
+				for(var j=0; j<3; j++)
+				{
+					for(var k=0; k<3; k++)
+					{
+						var cell = new CellViewModel();
+						cell.SolutionValue = completed[count].value;
+						var rand = getRan(10);
+						if(rand < 5)
+						{
+							cell.OriginalValue = "";
+							cell.CurrentValue("");
+						} else {
+							cell.OriginalValue = starting[count].value;
+							cell.CurrentValue(starting[count].value);
+						}
+						
+						square.Cells.push(cell);
+						count++;
+					}	
+					count += 6;
+				}
+				squares.push(square);
+				count = (3 * (i+1)) + (27*h);
+			}
+			count = 27 * (h+1);
+		}	
+		return squares;
+	}
+
+	this.GenerateNewGame = function() {
 		var squares = new Array();
 		var available = new Array();
 		var c = 0;
@@ -102,8 +148,8 @@ Generator = function() {
 			{
 				var index = getRan(available[c].length);
 				var z = available[c][index];
-				var test = this.Item(c, z);
-				var conflicts = this.checkForConflicts(squares, test); 
+				var test = item(c, z);
+				var conflicts = checkForConflicts(squares, test); 
 				if(conflicts === false)
 				{
 					//The current number works so lets add it to our list
@@ -129,64 +175,14 @@ Generator = function() {
 			
 			}
 		}
-		
-		var board = getBoardObject(squares, squares);
-		return board;
-	}
+
+		var newGame = new SudokuViewModel();
+		newGame.currentSelection = { square: 0, cell: 0 };
+		newGame.Squares = getSquares(squares, squares);
+
+		return newGame;
+	};
 };
 
-var Square = function(across, down, region, value, index) 
-{
-	this.across = across;
-	this.down = down;
-	this.region = region;
-	this.value = value;
-	this.index = index;
-}
 
-function getRan(high)
-{
-	return Math.floor(Math.random() * high);
-}
-	
-function getBoardObject(completed, starting)
-{
-	var count = 0;
-	var squares = new Array();
-	
-	for(var h=0; h<3; h++)
-	{
-		for(var i=0; i<3; i++)
-		{
-			var square = new Array();
-			square.Cells = new Array();
-			for(var j=0; j<3; j++)
-			{
-				for(var k=0; k<3; k++)
-				{
-					var cell = new CellViewModel();
-					cell.SolutionValue = completed[count].value;
-					var rand = getRan(10);
-					if(rand < 5)
-					{
-						cell.OriginalValue = "";
-						cell.CurrentValue("");
-					} else {
-						cell.OriginalValue = starting[count].value;
-						cell.CurrentValue(starting[count].value);
-					}
-					
-					square.Cells.push(cell);
-					count++;
-				}	
-				count += 6;
-			}
-			squares.push(square);
-			count = (3 * (i+1)) + (27*h);
-		}
-		count = 27 * (h+1);
-	}	
-	return squares;
-}
-	
 

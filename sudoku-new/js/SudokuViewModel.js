@@ -1,9 +1,10 @@
 var SudokuViewModel = function() {
-	this.Squares = {};
-	this.currentSelection = {
-		square: 0,
-		cell: 0
-	}
+	this.Squares = ko.observableArray();
+	this.currentSelection; //Rename to add capital C as is public
+};
+
+var SquareViewModel = function() {
+	this.Cells = ko.observableArray();
 };
 
 var CellViewModel = function() {

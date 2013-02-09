@@ -3,13 +3,13 @@ SudokuGameController = function(gameData) {
 	var localStorage = new LocalStorageRepository();
 
 	var initSudokuControls = function() {
-		sender.viewModel.Squares[0].Cells[0].IsSelected(true);
+		sender.viewModel.Squares()[0].Cells()[0].IsSelected(true);
 		
 		$(window).keydown(function(evt) {
             if($("#gameScreen").is(":visible")) {
             	var cell = sender.viewModel.currentSelection.cell;
             	var square = sender.viewModel.currentSelection.square;
-            	sender.viewModel.Squares[square].Cells[cell].IsSelected(false);
+            	sender.viewModel.Squares()[square].Cells()[cell].IsSelected(false);
             	
             	switch(evt.which)
             	{
@@ -190,7 +190,7 @@ SudokuGameController = function(gameData) {
             		break;
             	}
             	//Update the viewmodel data
-            	sender.viewModel.Squares[square].Cells[cell].IsSelected(true);	
+            	sender.viewModel.Squares()[square].Cells()[cell].IsSelected(true);	
             }
         });
 	};
@@ -205,6 +205,8 @@ SudokuGameController = function(gameData) {
 
 	var init = new function() {
             sender.viewModel = gameData;
+            console.log(sender.viewModel);
+            ko.cleanNode($("html")[0]);
             ko.applyBindings(sender.viewModel);
 
 		initSudokuControls();

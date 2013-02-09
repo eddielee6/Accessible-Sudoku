@@ -130,7 +130,7 @@ MenuController = function() {
                     //Perform action
                     switch(currentlySelected.attr("data-action")) {
                         case "continue":
-                            var existingGame = JSON.parse(localStorage.GetValueForKey("gameSave"));
+                            var existingGame = ko.mapping.fromJS(JSON.parse(localStorage.GetValueForKey("gameSave")));
                             console.log(existingGame);
                             sudokuGameController = new SudokuGameController(existingGame);
 
@@ -140,10 +140,8 @@ MenuController = function() {
                             break;
                         case "newGame":
                             var gameGenerator = new Generator();
-                            var newGame = new SudokuViewModel();
-                            newGame.Squares = gameGenerator.generateGrid();
+                            var newGame = gameGenerator.GenerateNewGame();
                             localStorage.SetValueForKey("gameSave", ko.toJSON(newGame));
-                            console.log(localStorage.GetValueForKey("gameSave"));
                             sudokuGameController = new SudokuGameController(newGame);
 
                             $("section.screen").hide();
