@@ -19,7 +19,34 @@ MenuController = function() {
             //Perform action
             switch(currentlySelected.attr("data-action")) {
                 case "theme":
-                    alert('Clicked the theme button');
+                    
+                    // Gets the comma-seperated values from the data-options attrib.
+                    var attribute = $(currentlySelected).data("options");
+                    
+                    // Splits them up into an array, seperated by ','
+                    var attribute_split = attribute.split(",");
+                    
+                    // Gets the current value thats shown on screen.
+                    var screen_value = $(currentlySelected).children()[1].innerHTML;
+                    
+                    // The next value
+                    var new_screen_value = null;
+                    
+                    // Tries to find the next value, comparing the current value on screen with whats next in the array.
+                    for (var i = 0; i < attribute_split.length; i++) 
+                    {
+	                    if (attribute_split[i] == screen_value) {
+	                    	if (i < attribute_split.length - 1) {
+		                    	new_screen_value = attribute_split[i + 1];
+		                    } else {
+			                    new_screen_value = attribute_split[0];
+		                    }
+	                    }
+                    }
+                    
+                    // Put the new value on the screen
+                    $(currentlySelected).children()[1].innerHTML = new_screen_value;
+                    
                     break;
                 case "textSize":
                     alert('Clicked the text size button');
