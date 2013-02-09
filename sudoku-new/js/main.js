@@ -8,10 +8,10 @@ $(function () {
         $("html").addClass("desktop");
     }
     
-    window.menuController = new MenuController();
+    var menuController = new MenuController();
 
 
-    window.sudokuGameController = new SudokuGameController();
+    var sudokuGameController = new SudokuGameController();
     
     var initMobileGridManager = function() {
         $(window).resize(function() {

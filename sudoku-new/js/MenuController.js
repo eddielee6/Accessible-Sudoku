@@ -111,7 +111,7 @@ MenuController = function() {
     };
 
     var initMenuButton = function() {
-        $(".screen header .back").click(function() {
+        var navigateToMenu = function() {
             $(".screen:visible").first().addClass("animated bounceOutLeft");
             setTimeout(function() {
                 removeAnimations($(".screen"));
@@ -119,6 +119,16 @@ MenuController = function() {
                 $("#menuScreen").show().addClass("animated bounceInRight");
                 $(".mainMenu li:visible").first().addClass("selected"); //Select first item
             }, 400);
+        };
+
+        $(".screen header .back").click(function() {
+            navigateToMenu();
+        });
+
+        $(window).keydown(function(evt) {
+            if(evt.which == 27) { //Esc
+                navigateToMenu();
+            }
         });
     };
 
