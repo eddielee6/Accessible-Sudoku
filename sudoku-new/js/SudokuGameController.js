@@ -95,7 +95,42 @@ SudokuGameController = function () {
             			}
             			break;
             		case 38: //up
-            			
+            			if(cell == 2 && square == 2)
+            			{
+            				square = 6;
+            				cell = 6;
+            				sender.viewModel.currentSelection.square = 6;
+            				sender.viewModel.currentSelection.cell = 6;
+            			}
+            			//Do we need to go into the next row?
+            			else if((cell == 0 || cell == 1) && (square >= 0 && square <= 2))
+            			{
+            				square += 6;
+            				cell += 7;
+            				sender.viewModel.currentSelection.square +=6;
+            				sender.viewModel.currentSelection.cell += 7;
+            			}
+            			else if ((cell == 2) && (square == 0 || square == 1))
+            			{
+            				square += 7;
+            				cell = 6;
+            				sender.viewModel.currentSelection.square += 7;
+            				sender.viewModel.currentSelection.cell = 6;
+            			}
+            			//Do we need to go up to the above square?
+            			else if(cell <= 2 && square >= 3)
+            			{
+            				square -= 3;
+            				cell += 6;
+            				sender.viewModel.currentSelection.square -= 3;
+            				sender.viewModel.currentSelection.cell += 6;
+            			}
+            			//Otherwise just go up into the above cell
+            			else
+            			{
+            				cell -= 3;
+            				sender.viewModel.currentSelection.cell -= 3;	
+            			}
             			break;
             		case 39: //right
             			//Do we need to wrap back to the first square?
