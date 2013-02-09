@@ -1,4 +1,4 @@
-SudokuGameController = function() {
+SudokuBoardController = function() {
 	var sender = this;
 	var localStorage = new LocalStorageRepository();
 
