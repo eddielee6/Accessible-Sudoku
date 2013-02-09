@@ -3,21 +3,52 @@ GameController = function() {
     var sudokuBoardController;
     var voiceOverManager;
 
-	var initOptionsScreen = function() {
+    var loadUserPreferences = function() {
         var localStorage = new LocalStorageRepository();
-        
+        $("html").addClass(localStorage.GetValueForKey("theme"));
+        $("html").addClass(localStorage.GetValueForKey("size"));
+        $("html").addClass(localStorage.GetValueForKey("font"));
+    };
+
+	var initOptionsScreen = function() {
+        //Mouse input
         $(".optionsMenu li").first().addClass("selected");
-        
         $(".optionsMenu li").mouseover(function() {
             $(".optionsMenu li").removeClass("selected");
             $(this).addClass("selected");
         });
-        
-        $("html").addClass(localStorage.GetValueForKey("theme"));
-        $("html").addClass(localStorage.GetValueForKey("size")); //TODO: Change these to valid keys
-        $("html").addClass(localStorage.GetValueForKey("font")); //TODONE: I think they're valid now, well they're what they was before I changed them.
+        $(".optionsMenu li").click(function() {
+            triggerSelectedAction();
+        });
+
+        //Keyboard input
+        $(window).keydown(function(evt) {
+            if($("#optionsScreen").is(":visible")) {
+                var currentlySelected = $(".optionsMenu li.selected");
+                switch(evt.which) {
+                    case 38: // w
+                    case 87: // up
+                        if(currentlySelected.prev(":visible").length) {
+                            currentlySelected.prev(":visible").addClass("selected");
+                            currentlySelected.removeClass("selected");
+                        }
+                        break;
+                    case 40: // s
+                    case 83: // down
+                        if(currentlySelected.next(":visible").length) {
+                            currentlySelected.next(":visible").addClass("selected");
+                            currentlySelected.removeClass("selected");
+                        }
+                        break
+                    case 13:
+                        triggerSelectedAction();
+                        break;
+                }
+            }
+        });
         
         var triggerSelectedAction = function() {
+            var localStorage = new LocalStorageRepository();
             
             var currentlySelected = $(".optionsMenu li.selected");
             
@@ -72,35 +103,6 @@ GameController = function() {
             
             // Eddie, since I know how much you love to refactor..
         };
-        
-        $(".optionsMenu li").click(function() {
-            triggerSelectedAction();
-        });
-        
-        $(window).keydown(function(evt) {
-            if($("#optionsScreen").is(":visible")) {
-                var currentlySelected = $(".optionsMenu li.selected");
-                switch(evt.which) {
-                    case 38: // w
-                    case 87: // up
-                        if(currentlySelected.prev(":visible").length) {
-                            currentlySelected.prev(":visible").addClass("selected");
-                            currentlySelected.removeClass("selected");
-                        }
-                        break;
-                    case 40: // s
-                    case 83: // down
-                        if(currentlySelected.next(":visible").length) {
-                            currentlySelected.next(":visible").addClass("selected");
-                            currentlySelected.removeClass("selected");
-                        }
-                        break
-                    case 13:
-                        triggerSelectedAction();
-                        break;
-                }
-            }
-        });
     };
 
     var initMenuScreen = function() {
@@ -217,8 +219,9 @@ GameController = function() {
         voiceOverManager = new VoiceOverManager();
         sudokuBoardController = new SudokuBoardController();
 
-    	initOptionsScreen();
+        loadUserPreferences();
         initMenuScreen();
         initMainMenuButton();
+        initOptionsScreen();
     };
 };
