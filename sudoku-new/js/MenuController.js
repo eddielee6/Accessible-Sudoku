@@ -5,7 +5,7 @@ MenuController = function() {
 	var initOptionsScreen = function() {
         var localStorage = new LocalStorageRepository();
         
-        $(".optionsMenu li:visible").first().addClass("selected");
+        $(".optionsMenu li").first().addClass("selected");
         
         $(".optionsMenu li").mouseover(function() {
             $(".optionsMenu li").removeClass("selected");
@@ -31,6 +31,31 @@ MenuController = function() {
         
         $(".optionsMenu li").click(function() {
             triggerSelectedAction();
+        });
+        
+        $(window).keydown(function(evt) {
+            if($("#optionsScreen").is(":visible")) {
+                var currentlySelected = $(".optionsMenu li.selected");
+                switch(evt.which) {
+                    case 38: // w
+                    case 87: // up
+                        if(currentlySelected.prev(":visible").length) {
+                            currentlySelected.prev(":visible").addClass("selected");
+                            currentlySelected.removeClass("selected");
+                        }
+                        break;
+                    case 40: // s
+                    case 83: // down
+                        if(currentlySelected.next(":visible").length) {
+                            currentlySelected.next(":visible").addClass("selected");
+                            currentlySelected.removeClass("selected");
+                        }
+                        break
+                    case 13:
+                        triggerSelectedAction();
+                        break;
+                }
+            }
         });
 
         /*$("html").addClass(localStorage.GetValueForKey("theme"));
