@@ -18,59 +18,76 @@ SudokuGameController = function () {
             		 	
             			break;
             		case 37: //left
-            			if((square % 3 == 0) && (cell % 3 == 0))
+            			//Do we need to move up from square 3 or 6? (zero indexed)
+            			if(((square == 6) || (square == 3)) && (cell == 0))
+            			{
+            				square--;
+            				cell = 8;
+            				sender.viewModel.currentSelection.square--;
+            				sender.viewModel.currentSelection.cell = 8;
+            			}
+            			//Do we need to move up a row?
+            			else if((square % 3 == 0) && (cell % 3 == 0))
             			{
             				square+=2;
             				cell--;
             				sender.viewModel.currentSelection.square+=2;
             				sender.viewModel.currentSelection.cell--;
-            				sender.viewModel.Squares[square].Cells[cell].IsSelected(true);
             			}
+            			//Do we need to move into the left adjacent box?
             			else if(cell % 3 == 0)
             			{
             				square--;
             				cell+=2;
             				sender.viewModel.currentSelection.square--;
             				sender.viewModel.currentSelection.cell +=2;
-            				sender.viewModel.Squares[square].Cells[cell].IsSelected(true);
-            			} else {
+            			} 
+            			//otherwise, just move the selected cell one cell to the left
+            			else 
+            			{
             				cell--;
             				sender.viewModel.currentSelection.cell--;
-            				sender.viewModel.Squares[square].Cells[cell].IsSelected(true);
             			}
             			break;
             		case 38: //up
             			
             			break;
             		case 39: //right
-            			if(((square + 1) % 3 == 0) && (square != 0) && ((cell+1) % 3 == 0))
+            			//Do we need to drop to drop down from squares 2 or 5? (zero indexed)
+            			if(((square == 2) || (square == 5)) && (cell == 8))
+            			{
+            				square++;
+            				cell = 0;
+            				sender.viewModel.currentSelection.square++;
+            				sender.viewModel.currentSelection.cell = 0;
+            			}
+            			//Do we need to drop down to the next row?
+            			else if(((square + 1) % 3 == 0) && (square != 0) && ((cell+1) % 3 == 0))
             			{
             				square-=2;
             				cell++;
             				sender.viewModel.currentSelection.square-=2;
             				sender.viewModel.currentSelection.cell++;
-            				sender.viewModel.Squares[square].Cells[cell].IsSelected(true);
             			}
+            			//Do we need to cross into the next square to the right?
             			else if((cell + 1) % 3 == 0 && cell != 0)
             			{
-            				//sender.viewModel.Squares[square].Cells[cell].IsSelected(false);
             				square++;
             				cell-=2;
             				sender.viewModel.currentSelection.square++;
             				sender.viewModel.currentSelection.cell -=2;
-            				sender.viewModel.Squares[square].Cells[cell].IsSelected(true);
-            			} else
+            			} 
+            			//Otherwise, just move the selected cell one cell to the right
+            			else 
             			{
-            				//var cell = sender.viewModel.currentSelection.cell;
-            				//var square = sender.viewModel.currentSelection.square;
-            				//sender.viewModel.Squares[square].Cells[cell].IsSelected(false);
             				cell++;
-            				sender.viewModel.currentSelection.cell++;
-            				sender.viewModel.Squares[square].Cells[cell].IsSelected(true);
-            				
+            				sender.viewModel.currentSelection.cell++;		
             			}
             		default: 
+            		break;
             	}
+            	//Update the viewmodel data
+            	sender.viewModel.Squares[square].Cells[cell].IsSelected(true);	
             }
         });
 	};
