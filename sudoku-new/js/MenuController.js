@@ -4,8 +4,10 @@ MenuController = function() {
 
 	var initOptionsScreen = function() {
         var localStorage = new LocalStorageRepository();
+        
+        var currentlySelected = $(".optionsMenu li:visible").first().addClass("selected");
 
-        $("html").addClass(localStorage.GetValueForKey("theme"));
+        /*$("html").addClass(localStorage.GetValueForKey("theme"));
         $("html").addClass(localStorage.GetValueForKey("size"));
         $("html").addClass(localStorage.GetValueForKey("font"));
 
@@ -28,7 +30,7 @@ MenuController = function() {
             var newFont = $(this).attr("data-theme-name")
             localStorage.SetValueForKey("font", newFont);
             $("html").removeClass(validSizeThemes).addClass(newFont);
-        });
+        });*/
     };
 
     var initMenuScreen = function() {
