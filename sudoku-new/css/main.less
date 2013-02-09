@@ -30,6 +30,15 @@
     background-attachment: fixed;
 }
 
+.noSelect {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
 ::selection,
 ::-moz-selection {
     color: #fff;
@@ -88,6 +97,7 @@ body {
             font-size: 1.5em;
             font-weight: bold;
             background-color: rgba(255, 255, 255, 0.2);
+            .noSelect;
 
              .left {
                 display: inline-block;
