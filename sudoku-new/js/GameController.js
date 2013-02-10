@@ -216,13 +216,17 @@ GameController = function() {
             $("#menuScreen li").show();
 
             //Show menu
-            $(".screen:visible").first().addClass("animated bounceOutLeft");
+            $(".screen:visible .back").first().addClass("animated bounceOutLeft");
             setTimeout(function() {
-                removeAnimations($(".screen"));
-                $(".screen").hide();
-                $("#menuScreen").show().addClass("animated bounceInRight");
-                $(".mainMenu li:visible").first().addClass("selected"); //Select first item
-            }, 400);
+            $(".screen:visible").first().addClass("animated bounceOutLeft");
+                setTimeout(function() {
+                    removeAnimations($(".screen"));
+                    removeAnimations($(".screen .back"));
+                    $(".screen").hide();
+                    $("#menuScreen").show().addClass("animated bounceInRight");
+                    $(".mainMenu li:visible").first().addClass("selected"); //Select first item
+                }, 400);
+            }, 100);
         };
     };
 
