@@ -14,35 +14,50 @@ SudokuBoardController = function() {
             	var cell = sender.viewModel.CurrentSelection.cell;
             	var square = sender.viewModel.CurrentSelection.square;
             	sender.viewModel.Squares()[square].Cells()[cell].IsSelected(false);
+            	var key;
             	switch(evt.which)
             	{
             		// a number key was pressed
             		case 96:
-            		case 97:
-            		case 98:
-            		case 99:
-            		case 100:
-            		case 101:
-            		case 102:
-            		case 103:
-            		case 104:
-            		case 105:
-            			if(sender.viewModel.Squares()[square].Cells()[cell].IsEditable())
-            			{
-            				var key = getKeyPressed(evt.which);
-            				sender.viewModel.Squares()[square].Cells()[cell].CurrentValue(key);
-							sender.viewModel.Squares()[square].Cells()[cell].CurrentValue.valueHasMutated();
-            			}
+            			key = "";
             			break;
+            		case 97:
+            			key = 1;
+            			break;
+            		case 98:
+            			key = 2;
+            			break;
+            		case 99:
+            			key = 3;
+            			break;
+            		case 100:
+            			key = 4;
+            			break;
+            		case 101:
+            			key = 5;
+            			break;
+            		case 102:
+            			key = 6;
+            			break;
+            		case 103:
+            			key = 7;
+            			break;
+            		case 104:
+            			key = 8;
+            			break;
+            		case 105:
+            			key = 9;
+            			break;
+            		/*
+            		 * MOVEMENT LOGIC
+            		 */
             		case 40: //down
             			//Wrap back to the first square
             			//(Remove if wrap round not required)
             			if(square == 8 && cell == 8)
             			{
-            				square = 0;
-            				cell = 0;
-            				sender.viewModel.CurrentSelection.square = 0;
-            				sender.viewModel.CurrentSelection.cell = 0;
+            				square = cell = 0;
+            				sender.viewModel.CurrentSelection.square = sender.viewModel.CurrentSelection.cell = 0;
             			}
             			//Do we need to go into the next row of squares
             			else if((square == 6 || square == 7) && (cell == 8))
@@ -196,13 +211,57 @@ SudokuBoardController = function() {
             		break;
             	}
             	//Update the viewmodel data
+            	if(key != undefined) // A number key was pressed so update the board if necessary
+            	{
+            		if(sender.viewModel.Squares()[square].Cells()[cell].IsEditable())
+            		{
+            			sender.viewModel.Squares()[square].Cells()[cell].CurrentValue(key);
+						sender.viewModel.Squares()[square].Cells()[cell].CurrentValue.valueHasMutated();
+            		}
+            	}
             	sender.viewModel.Squares()[square].Cells()[cell].IsSelected(true);	
             }
         });
 	};
 	
 	var cell = function(square,cell) {
-		return sender.viewModel.Squares[square].Cells[cell].currentValue;
+		return sender.viewModel.Squares[square].Cells[cell].CurrentValue;
+	};
+	
+	var getColArray = function() {
+		var square = sender.viewModel.CurrentSelection.square;
+		var cell = sender.viewModel.CurrentSelection.cell;
+		switch(sender.viewModel.Squares()[square].Cells()[cell].ColIndex)
+		{
+			case 0:
+				return new Array(cell(0,0), cell(0,3), cell(0,6), cell(3,0), cell(3,3), cell(3,6), cell(6,0), cell(6,3), cell(6,6));
+				break;	
+			case 1:
+				return new Array(cell(0,1), cell(0,4), cell(0,7), cell(3,1), cell(3,4), cell(3,7), cell(6,1), cell(6,4), cell(6,7));
+				break;
+			case 2:
+				return new Array(cell(0,2), cell(0,5), cell(0,8), cell(3,2), cell(3,5), cell(3,8), cell(6,2), cell(6,5), cell(6,8));
+				break;
+			case 3:
+				return new Array(cell(1,0), cell(1,3), cell(1,6), cell(4,0), cell(4,3), cell(4,6), cell(7,0), cell(7,3), cell(7,6));
+				break;
+			case 4:
+				return new Array(cell(1,1), cell(1,4), cell(1,7), cell(4,1), cell(4,4), cell(4,7), cell(7,1), cell(7,4), cell(7,7));
+				break;
+			case 5:
+				return new Array(cell(1,2), cell(1,5), cell(1,8), cell(4,2), cell(4,5), cell(4,8), cell(7,2), cell(7,5), cell(7,8));
+				break;
+			case 6:
+				return new Array(cell(2,0), cell(2,3), cell(2,6), cell(5,0), cell(5,3), cell(5,6), cell(8,0), cell(8,3), cell(8,6));
+				break;
+			case 7:
+				return new Array(cell(2,1), cell(2,4), cell(2,7), cell(5,1), cell(5,4), cell(5,7), cell(8,1), cell(8,4), cell(8,7));
+				break;
+			case 8:
+				return new Array(cell(2,2), cell(2,5), cell(2,8), cell(5,2), cell(5,5), cell(5,8), cell(8,2), cell(8,5), cell(8,8));
+				break;	
+				
+		}
 	};
 	
 	var getRowArray = function() {
@@ -212,22 +271,31 @@ SudokuBoardController = function() {
 		{
 			case 0:
 				return new Array(cell(0,0), cell(0,1), cell(0,2), cell(1,0), cell(1,1), cell(1,2), cell(2,0), cell(2,1), cell(2,2));
+				break;
 			case 1:
 				return new Array(cell(0,3), cell(0,4), cell(0,5), cell(1,3), cell(1,4), cell(1,5), cell(2,3), cell(2,4), cell(2,5));
+				break;
 			case 2:
 				return new Array(cell(0,6), cell(0,7), cell(0,8), cell(1,6), cell(1,7), cell(1,8), cell(2,6), cell(2,7), cell(2,8));
+				break;
 			case 3:
 				return new Array(cell(3,0), cell(3,1), cell(3,2), cell(4,0), cell(4,1), cell(4,2), cell(5,0), cell(5,1), cell(5,2));
+				break;
 			case 4:
 				return new Array(cell(3,3), cell(3,4), cell(3,5), cell(4,3), cell(4,4), cell(4,5), cell(5,3), cell(5,4), cell(5,5));
+				break;
 			case 5:
 				return new Array(cell(3,6), cell(3,7), cell(3,8), cell(4,6), cell(4,7), cell(4,8), cell(5,6), cell(5,7), cell(5,8));
+				break;
 			case 6:
 				return new Array(cell(6,0), cell(6,1), cell(6,2), cell(7,0), cell(7,1), cell(7,2), cell(8,0), cell(8,1), cell(8,2));
+				break;
 			case 7:
 				return new Array(cell(6,3), cell(6,4), cell(6,5), cell(7,3), cell(7,4), cell(7,5), cell(8,3), cell(8,4), cell(8,5));
+				break;
 			case 8:
 				return new Array(cell(6,6), cell(6,7), cell(6,8), cell(7,6), cell(7,7), cell(7,8), cell(8,6), cell(8,7), cell(8,8));
+				break;
 		}
 	};
 
@@ -237,41 +305,3 @@ SudokuBoardController = function() {
 			initSudokuControls();
 	};
 };
-
-function getKeyPressed(code)
-//TODO: Refactor
-{
-	switch(code)
-	{
-		case 96:
-			return "";
-			break;
-        case 97:
-            return 1;
-			break;
-        case 98:
-            return 2;
-			break;
-        case 99:
-            return 3;
-			break;
-        case 100:
-            return 4;
-			break;
-        case 101:
-            return 5;
-			break;
-        case 102:
-            return 6;
-			break;
-        case 103:
-            return 7;
-			break;
-        case 104:
-            return 8;
-			break;
-        case 105:
-            return 9;
-			break;	
-	}	
-}
