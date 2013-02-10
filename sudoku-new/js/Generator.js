@@ -45,13 +45,15 @@ Generator = function() {
 	}
 	
 	var item = function(n, v) {
-		n += 1;
 		var square = new Square();
+		square.row = Math.floor(n / 9);
+		square.col = n % 9;
+		n += 1;
 		square.across = Math.floor(getAcrossFromNumber(n));
 		square.down = Math.floor(getDownFromNumber(n));
 		square.region = Math.floor(getRegionFromNumber(n));
 		square.value = v;
-		square.index = n - 1;
+		square.index = n - 1;	
 		return square;	
 	}
 	
@@ -71,13 +73,15 @@ Generator = function() {
 		return false;	
 	}
 
-	var Square = function(across, down, region, value, index) 
+	var Square = function(across, down, region, value, index, row, col) 
 	{
 		this.across = across;
 		this.down = down;
 		this.region = region;
 		this.value = value;
 		this.index = index;
+		this.row = row;
+		this.col = col;
 	}
 
 	var getRan = function (high)
@@ -89,8 +93,6 @@ Generator = function() {
 	{
 		var count = 0;
 		var squares = ko.observableArray();
-		var rowIndex = 0;
-		var colIndex = 0;
 		
 		for(var h=0; h<3; h++)
 		{
@@ -115,16 +117,13 @@ Generator = function() {
 							cell.CurrentValue(starting[count].value);
 							cell.IsEditable(false);
 						}
-						cell.RowIndex(rowIndex);
-						cell.ColIndex(colIndex);
+						cell.RowIndex(completed[count].row);
+						cell.ColIndex(completed[count].col);
 						square.Cells.push(cell);
-						colIndex++;
 						count++;
 					}	
 					count += 6;
 				}
-				colIndex = 0;
-				rowIndex++;
 				squares.push(square);
 				count = (3 * (i+1)) + (27*h);
 			}
