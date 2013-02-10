@@ -63,7 +63,7 @@
         <div class="gameGrid" data-bind="foreach: Squares, event: { mouseover: ResetSelection }">
           <div class="squareWrapper">
             <div class="square" data-bind="foreach: Cells">
-              <div class="cellWrapper" data-bind="event: { mouseover: mouseEnter, mouseout: mouseLeave }">
+              <div class="cellWrapper" data-bind="event: { mouseover: mouseEnter, mouseleave: mouseLeave }">
                 <div class="cell" data-bind="css: { 'selected animated pulse': IsSelected() || IsMouseOver(), editable: IsEditable() }, attr: { 'data-row': RowIndex(), 'data-col': ColIndex() }">
                   <div class="cellValue" data-bind="text: CurrentValue"></div>
                 </div>
