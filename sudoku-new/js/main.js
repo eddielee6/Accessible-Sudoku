@@ -10,7 +10,7 @@ $(function () {
     //Initialize game
     SudokuGame = {
         voiceOverManager: new VoiceOverManager(),
-        game: new GameController()
+        menu: new MainMenuController()
     };
     
     
