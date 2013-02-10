@@ -76,3 +76,9 @@ function removeAnimations (element) {
 		"rollIn " +
 		"rollOut");
 }
+
+function cleanUpAnimationAfterTimeout(element, duration) {
+    setTimeout(function() {
+    	removeAnimations(element);
+    }, duration);
+};

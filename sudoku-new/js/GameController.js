@@ -137,13 +137,13 @@ GameController = function() {
         $(window).keydown(function(evt) {
             if($("#menuScreen").is(":visible")) {
                 var currentlySelected = $(".mainMenu li.selected");
-                removeAnimations(currentlySelected);
                 switch(evt.which) {
                     case 38: // w
                     case 87: // up
                         var newSelection = currentlySelected.prev(":visible");
                         if(newSelection.length) {
                             newSelection.addClass("selected animated pulse");
+                            cleanUpAnimationAfterTimeout(newSelection, 400);
                             currentlySelected.removeClass("selected");
                         }
                         break;
@@ -152,6 +152,7 @@ GameController = function() {
                         var newSelection = currentlySelected.next(":visible");
                         if(newSelection.length) {
                             newSelection.addClass("selected animated pulse");
+                            cleanUpAnimationAfterTimeout(newSelection, 400);
                             currentlySelected.removeClass("selected");
                         }
                         break
