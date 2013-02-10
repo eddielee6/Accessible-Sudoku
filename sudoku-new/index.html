@@ -44,10 +44,18 @@
 
       <section id="menuScreen" class="screen animated bounceInLeft">
   				<ul class="mainMenu menu">
-  					<li data-action="continue">Continue</li>
-  					<li data-action="newGame">New Game</li>
-            <li data-action="options">Options</li>
-  					<li data-action="help">Help</li>
+  					<li>
+              <div data-action="continue" class="menuItem">Continue</div>
+            </li>
+  					<li>
+              <div data-action="newGame" class="menuItem">New Game</div>
+            </li>
+            <li>
+              <div data-action="options" class="menuItem">Options</div>
+            </li>
+  					<li>
+              <div data-action="help" class="menuItem">Help</div>
+            </li>
   				</ul>
       </section>
 	    
@@ -92,17 +100,37 @@
         </header>
         
         <ul class="optionsMenu menu">
-        	<li data-action="theme" data-options="Default,Dark,Light">
-            <span class="key">Theme</span>
-            <span class="value">Default</span>
+        	<li>
+            <div class="leftArrow"></div>
+            
+            <div data-action="theme" data-options="Default,Dark,Light" class="menuItem">
+              <span class="key">Theme</span>
+              <span class="value">Default</span>
+            </div>
+
+            <div class="rightArrow"></div>
+            
           </li>
-        	<li data-action="size" data-options="Normal,Bigger,Biggest">
-            <span class="key">Text Size</span>
-            <span class="value">Normal</span>
+        	<li>
+            <div class="leftArrow"></div>
+            
+            <div data-action="size" data-options="Normal,Bigger,Biggest" class="menuItem">
+              <span class="key">Text Size</span>
+              <span class="value">Normal</span>
+            </div>
+            <div class="rightArrow"></div>
+            
           </li>
-        	<li data-action="font" data-options="Helvetica,Dyslexic">
-            <span class="key">Font Style</span>
-            <span class="value">Helvetica</span>
+        	<li>
+            <div class="leftArrow"></div>
+            
+            <div data-action="font" data-options="Helvetica,Dyslexic" class="menuItem">
+              <span class="key">Font Style</span>
+              <span class="value">Helvetica</span>
+            </div>
+
+            <div class="rightArrow"></div>
+            
           </li>
         </ul>
       </section>

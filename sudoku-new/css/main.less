@@ -90,32 +90,57 @@ body {
         list-style: none;
         overflow: hidden;
         padding: 0;
+        text-align: center;
 
         li {
-            width: 70%;
             margin: 0 auto 0.8em;
-            padding: 0.4em;
-            cursor: pointer;
-            text-align: center;
-            font-size: 1.5em;
-            font-weight: bold;
-            background-color: rgba(255, 255, 255, 0.2);
-            overflow: hidden; //to clear
+            display: block;
 
-            &.pulse {
-                .animationTime(0.4s);
-            }
-            
-            .noSelect;
+            .menuItem {
+                display: inline-block;
 
-            .key {
-                float: left;
-                margin-left: 0.2em;
+                width: 70%;
+                margin: 0 auto;
+                padding: 0.4em;
+                cursor: pointer;
+                text-align: center;
+                font-size: 1.5em;
+                font-weight: bold;
+                background-color: rgba(255, 255, 255, 0.2);
+                overflow: hidden; //to clear
+                
+
+                &.pulse {
+                    .animationTime(0.4s);
+                }
+                
+                .noSelect;
+
+                .key {
+                    float: left;
+                    margin-left: 0.2em;
+                }
+                
+                .value {
+                    float: right;
+                    margin-right: 0.2em;
+                }
             }
-            
-            .value {
-                float: right;
-                margin-right: 0.2em;
+
+            .leftArrow {
+                display: inline-block;
+                margin: 0.1em 0.5em;
+                border-top: 1.4em solid transparent;
+                border-bottom: 1.4em solid transparent;
+                border-right: 1.9em solid #fcfcfc;
+            }
+
+            .rightArrow {
+                display: inline-block;
+                margin: 0.1em 0.5em;
+                border-top: 1.4em solid transparent;
+                border-bottom: 1.4em solid transparent;
+                border-left: 1.9em solid #fcfcfc;
             }
         }
     }
@@ -124,7 +149,7 @@ body {
 .desktop {
     .screen {
         .menu {
-            li.selected {
+            .selected {
                 color: #580301;
                 background-color: rgba(255, 255, 255, 0.6);
 
@@ -151,7 +176,7 @@ body {
             }
 
             &.optionsMenu {
-                li.selected {
+                .selected {
                     &:before,
                     &:after {
                         display: none;
@@ -173,13 +198,13 @@ body {
     }
     
     section#controls button {
-	        display: block;
-	        float: left;
-	        background-color: rgb(241,114,0);
-	        width: 33.33333333333333%;
-	        margin-bottom: 10px;
-	        height: 64px;
-	        border: 1px solid #fff;
+        display: block;
+        float: left;
+        background-color: rgb(241,114,0);
+        width: 33.33333333333333%;
+        margin-bottom: 10px;
+        height: 64px;
+        border: 1px solid #fff;
     }
     
     section#controls button:hover {
@@ -211,7 +236,10 @@ body {
 
             .square {
                 position: absolute;
-                top: 0; bottom: 0; left: 0; right: 0;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
 
                 border: 1px solid @primaryBorderColour;
 
@@ -223,7 +251,10 @@ body {
 
                     .cell {
                         position: absolute;
-                        top: 0; bottom: 0; left: 0; right: 0;
+                        top: 0;
+                        bottom: 0;
+                        left: 0;
+                        right: 0;
 
                         border: 1px solid @secondaryBorderColour;
                         text-align: center;
@@ -342,13 +373,12 @@ html.Dark { //Dark text on light background
     &.desktop {
         .screen {
             .menu {
-                li {
+                .menuItem {
                     background-color: rgba(43, 47, 51, 0.5);
-                }
-
-                li.selected {
-                    color: #2b2f33;
-                    background-color: rgba(43, 47, 51, 0.3);
+                    &.selected {
+                        color: #2b2f33;
+                        background-color: rgba(43, 47, 51, 0.3);
+                    }
                 }
             }
         }
@@ -374,9 +404,11 @@ html.Light { //Light text on dark background
     &.desktop {
         .screen {
             .menu {
-                li.selected {
-                    color: #2b2f33;
-                    background-color: rgba(255, 255, 255, 0.6);
+                .menuItem {
+                    &.selected {
+                        color: #2b2f33;
+                        background-color: rgba(255, 255, 255, 0.6);
+                    }
                 }
             }
         }
@@ -412,12 +444,6 @@ html.Biggest {
         }
     }
 
-    .screen {
-        .menu li {
-            font-size: 1.5em;
-        }
-    }
-
     #gameScreen {
         .gameGrid {
             font-size: 1.2em;
@@ -427,9 +453,29 @@ html.Biggest {
 
 @media screen and (max-width: 500px) {
     .screen {
-        .menu li {
-            font-size: 1.1em;
+        .menu {
+            li {
+                .menuItem {
+                    font-size: 1.125em;
+                }
+
+                .leftArrow {
+                    margin: 0.07500000000000001em 0.375em;
+                    border-top: 1.0499999999999998em solid transparent;
+                    border-bottom: 1.0499999999999998em solid transparent;
+                    border-right: 1.4249999999999998em solid #fcfcfc;
+                }
+
+                .rightArrow {
+                    margin: 0.07500000000000001em 0.375em;
+                    border-top: 1.0499999999999998em solid transparent;
+                    border-bottom: 1.0499999999999998em solid transparent;
+                    border-left: 1.4249999999999998em solid #fcfcfc;
+                }
+            }
         }
+
+        
     }
 
     #gameScreen {

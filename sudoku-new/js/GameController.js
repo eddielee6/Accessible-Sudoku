@@ -19,36 +19,38 @@ GameController = function() {
 		if (localStorage.GetValueForKey("font") == null) { localStorage.SetValueForKey("font", "Dyslexic"); }
 		
 		// Show the local storage values on screen.
-		$(".optionsMenu").children('li:nth-child(1)').children()[1].innerHTML = localStorage.GetValueForKey("theme");
-		$(".optionsMenu").children('li:nth-child(2)').children()[1].innerHTML = localStorage.GetValueForKey("size");
-		$(".optionsMenu").children('li:nth-child(3)').children()[1].innerHTML = localStorage.GetValueForKey("font");
+		// $(".optionsMenu").children('li:nth-child(1)').children()[1].innerHTML = localStorage.GetValueForKey("theme");
+		// $(".optionsMenu").children('li:nth-child(2)').children()[1].innerHTML = localStorage.GetValueForKey("size"); //too tightly coupled to the UI
+		// $(".optionsMenu").children('li:nth-child(3)').children()[1].innerHTML = localStorage.GetValueForKey("font");
 
         //Mouse input
-        $(".optionsMenu li").first().addClass("selected");
-        $(".optionsMenu li").mouseover(function() {
-            $(".optionsMenu li").removeClass("selected");
+        $(".optionsMenu .menuItem").first().addClass("selected");
+        $(".optionsMenu .menuItem").mouseover(function() {
+            $(".optionsMenu .menuItem").removeClass("selected");
             $(this).addClass("selected");
         });
-        $(".optionsMenu li").click(function() {
+        $(".optionsMenu .menuItem").click(function() {
             triggerSelectedAction();
         });
 
         //Keyboard input
         $(window).keydown(function(evt) {
             if($("#optionsScreen").is(":visible")) {
-                var currentlySelected = $(".optionsMenu li.selected");
+                var currentlySelected = $(".optionsMenu .menuItem.selected");
                 switch(evt.which) {
                     case 38: // w
                     case 87: // up
-                        if(currentlySelected.prev(":visible").length) {
-                            currentlySelected.prev(":visible").addClass("selected");
+                        var newSelection = currentlySelected.parent("li").prev(":visible").find(".menuItem");
+                        if(newSelection.length) {
+                            newSelection.addClass("selected");
                             currentlySelected.removeClass("selected");
                         }
                         break;
                     case 40: // s
                     case 83: // down
-                        if(currentlySelected.next(":visible").length) {
-                            currentlySelected.next(":visible").addClass("selected");
+                        var newSelection = currentlySelected.parent("li").next(":visible").find(".menuItem");
+                        if(newSelection.length) {
+                            newSelection.addClass("selected");
                             currentlySelected.removeClass("selected");
                         }
                         break
@@ -62,7 +64,7 @@ GameController = function() {
         var triggerSelectedAction = function() {
 	        var localStorage = new LocalStorageRepository();
 	        
-	        var currentlySelected = $(".optionsMenu li.selected");
+	        var currentlySelected = $(".optionsMenu .menuItem.selected");
 	        
 	        var attribute = $(currentlySelected).data("options");
 	        var attribute_action = $(currentlySelected).data("action");
@@ -103,12 +105,12 @@ GameController = function() {
         }
 
         //Mouse input
-        $(".mainMenu li:visible").first().addClass("selected");
-        $(".mainMenu li").mouseover(function() {
-            $(".mainMenu li").removeClass("selected");
+        $(".mainMenu .menuItem:visible").first().addClass("selected");
+        $(".mainMenu .menuItem").mouseover(function() {
+            $(".mainMenu .menuItem").removeClass("selected");
             $(this).addClass("selected");
         });
-        $(".mainMenu li").click(function() {
+        $(".mainMenu .menuItem").click(function() {
             triggerSelectedAction();
         });
 
@@ -117,11 +119,11 @@ GameController = function() {
         //Keyboard input
         $(window).keydown(function(evt) {
             if($("#menuScreen").is(":visible")) {
-                var currentlySelected = $(".mainMenu li.selected");
+                var currentlySelected = $(".mainMenu .menuItem.selected");
                 switch(evt.which) {
                     case 38: // w
                     case 87: // up
-                        var newSelection = currentlySelected.prev(":visible");
+                        var newSelection = currentlySelected.parent("li").prev(":visible").find(".menuItem");
                         if(newSelection.length) {
                             newSelection.addClass("selected animated pulse");
                             menuItemAnimation = cleanUpAnimationAfterTimeout(newSelection, 400);
@@ -130,7 +132,7 @@ GameController = function() {
                         break;
                     case 40: // s
                     case 83: // down
-                        var newSelection = currentlySelected.next(":visible");
+                        var newSelection = currentlySelected.parent("li").next(":visible").find(".menuItem");
                         if(newSelection.length) {
                             newSelection.addClass("selected animated pulse");
                             menuItemAnimation = cleanUpAnimationAfterTimeout(newSelection, 400);
@@ -145,7 +147,7 @@ GameController = function() {
         });
 
         var triggerSelectedAction = function() {
-            var currentlySelected = $(".mainMenu li.selected");
+            var currentlySelected = $(".mainMenu .menuItem.selected");
             clearTimeout(menuItemAnimation);
             removeAnimations(currentlySelected);
             currentlySelected.addClass("animated bounceOutRight");
@@ -198,9 +200,9 @@ GameController = function() {
 
         var navigateToMenu = function() {
             //Reset main menu
-            $(".mainMenu li").removeClass("selected");
-            removeAnimations($("#menuScreen li"));
-            $("#menuScreen li").show();
+            $(".mainMenu .menuItem").removeClass("selected");
+            removeAnimations($("#menuScreen .menuItem"));
+            $("#menuScreen .menuItem").show();
 
             //Show menu
             $(".screen:visible .back").first().addClass("animated bounceOutLeft");
@@ -211,7 +213,7 @@ GameController = function() {
                     removeAnimations($(".screen .back"));
                     $(".screen").hide();
                     $("#menuScreen").show().addClass("animated bounceInRight");
-                    $(".mainMenu li:visible").first().addClass("selected"); //Select first item
+                    $(".mainMenu .menuItem:visible").first().addClass("selected"); //Select first item
                 }, 400);
             }, 100);
         };
