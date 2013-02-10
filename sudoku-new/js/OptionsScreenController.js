@@ -3,7 +3,7 @@ OptionsController = function() {
 
 	var loadUserPreferences = function() {
         var localStorage = new LocalStorageRepository();
-
+        
         $(".optionsMenu .menuItem").each(function() {
             var initialValue = localStorage.GetValueForKey($(this).attr("data-optionId"));
             initialValue = initialValue == null ? $(this).attr("data-options").split(",")[0] : initialValue;
@@ -93,13 +93,13 @@ OptionsController = function() {
                     	clearTimeout(leftArrowAnimation);
                     	removeAnimations(toAnimate)
                         toAnimate.addClass("animated shake");
-                        leftArrowAnimation = cleanUpAnimationAfterTimeout(toAnimate, 400);
+                        leftArrowAnimation = cleanUpAnimationAfterTimeout(toAnimate, 500);
                     } else {
                     	var toAnimate = $(currentlySelected).siblings(".rightArrow");
                     	clearTimeout(rightArrowAnimation);
                     	removeAnimations(toAnimate)
                         toAnimate.addClass("animated shake");
-                        rightArrowAnimation = cleanUpAnimationAfterTimeout(toAnimate, 400);
+                        rightArrowAnimation = cleanUpAnimationAfterTimeout(toAnimate, 500);
                     }
                 }
             }
