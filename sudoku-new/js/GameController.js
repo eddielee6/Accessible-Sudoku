@@ -10,6 +10,7 @@ GameController = function() {
     };
 
 	var initOptionsScreen = function() {
+
         //Mouse input
         $(".optionsMenu li").first().addClass("selected");
         $(".optionsMenu li").mouseover(function() {
@@ -54,7 +55,6 @@ GameController = function() {
             // Gets the comma-seperated values from the data-options attrib.
             var attribute = $(currentlySelected).data("options");
             var attribute_action = $(currentlySelected).data("action"); // TODONE: The data-action is the new key, that fits with the .GetValueForKey's above.
-            
             // Splits them up into an array, seperated by ','
             var attribute_split = attribute.split(",");
             
@@ -98,7 +98,7 @@ GameController = function() {
             }
             
             // Put the new value on the screen
-            $(currentlySelected).children()[1].innerHTML = new_screen_value;
+            $(currentlySelected).children(".value").text(new_screen_value);
             
             // Eddie, since I know how much you love to refactor..
         };
