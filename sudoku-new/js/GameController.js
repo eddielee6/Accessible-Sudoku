@@ -4,25 +4,22 @@ GameController = function() {
 
     var loadUserPreferences = function() {
         var localStorage = new LocalStorageRepository();
-        $("html").addClass(localStorage.GetValueForKey("theme"));
-        $("html").addClass(localStorage.GetValueForKey("size"));
-        $("html").addClass(localStorage.GetValueForKey("font"));
+
+        $(".optionsMenu .menuItem").each(function() {
+            var initialValue = localStorage.GetValueForKey($(this).attr("data-optionId"));
+            initialValue = initialValue == null ? $(this).attr("data-options").split(",")[0] : initialValue;
+            initialValue = initialValue.substring(1, initialValue.length - 1);
+
+            var key = initialValue.split(":")[0];
+            var value = initialValue.split(":")[1];
+
+            $(this).attr("data-selectedKey", key);
+            $(this).children(".value").text(value);
+            $("html").addClass(key);
+        });
     };
 
-	var initOptionsScreen = function() {
-
-		var localStorage = new LocalStorageRepository();
-		
-		// If the local storage values aren't populated with anything yet.
-		if (localStorage.GetValueForKey("theme") == null) { localStorage.SetValueForKey("theme", "Default"); }
-		if (localStorage.GetValueForKey("size") == null) { localStorage.SetValueForKey("size", "Bigger"); }
-		if (localStorage.GetValueForKey("font") == null) { localStorage.SetValueForKey("font", "Dyslexic"); }
-		
-		// Show the local storage values on screen.
-		// $(".optionsMenu").children('li:nth-child(1)').children()[1].innerHTML = localStorage.GetValueForKey("theme");
-		// $(".optionsMenu").children('li:nth-child(2)').children()[1].innerHTML = localStorage.GetValueForKey("size"); //too tightly coupled to the UI
-		// $(".optionsMenu").children('li:nth-child(3)').children()[1].innerHTML = localStorage.GetValueForKey("font");
-
+	var initOptionsScreenControles = function() {
         //Mouse input
         $(".optionsMenu .menuItem").first().addClass("selected");
         $(".optionsMenu .menuItem").mouseover(function() {
@@ -30,7 +27,7 @@ GameController = function() {
             $(this).addClass("selected");
         });
         $(".optionsMenu .menuItem").click(function() {
-            triggerSelectedAction();
+            changeOption("right");
         });
 
         //Keyboard input
@@ -54,46 +51,51 @@ GameController = function() {
                             currentlySelected.removeClass("selected");
                         }
                         break
+                    case 37: //left
+                        changeOption("left");
+                        break;
+                    case 39: //right
                     case 13:
-                        triggerSelectedAction();
+                        changeOption("right");
                         break;
                 }
             }
         });
         
-        var triggerSelectedAction = function() {
-	        var localStorage = new LocalStorageRepository();
+        var changeOption = function(direction) {
+            var localStorage = new LocalStorageRepository();
 	        
 	        var currentlySelected = $(".optionsMenu .menuItem.selected");
-	        
-	        var attribute = $(currentlySelected).data("options");
-	        var attribute_action = $(currentlySelected).data("action");
-	        var attribute_split = attribute.split(",");
-	        var screen_value = $(currentlySelected).children()[1].innerHTML;
-	        var new_screen_value = null;
-	        var hasFound = null;
-	        for (var i = 0; i < attribute_split.length; i++) 
-	        {
-	        	if (!hasFound)
-	        	{
-	            	$("html").removeClass(attribute_split[i]);
-	                if (attribute_split[i] == screen_value) {
-	                	if (i < attribute_split.length - 1) {	
-	                    	new_screen_value = attribute_split[i + 1];
-	                    	localStorage.SetValueForKey(attribute_action, new_screen_value);
-	                    	$("html").addClass(new_screen_value);
-	                    	hasFound = true;
-	                    } else {
-		                    new_screen_value = attribute_split[0];
-		                    localStorage.SetValueForKey(attribute_action, new_screen_value);
-		                    $("html").addClass(new_screen_value);
-		                    hasFound = true;
-	                    }
-	                }
-	            }
-	        }
-	        
-	        $(currentlySelected).children(".value").text(new_screen_value);
+
+            var availableOptions = currentlySelected.data("options").split(",");
+            var origionalKey = currentlySelected.attr("data-selectedKey");
+            $("html").removeClass(origionalKey);
+
+            for(var i = 0; i < availableOptions.length; i++) {
+                var key = availableOptions[i].substring(1, availableOptions[i].length - 1).split(":")[0];
+                var value = availableOptions[i].substring(1, availableOptions[i].length - 1).split(":")[1];
+
+                if(origionalKey == key) {
+                    var newIndex = (direction == "left") ? (i - 1) : (i + 1);
+                    newIndex = (newIndex >= availableOptions.length) ? 0 : newIndex;
+                    newIndex = (newIndex < 0) ? availableOptions.length - 1 : newIndex;
+                    var newKey = availableOptions[newIndex].substring(1, availableOptions[newIndex].length - 1).split(":")[0];
+                    var newValue = availableOptions[newIndex].substring(1, availableOptions[newIndex].length - 1).split(":")[1];
+
+                    localStorage.SetValueForKey(currentlySelected.attr("data-optionId"), availableOptions[newIndex]);
+                    $(currentlySelected).attr("data-selectedKey", newKey);
+                    $(currentlySelected).children(".value").html(newValue);
+                    $("html").addClass(newKey);
+
+                    if(direction == "left") {
+                        $(currentlySelected).siblings(".leftArrow").addClass("animated shake");
+                        cleanUpAnimationAfterTimeout($(currentlySelected).siblings(".leftArrow"), 400);
+                    } else {
+                        $(currentlySelected).siblings(".rightArrow").addClass("animated shake");
+                        cleanUpAnimationAfterTimeout($(currentlySelected).siblings(".rightArrow"), 400);
+                    }
+                }
+            }
         };
     };
 
@@ -225,6 +227,6 @@ GameController = function() {
         loadUserPreferences();
         initMenuScreen();
         initMainMenuButton();
-        initOptionsScreen();
+        initOptionsScreenControles();
     };
 };
