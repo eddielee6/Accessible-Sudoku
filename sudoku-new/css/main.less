@@ -115,6 +115,28 @@ body {
             li.selected {
                 color: #580301;
                 background-color: rgba(255, 255, 255, 0.6);
+
+                &:before {
+                    content: '\25b6';
+                    line-height: 100%;
+                    float: left;
+                    margin: 0.15em 0 0 0.5em;
+                }
+                &:after {
+                    content: '\25c0';
+                    line-height: 100%;
+                    float: right;
+                    margin: 0.15em 0.5em 0 0;
+                }
+            }
+
+            &.optionsMenu {
+                li.selected {
+                    &:before,
+                    &:after {
+                        display: none;
+                    }
+                }
             }
         }
     }
