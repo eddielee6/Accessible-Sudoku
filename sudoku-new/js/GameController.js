@@ -11,8 +11,14 @@ GameController = function() {
 
 	var initOptionsScreen = function() {
 
-		// Defaults
 		var localStorage = new LocalStorageRepository();
+		
+		// If the local storage values aren't populated with anything yet.
+		if (localStorage.GetValueForKey("theme") == null) { localStorage.SetValueForKey("theme", "Default"); }
+		if (localStorage.GetValueForKey("size") == null) { localStorage.SetValueForKey("size", "Normal"); }
+		if (localStorage.GetValueForKey("font") == null) { localStorage.SetValueForKey("font", "Helvetica"); }
+		
+		// Show the local storage values on screen.
 		$(".optionsMenu").children('li:nth-child(1)').children()[1].innerHTML = localStorage.GetValueForKey("theme");
 		$(".optionsMenu").children('li:nth-child(2)').children()[1].innerHTML = localStorage.GetValueForKey("size");
 		$(".optionsMenu").children('li:nth-child(3)').children()[1].innerHTML = localStorage.GetValueForKey("font");
