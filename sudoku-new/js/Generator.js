@@ -109,11 +109,11 @@ Generator = function() {
 						{
 							cell.OriginalValue = "";
 							cell.CurrentValue("");
-							cell.isEditable(true);
+							cell.IsEditable(true);
 						} else {
 							cell.OriginalValue = starting[count].value;
 							cell.CurrentValue(starting[count].value);
-							cell.isEditable(false);
+							cell.IsEditable(false);
 						}
 						cell.rowIndex = rowIndex;
 						cell.colIndex = colIndex;
