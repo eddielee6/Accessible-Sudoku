@@ -273,7 +273,7 @@ SudokuBoardController = function() {
             var currentSelection = sender.viewModel.GetCurrentSelection();
 		var square = currentSelection.square;
 		var cell = currentSelection.cell;
-		switch(sender.viewModel.Squares()[square].Cells()[cell].RowIndex())
+		switch(sender.viewModel.Squares()[square].Cells()[cell].RowIndex()) //isnt square always equal to RowIndex()
 		{
 			case 0:
 				return new Array(cell(0,0), cell(0,1), cell(0,2), cell(1,0), cell(1,1), cell(1,2), cell(2,0), cell(2,1), cell(2,2));
