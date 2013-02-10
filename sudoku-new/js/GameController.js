@@ -133,6 +133,8 @@ GameController = function() {
             triggerSelectedAction();
         });
 
+        var menuItemAnimation;
+
         //Keyboard input
         $(window).keydown(function(evt) {
             if($("#menuScreen").is(":visible")) {
@@ -143,7 +145,7 @@ GameController = function() {
                         var newSelection = currentlySelected.prev(":visible");
                         if(newSelection.length) {
                             newSelection.addClass("selected animated pulse");
-                            cleanUpAnimationAfterTimeout(newSelection, 400);
+                            menuItemAnimation = cleanUpAnimationAfterTimeout(newSelection, 400);
                             currentlySelected.removeClass("selected");
                         }
                         break;
@@ -152,7 +154,7 @@ GameController = function() {
                         var newSelection = currentlySelected.next(":visible");
                         if(newSelection.length) {
                             newSelection.addClass("selected animated pulse");
-                            cleanUpAnimationAfterTimeout(newSelection, 400);
+                            menuItemAnimation = cleanUpAnimationAfterTimeout(newSelection, 400);
                             currentlySelected.removeClass("selected");
                         }
                         break
@@ -165,6 +167,8 @@ GameController = function() {
 
         var triggerSelectedAction = function() {
             var currentlySelected = $(".mainMenu li.selected");
+            clearTimeout(menuItemAnimation);
+            removeAnimations(currentlySelected);
             currentlySelected.addClass("animated bounceOutRight");
             setTimeout(function() {
                 $("#menuScreen").addClass("animated bounceOutRight");

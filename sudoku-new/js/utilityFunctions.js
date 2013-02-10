@@ -78,7 +78,7 @@ function removeAnimations (element) {
 }
 
 function cleanUpAnimationAfterTimeout(element, duration) {
-    setTimeout(function() {
+    return setTimeout(function() {
     	removeAnimations(element);
     }, duration);
 };
