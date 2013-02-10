@@ -123,6 +123,29 @@ body {
 #gameScreen {
     @primaryBorderColour: #333;
     @secondaryBorderColour: #EEE;
+    
+    section#controls {
+    	width: 90%;
+    	position: relative;
+    	margin: 0.5em auto 0;
+    }
+    
+    section#controls button {
+    		margin: 0;
+    		padding: 0;
+	        background-color: rgb(241,114,0);
+	        width: 32%;
+	        height: 64px;
+	        border-color: white;
+	        border-style: solid;
+	        border-width: 1px;
+    }
+    
+    section#controls button:hover {
+	    background-color: #c84200;
+	    color: white;
+    }
+    
     .gameGrid {
 
         &div, div {
