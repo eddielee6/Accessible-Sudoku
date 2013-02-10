@@ -115,8 +115,8 @@ Generator = function() {
 							cell.CurrentValue(starting[count].value);
 							cell.IsEditable(false);
 						}
-						cell.rowIndex = rowIndex;
-						cell.colIndex = colIndex;
+						cell.RowIndex(rowIndex);
+						cell.ColIndex(colIndex);
 						square.Cells.push(cell);
 						colIndex++;
 						count++;
@@ -185,7 +185,6 @@ Generator = function() {
 		}
 
 		var newGame = new SudokuViewModel();
-		newGame.CurrentSelection = { square: 0, cell: 0 };
 		newGame.Squares = getSquares(squares, squares);
 
 		return newGame;
