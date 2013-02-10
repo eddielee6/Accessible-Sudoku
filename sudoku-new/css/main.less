@@ -96,6 +96,10 @@ body {
             margin: 0 auto 0.8em;
             display: block;
 
+            &.pulse {
+                .animationTime(0.4s);
+            }
+
             .menuItem {
                 display: inline-block;
 
@@ -108,7 +112,6 @@ body {
                 font-weight: bold;
                 background-color: rgba(255, 255, 255, 0.2);
                 overflow: hidden; //to clear
-                
 
                 &.pulse {
                     .animationTime(0.4s);
@@ -128,7 +131,7 @@ body {
             }
 
             .leftArrow {
-                display: inline-block;
+                display: none;
                 margin: 0.1em 0.5em;
                 border-top: 1.4em solid transparent;
                 border-bottom: 1.4em solid transparent;
@@ -136,7 +139,7 @@ body {
             }
 
             .rightArrow {
-                display: inline-block;
+                display: none;
                 margin: 0.1em 0.5em;
                 border-top: 1.4em solid transparent;
                 border-bottom: 1.4em solid transparent;
