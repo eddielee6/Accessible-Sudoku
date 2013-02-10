@@ -233,8 +233,9 @@ SudokuBoardController = function() {
 	};
 	
 	var getColArray = function() {
-		var square = sender.viewModel.CurrentSelection.square;
-		var cell = sender.viewModel.CurrentSelection.cell;
+		var currentSelection = sender.viewModel.GetCurrentSelection();
+            var square = currentSelection.square;
+            var cell = currentSelection.cell;
 		switch(sender.viewModel.Squares()[square].Cells()[cell].ColIndex())
 		{
 			case 0:
@@ -269,8 +270,9 @@ SudokuBoardController = function() {
 	};
 	
 	var getRowArray = function() {
-		var square = sender.viewModel.CurrentSelection.square;
-		var cell = sender.viewModel.CurrentSelection.cell;
+            var currentSelection = sender.viewModel.GetCurrentSelection();
+		var square = currentSelection.square;
+		var cell = currentSelection.cell;
 		switch(sender.viewModel.Squares()[square].Cells()[cell].RowIndex())
 		{
 			case 0:
