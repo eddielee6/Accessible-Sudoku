@@ -11,6 +11,12 @@ GameController = function() {
 
 	var initOptionsScreen = function() {
 
+		// Defaults
+		var localStorage = new LocalStorageRepository();
+		$(".optionsMenu").children('li:nth-child(1)').children()[1].innerHTML = localStorage.GetValueForKey("theme");
+		$(".optionsMenu").children('li:nth-child(2)').children()[1].innerHTML = localStorage.GetValueForKey("size");
+		$(".optionsMenu").children('li:nth-child(3)').children()[1].innerHTML = localStorage.GetValueForKey("font");
+
         //Mouse input
         $(".optionsMenu li").first().addClass("selected");
         $(".optionsMenu li").mouseover(function() {
