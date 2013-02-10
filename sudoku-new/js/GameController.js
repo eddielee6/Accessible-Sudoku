@@ -15,8 +15,8 @@ GameController = function() {
 		
 		// If the local storage values aren't populated with anything yet.
 		if (localStorage.GetValueForKey("theme") == null) { localStorage.SetValueForKey("theme", "Default"); }
-		if (localStorage.GetValueForKey("size") == null) { localStorage.SetValueForKey("size", "Normal"); }
-		if (localStorage.GetValueForKey("font") == null) { localStorage.SetValueForKey("font", "Helvetica"); }
+		if (localStorage.GetValueForKey("size") == null) { localStorage.SetValueForKey("size", "Bigger"); }
+		if (localStorage.GetValueForKey("font") == null) { localStorage.SetValueForKey("font", "Dyslexic"); }
 		
 		// Show the local storage values on screen.
 		$(".optionsMenu").children('li:nth-child(1)').children()[1].innerHTML = localStorage.GetValueForKey("theme");
@@ -60,59 +60,38 @@ GameController = function() {
         });
         
         var triggerSelectedAction = function() {
-            var localStorage = new LocalStorageRepository();
-            
-            var currentlySelected = $(".optionsMenu li.selected");
-            
-            // Gets the comma-seperated values from the data-options attrib.
-            var attribute = $(currentlySelected).data("options");
-            var attribute_action = $(currentlySelected).data("action"); // TODONE: The data-action is the new key, that fits with the .GetValueForKey's above.
-            // Splits them up into an array, seperated by ','
-            var attribute_split = attribute.split(",");
-            
-            // Gets the current value thats shown on screen.
-            var screen_value = $(currentlySelected).children()[1].innerHTML;
-            
-            // The next value
-            var new_screen_value = null;
-            var hasFound = null;
-            
-            // Tries to find the next value, comparing the current value on screen with whats next in the array.
-            for (var i = 0; i < attribute_split.length; i++) 
-            {
-            	// To replace break;
-            	if (!hasFound)
-            	{
-            		// Remove all classes
+	        var localStorage = new LocalStorageRepository();
+	        
+	        var currentlySelected = $(".optionsMenu li.selected");
+	        
+	        var attribute = $(currentlySelected).data("options");
+	        var attribute_action = $(currentlySelected).data("action");
+	        var attribute_split = attribute.split(",");
+	        var screen_value = $(currentlySelected).children()[1].innerHTML;
+	        var new_screen_value = null;
+	        var hasFound = null;
+	        for (var i = 0; i < attribute_split.length; i++) 
+	        {
+	        	if (!hasFound)
+	        	{
 	            	$("html").removeClass(attribute_split[i]);
-	            	
-	            	// If whatever is in the current loop equals whatever is on the screen then..
 	                if (attribute_split[i] == screen_value) {
-	                
-	                	// If it's not the end item..
 	                	if (i < attribute_split.length - 1) {	
-	                	
 	                    	new_screen_value = attribute_split[i + 1];
 	                    	localStorage.SetValueForKey(attribute_action, new_screen_value);
 	                    	$("html").addClass(new_screen_value);
 	                    	hasFound = true;
-	                    	
 	                    } else {
-	                    
 		                    new_screen_value = attribute_split[0];
 		                    localStorage.SetValueForKey(attribute_action, new_screen_value);
 		                    $("html").addClass(new_screen_value);
 		                    hasFound = true;
-		                    
 	                    }
 	                }
-                }
-            }
-            
-            // Put the new value on the screen
-            $(currentlySelected).children(".value").text(new_screen_value);
-            
-            // Eddie, since I know how much you love to refactor..
+	            }
+	        }
+	        
+	        $(currentlySelected).children(".value").text(new_screen_value);
         };
     };
 
