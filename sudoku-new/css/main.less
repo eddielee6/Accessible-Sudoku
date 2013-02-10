@@ -117,16 +117,24 @@ body {
                 background-color: rgba(255, 255, 255, 0.6);
 
                 &:before {
-                    content: '\25b6';
-                    line-height: 100%;
+                    content: '';
                     float: left;
                     margin: 0.15em 0 0 0.5em;
+                    width: 0; 
+                    height: 0; 
+                    border-top: 0.6em solid transparent;
+                    border-bottom: 0.6em solid transparent;
+                    border-left: 0.8em solid #580301;
                 }
                 &:after {
-                    content: '\25c0';
-                    line-height: 100%;
+                    content: '';
                     float: right;
                     margin: 0.15em 0.5em 0 0;
+                    width: 0; 
+                    height: 0; 
+                    border-top: 0.6em solid transparent;
+                    border-bottom: 0.6em solid transparent;
+                    border-right: 0.8em solid #580301;
                 }
             }
 
