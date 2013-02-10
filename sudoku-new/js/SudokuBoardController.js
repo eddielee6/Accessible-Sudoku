@@ -48,9 +48,13 @@ SudokuBoardController = function() {
             		case 105:
             			key = 9;
             			break;
+<<<<<<< HEAD
             		/*
             		 * MOVEMENT LOGIC
             		 */
+=======
+                        case 83:
+>>>>>>> Added WASD to game controles
             		case 40: //down
             			//Wrap back to the first square
             			//(Remove if wrap round not required)
@@ -90,6 +94,7 @@ SudokuBoardController = function() {
             		 		sender.viewModel.CurrentSelection.cell += 3;
             		 	}
             			break;
+                        case 65:
             		case 37: //left
             			if(square == 0 && cell == 0)
             			{
@@ -129,6 +134,7 @@ SudokuBoardController = function() {
             				sender.viewModel.CurrentSelection.cell--;
             			}
             			break;
+                        case 87:
             		case 38: //up
             			if(cell == 2 && square == 2)
             			{
@@ -167,6 +173,7 @@ SudokuBoardController = function() {
             				sender.viewModel.CurrentSelection.cell -= 3;	
             			}
             			break;
+                        case 68:
             		case 39: //right
             			//Do we need to wrap back to the first square?
             			//(Remove if wrap round not required)
