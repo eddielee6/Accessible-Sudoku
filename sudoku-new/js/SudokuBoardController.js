@@ -228,7 +228,7 @@ SudokuBoardController = function() {
         });
 	};
 	
-	var cell = function(square,cell) {
+	var cell = function(square,cell) { //This is crashing safari because it doesnt know the difference between this function and the local variable cell
 		return sender.viewModel.Squares[square].Cells[cell].CurrentValue;
 	};
 	
