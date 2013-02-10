@@ -291,7 +291,7 @@ body {
 #helpScreen {
 	
 	section#info {
-		background: transparent url('../img/help@1x.png') center center no-repeat;
+		background: /*transparent*/ url('../img/help@1x.png') /*center center*/ no-repeat; //no need to specify W3C defaults
 		width: 700px;
 		height: 715px;
 	}
@@ -333,9 +333,12 @@ body {
     height: 10px;
 }
 
-.logoWrapper {
-    margin: 30px;
-    text-align: center;
+.logo {
+    width: 650px;
+    height: 231px;
+    margin: 30px auto;
+    background: url('../img/logo_light@2x.png') no-repeat;
+    background-size: 650px 231px;
 }
 
 .backdrop {
@@ -382,6 +385,11 @@ html.dark { //Dark text on light background
 
     .ledge {
         background: #2b2f33;
+    }
+
+    .logo {
+        background: url('../img/logo_dark@2x.png') no-repeat;
+        background-size: 650px 231px; //background resets this
     }
 
     &.desktop {
