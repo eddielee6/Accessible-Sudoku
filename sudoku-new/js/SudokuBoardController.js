@@ -48,13 +48,10 @@ SudokuBoardController = function() {
             		case 105:
             			key = 9;
             			break;
-<<<<<<< HEAD
             		/*
             		 * MOVEMENT LOGIC
             		 */
-=======
                         case 83:
->>>>>>> Added WASD to game controles
             		case 40: //down
             			//Wrap back to the first square
             			//(Remove if wrap round not required)
