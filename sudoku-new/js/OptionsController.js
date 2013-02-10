@@ -19,16 +19,24 @@ OptionsController = function() {
     };
 
     var initOptionsScreenControles = function() {
-        //Mouse input
+        //Select first option
         $(".optionsMenu .menuItem").first().addClass("selected");
         $(".optionsMenu .menuItem").first().siblings(".leftArrow, .rightArrow").css("display", "inline-block");
-        $(".optionsMenu .menuItem").mouseover(function() {
+
+        //Mouse input
+        $(".optionsMenu li").mouseover(function() {
             $(".optionsMenu .menuItem").removeClass("selected");
             $(".optionsMenu .menuItem").siblings(".rightArrow, .leftArrow").css("display", "none");
-            $(this).siblings(".rightArrow, .leftArrow").css("display", "inline-block");
-            $(this).addClass("selected");
+            $(this).children(".rightArrow, .leftArrow").css("display", "inline-block");
+            $(this).children(".menuItem").addClass("selected");
         });
         $(".optionsMenu .menuItem").click(function() {
+            changeOption("right");
+        });
+        $(".optionsMenu .leftArrow").click(function() {
+            changeOption("left");
+        });
+        $(".optionsMenu .rightArrow").click(function() {
             changeOption("right");
         });
 
