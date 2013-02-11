@@ -66,7 +66,7 @@
           <div class="back">&#9664; menu</div>
         </header>
         <section id="controls">
-        	<button onclick="javascript:alert('Button 1, clicked.');">Button 1</button>
+        	<button onclick="javascript:alert('Button 1, clicked.');">Check Progress</button>
         	<button onclick="javascript:alert('Button 2, clicked.');">Button 2</button>
         	<button onclick="javascript:alert('Button 3, clicked.');">Button 3</button>
         </section>
@@ -74,8 +74,8 @@
           <div class="squareWrapper">
             <div class="square" data-bind="foreach: Cells">
               <div class="cellWrapper" data-bind="event: { mouseover: mouseEnter, mouseleave: mouseLeave }">
-                <div class="cell" data-bind="css: { 'selected animated pulse': IsSelected() || IsMouseOver(), editable: IsEditable() }, attr: { 'data-row': RowIndex(), 'data-col': ColIndex() }">
-                  <div class="cellValue" data-bind="text: CurrentValue, attr: { 'data-valid': IsValid() }"></div>
+                <div class="cell" data-bind="css: { 'selected animated pulse': IsSelected() || IsMouseOver(), editable: IsEditable() }, attr: { 'data-valid': IsValid(), 'data-row': RowIndex(), 'data-col': ColIndex() }">
+                  <div class="cellValue" data-bind="text: CurrentValue"></div>
                 </div>
               </div>
             </div>
