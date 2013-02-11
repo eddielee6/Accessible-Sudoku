@@ -112,10 +112,12 @@ Generator = function() {
 							cell.OriginalValue = "";
 							cell.CurrentValue("");
 							cell.IsEditable(true);
+							cell.IsValid(false);
 						} else {
 							cell.OriginalValue = starting[count].value;
 							cell.CurrentValue(starting[count].value);
 							cell.IsEditable(false);
+							cell.IsValid(true);
 						}
 						cell.RowIndex(completed[count].row);
 						cell.ColIndex(completed[count].col);

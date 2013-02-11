@@ -32,7 +32,7 @@ var CellViewModel = function() {
 	this.IsEditable = ko.observable();
 	this.CurrentValue = ko.observable();
 	this.IsSelected = ko.observable(false);
-
+	this.IsValid = ko.observable(false);
 	this.IsMouseOver = ko.observable(false);
 	this.mouseEnter = function() {
 		this.IsMouseOver(true);
