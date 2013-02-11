@@ -64,20 +64,32 @@
 
 
 //Standard style
+html {
+    height: 100%;
+}
+
 body {
 	height: 100%;
     font-size: 100%;
     color: #fcfcfc;
     .gradientBackground(rgb(241,114,0), rgb(88,3,1));
+    overflow-x: hidden; //stops animations creating scrolls bars in firefox
 }
 
+.applicationWrapper {
+    position: relative;
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+}
 
 // Screens
 .screen {
     display: none;
     max-width: 700px;
     width: 90%;
-    margin: 0 auto 4em;
+    margin: 0 auto;
+    padding-bottom: 4em;
 
     header {
         height: 2em;
