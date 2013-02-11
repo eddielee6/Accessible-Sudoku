@@ -74,7 +74,7 @@
         <div class="gameGrid" data-bind="foreach: Squares">
           <div class="squareWrapper">
             <div class="square" data-bind="foreach: Cells">
-              <div class="cellWrapper" data-bind="event: { mouseover: $root.SelectHoveredCell }">
+              <div class="cellWrapper" data-bind="event: { click: $root.SelectClickedCell }">
                 <div class="cell" data-bind="css: { 'selected animated pulse': IsSelected(), editable: IsEditable() }, attr: { 'data-valid': IsValid(), 'data-row': RowIndex(), 'data-col': ColIndex() }">
                   <div class="cellValue" data-bind="text: CurrentValue"></div>
                 </div>

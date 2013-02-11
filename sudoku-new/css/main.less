@@ -238,6 +238,9 @@ body {
             box-sizing:border-box;
             -moz-box-sizing:border-box;
             -webkit-box-sizing:border-box;
+
+            cursor: default;
+            .noSelect;
         }
 
         position: relative;
@@ -281,6 +284,7 @@ body {
 
                         &.editable {
                             background: green;
+                            cursor: pointer;
                         }
 
                         &.selected {
@@ -371,13 +375,13 @@ body {
     bottom: 0;
     width: 100%;
     height: 412px;
-    background: transparent url('../img/shadow-backdrop@1x.png');
+    background: url('../img/shadow-backdrop@1x.png');
 }
 
 
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) { 
    	.backdrop {
-		background: transparent url('../img/shadow-backdrop@2x.png');
+		background: url('../img/shadow-backdrop@2x.png');
 		background-size: 1854px 412px;
 	}
 }

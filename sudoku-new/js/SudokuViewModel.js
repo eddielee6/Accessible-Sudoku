@@ -33,7 +33,7 @@ var SudokuViewModel = function() {
         }
 	};
 
-	this.SelectHoveredCell = function(data) {
+	this.SelectClickedCell = function(data) {
 		for (var squareIndex = 0; squareIndex < sender.Squares().length; squareIndex++) {
 			for (var cellIndex = 0; cellIndex < sender.Squares()[squareIndex].Cells().length; cellIndex++) {
 				if(data.ColIndex() == sender.Squares()[squareIndex].Cells()[cellIndex].ColIndex() && 
