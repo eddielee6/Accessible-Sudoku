@@ -1,4 +1,5 @@
 var SudokuViewModel = function() {
+	var sender = this;
 	this.Squares = ko.observableArray();
 
 	this.SetSelectedCell = function(square, cell) {
@@ -31,6 +32,17 @@ var SudokuViewModel = function() {
 			this.Squares()[square].Cells()[cell].CurrentValue(value);
         }
 	};
+
+	this.SelectHoveredCell = function(data) {
+		for (var squareIndex = 0; squareIndex < sender.Squares().length; squareIndex++) {
+			for (var cellIndex = 0; cellIndex < sender.Squares()[squareIndex].Cells().length; cellIndex++) {
+				if(data.ColIndex() == sender.Squares()[squareIndex].Cells()[cellIndex].ColIndex() && 
+					data.RowIndex() == sender.Squares()[squareIndex].Cells()[cellIndex].RowIndex()) {
+					return sender.SetSelectedCell(squareIndex, cellIndex);
+				}
+			};
+		};
+	}
 };
 
 var SquareViewModel = function() {
@@ -46,12 +58,4 @@ var CellViewModel = function() {
 	this.CurrentValue = ko.observable();
 	this.IsSelected = ko.observable(false);
 	this.IsValid = ko.observable(false);
-	this.IsMouseOver = ko.observable(false);
-	this.mouseEnter = function() {
-		this.IsMouseOver(true);
-	};
-
-	this.mouseLeave = function() {
-		this.IsMouseOver(false);
-	};
 };
