@@ -87,6 +87,12 @@ MainMenuController = function() {
                             break;
 
                         case "options":
+                            //Select first item
+                            $(".optionsMenu .menuItem").removeClass("selected");
+                            $(".optionsMenu .menuItem").siblings(".leftArrow, .rightArrow").css("display", "none");
+                            $(".optionsMenu .menuItem").first().addClass("selected");
+                            $(".optionsMenu .menuItem").first().siblings(".leftArrow, .rightArrow").css("display", "inline-block");
+
                             $("#optionsScreen").addClass("animated bounceInLeft").show();
                             break;
 

@@ -21,10 +21,6 @@ OptionsController = function() {
     };
 
     var initOptionsScreenControles = function() {
-        //Select first option
-        $(".optionsMenu .menuItem").first().addClass("selected");
-        $(".optionsMenu .menuItem").first().siblings(".leftArrow, .rightArrow").css("display", "inline-block");
-
         //Mouse input
         $(".optionsMenu li").mouseenter(function() {
             $(".optionsMenu .menuItem").removeClass("selected");
