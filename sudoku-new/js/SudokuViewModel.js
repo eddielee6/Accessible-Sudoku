@@ -11,13 +11,17 @@ var SudokuViewModel = function() {
 
 	this.SetSelectedCell = function(square, cell) {
 		for (var squareIndex = 0; squareIndex < this.Squares().length; squareIndex++) {
-			for (var j = 0; j < this.Squares()[squareIndex].Cells().length; j++) {
-				
+			for (var cellIndex = 0; cellIndex < this.Squares()[squareIndex].Cells().length; cellIndex++) {
+				if(squareIndex == square && cellIndex == cell) {
+					this.Squares()[squareIndex].Cells()[cellIndex].IsSelected(true);
+				} else {
+					this.Squares()[squareIndex].Cells()[cellIndex].IsSelected(false);
+				}
 			};
 		};
 	};
 
-	this.GetCurrentSelection = function() {
+	this.GetSelectedCell = function() {
 		for (var squareIndex = 0; squareIndex < this.Squares().length; squareIndex++) {
 			for (var cellIndex = 0; cellIndex < this.Squares()[squareIndex].Cells().length; cellIndex++) {
 				if(this.Squares()[squareIndex].Cells()[cellIndex].IsSelected()) {

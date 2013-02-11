@@ -7,11 +7,9 @@ SudokuBoardController = function() {
 	var initSudokuControls = function() {
 		$(window).keydown(function(evt) {
             if($("#gameScreen").is(":visible")) {
-                  var currentSelection = sender.viewModel.GetCurrentSelection();
+                  var currentSelection = sender.viewModel.GetSelectedCell();
             	var cell = currentSelection.cell;
             	var square = currentSelection.square;
-            	var originallySelectedCell = cell;
-            	var originallySelectedSquare = square;
             	var key;
 
                   var handled = true;
@@ -197,10 +195,7 @@ SudokuBoardController = function() {
                               handled = false;
             		break;
             	}
-                  if(handled) {
-                        evt.preventDefault();
-                        localStorage.SetValueForKey("gameSave", ko.mapping.toJSON(sender.viewModel));
-                  }
+
             	//Update the viewmodel data
             	if(key != undefined) // A number key was pressed so update the board if necessary
             	{
@@ -210,8 +205,13 @@ SudokuBoardController = function() {
 						sender.viewModel.Squares()[square].Cells()[cell].CurrentValue.valueHasMutated();
             		}
             	}
-            	sender.viewModel.Squares()[originallySelectedSquare].Cells()[originallySelectedCell].IsSelected(false);
-            	sender.viewModel.Squares()[square].Cells()[cell].IsSelected(true);	
+
+                  sender.viewModel.SetSelectedCell(square, cell);
+
+                  if(handled) {
+                        evt.preventDefault();
+                        localStorage.SetValueForKey("gameSave", ko.mapping.toJSON(sender.viewModel));
+                  }
             }
         });
 	};
@@ -309,7 +309,7 @@ SudokuBoardController = function() {
 	var getColArray = function(requiredIndex) {
 		//If requiredIndex is supplied, then return the required column.
 		//Otherwise, return the currently selected column
-		var currentSelection = sender.viewModel.GetCurrentSelection();
+		var currentSelection = sender.viewModel.GetSelectedCell();
 		var index = requiredIndex != undefined ? requiredIndex : sender.viewModel.Squares()[currentSelection.square].Cells()[currentSelection.cell].ColIndex();
 		switch(index)
 		{
@@ -346,7 +346,7 @@ SudokuBoardController = function() {
 	var getRowArray = function(requiredIndex) {
 		//If requiredIndex is supplied, then return the required row.
 		//Otherwise, return the currently selected row
-        var currentSelection = sender.viewModel.GetCurrentSelection();
+        var currentSelection = sender.viewModel.GetSelectedCell();
         var index = requiredIndex != undefined ? requiredIndex : sender.viewModel.Squares()[currentSelection.square].Cells()[currentSelection.cell].RowIndex();
 		switch(index)
 		{
