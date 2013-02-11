@@ -338,13 +338,15 @@ body {
     height: 10px;
 }
 
-.logoWrapper {
-    .logo {
-        width: 650px;
-        height: 231px;
-        margin: 30px auto;
-        background: url('../img/logo_light@2x.png') no-repeat;
-        background-size: 650px 231px;
+.logo {
+    margin: 30px auto;
+
+    &.light {
+        display: block;
+    }
+
+    &.dark {
+        display: none;
     }
 }
 
@@ -395,8 +397,13 @@ html.light {
     }
 
     .logo {
-        background: url('../img/logo_dark@2x.png') no-repeat;
-        background-size: 650px 231px; //background resets this
+        &.light {
+          display: none;
+        }
+
+        &.dark {
+            display: block;
+        }
     }
 
     &.desktop {
@@ -490,13 +497,11 @@ html.biggest {
 
 //Media queries
 @media screen and (max-width: 710px) {
-    // .logoWrapper{
-    //     margin: 20px;
-    //     .logo {
-    //         width: 90%; //Fix
-    //         height: auto;
-    //     }
-    // }
+    .logo {
+        width: 90%; //Fix
+        margin: 20px auto;
+        height: auto;
+    }
 
     #gameScreen {
         .gameGrid {
