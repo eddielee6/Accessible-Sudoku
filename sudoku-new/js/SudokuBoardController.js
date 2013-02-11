@@ -214,28 +214,11 @@ SudokuBoardController = function() {
 	};
 	
 	var validateBoard = function() {
-		//First, validate rows
-		for(var i=0; i<9; i++)
-		{
-			var row = getRowArray(i);		
-			var available = new Array(1,2,3,4,5,6,7,8,9);
-			for(var j=0; j<9; j++)
-			{
-				if(row[j] != "")
-				{
-					var check = available.indexOf(row[j]);
-					if(check == -1) //value already used
-					{		
-						sender.viewModel.Squares()[i].Cells()[j].IsValid(false);
-					} else 
-					{
-						available.splice(check, 1);	
-					}
-				}
-			}
-			
-		}
-		//Now, validate cols
+		validateRows();
+		validateCols();	
+	};
+	
+	var validateCols = function() {
 		for(var i=0; i<9; i++)
 		{
 			var col = getColArray(i);		
@@ -255,7 +238,29 @@ SudokuBoardController = function() {
 				}
 			}
 		}
-	}
+	};
+	
+	var validateRows = function() {
+		for(var i=0; i<9; i++)
+		{
+			var row = getRowArray(i);		
+			var available = new Array(1,2,3,4,5,6,7,8,9);
+			for(var j=0; j<9; j++)
+			{
+				if(row[j] != "")
+				{
+					var check = available.indexOf(row[j]);
+					if(check == -1) //value already used
+					{		
+						sender.viewModel.Squares()[i].Cells()[j].IsValid(false);
+					} else 
+					{
+						available.splice(check, 1);	
+					}
+				}
+			}	
+		}
+	};
 	
 	var getColArray = function(requiredIndex) {
 		//If requiredIndex is supplied, then return the required column.
