@@ -96,9 +96,9 @@ Generator = function() {
 
 		var toRemove = 5; //medium inferred
 		if(difficulty == "easy") {
-			toRemove = 3;
+			toRemove = 4;
 		} else if(difficulty == "hard") {
-			toRemove = 8;
+			toRemove = 6;
 		}
 		
 		for(var h=0; h<3; h++)
