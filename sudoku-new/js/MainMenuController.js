@@ -71,16 +71,13 @@ MainMenuController = function() {
                     $("section.screen").hide();
                     switch(currentlySelected.attr("data-action")) {
                         case "continue":
-                            var existingGame = ko.mapping.fromJSON(localStorage.GetValueForKey("gameSave"));
-                            sudokuBoardController.StartGame(existingGame);
+                            var existingGame = ko.toJS(localStorage.GetValueForKey("gameSave"));
+                            sudokuBoardController.LoadGame(existingGame);
                             $("#gameScreen").addClass("animated bounceInLeft").show();
                             break;
 
                         case "newGame":
-                            var gameGenerator = new Generator();
-                            var newGame = gameGenerator.GenerateNewGame();
-                            localStorage.SetValueForKey("gameSave", ko.toJSON(newGame));
-                            sudokuBoardController.StartGame(newGame);
+                            sudokuBoardController.StartNewGame();
                             $("#gameScreen").addClass("animated bounceInLeft").show();
                             break;
 

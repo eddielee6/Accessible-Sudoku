@@ -185,10 +185,7 @@ Generator = function() {
 			}
 		}
 
-		var newGame = new SudokuViewModel();
-		newGame.Squares = getSquares(squares, squares);
-
-		return newGame;
+		return getSquares(squares, squares);
 	};
 };
 

@@ -2,9 +2,16 @@ SudokuBoardController = function() {
 	var sender = this;
 	var localStorage = new LocalStorageRepository();
 
-      this.StartGame = function(gameData) {
-            sender.viewModel.Squares(gameData.Squares());
+      this.StartNewGame = function() {
+            var gameGenerator = new Generator();
+            var generatedGrid = gameGenerator.GenerateNewGame();
+            localStorage.SetValueForKey("gameSave", ko.toJSON(generatedGrid()));
+            sender.viewModel.Squares(generatedGrid());
             sender.viewModel.Squares()[0].Cells()[0].IsSelected(true);
+      };
+
+      this.LoadGame = function(existingGame) {
+
       };
 
 	var initSudokuControls = function() {
