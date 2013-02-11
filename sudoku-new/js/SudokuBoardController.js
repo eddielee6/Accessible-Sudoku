@@ -24,33 +24,43 @@ SudokuBoardController = function() {
             			break;
             		// a number key was pressed
             		case 96:
+            		case 48:
             			key = "";
             			break;
             		case 97:
+            		case 49:
             			key = 1;
             			break;
             		case 98:
+            		case 50:
             			key = 2;
             			break;
             		case 99:
+            		case 51:
             			key = 3;
             			break;
             		case 100:
+            		case 52:
             			key = 4;
             			break;
             		case 101:
+            		case 53:
             			key = 5;
             			break;
             		case 102:
+            		case 54:
             			key = 6;
             			break;
             		case 103:
+            		case 55:
             			key = 7;
             			break;
             		case 104:
+            		case 56:
             			key = 8;
             			break;
             		case 105:
+            		case 57:
             			key = 9;
             			break;
             		/*
