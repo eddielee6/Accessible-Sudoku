@@ -368,6 +368,7 @@ SudokuBoardController = function() {
                   sender.viewModel.Squares(gameGenerator.GenerateNewGame(options.difficulty).Squares());
                   localStorage.SetValueForKey("gameSave", ko.mapping.toJSON(sender.viewModel));
             }
+            sender.viewModel.SetSelectedCell(0, 0);
       };
 
 	var init = new function() {
