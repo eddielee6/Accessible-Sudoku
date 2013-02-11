@@ -34,6 +34,7 @@ MainMenuController = function() {
         $(window).keydown(function(evt) {
             if($("#menuScreen").is(":visible")) {
                 var currentlySelected = $(".mainMenu .menuItem.selected");
+                var handled = true;
                 switch(evt.which) {
                     case 38: // w
                     case 87: // up
@@ -56,6 +57,12 @@ MainMenuController = function() {
                     case 13:
                         triggerSelectedAction();
                         break;
+                    default:
+                        handled = false;
+                        break;
+                }
+                if(handled) {
+                    evt.preventDefault();
                 }
             }
         });

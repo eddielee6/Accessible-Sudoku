@@ -52,6 +52,8 @@ OptionsController = function() {
         $(window).keydown(function(evt) {
             if($("#optionsScreen").is(":visible")) {
                 var currentlySelected = $(".optionsMenu .menuItem.selected");
+
+                var handled = true;
                 switch(evt.which) {
                     case 38: // w
                     case 87: // up
@@ -84,6 +86,12 @@ OptionsController = function() {
                     case 13:
                         changeOption("right");
                         break;
+                    default:
+                        handled = false;
+                        break;
+                }
+                if(handled) {
+                    evt.preventDefault();
                 }
             }
         });

@@ -13,6 +13,8 @@ SudokuBoardController = function() {
             	var originallySelectedCell = cell;
             	var originallySelectedSquare = square;
             	var key;
+
+                  var handled = true;
             	switch(evt.which)
             	{
             		//V was pressed (validation - RG using for debug)
@@ -192,8 +194,12 @@ SudokuBoardController = function() {
             				cell++;	
             			}
             		default: 
+                              handled = false;
             		break;
             	}
+                  if(handled) {
+                        evt.preventDefault();
+                  }
             	//Update the viewmodel data
             	if(key != undefined) // A number key was pressed so update the board if necessary
             	{
