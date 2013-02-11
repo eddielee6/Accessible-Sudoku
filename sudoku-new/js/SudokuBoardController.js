@@ -1,30 +1,8 @@
-SudokuBoardController = function(existingGame) {
+SudokuBoardController = function() {
 	var sender = this;
 	var localStorage = new LocalStorageRepository();
       var gameGenerator = new Generator();
       this.viewModel;
-
-      // this.StartNewGame = function() {
-      //       
-
-
-      //       var viewModel = ko.mapping.fromJS(data);
-      //       //localStorage.SetValueForKey("gameSave", ko.toJSON(generatedGrid);
-
-
-
-
-      //       ko.mapping.fromJSON(generatedGrid, sender.viewModel);
-
-
-            
-
-      //      // sender.viewModel;
-      // };
-
-      // this.LoadGame = function(existingGame) {
-      //       console.log(existingGame);
-      // };
 
 	var initSudokuControls = function() {
 		$(window).keydown(function(evt) {
@@ -395,14 +373,42 @@ SudokuBoardController = function(existingGame) {
 		}
 	};
 
-	var init = new function() {
+      this.StartGame = function(existingGame) {
             if(existingGame) {
-                  sender.viewmodel = ko.mapping.fromJSON(existingGame);
-                  console.log(sender.viewmodel);
+                  var loadedGame = ko.mapping.fromJSON(existingGame, {
+                        '': {
+                              create: function(options) {
+                                    var sudokuViewModel = new SudokuViewModel();
+                                    for (var squareIndex = 0; squareIndex < options.data.Squares.length; squareIndex++) {
+                                          var squareViewModel = new SquareViewModel();
+                                          for (var cellIndex = 0; cellIndex < options.data.Squares[squareIndex].Cells.length; cellIndex++) {
+                                                var cellViewModel = new CellViewModel();
+                                                cellViewModel.SolutionValue = options.data.Squares[squareIndex].Cells[cellIndex].SolutionValue;
+                                                cellViewModel.OriginalValue = options.data.Squares[squareIndex].Cells[cellIndex].OriginalValue;
+                                                cellViewModel.RowIndex = ko.observable(options.data.Squares[squareIndex].Cells[cellIndex].RowIndex);
+                                                cellViewModel.ColIndex = ko.observable(options.data.Squares[squareIndex].Cells[cellIndex].ColIndex);
+                                                cellViewModel.IsEditable = ko.observable(options.data.Squares[squareIndex].Cells[cellIndex].IsEditable);
+                                                cellViewModel.CurrentValue = ko.observable(options.data.Squares[squareIndex].Cells[cellIndex].CurrentValue);
+                                                cellViewModel.IsSelected = ko.observable(options.data.Squares[squareIndex].Cells[cellIndex].IsSelected);
+                                                cellViewModel.IsValid = ko.observable(options.data.Squares[squareIndex].Cells[cellIndex].IsValid);
+                                                cellViewModel.IsMouseOver = ko.observable(options.data.Squares[squareIndex].Cells[cellIndex].IsMouseOver);
+                                                squareViewModel.Cells.push(cellViewModel);
+                                          };
+                                          sudokuViewModel.Squares.push(squareViewModel);
+                                    };
+                                    return sudokuViewModel;
+                              }
+                        }
+                  });
+                  sender.viewModel.Squares(loadedGame.Squares());
             } else {
-                  sender.viewModel = gameGenerator.GenerateNewGame();
+                  sender.viewModel.Squares(gameGenerator.GenerateNewGame().Squares());
                   localStorage.SetValueForKey("gameSave", ko.mapping.toJSON(sender.viewModel));
             }
+      };
+
+	var init = new function() {
+            sender.viewModel = new SudokuViewModel();
             ko.applyBindings(sender.viewModel);
 		initSudokuControls();
 	};

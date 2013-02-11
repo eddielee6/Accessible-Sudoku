@@ -72,12 +72,12 @@ MainMenuController = function() {
                     switch(currentlySelected.attr("data-action")) {
                         case "continue":
                             var existingGame = localStorage.GetValueForKey("gameSave")
-                            sudokuBoardController = new SudokuBoardController(existingGame);
+                            sudokuBoardController.StartGame(existingGame);
                             $("#gameScreen").addClass("animated bounceInLeft").show();
                             break;
 
                         case "newGame":
-                            sudokuBoardController = new SudokuBoardController();
+                            sudokuBoardController.StartGame();
                             $("#gameScreen").addClass("animated bounceInLeft").show();
                             break;
 
@@ -134,7 +134,7 @@ MainMenuController = function() {
 
     var init = new function() {
         optionsController = new OptionsController();
-
+        sudokuBoardController = new SudokuBoardController();
         initMenuScreen();
         initMainMenuButton();
     };
