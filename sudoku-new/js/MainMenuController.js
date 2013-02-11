@@ -17,17 +17,18 @@ MainMenuController = function() {
 
         setContinueState();
 
+        var menuItemAnimation;
+
         //Mouse input
         $(".mainMenu .menuItem:visible").first().addClass("selected");
         $(".mainMenu .menuItem").mouseover(function() {
             $(".mainMenu .menuItem").removeClass("selected");
-            $(this).addClass("selected");
+            $(this).addClass("selected animated pulse");
+            menuItemAnimation = cleanUpAnimationAfterTimeout($(this), 400);
         });
         $(".mainMenu .menuItem").click(function() {
             triggerSelectedAction();
         });
-
-        var menuItemAnimation;
 
         //Keyboard input
         $(window).keydown(function(evt) {

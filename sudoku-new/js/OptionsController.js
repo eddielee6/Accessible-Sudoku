@@ -31,6 +31,10 @@ OptionsController = function() {
             $(".optionsMenu .menuItem").siblings(".rightArrow, .leftArrow").css("display", "none");
             $(this).children(".rightArrow, .leftArrow").css("display", "inline-block");
             $(this).children(".menuItem").addClass("selected");
+
+            //Animation
+            $(this).addClass("animated pulse");
+            menuItemAnimation = cleanUpAnimationAfterTimeout($(this), 400);
         });
         $(".optionsMenu .menuItem").click(function() {
             changeOption("right");
