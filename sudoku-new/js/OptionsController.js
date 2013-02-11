@@ -5,16 +5,18 @@ OptionsController = function() {
         var localStorage = new LocalStorageRepository();
 
         $(".optionsMenu .menuItem").each(function() {
-            var initialValue = localStorage.GetValueForKey($(this).attr("data-optionId"));
-            initialValue = initialValue == null ? $(this).attr("data-options").split(",")[0] : initialValue;
-            initialValue = initialValue.substring(1, initialValue.length - 1);
+            if((!$(this).parent("li").hasClass("desktop-only")) || $("html").hasClass("desktop")) {
+                var initialValue = localStorage.GetValueForKey($(this).attr("data-optionId"));
+                initialValue = initialValue == null ? $(this).attr("data-options").split(",")[0] : initialValue;
+                initialValue = initialValue.substring(1, initialValue.length - 1);
 
-            var key = initialValue.split(":")[0];
-            var value = initialValue.split(":")[1];
+                var key = initialValue.split(":")[0];
+                var value = initialValue.split(":")[1];
 
-            $(this).attr("data-selectedKey", key);
-            $(this).children(".value").text(value);
-            $("html").addClass(key);
+                $(this).attr("data-selectedKey", key);
+                $(this).children(".value").text(value);
+                $("html").addClass(key);
+            }
         });
     };
 

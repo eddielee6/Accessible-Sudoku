@@ -18,6 +18,16 @@
     position: absolute;
 }
 
+.mobile {
+    .desktop-only {
+        display: none!important;
+
+        * {
+            display: none!important;
+        }
+    }
+}
+
 .gradientBackground(@start, @end) {
     background: @end;
     background-image: -moz-linear-gradient(top, @start 0%, @end 100%);
