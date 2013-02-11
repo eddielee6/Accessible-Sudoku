@@ -233,12 +233,28 @@ SudokuBoardController = function() {
 					var check = available.indexOf(col[j]);
 					if(check == -1) //value already used
 					{		
-						sender.viewModel.Squares()[i].Cells()[j].IsValid(false);
-						colsValid = false;
+						//Make sure we highlight the duplicate that the user entered
+						//and not one that was already there
+						if(sender.viewModel.Squares()[i].Cells()[j].IsEditable())
+						{
+							//The duplicate was entered by the user...go ahead and mark it as invalid
+							sender.viewModel.Squares()[i].Cells()[j].IsValid(false);
+							colsValid = false;
+						} else {
+							//This was an original value...so need to find where the user entered duplicate is
+							var index = col.indexOf(col[j]);
+							sender.viewModel.Squares()[i].Cells()[index].IsValid(false);
+							colsValid = false;
+						}	
 					} else 
 					{
+						//Cell appears to be valid...so remove it from the remaining values for this column
 						available.splice(check, 1);	
 					}
+				} else {
+					//Cell is empty so implicitly invalid
+					sender.viewModel.Squares()[i].Cells()[j].IsValid(false);
+					colsValid = false;
 				}
 			}
 		}
@@ -258,10 +274,22 @@ SudokuBoardController = function() {
 					var check = available.indexOf(row[j]);
 					if(check == -1) //value already used
 					{		
-						sender.viewModel.Squares()[i].Cells()[j].IsValid(false);
-						rowsValid = false;
+						//Make sure we highlight the duplicate that the user entered
+						//and not one that was already there
+						if(sender.viewModel.Squares()[i].Cells()[j].IsEditable())
+						{
+							//The duplicate was entered by the user...go ahead and mark it as invalid
+							sender.viewModel.Squares()[i].Cells()[j].IsValid(false);
+							rowsValid = false;
+						} else {
+							//This was an original value...so need to find where the user entered duplicate is
+							var index = row.indexOf(row[j]);
+							sender.viewModel.Squares()[i].Cells()[index].IsValid(false);
+							rowsValid = false;
+						}	
 					} else 
 					{
+						//Cell appears to be valid...so remove it from the remaining values for this row
 						available.splice(check, 1);	
 					}
 				} else {
