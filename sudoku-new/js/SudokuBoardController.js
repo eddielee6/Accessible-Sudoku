@@ -20,7 +20,10 @@ SudokuBoardController = function() {
             	{
             		//V was pressed (validation - RG using for debug)
             		case 86:
-            			validateBoard();
+            			if(boardIsValid())
+            				alert("Board is valid!");
+            			else
+            				alert("Board is not valid!");
             			break;
             		// a number key was pressed
             		case 96:
@@ -213,24 +216,25 @@ SudokuBoardController = function() {
 		return sender.viewModel.Squares()[square].Cells()[cell].CurrentValue();
 	};
 	
-	var validateBoard = function() {
-		validateRows();
-		validateCols();	
+	var boardIsValid = function() {
+		return (validateRows() && validateCols());	
 	};
 	
 	var validateCols = function() {
+		var colsValid = true;
 		for(var i=0; i<9; i++)
 		{
 			var col = getColArray(i);		
 			var available = new Array(1,2,3,4,5,6,7,8,9);
 			for(var j=0; j<9; j++)
 			{
-				if(row[j] != "")
+				if(col[j] != "")
 				{
 					var check = available.indexOf(col[j]);
 					if(check == -1) //value already used
 					{		
 						sender.viewModel.Squares()[i].Cells()[j].IsValid(false);
+						colsValid = false;
 					} else 
 					{
 						available.splice(check, 1);	
@@ -238,9 +242,11 @@ SudokuBoardController = function() {
 				}
 			}
 		}
+		return colsValid;
 	};
 	
 	var validateRows = function() {
+		var rowsValid = true;
 		for(var i=0; i<9; i++)
 		{
 			var row = getRowArray(i);		
@@ -253,13 +259,19 @@ SudokuBoardController = function() {
 					if(check == -1) //value already used
 					{		
 						sender.viewModel.Squares()[i].Cells()[j].IsValid(false);
+						rowsValid = false;
 					} else 
 					{
 						available.splice(check, 1);	
 					}
+				} else {
+					//Cell is empty so implicitly invalid
+					sender.viewModel.Squares()[i].Cells()[j].IsValid(false);
+					rowsValid = false;
 				}
 			}	
 		}
+		return rowsValid;
 	};
 	
 	var getColArray = function(requiredIndex) {
