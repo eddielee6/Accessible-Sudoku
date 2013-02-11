@@ -76,13 +76,17 @@ MainMenuController = function() {
                     $("section.screen").hide();
                     switch(currentlySelected.attr("data-action")) {
                         case "continue":
-                            var existingGame = localStorage.GetValueForKey("gameSave")
-                            sudokuBoardController.StartGame(existingGame);
+                            sudokuBoardController.StartGame({
+                                existingGame: localStorage.GetValueForKey("gameSave")
+                            });
                             $("#gameScreen").addClass("animated bounceInLeft").show();
                             break;
 
                         case "newGame":
-                            sudokuBoardController.StartGame();
+                            sudokuBoardController.StartGame({
+                                existingGame: null,
+                                difficulty: $("html").attr("data-difficulty")
+                            });
                             $("#gameScreen").addClass("animated bounceInLeft").show();
                             break;
 

@@ -1,5 +1,6 @@
 var SudokuViewModel = function() {
 	var sender = this;
+	this.Difficulty = ko.observable();
 	this.Squares = ko.observableArray();
 
 	this.SetSelectedCell = function(square, cell) {

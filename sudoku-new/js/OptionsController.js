@@ -15,7 +15,12 @@ OptionsController = function() {
 
                 $(this).attr("data-selectedKey", key);
                 $(this).children(".value").text(value);
-                $("html").addClass(key);
+
+                if(key.indexOf('-') > 0) { //is data setting
+                    $("html").attr("data-"+key.split('-')[0], key.split('-')[1]);
+                } else { //is style setting
+                    $("html").addClass(key);
+                }
             }
         });
     };
@@ -98,7 +103,9 @@ OptionsController = function() {
 
             var availableOptions = currentlySelected.data("options").split(",");
             var origionalKey = currentlySelected.attr("data-selectedKey");
-            $("html").removeClass(origionalKey);
+            if(origionalKey.indexOf('-') < 0) { //is style settting
+                $("html").removeClass(origionalKey);
+            }
 
             for(var i = 0; i < availableOptions.length; i++) {
                 var key = availableOptions[i].substring(1, availableOptions[i].length - 1).split(":")[0];
@@ -114,7 +121,12 @@ OptionsController = function() {
                     localStorage.SetValueForKey(currentlySelected.attr("data-optionId"), availableOptions[newIndex]);
                     $(currentlySelected).attr("data-selectedKey", newKey);
                     $(currentlySelected).children(".value").html(newValue);
-                    $("html").addClass(newKey);
+
+                    if(newKey.indexOf('-') > 0) { //is data setting
+                        $("html").attr("data-"+newKey.split('-')[0], newKey.split('-')[1]);
+                    } else { //is style setting
+                        $("html").addClass(newKey);
+                    }
 
                     if(direction == "left") {
                         var toAnimate = $(currentlySelected).siblings(".leftArrow");
