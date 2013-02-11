@@ -13,10 +13,15 @@ SudokuBoardController = function() {
                 var currentSelection = sender.viewModel.GetCurrentSelection();
             	var cell = currentSelection.cell;
             	var square = currentSelection.square;
-            	sender.viewModel.Squares()[square].Cells()[cell].IsSelected(false);
+            	var originallySelectedCell = cell;
+            	var originallySelectedSquare = square;
             	var key;
             	switch(evt.which)
             	{
+            		//V was pressed (validation - RG using for debug)
+            		case 86:
+            			validateBoard();
+            			break;
             		// a number key was pressed
             		case 96:
             			key = "";
@@ -188,20 +193,49 @@ SudokuBoardController = function() {
 						sender.viewModel.Squares()[square].Cells()[cell].CurrentValue.valueHasMutated();
             		}
             	}
+            	sender.viewModel.Squares()[originallySelectedSquare].Cells()[originallySelectedCell].IsSelected(false);
             	sender.viewModel.Squares()[square].Cells()[cell].IsSelected(true);	
             }
         });
 	};
 	
 	var getCell = function(square,cell) { 
-		return sender.viewModel.Squares[square].Cells[cell].CurrentValue;
+		return sender.viewModel.Squares()[square].Cells()[cell].CurrentValue();
 	};
 	
-	var getColArray = function() {
+	var validateBoard = function() {
+		//First, validate rows
+		var incorrectCells = new Array();
+		for(var i=0; i<9; i++)
+		{
+			var row = getRowArray(i);		
+			var available = new Array(1,2,3,4,5,6,7,8,9);
+			for(var j=0; j<9; j++)
+			{
+				if(row[j] != "")
+				{
+					var check = available.indexOf(row[j]);
+					if(check == -1)
+					{
+						var cellRef = {row: i, col: j};
+						incorrectCells.push(cellRef);
+					} else 
+					{
+						available.splice(check, 1);	
+					}
+				}
+			}
+			
+		}
+		return incorrectCells;
+	}
+	
+	var getColArray = function(requiredIndex) {
+		//If requiredIndex is supplied, then return the required column.
+		//Otherwise, return the currently selected column
 		var currentSelection = sender.viewModel.GetCurrentSelection();
-            var square = currentSelection.square;
-            var cell = currentSelection.cell;
-		switch(sender.viewModel.Squares()[square].Cells()[cell].ColIndex())
+		var index = requiredIndex != undefined ? requiredIndex : sender.viewModel.Squares()[currentSelection.square].Cells()[currentSelection.cell].ColIndex();
+		switch(index)
 		{
 			case 0:
 				return new Array(getCell(0,0), getCell(0,3), getCell(0,6), getCell(3,0), getCell(3,3), getCell(3,6), getCell(6,0), getCell(6,3), getCell(6,6));
@@ -229,16 +263,16 @@ SudokuBoardController = function() {
 				break;
 			case 8:
 				return new Array(getCell(2,2), getCell(2,5), getCell(2,8), getCell(5,2), getCell(5,5), getCell(5,8), getCell(8,2), getCell(8,5), getCell(8,8));
-				break;	
-				
+				break;		
 		}
 	};
 	
-	var getRowArray = function() {
+	var getRowArray = function(requiredIndex) {
+		//If requiredIndex is supplied, then return the required row.
+		//Otherwise, return the currently selected row
         var currentSelection = sender.viewModel.GetCurrentSelection();
-		var square = currentSelection.square;
-		var cell = currentSelection.cell;
-		switch(sender.viewModel.Squares()[square].Cells()[cell].RowIndex()) //isnt square always equal to RowIndex()
+        var index = requiredIndex != undefined ? requiredIndex : sender.viewModel.Squares()[currentSelection.square].Cells()[currentSelection.cell].RowIndex();
+		switch(index)
 		{
 			case 0:
 				return new Array(getCell(0,0), getCell(0,1), getCell(0,2), getCell(1,0), getCell(1,1), getCell(1,2), getCell(2,0), getCell(2,1), getCell(2,2));
