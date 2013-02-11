@@ -199,6 +199,7 @@ SudokuBoardController = function() {
             	}
                   if(handled) {
                         evt.preventDefault();
+                        localStorage.SetValueForKey("gameSave", ko.mapping.toJSON(sender.viewModel));
                   }
             	//Update the viewmodel data
             	if(key != undefined) // A number key was pressed so update the board if necessary
