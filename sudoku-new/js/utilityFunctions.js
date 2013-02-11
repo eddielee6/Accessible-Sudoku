@@ -120,7 +120,7 @@ function keyCodeToAction(keycode) {
 			return "9";
 
         case 83: //s
-		case 40: //down arrow
+		case 40: //down
 			return "down";
         case 65: //a
 		case 37: //left

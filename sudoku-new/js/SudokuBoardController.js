@@ -6,175 +6,169 @@ SudokuBoardController = function() {
 
 	var initSudokuControls = function() {
 		$(window).keydown(function(evt) {
-            if($("#gameScreen").is(":visible")) {
-                  var currentSelection = sender.viewModel.GetSelectedCell();
-            	var cell = currentSelection.cell;
-            	var square = currentSelection.square;
+                  if($("#gameScreen").is(":visible")) {
+                        var currentSelection = sender.viewModel.GetSelectedCell();
+                  	var square = currentSelection.square;
+                        var cell = currentSelection.cell;
 
-                  var handled = true;
-                  var action = keyCodeToAction(evt.which);
-            	switch(action)
-            	{
-            		//V was pressed (validation - RG using for debug)
-            		case "v":
-            			if(boardIsValid())
-            				alert("Board is valid!");
-            			else
-            				alert("Board is not valid!");
-            			break;
+                        var handled = true;
+                  	switch(keyCodeToAction(evt.which)) {
+                  		//V was pressed (validation - RG using for debug)
+                  		case "v":
+                  			if(boardIsValid())
+                  				alert("Board is valid!");
+                  			else
+                  				alert("Board is not valid!");
+                  			break;
 
-            		case "1":
-            		case "2":
-            		case "3":
-            		case "4":
-            		case "5":
-            		case "6":
-            		case "7":
-            		case "8":
-            		case "9":
-            			if(sender.viewModel.Squares()[square].Cells()[cell].IsEditable())
-                              {
-                                    sender.viewModel.Squares()[square].Cells()[cell].CurrentValue(action);
-                                    sender.viewModel.Squares()[square].Cells()[cell].CurrentValue.valueHasMutated();
-                              }
-            			break;
-            		/*
-            		 * MOVEMENT LOGIC
-            		 */
-            		case "down":
-            			//Wrap back to the first square
-            			//(Remove if wrap round not required)
-            			if(square == 8 && cell == 8)
-            			{
-            				square = cell = 0;
-            			}
-            			//Do we need to go into the next row of squares
-            			else if((square == 6 || square == 7) && (cell == 8))
-            			{
-            				cell = 0;
-            				square -= 5;
-            			}
-            			//Do we need to go back up to the next row? (not requiring a change into the next row of squares)
-            			else if((square >= 6 && square <= 8) && (cell == 6 || cell == 7))
-            			{
-            				square -= 6;
-            				cell -= 5;
-            			}
-            			//Do we need to go down into the square below?
-            		 	else if(cell >= 6 && square <= 6)
-            		 	{
-            		 		cell -= 6;
-            		 		square += 3;
-            		 	}
-            		 	//Otherwise, just move to the next cell below
-            		 	else
-            		 	{
-            		 		cell += 3;
-            		 	}
-            			break;
-            		case "left":
-            			if(square == 0 && cell == 0)
-            			{
-            				square = 8;
-            				cell = 8;	
-            			}
-            			//Do we need to move up from square 3 or 6? (zero indexed)
-            			else if(((square == 6) || (square == 3)) && (cell == 0))
-            			{
-            				square--;
-            				cell = 8;
-            			}
-            			//Do we need to move up a row?
-            			else if((square % 3 == 0) && (cell % 3 == 0))
-            			{
-            				square+=2;
-            				cell--;
-            			}
-            			//Do we need to move into the left adjacent box?
-            			else if(cell % 3 == 0)
-            			{
-            				square--;
-            				cell+=2;
-            			} 
-            			//otherwise, just move the selected cell one cell to the left
-            			else 
-            			{
-            				cell--;
-            			}
-            			break;
-            		case "up":
-            			if(cell == 2 && square == 2)
-            			{
-            				square = 6;
-            				cell = 6;
-            			}
-            			//Do we need to go into the next row?
-            			else if((cell == 0 || cell == 1) && (square >= 0 && square <= 2))
-            			{
-            				square += 6;
-            				cell += 7;
-            			}
-            			else if ((cell == 2) && (square == 0 || square == 1))
-            			{
-            				square += 7;
-            				cell = 6;
-            			}
-            			//Do we need to go up to the above square?
-            			else if(cell <= 2 && square >= 3)
-            			{
-            				square -= 3;
-            				cell += 6;
-            			}
-            			//Otherwise just go up into the above cell
-            			else
-            			{
-            				cell -= 3;
-            			}
-            			break;
-            		case "right":
-            			//Do we need to wrap back to the first square?
-            			//(Remove if wrap round not required)
-            			if(square == 8 && cell == 8)
-            			{
-            				square = 0;
-            				cell = 0;
-            			}
-            			//Do we need to drop to drop down from squares 2 or 5? (zero indexed)
-            			else if(((square == 2) || (square == 5)) && (cell == 8))
-            			{
-            				square++;
-            				cell = 0;
-            			}
-            			//Do we need to drop down to the next row?
-            			else if(((square + 1) % 3 == 0) && (square != 0) && ((cell+1) % 3 == 0))
-            			{
-            				square-=2;
-            				cell++;
-            			}
-            			//Do we need to cross into the next square to the right?
-            			else if((cell + 1) % 3 == 0 && cell != 0)
-            			{
-            				square++;
-            				cell-=2;
-            			} 
-            			//Otherwise, just move the selected cell one cell to the right
-            			else 
-            			{
-            				cell++;	
-            			}
-            		default: 
-                              handled = false;
-            		break;
-            	}
+                  		case "1":
+                  		case "2":
+                  		case "3":
+                  		case "4":
+                  		case "5":
+                  		case "6":
+                  		case "7":
+                  		case "8":
+                  		case "9":
+                  			sender.viewModel.SetCellValue(square, cell, keyCodeToAction(evt.which));
+                  			break;
+                  		/*
+                  		 * MOVEMENT LOGIC
+                  		 */
+                  		case "down":
+                  			//Wrap back to the first square
+                  			//(Remove if wrap round not required)
+                  			if(square == 8 && cell == 8)
+                  			{
+                  				square = cell = 0;
+                  			}
+                  			//Do we need to go into the next row of squares
+                  			else if((square == 6 || square == 7) && (cell == 8))
+                  			{
+                  				cell = 0;
+                  				square -= 5;
+                  			}
+                  			//Do we need to go back up to the next row? (not requiring a change into the next row of squares)
+                  			else if((square >= 6 && square <= 8) && (cell == 6 || cell == 7))
+                  			{
+                  				square -= 6;
+                  				cell -= 5;
+                  			}
+                  			//Do we need to go down into the square below?
+                  		 	else if(cell >= 6 && square <= 6)
+                  		 	{
+                  		 		cell -= 6;
+                  		 		square += 3;
+                  		 	}
+                  		 	//Otherwise, just move to the next cell below
+                  		 	else
+                  		 	{
+                  		 		cell += 3;
+                  		 	}
+                  			break;
+                  		case "left":
+                  			if(square == 0 && cell == 0)
+                  			{
+                  				square = 8;
+                  				cell = 8;	
+                  			}
+                  			//Do we need to move up from square 3 or 6? (zero indexed)
+                  			else if(((square == 6) || (square == 3)) && (cell == 0))
+                  			{
+                  				square--;
+                  				cell = 8;
+                  			}
+                  			//Do we need to move up a row?
+                  			else if((square % 3 == 0) && (cell % 3 == 0))
+                  			{
+                  				square+=2;
+                  				cell--;
+                  			}
+                  			//Do we need to move into the left adjacent box?
+                  			else if(cell % 3 == 0)
+                  			{
+                  				square--;
+                  				cell+=2;
+                  			} 
+                  			//otherwise, just move the selected cell one cell to the left
+                  			else 
+                  			{
+                  				cell--;
+                  			}
+                  			break;
+                  		case "up":
+                  			if(cell == 2 && square == 2)
+                  			{
+                  				square = 6;
+                  				cell = 6;
+                  			}
+                  			//Do we need to go into the next row?
+                  			else if((cell == 0 || cell == 1) && (square >= 0 && square <= 2))
+                  			{
+                  				square += 6;
+                  				cell += 7;
+                  			}
+                  			else if ((cell == 2) && (square == 0 || square == 1))
+                  			{
+                  				square += 7;
+                  				cell = 6;
+                  			}
+                  			//Do we need to go up to the above square?
+                  			else if(cell <= 2 && square >= 3)
+                  			{
+                  				square -= 3;
+                  				cell += 6;
+                  			}
+                  			//Otherwise just go up into the above cell
+                  			else
+                  			{
+                  				cell -= 3;
+                  			}
+                  			break;
+                  		case "right":
+                  			//Do we need to wrap back to the first square?
+                  			//(Remove if wrap round not required)
+                  			if(square == 8 && cell == 8)
+                  			{
+                  				square = 0;
+                  				cell = 0;
+                  			}
+                  			//Do we need to drop to drop down from squares 2 or 5? (zero indexed)
+                  			else if(((square == 2) || (square == 5)) && (cell == 8))
+                  			{
+                  				square++;
+                  				cell = 0;
+                  			}
+                  			//Do we need to drop down to the next row?
+                  			else if(((square + 1) % 3 == 0) && (square != 0) && ((cell+1) % 3 == 0))
+                  			{
+                  				square-=2;
+                  				cell++;
+                  			}
+                  			//Do we need to cross into the next square to the right?
+                  			else if((cell + 1) % 3 == 0 && cell != 0)
+                  			{
+                  				square++;
+                  				cell-=2;
+                  			} 
+                  			//Otherwise, just move the selected cell one cell to the right
+                  			else 
+                  			{
+                  				cell++;	
+                  			}
+                  		default: 
+                                    handled = false;
+                  		break;
+                  	}
 
-                  sender.viewModel.SetSelectedCell(square, cell);
+                        sender.viewModel.SetSelectedCell(square, cell);
 
-                  if(handled) {
-                        evt.preventDefault();
-                        localStorage.SetValueForKey("gameSave", ko.mapping.toJSON(sender.viewModel));
+                        if(handled) {
+                              evt.preventDefault();
+                              localStorage.SetValueForKey("gameSave", ko.mapping.toJSON(sender.viewModel));
+                        }
                   }
-            }
-        });
+            });
 	};
 	
 	var getCell = function(square,cell) { 
