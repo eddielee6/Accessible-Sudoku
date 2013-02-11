@@ -1,7 +1,7 @@
 OptionsController = function() {
-	var sender = this;
+    var sender = this;
 
-	var loadUserPreferences = function() {
+    var loadUserPreferences = function() {
         var localStorage = new LocalStorageRepository();
 
         $(".optionsMenu .menuItem").each(function() {
@@ -19,15 +19,28 @@ OptionsController = function() {
     };
 
     var initOptionsScreenControles = function() {
-        //Mouse input
+        //Select first option
         $(".optionsMenu .menuItem").first().addClass("selected");
-        $(".optionsMenu .menuItem").mouseover(function() {
+        $(".optionsMenu .menuItem").first().siblings(".leftArrow, .rightArrow").css("display", "inline-block");
+
+        //Mouse input
+        $(".optionsMenu li").mouseover(function() {
             $(".optionsMenu .menuItem").removeClass("selected");
-            $(this).addClass("selected");
+            $(".optionsMenu .menuItem").siblings(".rightArrow, .leftArrow").css("display", "none");
+            $(this).children(".rightArrow, .leftArrow").css("display", "inline-block");
+            $(this).children(".menuItem").addClass("selected");
         });
         $(".optionsMenu .menuItem").click(function() {
             changeOption("right");
         });
+        $(".optionsMenu .leftArrow").click(function() {
+            changeOption("left");
+        });
+        $(".optionsMenu .rightArrow").click(function() {
+            changeOption("right");
+        });
+
+        var menuItemAnimation;
 
         //Keyboard input
         $(window).keydown(function(evt) {
@@ -39,7 +52,11 @@ OptionsController = function() {
                         var newSelection = currentlySelected.parent("li").prev(":visible").find(".menuItem");
                         if(newSelection.length) {
                             newSelection.addClass("selected");
+                            newSelection.parent("li").addClass("animated pulse");
+                            newSelection.siblings(".leftArrow, .rightArrow").css("display", "inline-block");
+                            menuItemAnimation = cleanUpAnimationAfterTimeout(newSelection.parent("li"), 400);
                             currentlySelected.removeClass("selected");
+                            currentlySelected.siblings(".leftArrow, .rightArrow").css("display", "none");
                         }
                         break;
                     case 40: // s
@@ -47,7 +64,11 @@ OptionsController = function() {
                         var newSelection = currentlySelected.parent("li").next(":visible").find(".menuItem");
                         if(newSelection.length) {
                             newSelection.addClass("selected");
+                            newSelection.parent("li").addClass("animated pulse");
+                            newSelection.siblings(".leftArrow, .rightArrow").css("display", "inline-block");
+                            menuItemAnimation = cleanUpAnimationAfterTimeout(newSelection.parent("li"), 400);
                             currentlySelected.removeClass("selected");
+                            currentlySelected.siblings(".leftArrow, .rightArrow").css("display", "none");
                         }
                         break
                     case 37: //left
@@ -61,10 +82,12 @@ OptionsController = function() {
             }
         });
         
+        var leftArrowAnimation;
+        var rightArrowAnimation;
         var changeOption = function(direction) {
             var localStorage = new LocalStorageRepository();
-	        
-	        var currentlySelected = $(".optionsMenu .menuItem.selected");
+            
+            var currentlySelected = $(".optionsMenu .menuItem.selected");
 
             var availableOptions = currentlySelected.data("options").split(",");
             var origionalKey = currentlySelected.attr("data-selectedKey");
@@ -87,19 +110,25 @@ OptionsController = function() {
                     $("html").addClass(newKey);
 
                     if(direction == "left") {
-                        $(currentlySelected).siblings(".leftArrow").addClass("animated shake");
-                        cleanUpAnimationAfterTimeout($(currentlySelected).siblings(".leftArrow"), 400);
+                        var toAnimate = $(currentlySelected).siblings(".leftArrow");
+                        clearTimeout(leftArrowAnimation);
+                        removeAnimations(toAnimate)
+                        toAnimate.addClass("animated shake");
+                        leftArrowAnimation = cleanUpAnimationAfterTimeout(toAnimate, 500);
                     } else {
-                        $(currentlySelected).siblings(".rightArrow").addClass("animated shake");
-                        cleanUpAnimationAfterTimeout($(currentlySelected).siblings(".rightArrow"), 400);
+                        var toAnimate = $(currentlySelected).siblings(".rightArrow");
+                        clearTimeout(rightArrowAnimation);
+                        removeAnimations(toAnimate)
+                        toAnimate.addClass("animated shake");
+                        rightArrowAnimation = cleanUpAnimationAfterTimeout(toAnimate, 500);
                     }
                 }
             }
         };
     };
 
-	var init = new function() {
-		loadUserPreferences();
-		initOptionsScreenControles();
-	};
+    var init = new function() {
+        loadUserPreferences();
+        initOptionsScreenControles();
+    };
 };

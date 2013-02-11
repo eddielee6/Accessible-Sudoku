@@ -96,6 +96,12 @@ body {
             margin: 0 auto 0.8em;
             display: block;
 
+            .noSelect;
+
+            &.pulse {
+                .animationTime(0.4s);
+            }
+
             .menuItem {
                 display: inline-block;
 
@@ -108,13 +114,10 @@ body {
                 font-weight: bold;
                 background-color: rgba(255, 255, 255, 0.2);
                 overflow: hidden; //to clear
-                
 
                 &.pulse {
                     .animationTime(0.4s);
                 }
-                
-                .noSelect;
 
                 .name {
                     float: left;
@@ -128,19 +131,21 @@ body {
             }
 
             .leftArrow {
-                display: inline-block;
+                display: none;
                 margin: 0.1em 0.5em;
                 border-top: 1.4em solid transparent;
                 border-bottom: 1.4em solid transparent;
                 border-right: 1.9em solid #fcfcfc;
+                cursor: pointer;
             }
 
             .rightArrow {
-                display: inline-block;
+                display: none;
                 margin: 0.1em 0.5em;
                 border-top: 1.4em solid transparent;
                 border-bottom: 1.4em solid transparent;
                 border-left: 1.9em solid #fcfcfc;
+                cursor: pointer;
             }
         }
     }
@@ -291,7 +296,7 @@ body {
 #helpScreen {
 	
 	section#info {
-		background: transparent url('../img/help@1x.png') center center no-repeat;
+		background: /*transparent*/ url('../img/help@1x.png') /*center center*/ no-repeat; //no need to specify W3C defaults
 		width: 700px;
 		height: 715px;
 	}
@@ -333,9 +338,12 @@ body {
     height: 10px;
 }
 
-.logoWrapper {
-    margin: 30px;
-    text-align: center;
+.logo {
+    width: 650px;
+    height: 231px;
+    margin: 30px auto;
+    background: url('../img/logo_light@2x.png') no-repeat;
+    background-size: 650px 231px;
 }
 
 .backdrop {
@@ -368,7 +376,7 @@ body {
 
 //Alternate Themes
 //Consistant structure should only be declared in the standard theme
-html.dark { //Dark text on light background
+html.light {
     body {
         background: #fcfcfc;
         color: #2b2f33;
@@ -384,14 +392,35 @@ html.dark { //Dark text on light background
         background: #2b2f33;
     }
 
+    .logo {
+        background: url('../img/logo_dark@2x.png') no-repeat;
+        background-size: 650px 231px; //background resets this
+    }
+
     &.desktop {
         .screen {
             .menu {
-                .menuItem {
-                    background-color: rgba(43, 47, 51, 0.5);
-                    &.selected {
-                        color: #2b2f33;
-                        background-color: rgba(43, 47, 51, 0.3);
+                li {
+                    .menuItem {
+                        background-color: rgba(43, 47, 51, 0.5);
+                        &.selected {
+                            color: #2b2f33;
+                            background-color: rgba(43, 47, 51, 0.3);
+
+                            &:before {
+                                border-left-color: #2b2f33;
+                            }
+                            &:after {
+                                border-right-color: #2b2f33;
+                            }
+                        }
+                    }
+                    .leftArrow {
+                        border-right-color: #2b2f33;
+                    }
+
+                    .rightArrow {
+                        border-left-color: #2b2f33;
                     }
                 }
             }
@@ -399,7 +428,7 @@ html.dark { //Dark text on light background
     }
 }
 
-html.light { //Light text on dark background
+html.dark {
     body {
         background: #2b2f33;
         color: #fcfcfc;
@@ -418,10 +447,19 @@ html.light { //Light text on dark background
     &.desktop {
         .screen {
             .menu {
-                .menuItem {
-                    &.selected {
-                        color: #2b2f33;
-                        background-color: rgba(255, 255, 255, 0.6);
+                li {
+                    .menuItem {
+                        &.selected {
+                            color: #2b2f33;
+                            background-color: rgba(255, 255, 255, 0.6);
+
+                            &:before {
+                                border-left-color: #2b2f33;
+                            }
+                            &:after {
+                                border-right-color: #2b2f33;
+                            }
+                        }
                     }
                 }
             }
@@ -488,8 +526,6 @@ html.biggest {
                 }
             }
         }
-
-        
     }
 
     #gameScreen {
