@@ -2,13 +2,20 @@ MainMenuController = function() {
     var sender = this;
     var sudokuBoardController;
     var optionsController;
+
+    var setContinueState = function() {
+        var localStorage = new LocalStorageRepository();
+        if(localStorage.GetValueForKey("gameSave")) {
+            $(".continueButton").show();
+        } else {
+            $(".continueButton").hide();
+        }
+    };
     
     var initMenuScreen = function() {
         var localStorage = new LocalStorageRepository();
 
-        if(localStorage.GetValueForKey("gameSave") == null) {
-            $("#buttonContinue").hide();
-        }
+        setContinueState();
 
         //Mouse input
         $(".mainMenu .menuItem:visible").first().addClass("selected");
@@ -109,6 +116,8 @@ MainMenuController = function() {
             $(".mainMenu .menuItem").removeClass("selected");
             removeAnimations($("#menuScreen .menuItem"));
             $("#menuScreen .menuItem").show();
+
+            setContinueState();
 
             //Show menu
             $(".screen:visible .back").first().addClass("animated bounceOutLeft");
