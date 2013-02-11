@@ -59,4 +59,8 @@ var CellViewModel = function() {
 	this.CurrentValue = ko.observable();
 	this.IsSelected = ko.observable(false);
 	this.IsValid = ko.observable(false);
+
+	this.IsFilled = ko.computed(function() {
+        return this.CurrentValue() != "";
+    }, this);
 };
