@@ -1,5 +1,5 @@
-function removeAnimations (element) {
-	$(element).removeClass("animated " +
+function removeAnimations (selector) {
+	$(selector).removeClass("animated " +
 		//Attention seekers
 		"flash " +
 		"bounce " +
@@ -77,10 +77,10 @@ function removeAnimations (element) {
 		"rollOut");
 }
 
-function cleanUpAnimationAfterTimeout(element, duration) {
+function cleanUpAnimationAfterTimeout(selector, timeout) {
     return setTimeout(function() {
-    	removeAnimations(element);
-    }, duration);
+    	removeAnimations(selector);
+    }, timeout);
 }
 
 function keyCodeToAction(keycode) {
