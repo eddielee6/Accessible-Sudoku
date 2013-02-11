@@ -71,13 +71,13 @@ MainMenuController = function() {
                     $("section.screen").hide();
                     switch(currentlySelected.attr("data-action")) {
                         case "continue":
-                            var existingGame = ko.toJS(localStorage.GetValueForKey("gameSave"));
-                            sudokuBoardController.LoadGame(existingGame);
+                            var existingGame = localStorage.GetValueForKey("gameSave")
+                            sudokuBoardController = new SudokuBoardController(existingGame);
                             $("#gameScreen").addClass("animated bounceInLeft").show();
                             break;
 
                         case "newGame":
-                            sudokuBoardController.StartNewGame();
+                            sudokuBoardController = new SudokuBoardController();
                             $("#gameScreen").addClass("animated bounceInLeft").show();
                             break;
 
@@ -133,7 +133,6 @@ MainMenuController = function() {
     };
 
     var init = new function() {
-        sudokuBoardController = new SudokuBoardController();
         optionsController = new OptionsController();
 
         initMenuScreen();

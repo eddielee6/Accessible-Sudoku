@@ -1,23 +1,35 @@
-SudokuBoardController = function() {
+SudokuBoardController = function(existingGame) {
 	var sender = this;
 	var localStorage = new LocalStorageRepository();
+      var gameGenerator = new Generator();
+      this.viewModel;
 
-      this.StartNewGame = function() {
-            var gameGenerator = new Generator();
-            var generatedGrid = gameGenerator.GenerateNewGame();
-            localStorage.SetValueForKey("gameSave", ko.toJSON(generatedGrid()));
-            sender.viewModel.Squares(generatedGrid());
-            sender.viewModel.Squares()[0].Cells()[0].IsSelected(true);
-      };
+      // this.StartNewGame = function() {
+      //       
 
-      this.LoadGame = function(existingGame) {
 
-      };
+      //       var viewModel = ko.mapping.fromJS(data);
+      //       //localStorage.SetValueForKey("gameSave", ko.toJSON(generatedGrid);
+
+
+
+
+      //       ko.mapping.fromJSON(generatedGrid, sender.viewModel);
+
+
+            
+
+      //      // sender.viewModel;
+      // };
+
+      // this.LoadGame = function(existingGame) {
+      //       console.log(existingGame);
+      // };
 
 	var initSudokuControls = function() {
 		$(window).keydown(function(evt) {
             if($("#gameScreen").is(":visible")) {
-                var currentSelection = sender.viewModel.GetCurrentSelection();
+                  var currentSelection = sender.viewModel.GetCurrentSelection();
             	var cell = currentSelection.cell;
             	var square = currentSelection.square;
             	var originallySelectedCell = cell;
@@ -384,8 +396,14 @@ SudokuBoardController = function() {
 	};
 
 	var init = new function() {
-        sender.viewModel = new SudokuViewModel();
-        ko.applyBindings(sender.viewModel);
+            if(existingGame) {
+                  sender.viewmodel = ko.mapping.fromJSON(existingGame);
+                  console.log(sender.viewmodel);
+            } else {
+                  sender.viewModel = gameGenerator.GenerateNewGame();
+                  localStorage.SetValueForKey("gameSave", ko.mapping.toJSON(sender.viewModel));
+            }
+            ko.applyBindings(sender.viewModel);
 		initSudokuControls();
 	};
 };

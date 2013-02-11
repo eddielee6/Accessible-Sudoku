@@ -185,7 +185,11 @@ Generator = function() {
 			}
 		}
 
-		return getSquares(squares, squares);
+		var newGame = new SudokuViewModel();
+		newGame.Squares = getSquares(squares, squares);
+		newGame.Squares()[0].Cells()[0].IsSelected(true);
+
+		return newGame;
 	};
 };
 
