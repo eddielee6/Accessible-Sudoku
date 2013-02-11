@@ -135,7 +135,7 @@ body {
                 margin: 0.1em 0.5em;
                 border-top: 1.4em solid transparent;
                 border-bottom: 1.4em solid transparent;
-                border-right: 1.9em solid #fcfcfc;
+                border-right: 1.9em solid rgba(255, 255, 255, 0.6);
                 cursor: pointer;
             }
 
@@ -144,7 +144,7 @@ body {
                 margin: 0.1em 0.5em;
                 border-top: 1.4em solid transparent;
                 border-bottom: 1.4em solid transparent;
-                border-left: 1.9em solid #fcfcfc;
+                border-left: 1.9em solid rgba(255, 255, 255, 0.6);
                 cursor: pointer;
             }
         }
@@ -338,12 +338,14 @@ body {
     height: 10px;
 }
 
-.logo {
-    width: 650px;
-    height: 231px;
-    margin: 30px auto;
-    background: url('../img/logo_light@2x.png') no-repeat;
-    background-size: 650px 231px;
+.logoWrapper {
+    .logo {
+        width: 650px;
+        height: 231px;
+        margin: 30px auto;
+        background: url('../img/logo_light@2x.png') no-repeat;
+        background-size: 650px 231px;
+    }
 }
 
 .backdrop {
@@ -488,13 +490,13 @@ html.biggest {
 
 //Media queries
 @media screen and (max-width: 710px) {
-    .logoWrapper{
-        margin: 20px;
-        img {
-            width: 90%;
-            height: auto;
-        }
-    }
+    // .logoWrapper{
+    //     margin: 20px;
+    //     .logo {
+    //         width: 90%; //Fix
+    //         height: auto;
+    //     }
+    // }
 
     #gameScreen {
         .gameGrid {
@@ -513,16 +515,16 @@ html.biggest {
 
                 .leftArrow {
                     margin: 0.07500000000000001em 0.375em;
-                    border-top: 1.0499999999999998em solid transparent;
-                    border-bottom: 1.0499999999999998em solid transparent;
-                    border-right: 1.4249999999999998em solid #fcfcfc;
+                    border-top-width: 1.0499999999999998em;
+                    border-bottom-width: 1.0499999999999998em;
+                    border-right-width: 1.4249999999999998em;
                 }
 
                 .rightArrow {
                     margin: 0.07500000000000001em 0.375em;
-                    border-top: 1.0499999999999998em solid transparent;
-                    border-bottom: 1.0499999999999998em solid transparent;
-                    border-left: 1.4249999999999998em solid #fcfcfc;
+                    border-top-width: 1.0499999999999998em;
+                    border-bottom-width: 1.0499999999999998em;
+                    border-left-width: 1.4249999999999998em;
                 }
             }
         }
