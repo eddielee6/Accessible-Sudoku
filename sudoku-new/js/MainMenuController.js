@@ -21,7 +21,7 @@ MainMenuController = function() {
 
         //Mouse input
         $(".mainMenu .menuItem:visible").first().addClass("selected");
-        $(".mainMenu .menuItem").mouseover(function() {
+        $(".mainMenu .menuItem").mouseenter(function() {
             $(".mainMenu .menuItem").removeClass("selected");
             $(this).addClass("selected animated pulse");
             menuItemAnimation = cleanUpAnimationAfterTimeout($(this), 400);

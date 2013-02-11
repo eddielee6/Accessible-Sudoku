@@ -26,7 +26,7 @@ OptionsController = function() {
         $(".optionsMenu .menuItem").first().siblings(".leftArrow, .rightArrow").css("display", "inline-block");
 
         //Mouse input
-        $(".optionsMenu li").mouseover(function() {
+        $(".optionsMenu li").mouseenter(function() {
             $(".optionsMenu .menuItem").removeClass("selected");
             $(".optionsMenu .menuItem").siblings(".rightArrow, .leftArrow").css("display", "none");
             $(this).children(".rightArrow, .leftArrow").css("display", "inline-block");
