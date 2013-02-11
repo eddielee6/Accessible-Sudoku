@@ -91,6 +91,7 @@ body {
         overflow: hidden;
         padding: 0;
         text-align: center;
+        margin: 1em -5%;
 
         li {
             margin: 0 auto 0.8em;
@@ -490,7 +491,7 @@ html.bigger {
 
 html.biggest {
     body {
-        font-size: 130%;
+        font-size: 125%;
     }
 }
 
@@ -503,14 +504,6 @@ html.biggest {
         height: auto;
     }
 
-    #gameScreen {
-        .gameGrid {
-            font-size: 1.2em;
-        }
-    }
-}
-
-@media screen and (max-width: 500px) {
     .screen {
         .menu {
             li {
@@ -533,8 +526,16 @@ html.biggest {
                 }
             }
         }
-    }
 
+        &#gameScreen {
+            .gameGrid {
+                font-size: 1.2em;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 500px) {
     #gameScreen {
         .gameGrid {
             font-size: 0.9em;
