@@ -54,9 +54,8 @@ OptionsController = function() {
                 var currentlySelected = $(".optionsMenu .menuItem.selected");
 
                 var handled = true;
-                switch(evt.which) {
-                    case 38: // w
-                    case 87: // up
+                switch(keyCodeToAction(evt.which)) {
+                    case "up":
                         var newSelection = currentlySelected.parent("li").prev(":visible").find(".menuItem");
                         if(newSelection.length) {
                             newSelection.addClass("selected");
@@ -67,8 +66,7 @@ OptionsController = function() {
                             currentlySelected.siblings(".leftArrow, .rightArrow").css("display", "none");
                         }
                         break;
-                    case 40: // s
-                    case 83: // down
+                    case "down":
                         var newSelection = currentlySelected.parent("li").next(":visible").find(".menuItem");
                         if(newSelection.length) {
                             newSelection.addClass("selected");
@@ -79,11 +77,10 @@ OptionsController = function() {
                             currentlySelected.siblings(".leftArrow, .rightArrow").css("display", "none");
                         }
                         break
-                    case 37: //left
+                    case "left":
                         changeOption("left");
                         break;
-                    case 39: //right
-                    case 13:
+                    case "right":
                         changeOption("right");
                         break;
                     default:

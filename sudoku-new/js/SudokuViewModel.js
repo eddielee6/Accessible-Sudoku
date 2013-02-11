@@ -1,14 +1,6 @@
 var SudokuViewModel = function() {
 	this.Squares = ko.observableArray();
 
-	this.ResetSelection = function() {
-		// for (var i = 0; i < this.Squares().length; i++) {
-		// 	for (var j = 0; j < this.Squares()[i].Cells().length; j++) {
-		// 		this.Squares()[i].Cells()[j].IsSelected(false);
-		// 	};
-		// };
-	};
-
 	this.SetSelectedCell = function(square, cell) {
 		for (var squareIndex = 0; squareIndex < this.Squares().length; squareIndex++) {
 			for (var cellIndex = 0; cellIndex < this.Squares()[squareIndex].Cells().length; cellIndex++) {

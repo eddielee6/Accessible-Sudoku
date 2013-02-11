@@ -35,9 +35,8 @@ MainMenuController = function() {
             if($("#menuScreen").is(":visible")) {
                 var currentlySelected = $(".mainMenu .menuItem.selected");
                 var handled = true;
-                switch(evt.which) {
-                    case 38: // w
-                    case 87: // up
+                switch(keyCodeToAction(evt.which)) {
+                    case "up":
                         var newSelection = currentlySelected.parent("li").prev(":visible").find(".menuItem");
                         if(newSelection.length) {
                             newSelection.addClass("selected animated pulse");
@@ -45,8 +44,7 @@ MainMenuController = function() {
                             currentlySelected.removeClass("selected");
                         }
                         break;
-                    case 40: // s
-                    case 83: // down
+                    case "down":
                         var newSelection = currentlySelected.parent("li").next(":visible").find(".menuItem");
                         if(newSelection.length) {
                             newSelection.addClass("selected animated pulse");
@@ -54,7 +52,7 @@ MainMenuController = function() {
                             currentlySelected.removeClass("selected");
                         }
                         break
-                    case 13:
+                    case "enter":
                         triggerSelectedAction();
                         break;
                     default:
@@ -109,9 +107,10 @@ MainMenuController = function() {
 
         //Keyboard input
         $(window).keydown(function(evt) {
-            if(evt.which == 27) { //Esc
+            if(keyCodeToAction(evt.which) == "escape") {
                 if(!$("#menuScreen:visible").length) {
                     navigateToMenu();
+                    evt.preventDefault();
                 }
             }
         });

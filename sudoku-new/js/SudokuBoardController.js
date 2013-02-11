@@ -10,64 +10,38 @@ SudokuBoardController = function() {
                   var currentSelection = sender.viewModel.GetSelectedCell();
             	var cell = currentSelection.cell;
             	var square = currentSelection.square;
-            	var key;
 
                   var handled = true;
-            	switch(evt.which)
+                  var action = keyCodeToAction(evt.which);
+            	switch(action)
             	{
             		//V was pressed (validation - RG using for debug)
-            		case 86:
+            		case "v":
             			if(boardIsValid())
             				alert("Board is valid!");
             			else
             				alert("Board is not valid!");
             			break;
-            		// a number key was pressed
-            		case 96:
-            		case 48:
-            			key = "";
-            			break;
-            		case 97:
-            		case 49:
-            			key = 1;
-            			break;
-            		case 98:
-            		case 50:
-            			key = 2;
-            			break;
-            		case 99:
-            		case 51:
-            			key = 3;
-            			break;
-            		case 100:
-            		case 52:
-            			key = 4;
-            			break;
-            		case 101:
-            		case 53:
-            			key = 5;
-            			break;
-            		case 102:
-            		case 54:
-            			key = 6;
-            			break;
-            		case 103:
-            		case 55:
-            			key = 7;
-            			break;
-            		case 104:
-            		case 56:
-            			key = 8;
-            			break;
-            		case 105:
-            		case 57:
-            			key = 9;
+
+            		case "1":
+            		case "2":
+            		case "3":
+            		case "4":
+            		case "5":
+            		case "6":
+            		case "7":
+            		case "8":
+            		case "9":
+            			if(sender.viewModel.Squares()[square].Cells()[cell].IsEditable())
+                              {
+                                    sender.viewModel.Squares()[square].Cells()[cell].CurrentValue(action);
+                                    sender.viewModel.Squares()[square].Cells()[cell].CurrentValue.valueHasMutated();
+                              }
             			break;
             		/*
             		 * MOVEMENT LOGIC
             		 */
-                        case 83:
-            		case 40: //down
+            		case "down":
             			//Wrap back to the first square
             			//(Remove if wrap round not required)
             			if(square == 8 && cell == 8)
@@ -98,8 +72,7 @@ SudokuBoardController = function() {
             		 		cell += 3;
             		 	}
             			break;
-                        case 65:
-            		case 37: //left
+            		case "left":
             			if(square == 0 && cell == 0)
             			{
             				square = 8;
@@ -129,8 +102,7 @@ SudokuBoardController = function() {
             				cell--;
             			}
             			break;
-                        case 87:
-            		case 38: //up
+            		case "up":
             			if(cell == 2 && square == 2)
             			{
             				square = 6;
@@ -159,8 +131,7 @@ SudokuBoardController = function() {
             				cell -= 3;
             			}
             			break;
-                        case 68:
-            		case 39: //right
+            		case "right":
             			//Do we need to wrap back to the first square?
             			//(Remove if wrap round not required)
             			if(square == 8 && cell == 8)
@@ -194,16 +165,6 @@ SudokuBoardController = function() {
             		default: 
                               handled = false;
             		break;
-            	}
-
-            	//Update the viewmodel data
-            	if(key != undefined) // A number key was pressed so update the board if necessary
-            	{
-            		if(sender.viewModel.Squares()[square].Cells()[cell].IsEditable())
-            		{
-            			sender.viewModel.Squares()[square].Cells()[cell].CurrentValue(key);
-						sender.viewModel.Squares()[square].Cells()[cell].CurrentValue.valueHasMutated();
-            		}
             	}
 
                   sender.viewModel.SetSelectedCell(square, cell);

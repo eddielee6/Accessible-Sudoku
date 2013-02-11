@@ -81,4 +81,61 @@ function cleanUpAnimationAfterTimeout(element, duration) {
     return setTimeout(function() {
     	removeAnimations(element);
     }, duration);
-};
+}
+
+function keyCodeToAction(keycode) {
+	switch(keycode) {
+		case 86: //v
+			return "v";
+
+		case 96: //keypad 0
+		case 48: //top 0
+			return "0";
+		case 97: //keypad 1
+		case 49: //top 1
+			return "1";
+		case 98: //keypad 2
+		case 50: //top 2
+			return "2";
+		case 99: //keypad 3
+		case 51: //top 3
+			return "3";
+		case 100: //keypad 4
+		case 52: //top 4
+			return "4";
+		case 101: //keypad 5
+		case 53: //top 5
+			return "5";
+		case 102: //keypad 6
+		case 54: //top 6
+			return "6";
+		case 103: //keypad 7
+		case 55: //top 7
+			return "7";
+		case 104: //keypad 8
+		case 56: //top 8
+			return "8";
+		case 105: //keypad 9
+		case 57: //top 9
+			return "9";
+
+        case 83: //s
+		case 40: //down arrow
+			return "down";
+        case 65: //a
+		case 37: //left
+			return "left";
+        case 87: //w
+		case 38: //up
+			return "up";
+        case 68: //d
+		case 39: //right
+			return "right";
+
+		case 13: //enter
+			return "enter";
+
+		case 27: //escape
+			return "escape";
+	}
+}
