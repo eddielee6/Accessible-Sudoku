@@ -34,6 +34,15 @@ var SudokuViewModel = function() {
 		};
 	};
 
+	this.HideInputPad = function() {
+		console.log("hide all");
+		for (var squareIndex = 0; squareIndex < sender.Squares().length; squareIndex++) {
+			for (var cellIndex = 0; cellIndex < sender.Squares()[squareIndex].Cells().length; cellIndex++) {
+				sender.Squares()[squareIndex].Cells()[cellIndex].WasSelectedWithMouse(false);
+			};
+		};
+	};
+
 	this.GetSelectedCell = function() {
 		for (var squareIndex = 0; squareIndex < sender.Squares().length; squareIndex++) {
 			for (var cellIndex = 0; cellIndex < sender.Squares()[squareIndex].Cells().length; cellIndex++) {
@@ -56,11 +65,13 @@ var SudokuViewModel = function() {
         }
 	};
 
-	this.SelectClickedCell = function(data) {
+	this.SelectClickedCell = function(data, evt) {
 		for (var squareIndex = 0; squareIndex < sender.Squares().length; squareIndex++) {
 			for (var cellIndex = 0; cellIndex < sender.Squares()[squareIndex].Cells().length; cellIndex++) {
 				if(data.ColIndex() == sender.Squares()[squareIndex].Cells()[cellIndex].ColIndex() && 
 					data.RowIndex() == sender.Squares()[squareIndex].Cells()[cellIndex].RowIndex()) {
+					evt.stopImmediatePropagation();
+				console.log("select");
 					return sender.SetSelectedCell(squareIndex, cellIndex, true);
 				}
 			};

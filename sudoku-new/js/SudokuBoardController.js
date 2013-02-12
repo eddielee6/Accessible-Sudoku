@@ -62,6 +62,11 @@ SudokuBoardController = function() {
                   }
             });
 
+            //InputDigitPad Reset
+            $(window).click(function(evt) {
+                  sender.viewModel.HideInputPad();
+            });
+
             //Keyboard input
 		$(window).keydown(function(evt) {
 			if ($("#gameScreen").is(":visible")) {
