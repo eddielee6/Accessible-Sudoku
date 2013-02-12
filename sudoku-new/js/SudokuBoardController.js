@@ -512,6 +512,7 @@ SudokuBoardController = function() {
                   sender.viewModel.IsComplete(boardIsValid());
 		} else {
 			sender.viewModel.Squares(gameGenerator.GenerateNewGame(options.difficulty).Squares());
+                  sender.viewModel.IsComplete(false);
                   sender.viewModel.AvailableHints(sender.viewModel.InitialHints);
                   sender.viewModel.Difficulty(options.difficulty);
 			localStorage.SetValueForKey("gameSave", ko.mapping.toJSON(sender.viewModel));
