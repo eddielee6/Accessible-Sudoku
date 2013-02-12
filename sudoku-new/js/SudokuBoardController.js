@@ -155,14 +155,14 @@ SudokuBoardController = function() {
 	};
 
 	var boardIsValid = function() {
-		return (validateRows() && validateCols());
+		return (validateRows() && validateCols() && validateSquares());
 	};
 
 	var validateCols = function() {
 		var colsValid = true;
 		for (var i = 0; i < 9; i++) {
 			var col = getColArray(i);
-			var available = new Array(1, 2, 3, 4, 5, 6, 7, 8, 9);
+			var available = new Array("1", "2", "3", "4", "5", "6", "7", "8", "9");
 			for (var j = 0; j < 9; j++) {
 				if (col[j] != "") {
 					var check = available.indexOf(col[j]);
@@ -193,12 +193,47 @@ SudokuBoardController = function() {
 		}
 		return colsValid;
 	};
+	
+	var validateSquares = function() {
+		var squaresValid = true;
+		for(var i=0; i<9; i++)
+		{
+			var available = new Array("1", "2", "3", "4", "5", "6", "7", "8", "9");
+			for(var j=0; j<9; j++)
+			{
+				if(sender.viewModel.Squares()[i].Cells()[j] != "")
+				{
+					var check = available.indexOf(sender.viewModel.Squares()[i].Cells()[j]);
+					if(check == -1)
+					{
+						if(sender.viewModel.Squares()[i].Cells()[j].IsEditable())
+						{
+							sender.viewModel.Squares()[i].Cells()[j].IsValid(false);
+							squaresValid = false;	
+						}
+						else
+						{
+							var value = sender.viewModel.Squares()[i].Cells()[j];
+							var index = sender.viewModel.Squares()[i].indexOf(value);
+							sender.viewModel.Squares()[i].Cells()[index].IsValid(false);
+							squaresValid = false;	
+						}
+					}
+					else 
+					{
+						//Cell appears to be valid...so remove it from the remaining values for this row
+						available.splice(check, 1);
+					}
+				}
+			}
+		}
+	};
 
 	var validateRows = function() {
 		var rowsValid = true;
 		for (var i = 0; i < 9; i++) {
 			var row = getRowArray(i);
-			var available = new Array(1, 2, 3, 4, 5, 6, 7, 8, 9);
+			var available = new Array("1", "2", "3", "4", "5", "6", "7", "8", "9");
 			for (var j = 0; j < 9; j++) {
 				if (row[j] != "") {
 					var check = available.indexOf(row[j]);
