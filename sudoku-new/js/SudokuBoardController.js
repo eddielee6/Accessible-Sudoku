@@ -368,12 +368,13 @@ SudokuBoardController = function() {
 		}
 	};
 
-      this.StartGame = function(existingGame) {
-            if(existingGame) {
-                  var loadedGame = ko.mapping.fromJSON(existingGame, {
+      this.StartGame = function(options) {
+            if(options.existingGame) {
+                  var loadedGame = ko.mapping.fromJSON(options.existingGame, {
                         '': {
                               create: function(options) {
                                     var sudokuViewModel = new SudokuViewModel();
+                                    sudokuViewModel.Difficulty(options.data.Difficulty);
                                     for (var squareIndex = 0; squareIndex < options.data.Squares.length; squareIndex++) {
                                           var squareViewModel = new SquareViewModel();
                                           for (var cellIndex = 0; cellIndex < options.data.Squares[squareIndex].Cells.length; cellIndex++) {
@@ -397,9 +398,10 @@ SudokuBoardController = function() {
                   });
                   sender.viewModel.Squares(loadedGame.Squares());
             } else {
-                  sender.viewModel.Squares(gameGenerator.GenerateNewGame().Squares());
+                  sender.viewModel.Squares(gameGenerator.GenerateNewGame(options.difficulty).Squares());
                   localStorage.SetValueForKey("gameSave", ko.mapping.toJSON(sender.viewModel));
             }
+            sender.viewModel.SetSelectedCell(0, 0);
       };
 
 	var init = new function() {

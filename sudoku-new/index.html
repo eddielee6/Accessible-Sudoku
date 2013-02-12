@@ -35,103 +35,112 @@
         <script type="text/javascript" src="js/main.js"></script>        
     </head>
     <body>
+      <div class="applicationWrapper">
+        <div id="messageOutput" aria-live="rude"></div>
 
-      <div id="messageOutput" aria-live="rude"></div>
+  	    <div class="ledge"></div>
 
-	    <div class="ledge"></div>
+        <div class="animated bounceInDown">
+          <img src="img/logo_light@2x.png" width="650" height="231" class="logo light" />
+          <img src="img/logo_dark@2x.png" width="650" height="231" class="logo dark" />
+        </div>
 
-      <div class="animated bounceInDown">
-        <img src="img/logo_light@2x.png" width="650" height="231" class="logo light" />
-        <img src="img/logo_dark@2x.png" width="650" height="231" class="logo dark" />
-      </div>
-
-      <section id="menuScreen" class="screen animated bounceInLeft">
-  				<ul class="mainMenu menu">
-  					<li class="continueButton">
-              <div data-action="continue" class="menuItem">Continue</div>
-            </li>
-  					<li>
-              <div data-action="newGame" class="menuItem">New Game</div>
-            </li>
-            <li>
-              <div data-action="options" class="menuItem">Options</div>
-            </li>
-  					<li>
-              <div data-action="help" class="menuItem">Help</div>
-            </li>
-  				</ul>
-      </section>
-	    
-      <section id="gameScreen" class="screen">
-        <header>
-          <div class="back">&#9664; menu</div>
-        </header>
-        <section id="controls">
-        	<button onclick="javascript:alert('Button 1, clicked.');">Check Progress</button>
-        	<button onclick="javascript:alert('Button 2, clicked.');">Button 2</button>
-        	<button onclick="javascript:alert('Button 3, clicked.');">Button 3</button>
+        <section id="menuScreen" class="screen animated bounceInLeft">
+    				<ul class="mainMenu menu">
+    					<li class="continueButton">
+                <div data-action="continue" class="menuItem">Continue</div>
+              </li>
+    					<li>
+                <div data-action="newGame" class="menuItem">New Game</div>
+              </li>
+              <li>
+                <div data-action="options" class="menuItem">Options</div>
+              </li>
+    					<li>
+                <div data-action="help" class="menuItem">Help</div>
+              </li>
+    				</ul>
         </section>
-        <div class="gameGrid" data-bind="foreach: Squares">
-          <div class="squareWrapper">
-            <div class="square" data-bind="foreach: Cells">
-              <div class="cellWrapper" data-bind="event: { click: $root.SelectClickedCell }">
-                <div class="cell" data-bind="css: { 'selected animated pulse': IsSelected(), editable: IsEditable() }, attr: { 'data-valid': IsValid(), 'data-row': RowIndex(), 'data-col': ColIndex() }">
-                  <div class="cellValue" data-bind="text: CurrentValue"></div>
+  	    
+        <section id="gameScreen" class="screen">
+          <header>
+            <div class="back">&#9664; menu</div>
+          </header>
+          <section id="controls">
+          	<button onclick="javascript:alert('Button 1, clicked.');">Check Progress</button>
+          	<button onclick="javascript:alert('Button 2, clicked.');">Button 2</button>
+          	<button onclick="javascript:alert('Button 3, clicked.');">Button 3</button>
+          </section>
+          <div class="gameGrid" data-bind="foreach: Squares">
+            <div class="squareWrapper">
+              <div class="square" data-bind="foreach: Cells">
+                <div class="cellWrapper" data-bind="event: { click: $root.SelectClickedCell }">
+                  <div class="cell" data-bind="css: { 'selected animated pulse': IsSelected(), editable: IsEditable(), invalid: (!IsValid() && IsEditable() && IsFilled()) }, attr: { 'data-row': RowIndex(), 'data-col': ColIndex() }">
+                    <div class="cellValue" data-bind="text: CurrentValue"></div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <section id="helpScreen" class="screen">
-        <header>
-          <div class="back">&#9664; menu</div>
-          <h1>Help</h1>
-        </header>
-          <section id="info">
-	          <div class="whitespace">
-	          	<p style="width:500px;font-weight:bold;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vel consequat dolor. Cras dictum porttitor augue, ac commodo lectus posuere in.</p>
-	          	<p>Nulla eget sem nulla. Sed tincidunt rutrum ligula, in eleifend nunc cursus vel. Nulla id sem neque. Curabitur ac est at arcu blandit malesuada. Integer at suscipit lorem. Morbi consectetur augue eu lectus ultricies vehicula.</p>
-	          	<p>Nulla eget sem nulla. Sed tincidunt rutrum ligula, in eleifend nunc cursus vel. Nulla id sem neque. Curabitur ac est at arcu blandit malesuada. Integer at suscipit lorem. Morbi consectetur augue eu lectus ultricies vehicula.</p>
-	          	<div class="keyboard"></div>
-	          </div>
-          </section>
-      </section>
+        <section id="helpScreen" class="screen">
+          <header>
+            <div class="back">&#9664; menu</div>
+            <h1>Help</h1>
+          </header>
+            <section id="info">
+  	          <div class="whitespace">
+  	          	<p style="width:500px;font-weight:bold;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vel consequat dolor. Cras dictum porttitor augue, ac commodo lectus posuere in.</p>
+  	          	<p>Nulla eget sem nulla. Sed tincidunt rutrum ligula, in eleifend nunc cursus vel. Nulla id sem neque. Curabitur ac est at arcu blandit malesuada. Integer at suscipit lorem. Morbi consectetur augue eu lectus ultricies vehicula.</p>
+  	          	<p>Nulla eget sem nulla. Sed tincidunt rutrum ligula, in eleifend nunc cursus vel. Nulla id sem neque. Curabitur ac est at arcu blandit malesuada. Integer at suscipit lorem. Morbi consectetur augue eu lectus ultricies vehicula.</p>
+  	          	<div class="keyboard"></div>
+  	          </div>
+            </section>
+        </section>
 
-      <section id="optionsScreen" class="screen">
-        <header>
-          <div class="back">&#9664; menu</div>
-          <h1>Options</h1>
-        </header>
-        
-        <ul class="optionsMenu menu">
-        	<li>
-            <div class="leftArrow"></div>
-            <div data-optionId="theme" data-options="{default:Oriental},{dark:Dark},{light:Light}" class="menuItem">
-              <span class="name">Theme</span>
-              <span class="value"></span>
-            </div>
-            <div class="rightArrow"></div>
-          </li>
-        	<li class="desktop-only">
-            <div class="leftArrow"></div>
-            <div data-optionId="size" data-options="{normal:Normal},{bigger:Bigger},{biggest:Biggest}" class="menuItem">
-              <span class="name">Text Size</span>
-              <span class="value"></span>
-            </div>
-            <div class="rightArrow"></div>
-          </li>
-        	<li>
-            <div class="leftArrow"></div>
-            <div data-optionId="font" data-options="{standard:Default},{dyslexic:Dyslexic}" class="menuItem">
-              <span class="name">Font Style</span>
-              <span class="value"></span>
-            </div>
-            <div class="rightArrow"></div>
-          </li>
-        </ul>
-      </section>
-      <div class="backdrop"></div>
+        <section id="optionsScreen" class="screen">
+          <header>
+            <div class="back">&#9664; menu</div>
+            <h1>Options</h1>
+          </header>
+          
+          <ul class="optionsMenu menu">
+            <li>
+              <div class="leftArrow"></div>
+              <div data-optionId="difficulty" data-options="{difficulty-medium:Medium},{difficulty-hard:Hard},{difficulty-easy:Easy}" class="menuItem">
+                <span class="name">Difficulty</span>
+                <span class="value"></span>
+              </div>
+              <div class="rightArrow"></div>
+            </li>
+          	<li>
+              <div class="leftArrow"></div>
+              <div data-optionId="theme" data-options="{default:Oriental},{dark:Dark},{light:Light}" class="menuItem">
+                <span class="name">Theme</span>
+                <span class="value"></span>
+              </div>
+              <div class="rightArrow"></div>
+            </li>
+          	<li class="desktop-only">
+              <div class="leftArrow"></div>
+              <div data-optionId="size" data-options="{normal:Normal},{bigger:Bigger},{biggest:Biggest}" class="menuItem">
+                <span class="name">Text Size</span>
+                <span class="value"></span>
+              </div>
+              <div class="rightArrow"></div>
+            </li>
+          	<li>
+              <div class="leftArrow"></div>
+              <div data-optionId="font" data-options="{standard:Default},{dyslexic:Dyslexic}" class="menuItem">
+                <span class="name">Font Style</span>
+                <span class="value"></span>
+              </div>
+              <div class="rightArrow"></div>
+            </li>
+          </ul>
+        </section>
+        <div class="backdrop"></div>
+      </div>
   </body>
 </html>

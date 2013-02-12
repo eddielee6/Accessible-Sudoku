@@ -1,5 +1,6 @@
 var SudokuViewModel = function() {
 	var sender = this;
+	this.Difficulty = ko.observable();
 	this.Squares = ko.observableArray();
 
 	this.SetSelectedCell = function(square, cell) {
@@ -58,4 +59,8 @@ var CellViewModel = function() {
 	this.CurrentValue = ko.observable();
 	this.IsSelected = ko.observable(false);
 	this.IsValid = ko.observable(false);
+
+	this.IsFilled = ko.computed(function() {
+        return this.CurrentValue() != "";
+    }, this);
 };

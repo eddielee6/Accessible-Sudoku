@@ -89,10 +89,17 @@ Generator = function() {
 		return Math.floor(Math.random() * high);
 	}
 		
-	var getSquares = function (completed, starting)
+	var getSquares = function (completed, starting, difficulty)
 	{
 		var count = 0;
 		var squares = ko.observableArray();
+
+		var toRemove = 5; //medium inferred
+		if(difficulty == "easy") {
+			toRemove = 4;
+		} else if(difficulty == "hard") {
+			toRemove = 6;
+		}
 		
 		for(var h=0; h<3; h++)
 		{
@@ -107,7 +114,7 @@ Generator = function() {
 						var cell = new CellViewModel();
 						cell.SolutionValue = completed[count].value;
 						var rand = getRan(10);
-						if(rand < 5)
+						if(rand < toRemove)
 						{
 							cell.OriginalValue = "";
 							cell.CurrentValue("");
@@ -134,7 +141,7 @@ Generator = function() {
 		return squares;
 	}
 
-	this.GenerateNewGame = function() {
+	this.GenerateNewGame = function(difficulty) {
 		var squares = new Array();
 		var available = new Array();
 		var c = 0;
@@ -186,8 +193,7 @@ Generator = function() {
 		}
 
 		var newGame = new SudokuViewModel();
-		newGame.Squares = getSquares(squares, squares);
-		newGame.Squares()[0].Cells()[0].IsSelected(true);
+		newGame.Squares = getSquares(squares, squares, difficulty);
 
 		return newGame;
 	};
