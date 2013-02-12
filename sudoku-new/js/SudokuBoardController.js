@@ -155,7 +155,74 @@ SudokuBoardController = function() {
 	};
 
 	var boardIsValid = function() {
-		return (validateRows() && validateCols() && validateSquares());
+		var rows = validateRows();
+		var cols = validateCols();
+		var squares = validateSquares();
+		if (rows == true && cols == true && squares == true)
+			return true;
+		else
+			return false;
+	};
+	
+	var getSquareFromRowIndex = function(rowIndex, colIndex) {
+		if(colIndex <= 2)
+		{
+			if(rowIndex <= 2)
+				 return 0;	
+			if(rowIndex >= 3 && rowIndex <=5)
+				return 3;	
+			if(rowIndex >= 6)
+				return 6;	
+		}
+		if(colIndex >=3 && colIndex <=5)
+		{
+			if(rowIndex <= 2)
+				 return 1;	
+			if(rowIndex >= 3 && rowIndex <=5)
+				return 4;	
+			if(rowIndex >= 6)
+				return 7;	
+		}
+		if(colIndex >=6)
+		{
+			if(rowIndex <= 2)
+				 return 2;	
+			if(rowIndex >= 3 && rowIndex <=5)
+				return 5;	
+			if(rowIndex >= 6)
+				return 8;	
+		}	
+	};
+	
+	var getCellFromRowIndex = function(rowIndex, colIndex)
+	{
+		if(rowIndex == 0 || rowIndex == 3 || rowIndex == 6)
+		{
+			if(colIndex == 0 || colIndex == 3 || colIndex == 6)
+				return 0;
+			if(colIndex == 1 || colIndex == 4 || colIndex == 7)
+				return 1;
+			if(colIndex == 2 || colIndex == 5 || colIndex == 8)
+				return 2;
+		}
+		if(rowIndex == 1 || rowIndex == 4 || rowIndex == 7)
+		{
+			if(colIndex == 0 || colIndex == 3 || colIndex == 6)
+				return 3;
+			if(colIndex == 1 || colIndex == 4 || colIndex == 7)
+				return 4;
+			if(colIndex == 2 || colIndex == 5 || colIndex == 8)
+				return 5;
+		}
+		if(rowIndex == 2 || rowIndex == 5 || rowIndex == 8)
+		{
+			if(colIndex == 0 || colIndex == 3 || colIndex == 6)
+				return 6;
+			if(colIndex == 1 || colIndex == 4 || colIndex == 7)
+				return 7;
+			if(colIndex == 2 || colIndex == 5 || colIndex == 8)
+				return 8;
+		}
 	};
 
 	var validateCols = function() {
@@ -170,14 +237,18 @@ SudokuBoardController = function() {
 					{
 						//Make sure we highlight the duplicate that the user entered
 						//and not one that was already there
-						if (sender.viewModel.Squares()[i].Cells()[j].IsEditable()) {
+						var square = getSquareFromRowIndex(j,i);
+						var cell = getCellFromRowIndex(j,i);
+						if (sender.viewModel.Squares()[square].Cells()[cell].IsEditable()) {
 							//The duplicate was entered by the user...go ahead and mark it as invalid
-							sender.viewModel.Squares()[i].Cells()[j].IsValid(false);
+							sender.viewModel.Squares()[square].Cells()[cell].IsValid(false);
 							colsValid = false;
 						} else {
 							//This was an original value...so need to find where the user entered duplicate is
-							var index = col.indexOf(col[j]);
-							sender.viewModel.Squares()[i].Cells()[index].IsValid(false);
+							var index = col.indexOf(col[j]); //will refer to the row
+							var square = getSquareFromRowIndex(index,i);
+							var cell = getCellFromRowIndex(index,i);
+							sender.viewModel.Squares()[square].Cells()[cell].IsValid(false);
 							colsValid = false;
 						}
 					} else {
@@ -186,12 +257,23 @@ SudokuBoardController = function() {
 					}
 				} else {
 					//Cell is empty so implicitly invalid
-					sender.viewModel.Squares()[i].Cells()[j].IsValid(false);
+					var square = getSquareFromRowIndex(j,i);
+					var cell = getCellFromRowIndex(j,i);
+					sender.viewModel.Squares()[square].Cells()[cell].IsValid(false);
 					colsValid = false;
 				}
 			}
 		}
 		return colsValid;
+	};
+	
+	var getSquareCellIndex = function(square, value) {
+		for(var i=0; i<9; i++)
+		{
+			if(sender.viewModel.Squares()[square].Cells()[i].CurrentValue() == value)	
+				return i;
+		}
+		return -1;
 	};
 	
 	var validateSquares = function() {
@@ -201,20 +283,21 @@ SudokuBoardController = function() {
 			var available = new Array("1", "2", "3", "4", "5", "6", "7", "8", "9");
 			for(var j=0; j<9; j++)
 			{
-				if(sender.viewModel.Squares()[i].Cells()[j] != "")
+				if(sender.viewModel.Squares()[i].Cells()[j].CurrentValue() != "")
 				{
-					var check = available.indexOf(sender.viewModel.Squares()[i].Cells()[j]);
+					var check = available.indexOf(sender.viewModel.Squares()[i].Cells()[j].CurrentValue());
 					if(check == -1)
 					{
 						if(sender.viewModel.Squares()[i].Cells()[j].IsEditable())
 						{
+							
 							sender.viewModel.Squares()[i].Cells()[j].IsValid(false);
 							squaresValid = false;	
 						}
 						else
 						{
-							var value = sender.viewModel.Squares()[i].Cells()[j];
-							var index = sender.viewModel.Squares()[i].indexOf(value);
+							var value = sender.viewModel.Squares()[i].Cells()[j].CurrentValue();
+							var index = getSquareCellIndex(i, value);
 							sender.viewModel.Squares()[i].Cells()[index].IsValid(false);
 							squaresValid = false;	
 						}
@@ -227,6 +310,7 @@ SudokuBoardController = function() {
 				}
 			}
 		}
+		return squaresValid;
 	};
 
 	var validateRows = function() {
@@ -241,14 +325,18 @@ SudokuBoardController = function() {
 					{
 						//Make sure we highlight the duplicate that the user entered
 						//and not one that was already there
-						if (sender.viewModel.Squares()[i].Cells()[j].IsEditable()) {
+						var square = getSquareFromRowIndex(i, j);
+						var cell = getCellFromRowIndex(i, j);
+						if (sender.viewModel.Squares()[square].Cells()[cell].IsEditable()) {
 							//The duplicate was entered by the user...go ahead and mark it as invalid
-							sender.viewModel.Squares()[i].Cells()[j].IsValid(false);
+							sender.viewModel.Squares()[square].Cells()[cell].IsValid(false);
 							rowsValid = false;
 						} else {
 							//This was an original value...so need to find where the user entered duplicate is
-							var index = row.indexOf(row[j]);
-							sender.viewModel.Squares()[i].Cells()[index].IsValid(false);
+							var index = row.indexOf(row[j]); //Wil refer to the column
+							var square = getSquareFromRowIndex(i, index);
+							var cell = getCellFromRowIndex(i, index);
+							sender.viewModel.Squares()[square].Cells()[cell].IsValid(false);
 							rowsValid = false;
 						}
 					} else {
@@ -257,7 +345,9 @@ SudokuBoardController = function() {
 					}
 				} else {
 					//Cell is empty so implicitly invalid
-					sender.viewModel.Squares()[i].Cells()[j].IsValid(false);
+					var square = getSquareFromRowIndex(i, j);
+					var cell = getCellFromRowIndex(i, j);
+					sender.viewModel.Squares()[square].Cells()[cell].IsValid(false);
 					rowsValid = false;
 				}
 			}

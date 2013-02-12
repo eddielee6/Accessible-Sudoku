@@ -112,7 +112,7 @@ Generator = function() {
 					for(var k=0; k<3; k++)
 					{
 						var cell = new CellViewModel();
-						cell.SolutionValue = completed[count].value;
+						cell.SolutionValue = completed[count].value.toString();
 						var rand = getRan(10);
 						if(rand < toRemove)
 						{
@@ -121,8 +121,8 @@ Generator = function() {
 							cell.IsEditable(true);
 							cell.IsValid(false);
 						} else {
-							cell.OriginalValue = starting[count].value;
-							cell.CurrentValue(starting[count].value);
+							cell.OriginalValue = starting[count].value.toString();
+							cell.CurrentValue(starting[count].value.toString());
 							cell.IsEditable(false);
 							cell.IsValid(true);
 						}
