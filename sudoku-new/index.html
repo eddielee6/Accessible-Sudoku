@@ -38,7 +38,7 @@
       <div class="applicationWrapper">
         <div id="messageOutput" aria-live="rude"></div>
 
-  	    <div class="ledge desktop-only"></div>
+  	    <div class="ledge"></div>
 
         <div class="animated bounceInDown">
           <img src="img/logo_light@2x.png" width="650" height="231" class="logo light" />
@@ -71,16 +71,41 @@
           	<button onclick="javascript:alert('Button 2, clicked.');">Button 2</button>
           	<button onclick="javascript:alert('Button 3, clicked.');">Button 3</button>
           </section>
-          <div class="gameGrid" data-bind="foreach: Squares">
-            <div class="squareWrapper">
-              <div class="square" data-bind="foreach: Cells">
-                <div class="cellWrapper" data-bind="event: { click: $root.SelectClickedCell }">
-                  <div class="cell" data-bind="css: { 'selected animated pulse': IsSelected(), editable: IsEditable(), invalid: (!IsValid() && IsEditable() && IsFilled()) }, attr: { 'data-row': RowIndex(), 'data-col': ColIndex() }">
-                    <div class="cellValue" data-bind="text: CurrentValue"></div>
+          <div class="gameGridWrapper">
+            <div class="gameGrid" data-bind="foreach: Squares">
+              <div class="squareWrapper">
+                <div class="square" data-bind="foreach: Cells">
+                  <div class="cellWrapper" data-bind="event: { click: $root.SelectClickedCell }">
+                    <div class="inputPad" data-bind="visible: DisplayInputPad">
+                      <table>
+                        <tr>
+                          <td><div class="inputButton" data-bind="event: { click: $root.SetValueFromInputPad.bind($data, '1') }">1</div></td>
+                          <td><div class="inputButton" data-bind="event: { click: $root.SetValueFromInputPad.bind($data, '2') }">2</div></td>
+                          <td><div class="inputButton" data-bind="event: { click: $root.SetValueFromInputPad.bind($data, '3') }">3</div></td>
+                        </tr>
+                        <tr>
+                          <td><div class="inputButton" data-bind="event: { click: $root.SetValueFromInputPad.bind($data, '4') }">4</div></td>
+                          <td><div class="inputButton" data-bind="event: { click: $root.SetValueFromInputPad.bind($data, '5') }">5</div></td>
+                          <td><div class="inputButton" data-bind="event: { click: $root.SetValueFromInputPad.bind($data, '6') }">6</div></td>
+                        </tr>
+                        <tr>
+                          <td><div class="inputButton" data-bind="event: { click: $root.SetValueFromInputPad.bind($data, '7') }">7</div></td>
+                          <td><div class="inputButton" data-bind="event: { click: $root.SetValueFromInputPad.bind($data, '8') }">8</div></td>
+                          <td><div class="inputButton" data-bind="event: { click: $root.SetValueFromInputPad.bind($data, '9') }">9</div></td>
+                        </tr>
+                        <tr>
+                          <td colspan="3"><div class="inputButton">clear</div></td>
+                        </tr>
+                      </table>
+                    </div>
+                    <div class="cell" data-bind="css: { 'selected': IsSelected, hasInputPad: DisplayInputPad, editable: IsEditable, invalid: (!IsValid && IsEditable && IsFilled()) }, attr: { 'data-row': RowIndex, 'data-col': ColIndex }">
+                      <div class="cellValue" data-bind="text: CurrentValue"></div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
+            <div class="clearFix"></div>
           </div>
         </section>
 
