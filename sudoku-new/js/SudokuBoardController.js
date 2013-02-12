@@ -32,6 +32,11 @@ SudokuBoardController = function() {
 					case "9":
 						sender.viewModel.SetCellValue(square, cell, keyCodeToAction(evt.which));
 						break;
+
+                              case "delete":
+                                    sender.viewModel.SetCellValue(square, cell, "");
+                                    break;
+
 					/*
 					 * MOVEMENT LOGIC
 					 */
@@ -462,7 +467,7 @@ SudokuBoardController = function() {
                         localStorage.SetValueForKey("gameSave", ko.mapping.toJSON(sender.viewModel));
                         sender.viewModel.NeedsSave(false);
                   }
-            }, sender);
+            });
 	};
 
 	var init = new function() {

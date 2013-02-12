@@ -137,5 +137,9 @@ function keyCodeToAction(keycode) {
 
 		case 27: //escape
 			return "escape";
+
+		case 8: //backspace
+		case 46: //delete
+			return "delete";
 	}
 }
