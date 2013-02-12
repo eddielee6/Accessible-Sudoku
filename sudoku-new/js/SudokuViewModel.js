@@ -9,11 +9,11 @@ var SudokuViewModel = function() {
 				if(squareIndex == square && cellIndex == cell) {
 					this.Squares()[squareIndex].Cells()[cellIndex].IsSelected(true);
 					if(displayInputPad) {
-						this.Squares()[squareIndex].Cells()[cellIndex].DisplayInputPad(true);
+						this.Squares()[squareIndex].Cells()[cellIndex].WasSelectedWithMouse(true);
 					}
 				} else {
 					this.Squares()[squareIndex].Cells()[cellIndex].IsSelected(false);
-					this.Squares()[squareIndex].Cells()[cellIndex].DisplayInputPad(false);
+					this.Squares()[squareIndex].Cells()[cellIndex].WasSelectedWithMouse(false);
 				}
 			};
 		};
@@ -56,16 +56,23 @@ var SquareViewModel = function() {
 };
 
 var CellViewModel = function() {
-	this.SolutionValue;
-	this.OriginalValue;
+	this.SolutionValue = ko.observable();
+	this.OriginalValue = ko.observable();
 	this.RowIndex = ko.observable();
 	this.ColIndex = ko.observable();
-	this.IsEditable = ko.observable();
 	this.CurrentValue = ko.observable();
 	this.IsSelected = ko.observable(false);
 	this.IsValid = ko.observable(false);
+	
+	this.WasSelectedWithMouse = ko.observable(false);
 
-	this.DisplayInputPad = ko.observable(false);
+	this.DisplayInputPad = ko.computed(function() {
+		return this.WasSelectedWithMouse() && this.IsEditable();
+	}, this);
+
+	this.IsEditable = ko.computed(function() {
+		return !this.OriginalValue();
+	}, this);
 
 	this.IsFilled = ko.computed(function() {
         return this.CurrentValue() != "";

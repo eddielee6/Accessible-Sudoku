@@ -125,7 +125,6 @@ body {
     width: 90%;
     margin: 0 auto;
     padding-bottom: 4em;
-    overflow: hidden;
 
     header {
         height: 2em;
@@ -257,7 +256,7 @@ body {
 
 #gameScreen {
     @primaryBorderColour: #333;
-    @secondaryBorderColour: #EEE;
+    @secondaryBorderColour: #CCC;
     
     section#controls {
     	width: 90%;
@@ -332,6 +331,12 @@ body {
                         table {
                             border-collapse:collapse;
                         }
+
+                        .inputButton {
+                            padding: 0.25em 0.5em;
+                            cursor: pointer;
+                            text-align: center;
+                        }
                     }
 
                     .cell {
@@ -345,7 +350,8 @@ body {
                         text-align: center;
 
                         &.editable {
-                            background: green;
+                            background: #fcfcfc;
+                            color: #2b2f33;
                             cursor: pointer;
                         }
 

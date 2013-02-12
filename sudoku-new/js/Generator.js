@@ -112,18 +112,16 @@ Generator = function() {
 					for(var k=0; k<3; k++)
 					{
 						var cell = new CellViewModel();
-						cell.SolutionValue = completed[count].value;
+						cell.SolutionValue(completed[count].value);
 						var rand = getRan(10);
 						if(rand < toRemove)
 						{
-							cell.OriginalValue = "";
+							cell.OriginalValue("");
 							cell.CurrentValue("");
-							cell.IsEditable(true);
 							cell.IsValid(false);
 						} else {
-							cell.OriginalValue = starting[count].value;
+							cell.OriginalValue(starting[count].value);
 							cell.CurrentValue(starting[count].value);
-							cell.IsEditable(false);
 							cell.IsValid(true);
 						}
 						cell.RowIndex(completed[count].row);

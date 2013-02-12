@@ -79,26 +79,26 @@
                     <div class="inputPad" data-bind="visible: DisplayInputPad">
                       <table>
                         <tr>
-                          <td>1</td>
-                          <td>2</td>
-                          <td>3</td>
+                          <td><div class="inputButton">1</div></td>
+                          <td><div class="inputButton">2</div></td>
+                          <td><div class="inputButton">3</div></td>
                         </tr>
                         <tr>
-                          <td>4</td>
-                          <td>5</td>
-                          <td>6</td>
+                          <td><div class="inputButton">4</div></td>
+                          <td><div class="inputButton">5</div></td>
+                          <td><div class="inputButton">6</div></td>
                         </tr>
                         <tr>
-                          <td>7</td>
-                          <td>8</td>
-                          <td>9</td>
+                          <td><div class="inputButton">7</div></td>
+                          <td><div class="inputButton">8</div></td>
+                          <td><div class="inputButton">9</div></td>
                         </tr>
                         <tr>
-                          <td colspan="3">Clear</td>
+                          <td colspan="3"><div class="inputButton">clear</div></td>
                         </tr>
                       </table>
                     </div>
-                    <div class="cell" data-bind="css: { 'selected': IsSelected(), editable: IsEditable(), invalid: (!IsValid() && IsEditable() && IsFilled()) }, attr: { 'data-row': RowIndex(), 'data-col': ColIndex() }">
+                    <div class="cell" data-bind="css: { 'selected': IsSelected, editable: IsEditable, invalid: (!IsValid && IsEditable && IsFilled()) }, attr: { 'data-row': RowIndex, 'data-col': ColIndex }">
                       <div class="cellValue" data-bind="text: CurrentValue"></div>
                     </div>
                   </div>
