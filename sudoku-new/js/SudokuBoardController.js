@@ -179,6 +179,39 @@ SudokuBoardController = function() {
 		return (validateRows() && validateCols());	
 	};
 	
+	var validateSquares = function() {
+		var squaresValid = true;
+		for(var i=0; i<9 i++)
+		{
+			var available = new Array(1,2,3,4,5,6,7,8,9);
+			for(var j=0; j<9; j++)
+			{
+				var check = available.indexOf(sender.viewModel.Squares()[i].Cells()[j]);
+				if(check == -1)
+				{
+					if(sender.viewModel.Squares()[i].Cells()[j].IsEditable());
+					{
+						sender.viewModel.Squares()[i].Cells()[j].IsValid(false);
+						colsValid = false;	
+					}
+					else
+					{
+						var value = sender.viewModel.Squares()[i].Cells()[j];
+						var index = sender.viewModel.Squares()[i].indexOf(value);
+						sender.viewModel.Squares()[i].Cells()[index].IsValid(false);
+						colsValid = false;	
+					}
+				}
+				else
+				{
+					//Cell is empty so implicitly invalid
+					sender.viewModel.Squares()[i].Cells()[j].IsValid(false);
+					colsValid = false;	
+				}	
+			}
+		}
+	};
+	
 	var validateCols = function() {
 		var colsValid = true;
 		for(var i=0; i<9; i++)
