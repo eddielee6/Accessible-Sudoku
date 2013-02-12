@@ -36,6 +36,7 @@ var SudokuViewModel = function() {
 	this.SetCellValue = function(square, cell, value) {
 		if(sender.Squares()[square].Cells()[cell].IsEditable()) {
 			sender.Squares()[square].Cells()[cell].CurrentValue(value);
+			sender.Squares()[square].Cells()[cell].WasSelectedWithMouse(false);
 			sender.Squares()[square].Cells()[cell].IsValid(true);
 			sender.RequestSave();
         }
@@ -58,7 +59,6 @@ var SudokuViewModel = function() {
 				if(data.ColIndex() == sender.Squares()[squareIndex].Cells()[cellIndex].ColIndex() && 
 					data.RowIndex() == sender.Squares()[squareIndex].Cells()[cellIndex].RowIndex()) {
 					evt.stopImmediatePropagation();
-					sender.Squares()[squareIndex].Cells()[cellIndex].WasSelectedWithMouse(false);
 					sender.SetCellValue(squareIndex, cellIndex, value);
 					return;
 				}
