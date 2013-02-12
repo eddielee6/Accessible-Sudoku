@@ -79,26 +79,26 @@
                     <div class="inputPad" data-bind="visible: DisplayInputPad">
                       <table>
                         <tr>
-                          <td><div class="inputButton">1</div></td>
-                          <td><div class="inputButton">2</div></td>
-                          <td><div class="inputButton">3</div></td>
+                          <td><div class="inputButton" data-bind="event: { click: $root.SetValueFromInputPad.bind($data, '1') }">1</div></td>
+                          <td><div class="inputButton" data-bind="event: { click: $root.SetValueFromInputPad.bind($data, '2') }">2</div></td>
+                          <td><div class="inputButton" data-bind="event: { click: $root.SetValueFromInputPad.bind($data, '3') }">3</div></td>
                         </tr>
                         <tr>
-                          <td><div class="inputButton">4</div></td>
-                          <td><div class="inputButton">5</div></td>
-                          <td><div class="inputButton">6</div></td>
+                          <td><div class="inputButton" data-bind="event: { click: $root.SetValueFromInputPad.bind($data, '4') }">4</div></td>
+                          <td><div class="inputButton" data-bind="event: { click: $root.SetValueFromInputPad.bind($data, '5') }">5</div></td>
+                          <td><div class="inputButton" data-bind="event: { click: $root.SetValueFromInputPad.bind($data, '6') }">6</div></td>
                         </tr>
                         <tr>
-                          <td><div class="inputButton">7</div></td>
-                          <td><div class="inputButton">8</div></td>
-                          <td><div class="inputButton">9</div></td>
+                          <td><div class="inputButton" data-bind="event: { click: $root.SetValueFromInputPad.bind($data, '7') }">7</div></td>
+                          <td><div class="inputButton" data-bind="event: { click: $root.SetValueFromInputPad.bind($data, '8') }">8</div></td>
+                          <td><div class="inputButton" data-bind="event: { click: $root.SetValueFromInputPad.bind($data, '9') }">9</div></td>
                         </tr>
                         <tr>
                           <td colspan="3"><div class="inputButton">clear</div></td>
                         </tr>
                       </table>
                     </div>
-                    <div class="cell" data-bind="css: { 'selected': IsSelected, editable: IsEditable, invalid: (!IsValid && IsEditable && IsFilled()) }, attr: { 'data-row': RowIndex, 'data-col': ColIndex }">
+                    <div class="cell" data-bind="css: { 'selected': IsSelected, hasInputPad: DisplayInputPad, editable: IsEditable, invalid: (!IsValid && IsEditable && IsFilled()) }, attr: { 'data-row': RowIndex, 'data-col': ColIndex }">
                       <div class="cellValue" data-bind="text: CurrentValue"></div>
                     </div>
                   </div>

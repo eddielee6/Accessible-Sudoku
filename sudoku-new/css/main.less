@@ -70,6 +70,13 @@
     .animationTime(0.3s);
 }
 
+.removeAnimation {
+    -webkit-animation-name: none!important;
+    -moz-animation-name: none!important;
+    -o-animation-name: none!important;
+    animation-name: none!important;
+}
+
 .gradientBackground(@start, @end) {
     background: @end;
     background-image: -moz-linear-gradient(top, @start 0%, @end 100%);
@@ -362,6 +369,10 @@ body {
                         &.selected {
                             z-index: 1000;
                             .grow;
+
+                            &.hasInputPad {
+                                .removeAnimation;
+                            }
                         }
 
                         &:before {

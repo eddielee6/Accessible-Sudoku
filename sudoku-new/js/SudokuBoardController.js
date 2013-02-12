@@ -144,7 +144,6 @@ SudokuBoardController = function() {
 
 				if (handled) {
 					evt.preventDefault();
-					localStorage.SetValueForKey("gameSave", ko.mapping.toJSON(sender.viewModel));
 				}
 			}
 		});
@@ -367,11 +366,19 @@ SudokuBoardController = function() {
 			localStorage.SetValueForKey("gameSave", ko.mapping.toJSON(sender.viewModel));
 		}
 		sender.viewModel.SetSelectedCell(0, 0);
+
+            sender.viewModel.NeedsSave.subscribe(function (needsSave) {
+                  if(needsSave) {
+                        localStorage.SetValueForKey("gameSave", ko.mapping.toJSON(sender.viewModel));
+                        sender.viewModel.NeedsSave(false);
+                  }
+            }, sender);
 	};
 
 	var init = new function() {
       	sender.viewModel = new SudokuViewModel();
       	ko.applyBindings(sender.viewModel);
+
       	initSudokuControls();
 	};
 };
