@@ -118,12 +118,10 @@ Generator = function() {
 						{
 							cell.OriginalValue = "";
 							cell.CurrentValue("");
-							cell.IsEditable(true);
 							cell.IsValid(false);
 						} else {
 							cell.OriginalValue(starting[count].value.toString());
 							cell.CurrentValue(starting[count].value.toString());
-							cell.IsEditable(false);
 							cell.IsValid(true);
 						}
 						cell.RowIndex(completed[count].row);
