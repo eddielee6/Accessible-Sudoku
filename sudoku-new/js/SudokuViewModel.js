@@ -1,8 +1,22 @@
 var SudokuViewModel = function() {
 	var sender = this;
 	this.NeedsSave = ko.observable(false);
-	this.Difficulty = ko.observable();
+	this.Difficulty = ko.observable("");
+
+	this.IsComplete = ko.observable(false);
+
+	this.InitialHints = 3;
+	this.AvailableHints = ko.observable(this.InitialHints);
+
 	this.Squares = ko.observableArray();
+
+	this.GameTitle = ko.computed(function() {
+		return capitaliseFirstLetter(this.Difficulty()) + " Game";
+	}, this);
+
+	this.HintLabel = ko.computed(function() {
+		return "Hints - " + this.AvailableHints() + "/" + this.InitialHints;
+	}, this);
 
 	this.SetSelectedCell = function(square, cell, displayInputPad) {
 		for (var squareIndex = 0; squareIndex < sender.Squares().length; squareIndex++) {
@@ -82,7 +96,7 @@ var CellViewModel = function() {
 	this.ColIndex = ko.observable();
 	this.CurrentValue = ko.observable();
 	this.IsSelected = ko.observable(false);
-	this.IsValid = ko.observable(false);
+	this.IsValid = ko.observable(true);
 
 	this.WasSelectedWithMouse = ko.observable(false);
 
@@ -100,5 +114,9 @@ var CellViewModel = function() {
 
 	this.MarkAsInvalid = ko.computed(function() {
         return this.IsFilled() && this.IsEditable() && !this.IsValid();
+    }, this);
+
+    this.MarkAsValid = ko.computed(function() {
+        return this.IsFilled() && this.IsEditable() && this.IsValid();
     }, this);
 };

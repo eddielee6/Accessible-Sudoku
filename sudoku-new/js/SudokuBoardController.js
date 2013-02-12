@@ -6,15 +6,36 @@ SudokuBoardController = function() {
 
 	var initSudokuControls = function() {
 
-            var validateBoard = function() {
+            var showBoardValidation = function() {
                   boardIsValid();
                   $(".gameGrid .markAsInvalid").addClass("invalid");
+                  $(".gameGrid .markAsValid").addClass("valid");
                   setTimeout(function() {
-                        $(".gameGrid .markAsInvalid").addClass("fadeOut");
+                        $(".gameGrid .invalid").addClass("fadeOut");
+                        $(".gameGrid .valid").addClass("fadeOut");
                         setTimeout(function() {
-                              $(".gameGrid .markAsInvalid").removeClass("invalid fadeOut");
+                              $(".gameGrid .invalid").removeClass("invalid fadeOut");
+                              $(".gameGrid .valid").removeClass("valid fadeOut");
                         }, 1000);
                   }, 4000);
+            };
+
+            var getHint = function() {
+                  if(sender.viewModel.AvailableHints() > 0) {
+                        sender.viewModel.AvailableHints(sender.viewModel.AvailableHints() - 1);
+                        boardIsValid();
+                        var cellsChecked = 0;
+                        while(cellsChecked < 81) {
+                              var randomCell = sender.viewModel.Squares()[Math.floor(Math.random() * 9)].Cells()[Math.floor(Math.random() * 9)];
+                              if(!randomCell.IsValid() && randomCell.IsEditable()) {
+                                    randomCell.CurrentValue(randomCell.SolutionValue());
+                                    randomCell.OriginalValue(randomCell.SolutionValue());
+                                    sender.viewModel.NeedsSave(true);
+                                    break;
+                              }
+                              cellsChecked++;
+                        }
+                  }
             };
 
             //Menu bar
@@ -22,7 +43,16 @@ SudokuBoardController = function() {
                   if ($("#gameScreen").is(":visible")) {
                         switch($(this).attr("data-action")) {
                               case "validate":
-                                    validateBoard();
+                                    showBoardValidation();
+                                    break;
+                              case "hint":
+                                    getHint();
+                                    break;
+                              case "newGame":
+                                    sender.StartGame({
+                                          existingGame: null,
+                                          difficulty: $("html").attr("data-difficulty")
+                                    });
                                     break;
                         }
                   }
@@ -39,7 +69,7 @@ SudokuBoardController = function() {
 				switch(keyCodeToAction(evt.which)) {
 					//Validation
 					case "v":
-                                    validateBoard();
+                                    showBoardValidation();
 						break;
 
                               //Digit input
@@ -457,6 +487,7 @@ SudokuBoardController = function() {
 				'' : {
 					create : function(options) {
 						var sudokuViewModel = new SudokuViewModel();
+                                    sudokuViewModel.AvailableHints(options.data.AvailableHints);
 						sudokuViewModel.Difficulty(options.data.Difficulty);
 						for (var squareIndex = 0; squareIndex < options.data.Squares.length; squareIndex++) {
 							var squareViewModel = new SquareViewModel();
@@ -476,8 +507,13 @@ SudokuBoardController = function() {
 				}
 			});
 			sender.viewModel.Squares(loadedGame.Squares());
+                  sender.viewModel.AvailableHints(loadedGame.AvailableHints());
+                  sender.viewModel.Difficulty(loadedGame.Difficulty());
+                  sender.viewModel.IsComplete(boardIsValid());
 		} else {
 			sender.viewModel.Squares(gameGenerator.GenerateNewGame(options.difficulty).Squares());
+                  sender.viewModel.AvailableHints(sender.viewModel.InitialHints);
+                  sender.viewModel.Difficulty(options.difficulty);
 			localStorage.SetValueForKey("gameSave", ko.mapping.toJSON(sender.viewModel));
 		}
 		sender.viewModel.SetSelectedCell(0, 0);
@@ -486,6 +522,10 @@ SudokuBoardController = function() {
                   if(needsSave) {
                         localStorage.SetValueForKey("gameSave", ko.mapping.toJSON(sender.viewModel));
                         sender.viewModel.NeedsSave(false);
+
+                        if(boardIsValid()) {
+                              alert("You winner!");
+                        }
                   }
             });
 	};

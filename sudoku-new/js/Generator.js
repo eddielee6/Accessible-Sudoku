@@ -116,7 +116,7 @@ Generator = function() {
 						var rand = getRan(10);
 						if(rand < toRemove)
 						{
-							cell.OriginalValue = "";
+							cell.OriginalValue("");
 							cell.CurrentValue("");
 							cell.IsValid(false);
 						} else {

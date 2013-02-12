@@ -274,12 +274,13 @@ body {
     .controls {
     	width: 90%;
     	position: relative;
-    	margin: 0.2em auto 1em;
+    	margin: 1em auto 1em;
 
         overflow: hidden; //to clear
 
         .button {
             .borderBox;
+            .noSelect;
             cursor: pointer;
             display: block;
             float: left;
@@ -298,6 +299,16 @@ body {
                 background-color: rgba(255, 255, 255, 0.6);
                 border-right-color: rgba(255, 255, 255, 0.2);
             }
+
+            &.disabled {
+                background-color: rgba(0, 0, 0, 0.6);
+                cursor: default;
+
+                &:hover {
+                    color: inherit;
+                    border-right-color: rgba(255, 255, 255, 0.6);
+                }
+            }
         }
 
     }
@@ -307,74 +318,89 @@ body {
         background-color: @primaryBorderColour;
         margin: 0.5em auto 0;
         width: 90%;
-    }
-    
-    .gameGrid {
 
-        &div, div {
-            .borderBox;
-            cursor: default;
-            .noSelect;
+        .gameComplete {
+            position: absolute;
+            z-index: 1000;
+            width: 90%;
+            background: green;
         }
+    
+        .gameGrid {
 
-        position: relative;
-        font-size: 1.5em;
+            &div, div {
+                .borderBox;
+                cursor: default;
+                .noSelect;
+            }
 
-        .squareWrapper {
-            width: 33.33333333333333%;
-            padding-bottom: 33.33333333333333%;
             position: relative;
-            float: left;
+            font-size: 1.5em;
 
-            .square {
-                position: absolute;
-                top: 0;
-                bottom: 0;
-                left: 0;
-                right: 0;
+            .squareWrapper {
+                width: 33.33333333333333%;
+                padding-bottom: 33.33333333333333%;
+                position: relative;
+                float: left;
 
-                border: 1px solid @primaryBorderColour;
+                .square {
+                    position: absolute;
+                    top: 0;
+                    bottom: 0;
+                    left: 0;
+                    right: 0;
 
-                .cellWrapper {
-                    width: 33.33333333333333%;
-                    padding-bottom: 33.33333333333333%;
-                    position: relative;
-                    float: left;
+                    border: 1px solid @primaryBorderColour;
 
-                    .inputPad {
-                        position: absolute;
-                        background: pink;
-                        z-index: 9999;
+                    .cellWrapper {
+                        width: 33.33333333333333%;
+                        padding-bottom: 33.33333333333333%;
+                        position: relative;
+                        float: left;
 
-                        table {
-                            border-collapse:collapse;
+                        .inputPad {
+                            position: absolute;
+                            background: pink;
+                            z-index: 9999;
+
+                            table {
+                                border-collapse:collapse;
+                            }
+
+                            .inputButton {
+                                padding: 0.25em 0.5em;
+                                cursor: pointer;
+                                text-align: center;
+
+                                &.current {
+                                    background: red;
+                                }
+                            }
                         }
 
-                        .inputButton {
-                            padding: 0.25em 0.5em;
-                            cursor: pointer;
+                        .cell {
+                            position: absolute;
+                            top: 0;
+                            bottom: 0;
+                            left: 0;
+                            right: 0;
+                            background-color: @primaryBorderColour;
+                            border: 1px solid @secondaryBorderColour;
                             text-align: center;
-                        }
-                    }
 
-                    .cell {
-                        position: absolute;
-                        top: 0;
-                        bottom: 0;
-                        left: 0;
-                        right: 0;
-                        background-color: @primaryBorderColour;
-                        border: 1px solid @secondaryBorderColour;
-                        text-align: center;
+                            &.editable {
+                                background: #fcfcfc;
+                                color: #2b2f33;
+                                cursor: pointer;
+                            }
 
-                        &.editable {
-                            background: #fcfcfc;
-                            color: #2b2f33;
-                            cursor: pointer;
-                        }
+                            &.invalid {
+                                background-color: red;
+                            }
 
-                        &.invalid {
-                            background-color: red;
+                            &.valid {
+                                background-color: green;
+                            }
 
                             &.fadeOut {
                                 background-color: #fcfcfc;
@@ -384,28 +410,28 @@ body {
                                 -ms-transition: background-color 1000ms linear;
                                 transition: background-color 1000ms linear;
                             }
-                        }
 
-                        &.selected {
-                            z-index: 1000;
-                            .grow;
+                            &.selected {
+                                z-index: 1000;
+                                .grow;
 
-                            &.hasInputPad {
-                                .removeAnimation;
+                                &.hasInputPad {
+                                    .removeAnimation;
+                                }
                             }
-                        }
 
-                        &:before {
-                            content: '';
-                            display: inline-block;
-                            height: 100%; 
-                            vertical-align: middle;
-                            margin-right: -0.25em;
-                        }
+                            &:before {
+                                content: '';
+                                display: inline-block;
+                                height: 100%; 
+                                vertical-align: middle;
+                                margin-right: -0.25em;
+                            }
 
-                        .cellValue {
-                            display: inline-block;
-                            vertical-align: middle;
+                            .cellValue {
+                                display: inline-block;
+                                vertical-align: middle;
+                            }
                         }
                     }
                 }
@@ -631,6 +657,10 @@ html.biggest {
                 width: 100%;
                 .gameGrid {
                     font-size: 1.2em;
+                }
+
+                .gameComplete {
+                    width: 100%;
                 }
             }
         }
