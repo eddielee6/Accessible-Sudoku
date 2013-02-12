@@ -47,9 +47,11 @@ SudokuBoardController = function() {
                   if ($("#gameScreen").is(":visible")) {
                         switch($(this).attr("data-action")) {
                               case "validate":
+                                    if(sender.viewModel.IsComplete()) return;
                                     showBoardValidation();
                                     break;
                               case "hint":
+                                    if(sender.viewModel.IsComplete()) return;
                                     getHint();
                                     break;
                               case "newGame":
@@ -70,6 +72,8 @@ SudokuBoardController = function() {
             //Keyboard input
 		$(window).keydown(function(evt) {
 			if ($("#gameScreen").is(":visible")) {
+                        if(sender.viewModel.IsComplete()) return;
+
 				var currentSelection = sender.viewModel.GetSelectedCell();
 				var square = currentSelection.square;
 				var cell = currentSelection.cell;

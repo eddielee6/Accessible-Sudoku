@@ -19,6 +19,7 @@ var SudokuViewModel = function() {
 	}, this);
 
 	this.SetSelectedCell = function(square, cell, displayInputPad) {
+		if(sender.IsComplete()) return; //Don't run when game is complete
 		for (var squareIndex = 0; squareIndex < sender.Squares().length; squareIndex++) {
 			for (var cellIndex = 0; cellIndex < sender.Squares()[squareIndex].Cells().length; cellIndex++) {
 				if(squareIndex == square && cellIndex == cell) {
@@ -56,6 +57,7 @@ var SudokuViewModel = function() {
 	};
 
 	this.SetCellValue = function(square, cell, value) {
+		if(sender.IsComplete()) return; //Don't run when game is complete
 		if(sender.Squares()[square].Cells()[cell].IsEditable()) {
 			sender.Squares()[square].Cells()[cell].CurrentValue(value);
 			sender.Squares()[square].Cells()[cell].WasSelectedWithMouse(false);

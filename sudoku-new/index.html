@@ -67,37 +67,38 @@
             <h1 data-bind="text: GameTitle"></h1>
           </header>
           <div class="controls">
-            <div class="button" data-action="validate">Validate</div>
-            <div class="button" data-action="hint" data-bind="text: HintLabel, css: { disabled: AvailableHints() <= 0 }"></div>
+            <div class="button" data-action="validate" data-bind="css: { disabled: IsComplete()}">Validate</div>
+            <div class="button" data-action="hint" data-bind="text: HintLabel, css: { disabled: AvailableHints() <= 0 || IsComplete()}"></div>
             <div class="button" data-action="newGame">New Game</div>
           </div>
           <div class="gameGridWrapper">
             <div class="gameComplete" data-bind="visible: IsComplete()">
-              <h1>You winner!</h1>
+              <h1>Game Complete!</h1>
+              <h2>Well done!</h2>
             </div>
-            <div class="gameGrid" data-bind="foreach: Squares">
+            <div class="gameGrid" data-bind="foreach: Squares, css: { inprogress: !IsComplete() }">
               <div class="squareWrapper">
                 <div class="square" data-bind="foreach: Cells">
                   <div class="cellWrapper" data-bind="event: { click: $root.SelectClickedCell }">
                     <div class="inputPad" data-bind="visible: DisplayInputPad">
                       <table>
                         <tr>
-                          <td><div class="inputButton" data-bind="event: { click: $root.SetValueFromInputPad.bind($data, '1') }, css: { current: (CurrentValue() == '1') }">1</div></td>
-                          <td><div class="inputButton" data-bind="event: { click: $root.SetValueFromInputPad.bind($data, '2') }, css: { current: (CurrentValue() == '2') }">2</div></td>
-                          <td><div class="inputButton" data-bind="event: { click: $root.SetValueFromInputPad.bind($data, '3') }, css: { current: (CurrentValue() == '3') }">3</div></td>
+                          <td class="inputButton" data-bind="event: { click: $root.SetValueFromInputPad.bind($data, '1') }, css: { current: (CurrentValue() == '1') }">1</td>
+                          <td class="inputButton" data-bind="event: { click: $root.SetValueFromInputPad.bind($data, '2') }, css: { current: (CurrentValue() == '2') }">2</td>
+                          <td class="inputButton" data-bind="event: { click: $root.SetValueFromInputPad.bind($data, '3') }, css: { current: (CurrentValue() == '3') }">3</td>
                         </tr>
                         <tr>
-                          <td><div class="inputButton" data-bind="event: { click: $root.SetValueFromInputPad.bind($data, '4') }, css: { current: (CurrentValue() == '4') }">4</div></td>
-                          <td><div class="inputButton" data-bind="event: { click: $root.SetValueFromInputPad.bind($data, '5') }, css: { current: (CurrentValue() == '5') }">5</div></td>
-                          <td><div class="inputButton" data-bind="event: { click: $root.SetValueFromInputPad.bind($data, '6') }, css: { current: (CurrentValue() == '6') }">6</div></td>
+                          <td class="inputButton" data-bind="event: { click: $root.SetValueFromInputPad.bind($data, '4') }, css: { current: (CurrentValue() == '4') }">4</td>
+                          <td class="inputButton" data-bind="event: { click: $root.SetValueFromInputPad.bind($data, '5') }, css: { current: (CurrentValue() == '5') }">5</td>
+                          <td class="inputButton" data-bind="event: { click: $root.SetValueFromInputPad.bind($data, '6') }, css: { current: (CurrentValue() == '6') }">6</td>
                         </tr>
                         <tr>
-                          <td><div class="inputButton" data-bind="event: { click: $root.SetValueFromInputPad.bind($data, '7') }, css: { current: (CurrentValue() == '7') }">7</div></td>
-                          <td><div class="inputButton" data-bind="event: { click: $root.SetValueFromInputPad.bind($data, '8') }, css: { current: (CurrentValue() == '8') }">8</div></td>
-                          <td><div class="inputButton" data-bind="event: { click: $root.SetValueFromInputPad.bind($data, '9') }, css: { current: (CurrentValue() == '9') }">9</div></td>
+                          <td class="inputButton" data-bind="event: { click: $root.SetValueFromInputPad.bind($data, '7') }, css: { current: (CurrentValue() == '7') }">7</div></td>
+                          <td class="inputButton" data-bind="event: { click: $root.SetValueFromInputPad.bind($data, '8') }, css: { current: (CurrentValue() == '8') }">8</td>
+                          <td class="inputButton" data-bind="event: { click: $root.SetValueFromInputPad.bind($data, '9') }, css: { current: (CurrentValue() == '9') }">9</td>
                         </tr>
                         <tr>
-                          <td colspan="3"><div class="inputButton" data-bind="event: { click: $root.SetValueFromInputPad.bind($data, '') }">clear</div></td>
+                          <td colspan="3" class="inputButton" data-bind="event: { click: $root.SetValueFromInputPad.bind($data, '') }">clear</td>
                         </tr>
                       </table>
                     </div>
