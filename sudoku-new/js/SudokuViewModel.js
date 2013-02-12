@@ -3,13 +3,17 @@ var SudokuViewModel = function() {
 	this.Difficulty = ko.observable();
 	this.Squares = ko.observableArray();
 
-	this.SetSelectedCell = function(square, cell) {
+	this.SetSelectedCell = function(square, cell, displayInputPad) {
 		for (var squareIndex = 0; squareIndex < this.Squares().length; squareIndex++) {
 			for (var cellIndex = 0; cellIndex < this.Squares()[squareIndex].Cells().length; cellIndex++) {
 				if(squareIndex == square && cellIndex == cell) {
 					this.Squares()[squareIndex].Cells()[cellIndex].IsSelected(true);
+					if(displayInputPad) {
+						this.Squares()[squareIndex].Cells()[cellIndex].DisplayInputPad(true);
+					}
 				} else {
 					this.Squares()[squareIndex].Cells()[cellIndex].IsSelected(false);
+					this.Squares()[squareIndex].Cells()[cellIndex].DisplayInputPad(false);
 				}
 			};
 		};
@@ -40,7 +44,7 @@ var SudokuViewModel = function() {
 			for (var cellIndex = 0; cellIndex < sender.Squares()[squareIndex].Cells().length; cellIndex++) {
 				if(data.ColIndex() == sender.Squares()[squareIndex].Cells()[cellIndex].ColIndex() && 
 					data.RowIndex() == sender.Squares()[squareIndex].Cells()[cellIndex].RowIndex()) {
-					return sender.SetSelectedCell(squareIndex, cellIndex);
+					return sender.SetSelectedCell(squareIndex, cellIndex, true);
 				}
 			};
 		};
@@ -60,6 +64,8 @@ var CellViewModel = function() {
 	this.CurrentValue = ko.observable();
 	this.IsSelected = ko.observable(false);
 	this.IsValid = ko.observable(false);
+
+	this.DisplayInputPad = ko.observable(false);
 
 	this.IsFilled = ko.computed(function() {
         return this.CurrentValue() != "";

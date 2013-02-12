@@ -28,6 +28,48 @@
     }
 }
 
+.clearFix {
+    clear: both;
+}
+
+.animationTime(@duration) {
+    -moz-animation-duration: @duration;
+    -webkit-animation-duration: @duration;
+    -o-animation-duration: @duration;
+    animation-duration: @duration;
+}
+
+@-webkit-keyframes enlarge {
+    0% { -webkit-transform: scale(1); } 
+    100% { -webkit-transform: scale(1.4); }
+}
+@-moz-keyframes enlarge {
+    0% { -moz-transform: scale(1); }    
+    100% { -moz-transform: scale(1.4); }
+}
+@-o-keyframes enlarge {
+    0% { -o-transform: scale(1); }  
+    100% { -o-transform: scale(1.4); }
+}
+@keyframes enlarge {
+    0% { transform: scale(1); } 
+    100% { transform: scale(1.4); }
+}
+
+.grow {
+    -webkit-animation-name: enlarge;
+    -moz-animation-name: enlarge;
+    -o-animation-name: enlarge;
+    animation-name: enlarge;
+
+    -webkit-animation-fill-mode: both;
+    -moz-animation-fill-mode: both;
+    -o-animation-fill-mode: both;
+    animation-fill-mode: both;
+
+    .animationTime(0.3s);
+}
+
 .gradientBackground(@start, @end) {
     background: @end;
     background-image: -moz-linear-gradient(top, @start 0%, @end 100%);
@@ -53,13 +95,6 @@
 ::-moz-selection {
     color: #fff;
     background-color: #580301;
-}
-
-.animationTime(@duration) {
-    -moz-animation-duration: @duration;
-    -webkit-animation-duration: @duration;
-    -o-animation-duration: @duration;
-    animation-duration: @duration;
 }
 
 
@@ -90,6 +125,7 @@ body {
     width: 90%;
     margin: 0 auto;
     padding-bottom: 4em;
+    overflow: hidden;
 
     header {
         height: 2em;
@@ -227,6 +263,8 @@ body {
     	width: 90%;
     	position: relative;
     	margin: 0.5em auto 0;
+
+        overflow: hidden; //to clear
     }
     
     section#controls button {
@@ -243,6 +281,13 @@ body {
 	    background-color: #c84200;
 	    color: white;
     }
+
+    .gameGridWrapper {
+        border: 1px solid @primaryBorderColour;
+        background-color: @primaryBorderColour;
+        margin: 0.5em auto 0;
+        width: 90%;
+    }
     
     .gameGrid {
 
@@ -256,11 +301,6 @@ body {
         }
 
         position: relative;
-        width: 90%;
-        border: 1px solid @primaryBorderColour;
-        margin: 0.5em auto 0;
-        overflow: hidden; //to clear
-        background-color: @primaryBorderColour;
         font-size: 1.5em;
 
         .squareWrapper {
@@ -284,13 +324,23 @@ body {
                     position: relative;
                     float: left;
 
+                    .inputPad {
+                        position: absolute;
+                        background: pink;
+                        z-index: 9999;
+
+                        table {
+                            border-collapse:collapse;
+                        }
+                    }
+
                     .cell {
                         position: absolute;
                         top: 0;
                         bottom: 0;
                         left: 0;
                         right: 0;
-
+                        background-color: @primaryBorderColour;
                         border: 1px solid @secondaryBorderColour;
                         text-align: center;
 
@@ -304,9 +354,8 @@ body {
                         }
 
                         &.selected {
-                            background: blue;
-                            .animationTime(0.4s);
                             z-index: 1000;
+                            .grow;
                         }
 
                         &:before {
@@ -537,8 +586,11 @@ html.biggest {
 
     .screen {
         &#gameScreen {
-            .gameGrid {
+            .gameGridWrapper {
                 width: 100%;
+                .gameGrid {
+                    font-size: 1.2em;
+                }
             }
         }
 
@@ -563,19 +615,15 @@ html.biggest {
                 }
             }
         }
-
-        &#gameScreen {
-            .gameGrid {
-                font-size: 1.2em;
-            }
-        }
     }
 }
 
 @media screen and (max-width: 500px) {
     #gameScreen {
-        .gameGrid {
-            font-size: 0.9em;
+        .gameGridWrapper {
+            .gameGrid {
+                font-size: 0.9em;
+            }
         }
     }
 }

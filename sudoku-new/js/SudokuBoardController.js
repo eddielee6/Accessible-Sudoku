@@ -2,7 +2,7 @@ SudokuBoardController = function() {
 	var sender = this;
 	var localStorage = new LocalStorageRepository();
 	var gameGenerator = new Generator();
-	this.viewModel
+	this.viewModel;
 
 	var initSudokuControls = function() {
 		$(window).keydown(function(evt) {

@@ -71,16 +71,41 @@
           	<button onclick="javascript:alert('Button 2, clicked.');">Button 2</button>
           	<button onclick="javascript:alert('Button 3, clicked.');">Button 3</button>
           </section>
-          <div class="gameGrid" data-bind="foreach: Squares">
-            <div class="squareWrapper">
-              <div class="square" data-bind="foreach: Cells">
-                <div class="cellWrapper" data-bind="event: { click: $root.SelectClickedCell }">
-                  <div class="cell" data-bind="css: { 'selected animated pulse': IsSelected(), editable: IsEditable(), invalid: (!IsValid() && IsEditable() && IsFilled()) }, attr: { 'data-row': RowIndex(), 'data-col': ColIndex() }">
-                    <div class="cellValue" data-bind="text: CurrentValue"></div>
+          <div class="gameGridWrapper">
+            <div class="gameGrid" data-bind="foreach: Squares">
+              <div class="squareWrapper">
+                <div class="square" data-bind="foreach: Cells">
+                  <div class="cellWrapper" data-bind="event: { click: $root.SelectClickedCell }">
+                    <div class="inputPad" data-bind="visible: DisplayInputPad">
+                      <table>
+                        <tr>
+                          <td>1</td>
+                          <td>2</td>
+                          <td>3</td>
+                        </tr>
+                        <tr>
+                          <td>4</td>
+                          <td>5</td>
+                          <td>6</td>
+                        </tr>
+                        <tr>
+                          <td>7</td>
+                          <td>8</td>
+                          <td>9</td>
+                        </tr>
+                        <tr>
+                          <td colspan="3">Clear</td>
+                        </tr>
+                      </table>
+                    </div>
+                    <div class="cell" data-bind="css: { 'selected': IsSelected(), editable: IsEditable(), invalid: (!IsValid() && IsEditable() && IsFilled()) }, attr: { 'data-row': RowIndex(), 'data-col': ColIndex() }">
+                      <div class="cellValue" data-bind="text: CurrentValue"></div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
+            <div class="clearFix"></div>
           </div>
         </section>
 
