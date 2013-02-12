@@ -32,6 +32,12 @@
     clear: both;
 }
 
+.borderBox {
+    box-sizing:border-box;
+    -moz-box-sizing:border-box;
+    -webkit-box-sizing:border-box;
+}
+
 .animationTime(@duration) {
     -moz-animation-duration: @duration;
     -webkit-animation-duration: @duration;
@@ -265,27 +271,35 @@ body {
     @primaryBorderColour: #333;
     @secondaryBorderColour: #CCC;
     
-    section#controls {
+    .controls {
     	width: 90%;
     	position: relative;
-    	margin: 0.5em auto 0;
+    	margin: 0.2em auto 1em;
 
         overflow: hidden; //to clear
-    }
-    
-    section#controls button {
-        display: block;
-        float: left;
-        background-color: rgb(241,114,0);
-        width: 33.33333333333333%;
-        margin-bottom: 10px;
-        height: 64px;
-        border: 1px solid #fff;
-    }
-    
-    section#controls button:hover {
-	    background-color: #c84200;
-	    color: white;
+
+        .button {
+            .borderBox;
+            cursor: pointer;
+            display: block;
+            float: left;
+            text-align: center;
+            padding: 0.6em 1em;
+            background-color: rgba(255, 255, 255, 0.2);
+            width: 33.33333333333333%;
+            border-right: 1px solid rgba(255, 255, 255, 0.6);
+
+            &:last-child {
+                border-right: none;
+            }
+
+            &:hover {
+                color: #580301;
+                background-color: rgba(255, 255, 255, 0.6);
+                border-right-color: rgba(255, 255, 255, 0.2);
+            }
+        }
+
     }
 
     .gameGridWrapper {
@@ -298,10 +312,7 @@ body {
     .gameGrid {
 
         &div, div {
-            box-sizing:border-box;
-            -moz-box-sizing:border-box;
-            -webkit-box-sizing:border-box;
-
+            .borderBox;
             cursor: default;
             .noSelect;
         }
@@ -363,7 +374,16 @@ body {
                         }
 
                         &.invalid {
-                            background: red;
+                            background-color: red;
+
+                            &.fadeOut {
+                                background-color: #fcfcfc;
+                                -webkit-transition: background-color 1000ms linear;
+                                -moz-transition: background-color 1000ms linear;
+                                -o-transition: background-color 1000ms linear;
+                                -ms-transition: background-color 1000ms linear;
+                                transition: background-color 1000ms linear;
+                            }
                         }
 
                         &.selected {
@@ -603,6 +623,10 @@ html.biggest {
 
     .screen {
         &#gameScreen {
+            .controls {
+                width: 100%;
+            }
+
             .gameGridWrapper {
                 width: 100%;
                 .gameGrid {

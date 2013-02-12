@@ -66,11 +66,11 @@
           <header>
             <div class="back">&#9664; menu</div>
           </header>
-          <section id="controls">
-          	<button onclick="javascript:alert('Button 1, clicked.');">Check Progress</button>
-          	<button onclick="javascript:alert('Button 2, clicked.');">Button 2</button>
-          	<button onclick="javascript:alert('Button 3, clicked.');">Button 3</button>
-          </section>
+          <div class="controls">
+            <div class="button" data-action="validate">Validate</div>
+            <div class="button" data-action="">Button 2</div>
+            <div class="button" data-action="">Button 3</div>
+          </div>
           <div class="gameGridWrapper">
             <div class="gameGrid" data-bind="foreach: Squares">
               <div class="squareWrapper">
@@ -98,7 +98,7 @@
                         </tr>
                       </table>
                     </div>
-                    <div class="cell" data-bind="css: { 'selected': IsSelected, hasInputPad: DisplayInputPad, editable: IsEditable, invalid: (!IsValid && IsEditable && IsFilled()) }, attr: { 'data-row': RowIndex, 'data-col': ColIndex }">
+                    <div class="cell" data-bind="css: { 'selected': IsSelected, hasInputPad: DisplayInputPad, editable: IsEditable, markAsInvalid: MarkAsInvalid }, attr: { 'data-row': RowIndex, 'data-col': ColIndex }">
                       <div class="cellValue" data-bind="text: CurrentValue"></div>
                     </div>
                   </div>

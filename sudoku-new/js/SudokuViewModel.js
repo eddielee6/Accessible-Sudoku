@@ -97,4 +97,8 @@ var CellViewModel = function() {
 	this.IsFilled = ko.computed(function() {
         return this.CurrentValue() != "";
     }, this);
+
+	this.MarkAsInvalid = ko.computed(function() {
+        return this.IsFilled() && this.IsEditable() && !this.IsValid();
+    }, this);
 };

@@ -5,6 +5,30 @@ SudokuBoardController = function() {
 	this.viewModel;
 
 	var initSudokuControls = function() {
+
+            var validateBoard = function() {
+                  boardIsValid();
+                  $(".gameGrid .markAsInvalid").addClass("invalid");
+                  setTimeout(function() {
+                        $(".gameGrid .markAsInvalid").addClass("fadeOut");
+                        setTimeout(function() {
+                              $(".gameGrid .markAsInvalid").removeClass("invalid fadeOut");
+                        }, 1000);
+                  }, 4000);
+            };
+
+            //Menu bar
+            $(".controls .button").click(function() {
+                  if ($("#gameScreen").is(":visible")) {
+                        switch($(this).attr("data-action")) {
+                              case "validate":
+                                    validateBoard();
+                                    break;
+                        }
+                  }
+            });
+
+            //Keyboard input
 		$(window).keydown(function(evt) {
 			if ($("#gameScreen").is(":visible")) {
 				var currentSelection = sender.viewModel.GetSelectedCell();
@@ -13,14 +37,12 @@ SudokuBoardController = function() {
 
 				var handled = true;
 				switch(keyCodeToAction(evt.which)) {
-					//V was pressed (validation - RG using for debug)
+					//Validation
 					case "v":
-						if (boardIsValid())
-							alert("Board is valid!");
-						else
-							alert("Board is not valid!");
+                                    validateBoard();
 						break;
 
+                              //Digit input
 					case "1":
 					case "2":
 					case "3":
@@ -37,9 +59,7 @@ SudokuBoardController = function() {
                                     sender.viewModel.SetCellValue(square, cell, "");
                                     break;
 
-					/*
-					 * MOVEMENT LOGIC
-					 */
+					//MOVEMENT LOGIC
 					case "down":
 						//Wrap back to the first square
 						//(Remove if wrap round not required)
