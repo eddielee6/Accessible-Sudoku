@@ -8,13 +8,6 @@ $(function () {
         $("html").addClass("desktop");
     }
 
-    //Prevent mobile scrolling
-    document.addEventListener("touchmove", function(e) {
-        if ($(document).height() <= $(window).height()) {
-            e.preventDefault();
-        }
-    });
-
     //Initialize game
     SudokuGame = {
         voiceOverManager: new VoiceOverManager(),
