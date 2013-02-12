@@ -5,15 +5,19 @@ SudokuBoardController = function() {
 	this.viewModel;
 
 	var initSudokuControls = function() {
-
+            var waitTimeout;
+            var fadeTimeout;
             var showBoardValidation = function() {
                   boardIsValid();
+                  clearTimeout(waitTimeout);
+                  clearTimeout(fadeTimeout);
+                  $(".valid, .invalid, .fadeOut").removeClass("valid, invalid fadeOut");
                   $(".gameGrid .markAsInvalid").addClass("invalid");
                   $(".gameGrid .markAsValid").addClass("valid");
-                  setTimeout(function() {
+                  waitTimeout = setTimeout(function() {
                         $(".gameGrid .invalid").addClass("fadeOut");
                         $(".gameGrid .valid").addClass("fadeOut");
-                        setTimeout(function() {
+                        fadeTimeout = setTimeout(function() {
                               $(".gameGrid .invalid").removeClass("invalid fadeOut");
                               $(".gameGrid .valid").removeClass("valid fadeOut");
                         }, 1000);
