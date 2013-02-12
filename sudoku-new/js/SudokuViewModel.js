@@ -31,6 +31,7 @@ var SudokuViewModel = function() {
 	this.SetCellValue = function(square, cell, value) {
 		if(this.Squares()[square].Cells()[cell].IsEditable()) {
 			this.Squares()[square].Cells()[cell].CurrentValue(value);
+			this.Squares()[square].Cells()[cell].IsValid(true);
         }
 	};
 
