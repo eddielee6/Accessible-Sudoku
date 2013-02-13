@@ -80,7 +80,7 @@
               <div class="squareWrapper">
                 <div class="square" data-bind="foreach: Cells">
                   <div class="cellWrapper" data-bind="event: { click: $root.SelectClickedCell }">
-                    <div class="inputPad" data-bind="visible: DisplayInputPad">
+                    <div class="inputPad" data-bind="visible: DisplayInputPad, css: { rightHandSide: ($index()%3), bottomRow: ($index()>5) }">
                       <table>
                         <tr>
                           <td class="inputButton" data-bind="event: { click: $root.SetValueFromInputPad.bind($data, '1') }, css: { current: (CurrentValue() == '1') }">1</td>
