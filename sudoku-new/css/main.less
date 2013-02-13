@@ -634,6 +634,83 @@ html.light {
         }
     }
 
+    #gameScreen {
+        .controls {
+            .button {
+                background-color: rgba(43, 47, 51, 0.5);
+                border-right: 1px solid rgba(255, 255, 255, 0.6);
+
+                &.disabled {
+                    background-color: rgba(0, 0, 0, 0.6);
+                }
+            }
+        }
+        .gameGridWrapper {
+            .gameComplete {
+                background-color: #2b2f33;
+            }
+
+            .gameGrid {
+                .squareWrapper {
+                    .square {
+                        .cellWrapper {
+                            .inputPad {
+                                .inputButton {
+                                    border-color: #B7B9BA;
+                                    background-color: #D1D2D3;
+
+                                    &:hover,
+                                    &.current {
+                                        color: #2b2f33;
+                                        background-color: #BDBFC0;
+                                    }
+                                }
+                            }
+
+                            .cell {
+                                background: #111111;
+                                color: #fcfcfc;
+
+                                &.editable {
+                                    background: #fcfcfc;
+                                    color: #2b2f33;
+                                }
+
+                                &.invalid {
+                                    background-color: #FF0000;
+                                }
+
+                                &.valid {
+                                    background-color: #00FF00;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    &.desktop {
+        #gameScreen {
+            .controls {
+                .button {
+                    &:hover {
+                        color: #2b2f33;
+                        background-color: rgba(43, 47, 51, 0.3);
+                    }
+
+                    &.disabled {
+                        background-color: rgba(0, 0, 0, 0.6);
+                        &:hover {
+                            color: inherit;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     .screen {
         header {
             .back {
@@ -699,8 +776,6 @@ html.dark {
                     .square {
                         .cellWrapper {
                             .inputPad {
-                                box-shadow: 0px 0px 0px 5px rgba(0, 0, 0, 0.5);
-
                                 .inputButton {
                                     border-color: #B7B9BA;
                                     background-color: #55595C;
