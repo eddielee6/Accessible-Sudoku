@@ -11,13 +11,6 @@ MainMenuController = function() {
             $(".continueButton").hide();
         }
     };
-   
-    // Seperates help screens, desktop and mobile.
-	if ($("html").hasClass("mobile"))  {
-		$("#desktop").css('display','none');
-	} else {
-		$("#mobile").css('display','none');
-	}
     
     var initMenuScreen = function() {
         var localStorage = new LocalStorageRepository();
