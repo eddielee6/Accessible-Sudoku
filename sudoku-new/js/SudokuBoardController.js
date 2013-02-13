@@ -538,7 +538,7 @@ SudokuBoardController = function() {
                         sender.viewModel.NeedsSave(false);
 
                         if(boardIsValid()) {
-                              alert("You winner!");
+                              sender.viewModel.IsComplete(true);
                         }
                   }
             });
