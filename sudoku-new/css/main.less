@@ -319,7 +319,6 @@ body {
                 cursor: default;
             }
         }
-
     }
 
     .gameGridWrapper {
@@ -416,11 +415,11 @@ body {
                             }
 
                             &.invalid {
-                                background-color: red;
+                                background-color: #aa483b;
                             }
 
                             &.valid {
-                                background-color: green;
+                                background-color: #6f853a;
                             }
 
                             &.fadeOut {
@@ -677,6 +676,69 @@ html.dark {
 
     .ledge {
         background: #fcfcfc;
+    }
+
+    &.desktop {
+        #gameScreen {
+            .controls {
+                .button {
+                    &:hover {
+                        color: #2b2f33;
+                    }
+
+                    &.disabled {
+                        &:hover {
+                            color: inherit;
+                        }
+                    }
+                }
+            }
+
+            .gameGridWrapper {
+                .gameComplete {
+                    background-color: #2b2f33;
+                }
+                .gameGrid {
+                    .squareWrapper {
+                        .square {
+                            .cellWrapper {
+                                .inputPad {
+                                    box-shadow: 0px 0px 0px 5px rgba(0, 0, 0, 0.5);
+
+                                    .inputButton {
+                                        border-color: #B7B9BA;
+                                        background-color: #55595C;
+
+                                        &:hover,
+                                        &.current {
+                                            color: #2b2f33;
+                                            background-color: #AAACAD;
+                                        }
+                                    }
+                                }
+
+                                .cell {
+                                    background: #111111;
+
+                                    &.editable {
+                                        background: #fcfcfc;
+                                        color: #2b2f33;
+                                    }
+
+                                    &.invalid {
+                                        background-color: #FF0000;
+                                    }
+
+                                    &.valid {
+                                        background-color: #00FF00;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 
     .screen {
