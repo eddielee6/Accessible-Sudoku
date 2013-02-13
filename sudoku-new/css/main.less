@@ -14,8 +14,11 @@
 
 //Mixins
 .visuallyHidden {
-    text-indent: -99999px;
-    position: absolute;
+    position: absolute; 
+    overflow: hidden; 
+    clip: rect(0 0 0 0); 
+    height: 1px; width: 1px; 
+    margin: -1px; padding: 0; border: 0; 
 }
 
 .mobile {
@@ -112,6 +115,11 @@
     background-color: #580301;
 }
 
+@highdensity: ~"only screen and (-webkit-min-device-pixel-ratio: 1.5)",
+              ~"only screen and (min--moz-device-pixel-ratio: 1.5)",
+              ~"only screen and (-o-min-device-pixel-ratio: 3/2)",
+              ~"only screen and (min-device-pixel-ratio: 1.5)";
+
 
 //Standard style
 html {
@@ -131,6 +139,7 @@ body {
     min-height: 100%;
     height: auto !important;
     height: 100%;
+    padding-bottom: 1.5em;
 }
 
 // Screens
@@ -139,12 +148,11 @@ body {
     max-width: 700px;
     width: 90%;
     margin: 0 auto;
-    padding-bottom: 4em;
 
     header {
-        height: 2em;
-
         h1 {
+            height: 32px;
+            line-height: 32px;
             text-align: center;
             font-size: 1.7em;
             margin: 0;
@@ -152,9 +160,16 @@ body {
 
         .back {
             position: absolute;
-            line-height: 2em;
+            height: 32px;
+            width: 60px;
             cursor: pointer;
             .noSelect;
+            background: url('../img/back_light@1x.png') no-repeat;
+
+            @media @highdensity {
+                background-image: url('../img/back_light@2x.png');
+                background-size: contain;
+            }
         }
     }
 
@@ -269,6 +284,10 @@ body {
     }
 }
 
+#menuScreen {
+    padding: 1em 0;
+}
+
 #gameScreen {
     @primaryBorderColour: #333;
     @secondaryBorderColour: #CCC;
@@ -276,8 +295,7 @@ body {
     .controls {
     	width: 90%;
     	position: relative;
-    	margin: 1em auto 1em;
-
+    	margin: 1em auto 1.5em;
         overflow: hidden; //to clear
 
         .button {
@@ -604,6 +622,15 @@ html.light {
     }
 
     .screen {
+        header {
+            .back {
+                background: url('../img/back_dark@1x.png') no-repeat;
+
+                @media @highdensity {
+                    background-image: url('../img/back_dark@2x.png');
+                }
+            }
+        }
         .menu {
             li {
                 .menuItem {
@@ -710,12 +737,24 @@ html.mobile {
 //Media queries
 @media screen and (max-width: 710px) {
     .logo {
-        width: 90%; //Fix
-        margin: 20px auto;
+        width: 90%;
+        margin: 20px auto 20px;
         height: auto;
     }
 
     .screen {
+        header {
+            h1 {
+                font-size: 1.2em;
+                height: 22.4px;
+                line-height: 22.4px;
+            }
+            .back {
+                height: 22.4px;
+                width: 42px;
+                background-size: contain;
+            }
+        }
         &#gameScreen {
             .controls {
                 width: 100%;
@@ -758,6 +797,10 @@ html.mobile {
 }
 
 @media screen and (max-width: 500px) {
+    #menuScreen {
+        padding: 0.5em 0;
+    }
+
     #gameScreen {
         .controls {
             font-size: 0.9em;
