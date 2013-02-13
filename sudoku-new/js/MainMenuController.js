@@ -79,18 +79,10 @@ MainMenuController = function() {
             currentlySelected.addClass("animated bounceOutRight");
 
             setTimeout(function() {
-                var action = currentlySelected.attr("data-action");
-                if(action == "newGame" || action == "continue") {
-                    removeAnimations($(".logo:visible"));
-                    $(".logo:visible").addClass("animated bounceOutRight");
-                }
                 $("#menuScreen").addClass("animated bounceOutRight");
                 setTimeout(function() {
-                    if(action == "newGame" || action == "continue") {
-                        $(".logo:visible").addClass("hidden");
-                    }
                     $("section.screen").hide();
-                    switch(action) {
+                    switch(currentlySelected.attr("data-action")) {
                         case "continue":
                             sudokuBoardController.StartGame({
                                 existingGame: localStorage.GetValueForKey("gameSave")
@@ -154,12 +146,6 @@ MainMenuController = function() {
             setTimeout(function() {
             $(".screen:visible").first().addClass("animated bounceOutLeft");
                 setTimeout(function() {
-                    //Ensure is shown
-                    if($(".logo:visible").hasClass("hidden")) {
-                        removeAnimations($(".logo:visible"));
-                        $(".logo:visible").show().removeClass("hidden").addClass("animated bounceInRight");
-                    }
-
                     removeAnimations($(".screen"));
                     removeAnimations($(".screen .back"));
                     $(".screen").hide();
