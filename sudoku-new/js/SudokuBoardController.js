@@ -345,8 +345,10 @@ SudokuBoardController = function() {
 	
 	var validateSquares = function() {
 		var squaresValid = true;
+		var invalidValues = new Array();
 		for(var i=0; i<9; i++)
 		{
+			var valid = true;
 			var available = new Array("1", "2", "3", "4", "5", "6", "7", "8", "9");
 			for(var j=0; j<9; j++)
 			{
@@ -355,18 +357,18 @@ SudokuBoardController = function() {
 					var check = available.indexOf(sender.viewModel.Squares()[i].Cells()[j].CurrentValue());
 					if(check == -1)
 					{
+						var value = sender.viewModel.Squares()[i].Cells()[j].CurrentValue();
+						valid = squaresValid = false;
+						invalidValues.push(value);
+						
 						if(sender.viewModel.Squares()[i].Cells()[j].IsEditable())
 						{
-							
-							sender.viewModel.Squares()[i].Cells()[j].IsValid(false);
-							squaresValid = false;	
+							sender.viewModel.Squares()[i].Cells()[j].IsValid(false);							
 						}
 						else
 						{
-							var value = sender.viewModel.Squares()[i].Cells()[j].CurrentValue();
 							var index = getSquareCellIndex(i, value);
 							sender.viewModel.Squares()[i].Cells()[index].IsValid(false);
-							squaresValid = false;	
 						}
 					}
 					else 
@@ -374,6 +376,18 @@ SudokuBoardController = function() {
 						//Cell appears to be valid...so remove it from the remaining values for this row
 						available.splice(check, 1);
 					}
+				}
+			}
+			if(!valid)
+			{
+				//Ensure all cells containing invalid values are treated as invalid
+				for(var k=0; k<invalidValues.length; k++)
+				{
+					for(var m=0; m<9; m++)
+					{
+						if(sender.viewModel.Squares()[i].Cells()[m].CurrentValue() == invalidValues[k])
+							sender.viewModel.Squares()[i].Cells()[m].IsValid(false);
+					}	
 				}
 			}
 		}
