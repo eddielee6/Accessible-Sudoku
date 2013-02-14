@@ -703,9 +703,6 @@ html {
                         .menuItem {
                             background-color: @dark_buttonBackground;
                             &.selected {
-                                color: @dark_darkText;
-                                background-color: @dark_buttonHover;
-
                                 &:before {
                                     border-left-color: @dark_darkText;
                                 }
@@ -792,26 +789,39 @@ html {
 
         &.desktop {
             .applicationWrapper {
-                #gameScreen {
-                    .controls {
-                        .button {
-                            &:hover {
-                                color: @dark_darkText;
-                                background-color: @dark_buttonHover;
-
-                                &:before {
-                                    border-left-color: @dark_darkText;
-                                }
-                                &:after {
-                                    border-right-color: @dark_darkText;
+                .screen {
+                    .menu {
+                        li {
+                            .menuItem {
+                                &.selected {
+                                    color: @dark_darkText;
+                                    background-color: @dark_buttonHover;
                                 }
                             }
+                        }
+                    }
 
-                            &.disabled {
-                                background-color: @dark_darkText;
-
+                    &#gameScreen {
+                        .controls {
+                            .button {
                                 &:hover {
-                                    color: inherit;
+                                    color: @dark_darkText;
+                                    background-color: @dark_buttonHover;
+
+                                    &:before {
+                                        border-left-color: @dark_darkText;
+                                    }
+                                    &:after {
+                                        border-right-color: @dark_darkText;
+                                    }
+                                }
+
+                                &.disabled {
+                                    background-color: @dark_darkText;
+
+                                    &:hover {
+                                        color: inherit;
+                                    }
                                 }
                             }
                         }
@@ -868,9 +878,6 @@ html {
                         .menuItem {
                             background-color: @light_buttonBackground;
                             &.selected {
-                                color: @light_lightText;
-                                background-color: @light_buttonHover;
-
                                 &:before {
                                     border-left-color: @light_lightText;
                                 }
@@ -897,6 +904,7 @@ html {
 
                             &.disabled {
                                 background-color: @dark_darkText;
+                                color: @light_lightText;
                             }
                         }
                     }
@@ -957,27 +965,40 @@ html {
 
         &.desktop {
             .applicationWrapper {
-                #gameScreen {
-                    .controls {
-                        .button {
-                            &:hover {
-                                color: @light_lightText;
-                                background-color: @light_buttonHover;
-
-                                &:before {
-                                    border-left-color: @light_lightText;
-                                }
-                                &:after {
-                                    border-right-color: @light_lightText;
+                .screen {
+                    .menu {
+                        li {
+                            .menuItem {
+                                &.selected {
+                                    color: @light_lightText;
+                                    background-color: @light_buttonHover;
                                 }
                             }
+                        }
+                    }
 
-                            &.disabled {
-                                background-color: @light_darkText;
-                                color: @light_lightText;
-
+                    &#gameScreen {
+                        .controls {
+                            .button {
                                 &:hover {
                                     color: @light_lightText;
+                                    background-color: @light_buttonHover;
+
+                                    &:before {
+                                        border-left-color: @light_lightText;
+                                    }
+                                    &:after {
+                                        border-right-color: @light_lightText;
+                                    }
+                                }
+
+                                &.disabled {
+                                    background-color: @light_darkText;
+                                    color: @light_lightText;
+
+                                    &:hover {
+                                        color: @light_lightText;
+                                    }
                                 }
                             }
                         }
