@@ -96,14 +96,16 @@
     animation-name: none!important;
 }
 
-.gradientBackground(@start, @end) {
-    background: @end;
-    background-image: -moz-linear-gradient(top, @start 0%, @end 100%);
-    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, @start), color-stop(100%, @end));
-    background-image: -webkit-linear-gradient(top, @start 0%, @end 100%);
-    background-image: -o-linear-gradient(top, @start 0%, @end 100%);
-    background-image: -ms-linear-gradient(top, @start 0%, @end 100%);
-    background-image: linear-gradient(to bottom, @start 0%, @end 100%);
+.gradientBackground(@fallback, @start, @end) {
+    background: @fallback;
+    background: -moz-linear-gradient(top,  @start 0%, @end 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,@start), color-stop(100%,@end));
+    background: -webkit-linear-gradient(top,  @start 0%,@end 100%);
+    background: -o-linear-gradient(top,  @start 0%,@end 100%);
+    background: -ms-linear-gradient(top,  @start 0%,@end 100%);
+    background: linear-gradient(to bottom,  @start 0%,@end 100%);
+    filter:~"progid:DXImageTransform.Microsoft.gradient(startColorstr='@{start}', endColorstr='@{end}', GradientType=0)";
+
     background-repeat: no-repeat;
     background-attachment: fixed;
 }
@@ -119,19 +121,35 @@
     -webkit-tap-highlight-color: rgba(255, 255, 255, 0); //Fixes a bug with chrome for android
 }
 
-::selection,
-::-moz-selection {
-    color: #fff;
-    background-color: #580301;
-}
-
 @highdensity: ~"only screen and (-webkit-min-device-pixel-ratio: 1.5)",
               ~"only screen and (min--moz-device-pixel-ratio: 1.5)",
               ~"only screen and (-o-min-device-pixel-ratio: 3/2)",
               ~"only screen and (min-device-pixel-ratio: 1.5)";
 
 
-//Standard style
+//Colour themes
+@oriental_backgroundEnd: rgb(88, 3, 1);
+@oriental_backgroundSolid: average(@oriental_backgroundStart, @oriental_backgroundEnd);
+@oriental_backgroundStart: rgb(241, 114, 0);
+@oriental_buttonBackground: rgb(203, 113, 51);
+@oriental_buttonHover: rgb(231, 185, 153);
+@oriental_cellEditable: rgb(252, 252, 252);
+@oriental_cellEditableText: rgb(51, 51, 51);
+@oriental_cellInvalid: rgb(170, 72, 59);
+@oriental_cellNotEditable: rgb(51, 51, 51);
+@oriental_cellNotEditableText: rgb(252, 252, 252);
+@oriental_cellValid: rgb(111, 133, 58);
+@oriental_darkText: rgb(88, 3, 1);
+@oriental_lightText: rgb(252, 252, 252);
+
+
+//Standard style (oriental)
+::selection,
+::-moz-selection {
+    color: @oriental_lightText;
+    background-color: @oriental_backgroundEnd;
+}
+
 html {
     height: 100%;
 }
@@ -139,9 +157,9 @@ html {
 body {
 	height: 100%;
     font-size: 100%;
-    color: #fcfcfc;
-    .gradientBackground(rgb(241,114,0), rgb(88,3,1));
-    overflow-x: hidden; //stops animations creating scrolls bars in firefox
+    color: @oriental_lightText;
+    .gradientBackground(@oriental_backgroundStart, @oriental_backgroundStart, @oriental_backgroundEnd);
+    overflow-x: hidden; //stops animations creating scroll bars in firefox
 }
 
 .applicationWrapper {
@@ -214,7 +232,7 @@ body {
                 text-align: center;
                 font-size: 1.5em;
                 font-weight: bold;
-                background-color: rgba(255, 255, 255, 0.2);
+                background-color: @oriental_buttonBackground;
                 overflow: hidden; //to clear
 
                 &.pulse {
@@ -237,7 +255,7 @@ body {
                 margin: 0.1em 0.5em;
                 border-top: 1.4em solid transparent;
                 border-bottom: 1.4em solid transparent;
-                border-right: 1.9em solid rgba(255, 255, 255, 0.6);
+                border-right: 1.9em solid @oriental_buttonHover;
                 cursor: pointer;
             }
 
@@ -246,7 +264,7 @@ body {
                 margin: 0.1em 0.5em;
                 border-top: 1.4em solid transparent;
                 border-bottom: 1.4em solid transparent;
-                border-left: 1.9em solid rgba(255, 255, 255, 0.6);
+                border-left: 1.9em solid @oriental_buttonHover;
                 cursor: pointer;
             }
         }
@@ -257,8 +275,8 @@ body {
     .screen {
         .menu {
             .selected {
-                color: #580301;
-                background-color: rgba(255, 255, 255, 0.6);
+                color: @oriental_darkText;
+                background-color: @oriental_buttonHover;
 
                 &:before {
                     content: '';
@@ -268,7 +286,7 @@ body {
                     height: 0; 
                     border-top: 0.5em solid transparent;
                     border-bottom: 0.5em solid transparent;
-                    border-left: 0.8em solid #580301;
+                    border-left: 0.8em solid @oriental_darkText;
                 }
                 &:after {
                     content: '';
@@ -278,7 +296,7 @@ body {
                     height: 0; 
                     border-top: 0.5em solid transparent;
                     border-bottom: 0.5em solid transparent;
-                    border-right: 0.8em solid #580301;
+                    border-right: 0.8em solid @oriental_darkText;
                 }
             }
 
@@ -299,9 +317,6 @@ body {
 }
 
 #gameScreen {
-    @primaryBorderColour: #333;
-    @secondaryBorderColour: #CCC;
-    
     .controls {
     	width: 90%;
     	position: relative;
@@ -316,24 +331,29 @@ body {
             float: left;
             text-align: center;
             padding: 0.6em 1em;
-            background-color: rgba(255, 255, 255, 0.2);
+            background-color: @oriental_buttonBackground;
             width: 33.33333333333333%;
-            border-right: 1px solid rgba(255, 255, 255, 0.6);
+            border-right: 1px solid @oriental_lightText;
 
             &:last-child {
                 border-right: none;
             }
 
             &.disabled {
-                background-color: rgba(0, 0, 0, 0.6);
+                background: @oriental_darkText url("../img/texture_light@1x.png");
+
+                @media @highdensity {
+                    background-image: url('../img/texture_light@2x.png');
+                    background-size: 10px 10px;
+                }
                 cursor: default;
             }
         }
     }
 
     .gameGridWrapper {
-        border: 1px solid @primaryBorderColour;
-        background-color: @primaryBorderColour;
+        border: 1px solid @oriental_darkText;
+        background-color: @oriental_darkText;
         margin: 0.5em auto 0;
         width: 90%;
 
@@ -345,7 +365,7 @@ body {
             width: 80%;
             margin: 20% 5%;
             background: #D47733;
-            box-shadow: 0px 0px 0px 5px rgba(0, 0, 0, 0.5);
+            box-shadow: 0px 0px 0px 5px rgba(0, 0, 0, 0.5); //Drop shadow, gracefully degrades
             text-align: center;
         }
     
@@ -373,7 +393,7 @@ body {
                     left: 0;
                     right: 0;
 
-                    border: 1px solid @primaryBorderColour;
+                    border: 1px solid @oriental_darkText;
 
                     .cellWrapper {
                         width: 33.33333333333333%;
@@ -384,7 +404,7 @@ body {
                         .inputPad {
                             position: absolute;
                             z-index: 9999;
-                            box-shadow: 0px 0px 0px 5px rgba(0, 0, 0, 0.5);
+                            box-shadow: 0px 0px 0px 5px rgba(0, 0, 0, 0.5); //Drop shadow, gracefully degrades
 
                             &.rightHandSide {
                                 right: 0;
@@ -396,15 +416,20 @@ body {
 
                             .inputButton {
                                 padding: 0.25em 0.5em;
-                                border: 1px solid #ECC5A9;
+                                border: 1px solid @oriental_lightText;
                                 cursor: pointer;
                                 text-align: center;
-                                background-color: #D47733;
+                                background-color: @oriental_buttonBackground;
 
                                 &:hover,
                                 &.current {
-                                    color: #580301;
-                                    background-color: #ECC5A9;
+                                    color: @oriental_darkText;
+                                    background: @oriental_buttonHover url("../img/texture_light@1x.png");
+
+                                    @media @highdensity {
+                                        background-image: url('../img/texture_light@2x.png');
+                                        background-size: 10px 10px;
+                                    }
                                 }
                             }
                         }
@@ -415,25 +440,30 @@ body {
                             bottom: 0;
                             left: 0;
                             right: 0;
-                            background-color: @primaryBorderColour;
-                            border: 1px solid @secondaryBorderColour;
+                            background: @oriental_darkText url("../img/texture_light@1x.png");
+                            border: 1px solid darken(@oriental_lightText, 20%);
                             text-align: center;
 
+                            @media @highdensity {
+                                background-image: url('../img/texture_light@2x.png');
+                                background-size: 10px 10px;
+                            }
+
                             &.editable {
-                                background: #fcfcfc;
-                                color: #2b2f33;
+                                background: @oriental_lightText;
+                                color: @oriental_darkText;
                             }
 
                             &.invalid {
-                                background-color: #aa483b;
+                                background-color: @oriental_cellInvalid;
                             }
 
                             &.valid {
-                                background-color: #6f853a;
+                                background-color: @oriental_cellValid;
                             }
 
                             &.fadeOut {
-                                background-color: #fcfcfc;
+                                background-color: @oriental_lightText;
                                 -webkit-transition: background-color 1000ms linear;
                                 -moz-transition: background-color 1000ms linear;
                                 -o-transition: background-color 1000ms linear;
@@ -489,16 +519,39 @@ body {
         .controls {
             .button {
                 &:hover {
-                    color: #580301;
-                    background-color: rgba(255, 255, 255, 0.6);
-                    border-right-color: rgba(255, 255, 255, 0.2);
+                    color: @oriental_darkText;
+                    background-color: @oriental_buttonHover;
+
+                    &:before {
+                        content: '';
+                        float: left;
+                        margin: 0.1em 0 0 0;
+                        width: 0; 
+                        height: 0; 
+                        border-top: 0.5em solid transparent;
+                        border-bottom: 0.5em solid transparent;
+                        border-left: 0.8em solid @oriental_darkText;
+                    }
+                    &:after {
+                        content: '';
+                        float: right;
+                        margin: 0.1em 0 0 0;
+                        width: 0; 
+                        height: 0; 
+                        border-top: 0.5em solid transparent;
+                        border-bottom: 0.5em solid transparent;
+                        border-right: 0.8em solid @oriental_darkText;
+                    }
                 }
 
                 &.disabled {
-                    background-color: rgba(0, 0, 0, 0.6);
+                    background-color: @oriental_darkText;
                     &:hover {
                         color: inherit;
-                        border-right-color: rgba(255, 255, 255, 0.6);
+                        &:before,
+                        &:after {
+                            border: none;
+                        }
                     }
                 }
             }
