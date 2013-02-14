@@ -128,570 +128,690 @@
 
 
 //Colour themes
+@oriental_backgroundStart: rgb(241, 114, 0);
 @oriental_backgroundEnd: rgb(88, 3, 1);
 @oriental_backgroundSolid: average(@oriental_backgroundStart, @oriental_backgroundEnd);
-@oriental_backgroundStart: rgb(241, 114, 0);
 @oriental_buttonBackground: rgb(203, 113, 51);
 @oriental_buttonHover: rgb(231, 185, 153);
-@oriental_cellEditable: rgb(252, 252, 252);
-@oriental_cellEditableText: rgb(51, 51, 51);
-@oriental_cellInvalid: rgb(170, 72, 59);
-@oriental_cellNotEditable: rgb(51, 51, 51);
-@oriental_cellNotEditableText: rgb(252, 252, 252);
-@oriental_cellValid: rgb(111, 133, 58);
 @oriental_darkText: rgb(88, 3, 1);
 @oriental_lightText: rgb(252, 252, 252);
+@oriental_cellEditable: rgb(252, 252, 252);
+@oriental_cellEditableText: rgb(51, 51, 51);
+@oriental_cellNotEditable: rgb(88, 3, 1);
+@oriental_cellNotEditableText: rgb(252, 252, 252);
+@oriental_cellInvalid: rgb(170, 72, 59);
+@oriental_cellValid: rgb(111, 133, 58);
+
+@dark_backgroundSolid: rgb(43, 47, 51);
+@dark_buttonBackground: rgb(85, 89, 92);
+@dark_buttonHover: rgb(170, 172, 173);
+@dark_darkText: rgb(43, 47, 51);
+@dark_lightText: rgb(252, 252, 252);
+@dark_cellEditable: rgb(252, 252, 252);//Not changed below here
+@dark_cellEditableText: rgb(51, 51, 51);
+@dark_cellNotEditable: rgb(51, 51, 51);
+@dark_cellNotEditableText: rgb(252, 252, 252);
+@dark_cellInvalid: rgb(255, 0, 0);
+@dark_cellValid: rgb(0, 255, 0);
+
+@light_backgroundSolid: rgb(252, 252, 252);
+@light_buttonBackground: rgb(170, 172, 173);
+@light_buttonHover: rgb(85, 89, 92);
+@light_darkText: rgb(43, 47, 51);
+@light_lightText: rgb(252, 252, 252);
+@light_cellEditable: rgb(252, 252, 252);//Not changed below here
+@light_cellEditableText: rgb(51, 51, 51);
+@light_cellNotEditable: rgb(51, 51, 51);
+@light_cellNotEditableText: rgb(252, 252, 252);
+@light_cellInvalid: rgb(255, 0, 0);
+@light_cellValid: rgb(0, 255, 0);
+
 
 
 //Standard style (oriental)
-::selection,
-::-moz-selection {
-    color: @oriental_lightText;
-    background-color: @oriental_backgroundEnd;
-}
-
 html {
     height: 100%;
-}
 
-body {
-	height: 100%;
-    font-size: 100%;
-    color: @oriental_lightText;
-    .gradientBackground(@oriental_backgroundStart, @oriental_backgroundStart, @oriental_backgroundEnd);
-    overflow-x: hidden; //stops animations creating scroll bars in firefox
-}
-
-.applicationWrapper {
-    position: relative;
-    min-height: 100%;
-    height: auto !important;
-    height: 100%;
-    padding-bottom: 1.5em;
-}
-
-// Screens
-.screen {
-    display: none;
-    max-width: 700px;
-    width: 90%;
-    margin: 0 auto;
-
-    header {
-        h1 {
-            height: 32px;
-            line-height: 32px;
-            text-align: center;
-            font-size: 1.7em;
-            margin: 0;
-        }
-
-        .back {
-            position: absolute;
-            height: 32px;
-            width: 60px;
-            cursor: pointer;
-            .noSelect;
-            background: url('../img/back_light@1x.png') no-repeat;
-
-            @media @highdensity {
-                background-image: url('../img/back_light@2x.png');
-                background-size: contain;
-            }
-        }
+    ::selection,
+    ::-moz-selection {
+        color: @oriental_lightText;
+        background-color: @oriental_backgroundEnd;
     }
 
-    .menu {
-        list-style: none;
-        overflow: hidden;
-        padding: 0;
-        text-align: center;
-        margin: 1em -5%;
+    body {
+        height: 100%;
+        font-size: 100%;
+        color: @oriental_lightText;
+        .gradientBackground(@oriental_backgroundStart, @oriental_backgroundStart, @oriental_backgroundEnd);
+        overflow-x: hidden; //stops animations creating scroll bars in firefox
+    }
 
-        li {
-            margin: 0 auto 0.8em;
+    .applicationWrapper {
+        position: relative;
+        min-height: 100%;
+        height: auto !important;
+        height: 100%;
+        padding-bottom: 1.5em;
+
+        #messageOutput {
+            .visuallyHidden;
+        }
+
+        .ledge {
+            background-color: #580301;
+            height: 10px;
+        }
+
+        .logo {
+            margin: 30px auto;
             display: block;
 
-            .noSelect;
-
-            &.pulse {
-                .animationTime(0.4s);
-            }
-
-            &.continueButton {
+            &.dark {
                 display: none;
-            }
-
-            .menuItem {
-                display: inline-block;
-
-                width: 70%;
-                margin: 0 auto;
-                padding: 0.4em;
-                cursor: pointer;
-                text-align: center;
-                font-size: 1.5em;
-                font-weight: bold;
-                background-color: @oriental_buttonBackground;
-                overflow: hidden; //to clear
-
-                &.pulse {
-                    .animationTime(0.4s);
-                }
-
-                .name {
-                    float: left;
-                    margin-left: 0.2em;
-                }
-                
-                .value {
-                    float: right;
-                    margin-right: 0.2em;
-                }
-            }
-
-            .leftArrow {
-                display: none;
-                margin: 0.1em 0.5em;
-                border-top: 1.4em solid transparent;
-                border-bottom: 1.4em solid transparent;
-                border-right: 1.9em solid @oriental_buttonHover;
-                cursor: pointer;
-            }
-
-            .rightArrow {
-                display: none;
-                margin: 0.1em 0.5em;
-                border-top: 1.4em solid transparent;
-                border-bottom: 1.4em solid transparent;
-                border-left: 1.9em solid @oriental_buttonHover;
-                cursor: pointer;
             }
         }
-    }
-}
 
-.desktop {
-    .screen {
-        .menu {
-            .selected {
-                color: @oriental_darkText;
-                background-color: @oriental_buttonHover;
+        .backdrop {
+            position: absolute;
+            z-index: -100;
+            bottom: 0;
+            width: 100%;
+            height: 412px;
+            background: url('../img/shadow-backdrop@1x.png');
 
-                &:before {
-                    content: '';
-                    float: left;
-                    margin: 0.15em 0 0 0.5em;
-                    width: 0; 
-                    height: 0; 
-                    border-top: 0.5em solid transparent;
-                    border-bottom: 0.5em solid transparent;
-                    border-left: 0.8em solid @oriental_darkText;
-                }
-                &:after {
-                    content: '';
-                    float: right;
-                    margin: 0.15em 0.5em 0 0;
-                    width: 0; 
-                    height: 0; 
-                    border-top: 0.5em solid transparent;
-                    border-bottom: 0.5em solid transparent;
-                    border-right: 0.8em solid @oriental_darkText;
-                }
+            @media @highdensity {
+                background: url('../img/shadow-backdrop@2x.png');
+                background-size: 1854px 412px;
             }
+        }
 
-            &.optionsMenu {
-                .selected {
-                    &:before,
-                    &:after {
-                        display: none;
+        .screen {
+            display: none;
+            max-width: 700px;
+            width: 90%;
+            margin: 0 auto;
+
+            header {
+                h1 {
+                    height: 32px;
+                    line-height: 32px;
+                    text-align: center;
+                    font-size: 1.7em;
+                    margin: 0;
+                }
+
+                .back {
+                    position: absolute;
+                    height: 32px;
+                    width: 60px;
+                    cursor: pointer;
+                    .noSelect;
+                    background: url('../img/back_light@1x.png') no-repeat;
+
+                    @media @highdensity {
+                        background-image: url('../img/back_light@2x.png');
+                        background-size: contain;
                     }
                 }
             }
-        }
-    }
-}
 
-#menuScreen {
-    padding: 1em 0;
-}
+            .menu {
+                list-style: none;
+                overflow: hidden;
+                padding: 0;
+                text-align: center;
+                margin: 1em -5%;
 
-#gameScreen {
-    .controls {
-    	width: 90%;
-    	position: relative;
-    	margin: 1em auto 1.5em;
-        overflow: hidden; //to clear
+                li {
+                    margin: 0 auto 0.8em;
+                    display: block;
 
-        .button {
-            .borderBox;
-            .noSelect;
-            cursor: pointer;
-            display: block;
-            float: left;
-            text-align: center;
-            padding: 0.6em 1em;
-            background-color: @oriental_buttonBackground;
-            width: 33.33333333333333%;
-            border-right: 1px solid @oriental_lightText;
+                    .noSelect;
 
-            &:last-child {
-                border-right: none;
-            }
+                    &.pulse {
+                        .animationTime(0.4s);
+                    }
 
-            &.disabled {
-                background: @oriental_darkText url("../img/texture_light@1x.png");
+                    &.continueButton {
+                        display: none;
+                    }
 
-                @media @highdensity {
-                    background-image: url('../img/texture_light@2x.png');
-                    background-size: 10px 10px;
-                }
-                cursor: default;
-            }
-        }
-    }
+                    .menuItem {
+                        display: inline-block;
 
-    .gameGridWrapper {
-        border: 1px solid @oriental_darkText;
-        background-color: @oriental_darkText;
-        margin: 0.5em auto 0;
-        width: 90%;
+                        width: 70%;
+                        margin: 0 auto;
+                        padding: 0.4em;
+                        cursor: pointer;
+                        text-align: center;
+                        font-size: 1.5em;
+                        font-weight: bold;
+                        background-color: @oriental_buttonBackground;
+                        overflow: hidden; //to clear
 
-        .gameComplete {
-            position: absolute;
-            .borderBox;
-            z-index: 99999;
-            padding: 2em 0;
-            width: 80%;
-            margin: 20% 5%;
-            background: #D47733;
-            box-shadow: 0px 0px 0px 5px rgba(0, 0, 0, 0.5); //Drop shadow, gracefully degrades
-            text-align: center;
-        }
-    
-        .gameGrid {
-
-            &div, div {
-                .borderBox;
-                cursor: default;
-                .noSelect;
-            }
-
-            position: relative;
-            font-size: 1.5em;
-
-            .squareWrapper {
-                width: 33.33333333333333%;
-                padding-bottom: 33.33333333333333%;
-                position: relative;
-                float: left;
-
-                .square {
-                    position: absolute;
-                    top: 0;
-                    bottom: 0;
-                    left: 0;
-                    right: 0;
-
-                    border: 1px solid @oriental_darkText;
-
-                    .cellWrapper {
-                        width: 33.33333333333333%;
-                        padding-bottom: 33.33333333333333%;
-                        position: relative;
-                        float: left;
-
-                        .inputPad {
-                            position: absolute;
-                            z-index: 9999;
-                            box-shadow: 0px 0px 0px 5px rgba(0, 0, 0, 0.5); //Drop shadow, gracefully degrades
-
-                            &.rightHandSide {
-                                right: 0;
-                            }
-
-                            &.bottomRow {
-                                bottom: 0;
-                            }
-
-                            .inputButton {
-                                padding: 0.25em 0.5em;
-                                border: 1px solid @oriental_lightText;
-                                cursor: pointer;
-                                text-align: center;
-                                background-color: @oriental_buttonBackground;
-
-                                &:hover,
-                                &.current {
-                                    color: @oriental_darkText;
-                                    background: @oriental_buttonHover url("../img/texture_light@1x.png");
-
-                                    @media @highdensity {
-                                        background-image: url('../img/texture_light@2x.png');
-                                        background-size: 10px 10px;
-                                    }
-                                }
-                            }
+                        &.pulse {
+                            .animationTime(0.4s);
                         }
 
-                        .cell {
-                            position: absolute;
-                            top: 0;
-                            bottom: 0;
-                            left: 0;
-                            right: 0;
+                        .name {
+                            float: left;
+                            margin-left: 0.2em;
+                        }
+                        
+                        .value {
+                            float: right;
+                            margin-right: 0.2em;
+                        }
+                    }
+
+                    .leftArrow {
+                        display: none;
+                        margin: 0.1em 0.5em;
+                        border-top: 1.4em solid transparent;
+                        border-bottom: 1.4em solid transparent;
+                        border-right: 1.9em solid @oriental_buttonHover;
+                        cursor: pointer;
+                    }
+
+                    .rightArrow {
+                        display: none;
+                        margin: 0.1em 0.5em;
+                        border-top: 1.4em solid transparent;
+                        border-bottom: 1.4em solid transparent;
+                        border-left: 1.9em solid @oriental_buttonHover;
+                        cursor: pointer;
+                    }
+                }
+            }
+
+            &#menuScreen {
+                display: block;
+                padding: 1em 0;
+            }
+
+            &#helpScreen {
+                .keyboard {
+                    width: 566px;
+                    margin: 0.5em auto;
+                    display: block;
+                }
+
+                .content {
+                    width: 90%;
+                    margin: 0 auto;
+                }
+            }
+
+            &#gameScreen {
+                .controls {
+                    width: 90%;
+                    position: relative;
+                    margin: 1em auto 1.5em;
+                    overflow: hidden; //to clear
+
+                    .button {
+                        .borderBox;
+                        .noSelect;
+                        cursor: pointer;
+                        display: block;
+                        float: left;
+                        text-align: center;
+                        padding: 0.6em 1em;
+                        background-color: @oriental_buttonBackground;
+                        width: 33.33333333333333%;
+                        border-right: 1px solid @oriental_lightText;
+
+                        &:last-child {
+                            border-right: none;
+                        }
+
+                        &.disabled {
                             background: @oriental_darkText url("../img/texture_light@1x.png");
-                            border: 1px solid darken(@oriental_lightText, 20%);
-                            text-align: center;
 
                             @media @highdensity {
                                 background-image: url('../img/texture_light@2x.png');
                                 background-size: 10px 10px;
                             }
-
-                            &.editable {
-                                background: @oriental_lightText;
-                                color: @oriental_darkText;
-                            }
-
-                            &.invalid {
-                                background-color: @oriental_cellInvalid;
-                            }
-
-                            &.valid {
-                                background-color: @oriental_cellValid;
-                            }
-
-                            &.fadeOut {
-                                background-color: @oriental_lightText;
-                                -webkit-transition: background-color 1000ms linear;
-                                -moz-transition: background-color 1000ms linear;
-                                -o-transition: background-color 1000ms linear;
-                                -ms-transition: background-color 1000ms linear;
-                                transition: background-color 1000ms linear;
-                            }
-
-                            &:before {
-                                content: '';
-                                display: inline-block;
-                                height: 100%; 
-                                vertical-align: middle;
-                                margin-right: -0.25em;
-                            }
-
-                            .cellValue {
-                                display: inline-block;
-                                vertical-align: middle;
-                            }
+                            cursor: default;
                         }
                     }
                 }
-            }
 
-            &.inprogress {
-                .squareWrapper {
-                    .square {
-                        .cellWrapper {
-                            .cell {
-                                &.selected {
-                                    z-index: 1000;
-                                    .grow;
-
-                                    &.hasInputPad {
-                                        .removeAnimation;
-                                    }
-                                }
-
-                                &.editable {
-                                    cursor: pointer;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
-
-.desktop {
-    #gameScreen {
-        .controls {
-            .button {
-                &:hover {
-                    color: @oriental_darkText;
-                    background-color: @oriental_buttonHover;
-
-                    &:before {
-                        content: '';
-                        float: left;
-                        margin: 0.1em 0 0 0;
-                        width: 0; 
-                        height: 0; 
-                        border-top: 0.5em solid transparent;
-                        border-bottom: 0.5em solid transparent;
-                        border-left: 0.8em solid @oriental_darkText;
-                    }
-                    &:after {
-                        content: '';
-                        float: right;
-                        margin: 0.1em 0 0 0;
-                        width: 0; 
-                        height: 0; 
-                        border-top: 0.5em solid transparent;
-                        border-bottom: 0.5em solid transparent;
-                        border-right: 0.8em solid @oriental_darkText;
-                    }
-                }
-
-                &.disabled {
+                .gameGridWrapper {
+                    border: 1px solid @oriental_darkText;
                     background-color: @oriental_darkText;
-                    &:hover {
-                        color: inherit;
-                        &:before,
-                        &:after {
-                            border: none;
+                    margin: 0.5em auto 0;
+                    width: 90%;
+
+                    .gameComplete {
+                        position: absolute;
+                        .borderBox;
+                        z-index: 99999;
+                        padding: 2em 0;
+                        width: 80%;
+                        margin: 20% 5%;
+                        background: #D47733;
+                        box-shadow: 0px 0px 0px 5px rgba(0, 0, 0, 0.5); //Drop shadow, gracefully degrades
+                        text-align: center;
+                    }
+                
+                    .gameGrid {
+
+                        &div, div {
+                            .borderBox;
+                            cursor: default;
+                            .noSelect;
+                        }
+
+                        position: relative;
+                        font-size: 1.5em;
+
+                        .squareWrapper {
+                            width: 33.33333333333333%;
+                            padding-bottom: 33.33333333333333%;
+                            position: relative;
+                            float: left;
+
+                            .square {
+                                position: absolute;
+                                top: 0;
+                                bottom: 0;
+                                left: 0;
+                                right: 0;
+
+                                border: 1px solid @oriental_darkText;
+
+                                .cellWrapper {
+                                    width: 33.33333333333333%;
+                                    padding-bottom: 33.33333333333333%;
+                                    position: relative;
+                                    float: left;
+
+                                    .inputPad {
+                                        position: absolute;
+                                        z-index: 9999;
+                                        box-shadow: 0px 0px 0px 5px rgba(0, 0, 0, 0.5); //Drop shadow, gracefully degrades
+
+                                        &.rightHandSide {
+                                            right: 0;
+                                        }
+
+                                        &.bottomRow {
+                                            bottom: 0;
+                                        }
+
+                                        .inputButton {
+                                            padding: 0.25em 0.5em;
+                                            border: 1px solid @oriental_lightText;
+                                            cursor: pointer;
+                                            text-align: center;
+                                            background-color: @oriental_buttonBackground;
+
+                                            &:hover,
+                                            &.current {
+                                                color: @oriental_darkText;
+                                                background: @oriental_buttonHover url("../img/texture_light@1x.png");
+
+                                                @media @highdensity {
+                                                    background-image: url('../img/texture_light@2x.png');
+                                                    background-size: 10px 10px;
+                                                }
+                                            }
+                                        }
+                                    }
+
+                                    .cell {
+                                        position: absolute;
+                                        top: 0;
+                                        bottom: 0;
+                                        left: 0;
+                                        right: 0;
+                                        color: @oriental_cellNotEditableText;
+                                        background: @oriental_cellNotEditable url("../img/texture_light@1x.png");
+                                        border: 1px solid darken(@oriental_cellEditable, 20%);
+                                        text-align: center;
+
+                                        @media @highdensity {
+                                            background-image: url('../img/texture_light@2x.png');
+                                            background-size: 10px 10px;
+                                        }
+
+                                        &.editable {
+                                            background: @oriental_cellEditable;
+                                            color: @oriental_cellEditableText;
+                                        }
+
+                                        &.invalid {
+                                            background-color: @oriental_cellInvalid;
+                                        }
+
+                                        &.valid {
+                                            background-color: @oriental_cellValid;
+                                        }
+
+                                        &.fadeOut {
+                                            background-color: @oriental_lightText;
+                                            -webkit-transition: background-color 1000ms linear;
+                                            -moz-transition: background-color 1000ms linear;
+                                            -o-transition: background-color 1000ms linear;
+                                            -ms-transition: background-color 1000ms linear;
+                                            transition: background-color 1000ms linear;
+                                        }
+
+                                        &:before {
+                                            content: '';
+                                            display: inline-block;
+                                            height: 100%; 
+                                            vertical-align: middle;
+                                            margin-right: -0.25em;
+                                        }
+
+                                        .cellValue {
+                                            display: inline-block;
+                                            vertical-align: middle;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        &.inprogress {
+                            .squareWrapper {
+                                .square {
+                                    .cellWrapper {
+                                        .cell {
+                                            &.selected {
+                                                z-index: 1000;
+                                                .grow;
+
+                                                &.hasInputPad {
+                                                    .removeAnimation;
+                                                }
+                                            }
+
+                                            &.editable {
+                                                cursor: pointer;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
                 }
             }
         }
     }
-}
 
-#helpScreen {
-    .keyboard {
-        width: 566px;
-        margin: 0.5em auto;
-        display: block;
+
+    &.dyslexic {
+        body {
+            font-family: opendyslexic;
+        }
     }
 
-    .content {
-        width: 90%;
-        margin: 0 auto;
+    &.bigger {
+        body {
+            font-size: 115%;
+        }
     }
-}
 
-#menuScreen {
-    display: block;
-}
+    &.biggest {
+        body {
+            font-size: 125%;
+        }
+    }
 
-.ledge {
-    background-color: #580301;
-    height: 10px;
-}
 
-.logo {
-    margin: 30px auto;
-    display: block;
+    //Desktop only styles
+    &.desktop {
+        .applicationWrapper {
+            .screen {
+                .menu {
+                    .selected {
+                        color: @oriental_darkText;
+                        background-color: @oriental_buttonHover;
 
+                        &:before {
+                            content: '';
+                            float: left;
+                            margin: 0.15em 0 0 0.5em;
+                            width: 0; 
+                            height: 0; 
+                            border-top: 0.5em solid transparent;
+                            border-bottom: 0.5em solid transparent;
+                            border-left: 0.8em solid @oriental_darkText;
+                        }
+                        &:after {
+                            content: '';
+                            float: right;
+                            margin: 0.15em 0.5em 0 0;
+                            width: 0; 
+                            height: 0; 
+                            border-top: 0.5em solid transparent;
+                            border-bottom: 0.5em solid transparent;
+                            border-right: 0.8em solid @oriental_darkText;
+                        }
+                    }
+
+                    &.optionsMenu {
+                        .selected {
+                            &:before,
+                            &:after {
+                                display: none;
+                            }
+                        }
+                    }
+                }
+
+                &#gameScreen {
+                    .controls {
+                        .button {
+                            &:hover {
+                                color: @oriental_darkText;
+                                background-color: @oriental_buttonHover;
+
+                                &:before {
+                                    content: '';
+                                    float: left;
+                                    margin: 0.1em 0 0 0;
+                                    width: 0; 
+                                    height: 0; 
+                                    border-top: 0.5em solid transparent;
+                                    border-bottom: 0.5em solid transparent;
+                                    border-left: 0.8em solid @oriental_darkText;
+                                }
+                                &:after {
+                                    content: '';
+                                    float: right;
+                                    margin: 0.1em 0 0 0;
+                                    width: 0; 
+                                    height: 0; 
+                                    border-top: 0.5em solid transparent;
+                                    border-bottom: 0.5em solid transparent;
+                                    border-right: 0.8em solid @oriental_darkText;
+                                }
+                            }
+
+                            &.disabled {
+                                background-color: @oriental_darkText;
+                                &:hover {
+                                    color: inherit;
+                                    &:before,
+                                    &:after {
+                                        border: none;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+
+    //Mobile only styles
+    &.mobile {
+        .applicationWrapper {
+            .screen {
+                &#gameScreen {
+                    .gameGridWrapper {
+                        .gameGrid {
+                            .squareWrapper {
+                                .square {
+                                    .cellWrapper {
+                                        .inputPad {
+                                            font-size: 1.2em;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            .backdrop {
+                height: 352px;
+                background-position: -205px 0;
+            }
+        }
+    }
+
+
+    //Dark theme
     &.dark {
-        display: none;
-    }
-}
-
-.backdrop {
-    position: absolute;
-    z-index: -100;
-    bottom: 0;
-    width: 100%;
-    height: 412px;
-    background: url('../img/shadow-backdrop@1x.png');
-
-    @media @highdensity {
-        background: url('../img/shadow-backdrop@2x.png');
-        background-size: 1854px 412px;
-    }
-}
-
-.mobile {
-    .backdrop {
-        height: 352px;
-        background-position: -205px 0;
-    }
-}
-
-#messageOutput {
-    .visuallyHidden;
-}
-
-
-//Alternate Themes
-//Consistant structure should only be declared in the standard theme
-html.light {
-    body {
-        background: #fcfcfc;
-        color: #2b2f33;
-    }
-
-    ::selection,
-    ::-moz-selection {
-        color: #fcfcfc;
-        background-color: #2b2f33;
-    }
-
-    .ledge {
-        background: #2b2f33;
-    }
-
-    .logo {
-        &.light {
-          display: none;
+        ::selection,
+        ::-moz-selection {
+            color: @dark_lightText;
+            background-color: @dark_backgroundSolid;
         }
 
-        &.dark {
-            display: block;
+        body {
+            color: @dark_lightText;
+            background: @dark_backgroundSolid;
         }
-    }
 
-    #gameScreen {
-        .controls {
-            .button {
-                background-color: rgba(43, 47, 51, 0.5);
-                border-right: 1px solid rgba(255, 255, 255, 0.6);
+        .applicationWrapper {
+            .ledge {
+                background: @dark_lightText;
+            }
 
-                &.disabled {
-                    background-color: rgba(0, 0, 0, 0.6);
+            .screen {
+                .menu {
+                    li {
+                        .menuItem {
+                            background-color: @dark_buttonBackground;
+                            &.selected {
+                                color: @dark_darkText;
+                                background-color: @dark_buttonHover;
+
+                                &:before {
+                                    border-left-color: @dark_darkText;
+                                }
+                                &:after {
+                                    border-right-color: @dark_darkText;
+                                }
+                            }
+                        }
+                        .leftArrow {
+                            border-right-color: @dark_buttonHover;
+                        }
+
+                        .rightArrow {
+                            border-left-color: @dark_buttonHover;
+                        }
+                    }
                 }
-            }
-        }
-        .gameGridWrapper {
-            .gameComplete {
-                background-color: #2b2f33;
-            }
 
-            .gameGrid {
-                .squareWrapper {
-                    .square {
-                        .cellWrapper {
-                            .inputPad {
-                                .inputButton {
-                                    border-color: #B7B9BA;
-                                    background-color: #D1D2D3;
+                &#gameScreen {
+                    .controls {
+                        .button {
+                            background-color: @dark_buttonBackground;
+                            border-right-color: @dark_lightText;
 
-                                    &:hover,
-                                    &.current {
-                                        color: #2b2f33;
-                                        background-color: #BDBFC0;
+                            &.disabled {
+                                background-color: @dark_darkText;
+                            }
+                        }
+                    }
+                    .gameGridWrapper {
+                        border-color: @dark_darkText;
+                        background-color: @dark_darkText;
+
+                        .gameComplete {
+                            background-color: @dark_backgroundSolid;
+                        }
+
+                        .gameGrid {
+                            .squareWrapper {
+                                .square {
+                                    border-color: @dark_darkText;
+                                    .cellWrapper {
+                                        .inputPad {
+                                            .inputButton {
+                                                border-color: @dark_lightText;
+                                                background-color: @dark_buttonBackground;
+
+                                                &:hover,
+                                                &.current {
+                                                    color: @dark_darkText;
+                                                    background-color: @dark_buttonHover;
+                                                }
+                                            }
+                                        }
+
+                                        .cell {
+                                            background-color: @dark_darkText;
+
+                                            &.editable {
+                                                background: @dark_lightText;
+                                                color: @dark_darkText;
+                                            }
+
+                                            &.invalid {
+                                                background-color: @dark_cellInvalid;
+                                            }
+
+                                            &.valid {
+                                                background-color: @dark_cellValid;
+                                            }
+
+                                            &.fadeOut {
+                                                background-color: @dark_lightText;
+                                            }
+                                        }
                                     }
                                 }
                             }
+                        }
+                    }
+                }
+            }
+        }
 
-                            .cell {
-                                background: #111111;
-                                color: #fcfcfc;
+        &.desktop {
+            .applicationWrapper {
+                #gameScreen {
+                    .controls {
+                        .button {
+                            &:hover {
+                                color: @dark_darkText;
+                                background-color: @dark_buttonHover;
 
-                                &.editable {
-                                    background: #fcfcfc;
-                                    color: #2b2f33;
+                                &:before {
+                                    border-left-color: @dark_darkText;
                                 }
-
-                                &.invalid {
-                                    background-color: #FF0000;
+                                &:after {
+                                    border-right-color: @dark_darkText;
                                 }
+                            }
 
-                                &.valid {
-                                    background-color: #00FF00;
+                            &.disabled {
+                                background-color: @dark_darkText;
+
+                                &:hover {
+                                    color: inherit;
                                 }
                             }
                         }
@@ -701,194 +821,161 @@ html.light {
         }
     }
 
-    &.desktop {
-        #gameScreen {
-            .controls {
-                .button {
-                    &:hover {
-                        color: #2b2f33;
-                        background-color: rgba(43, 47, 51, 0.3);
-                    }
 
-                    &.disabled {
-                        background-color: rgba(0, 0, 0, 0.6);
-                        &:hover {
-                            color: inherit;
+    //Light theme
+    &.light {
+        ::selection,
+        ::-moz-selection {
+            color: @light_backgroundSolid;
+            background-color: @light_darkText;
+        }
+
+        body {
+            color: @light_darkText;
+            background: @light_backgroundSolid;
+        }
+
+        .applicationWrapper {
+            .ledge {
+                background: @light_darkText;
+            }
+
+            .logo {
+                &.light {
+                  display: none;
+                }
+
+                &.dark {
+                    display: block;
+                }
+            }
+
+            .screen {
+                header {
+                    .back {
+                        background: url('../img/back_dark@1x.png') no-repeat;
+
+                        @media @highdensity {
+                            background-image: url('../img/back_dark@2x.png');
                         }
                     }
                 }
-            }
-        }
-    }
 
-    .screen {
-        header {
-            .back {
-                background: url('../img/back_dark@1x.png') no-repeat;
+                .menu {
+                    li {
+                        .menuItem {
+                            background-color: @light_buttonBackground;
+                            &.selected {
+                                color: @light_lightText;
+                                background-color: @light_buttonHover;
 
-                @media @highdensity {
-                    background-image: url('../img/back_dark@2x.png');
-                }
-            }
-        }
-        .menu {
-            li {
-                .menuItem {
-                    background-color: rgba(43, 47, 51, 0.5);
-                    &.selected {
-                        color: #2b2f33;
-                        background-color: rgba(43, 47, 51, 0.3);
-
-                        &:before {
-                            border-left-color: #2b2f33;
+                                &:before {
+                                    border-left-color: @light_lightText;
+                                }
+                                &:after {
+                                    border-right-color: @light_lightText;
+                                }
+                            }
                         }
-                        &:after {
-                            border-right-color: #2b2f33;
+                        .leftArrow {
+                            border-right-color: @light_buttonHover;
+                        }
+
+                        .rightArrow {
+                            border-left-color: @light_buttonHover;
                         }
                     }
                 }
-                .leftArrow {
-                    border-right-color: #2b2f33;
-                }
 
-                .rightArrow {
-                    border-left-color: #2b2f33;
-                }
-            }
-        }
-    }
-}
+                &#gameScreen {
+                    .controls {
+                        .button {
+                            background-color: @light_buttonBackground;
+                            border-right-color: @light_lightText;
 
-html.dark {
-    body {
-        background: #2b2f33;
-        color: #fcfcfc;
-    }
+                            &.disabled {
+                                background-color: @dark_darkText;
+                            }
+                        }
+                    }
+                    .gameGridWrapper {
+                        border-color: @light_darkText;
+                        background-color: @light_darkText;
 
-    ::selection,
-    ::-moz-selection {
-        color: #2b2f33;
-        background-color: #fcfcfc;
-    }
+                        .gameComplete {
+                            background-color: @light_backgroundSolid;
+                        }
 
-    .ledge {
-        background: #fcfcfc;
-    }
+                        .gameGrid {
+                            .squareWrapper {
+                                .square {
+                                    border-color: @light_darkText;
+                                    .cellWrapper {
+                                        .inputPad {
+                                            .inputButton {
+                                                border-color: @light_lightText;
+                                                background-color: @light_buttonBackground;
 
-    #gameScreen {
-        .gameGridWrapper {
-            .gameComplete {
-                background-color: #2b2f33;
-            }
+                                                &:hover,
+                                                &.current {
+                                                    color: @light_darkText;
+                                                    background-color: @light_buttonHover;
+                                                }
+                                            }
+                                        }
 
-            .gameGrid {
-                .squareWrapper {
-                    .square {
-                        .cellWrapper {
-                            .inputPad {
-                                .inputButton {
-                                    border-color: #B7B9BA;
-                                    background-color: #55595C;
+                                        .cell {
+                                            background-color: @light_darkText;
 
-                                    &:hover,
-                                    &.current {
-                                        color: #2b2f33;
-                                        background-color: #AAACAD;
+                                            &.editable {
+                                                background: @light_lightText;
+                                                color: @light_darkText;
+                                            }
+
+                                            &.invalid {
+                                                background-color: @light_cellInvalid;
+                                            }
+
+                                            &.valid {
+                                                background-color: @light_cellValid;
+                                            }
+
+                                            &.fadeOut {
+                                                background-color: @light_lightText;
+                                            }
+                                        }
                                     }
                                 }
                             }
+                        }
+                    }
+                }
+            }
+        }
 
-                            .cell {
-                                background: #111111;
+        &.desktop {
+            .applicationWrapper {
+                #gameScreen {
+                    .controls {
+                        .button {
+                            &:hover {
+                                color: @light_lightText;
+                                background-color: @light_buttonHover;
 
-                                &.editable {
-                                    background: #fcfcfc;
-                                    color: #2b2f33;
+                                &:before {
+                                    border-left-color: @light_lightText;
                                 }
-
-                                &.invalid {
-                                    background-color: #FF0000;
-                                }
-
-                                &.valid {
-                                    background-color: #00FF00;
+                                &:after {
+                                    border-right-color: @light_lightText;
                                 }
                             }
-                        }
-                    }
-                }
-            }
-        }
-    }
 
-    &.desktop {
-        #gameScreen {
-            .controls {
-                .button {
-                    &:hover {
-                        color: #2b2f33;
-                    }
+                            &.disabled {
+                                background-color: @light_darkText;
+                                color: @light_lightText;
 
-                    &.disabled {
-                        &:hover {
-                            color: inherit;
-                        }
-                    }
-                }
-            }
-            
-        }
-    }
-
-    .screen {
-        .menu {
-            li {
-                .menuItem {
-                    &.selected {
-                        color: #2b2f33;
-                        background-color: rgba(255, 255, 255, 0.6);
-
-                        &:before {
-                            border-left-color: #2b2f33;
-                        }
-                        &:after {
-                            border-right-color: #2b2f33;
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
-
-html.dyslexic {
-    body {
-        font-family: opendyslexic;
-    }
-}
-
-html.bigger {
-    body {
-        font-size: 115%;
-    }
-}
-
-html.biggest {
-    body {
-        font-size: 125%;
-    }
-}
-
-html.mobile {
-    .screen {
-        &#gameScreen {
-            .gameGridWrapper {
-                .gameGrid {
-                    .squareWrapper {
-                        .square {
-                            .cellWrapper {
-                                .inputPad {
-                                    font-size: 1.2em;
+                                &:hover {
+                                    color: @light_lightText;
                                 }
                             }
                         }
@@ -898,6 +985,7 @@ html.mobile {
         }
     }
 }
+
 
 //Media queries
 @media screen and (max-width: 710px) {
