@@ -508,6 +508,10 @@ SudokuBoardController = function() {
 		}
 	};
 
+	var gameDataToJson = function(gameData) {
+		return ko.mapping.toJSON(gameData);
+	};
+
 	this.StartGame = function(options) {
 		if (options.existingGame) {
 			var loadedGame = ko.mapping.fromJSON(options.existingGame, {
@@ -542,13 +546,13 @@ SudokuBoardController = function() {
                   sender.viewModel.IsComplete(false);
                   sender.viewModel.AvailableHints(sender.viewModel.InitialHints);
                   sender.viewModel.Difficulty(options.difficulty);
-			localStorage.SetValueForKey("gameSave", ko.mapping.toJSON(sender.viewModel));
+			localStorage.SetValueForKey("gameSave", gameDataToJson(sender.viewModel));
 		}
 		sender.viewModel.SetSelectedCell(0, 0);
 
             sender.viewModel.NeedsSave.subscribe(function (needsSave) {
                   if(needsSave) {
-                        localStorage.SetValueForKey("gameSave", ko.mapping.toJSON(sender.viewModel));
+                        localStorage.SetValueForKey("gameSave", gameDataToJson(sender.viewModel));
                         sender.viewModel.NeedsSave(false);
 
                         if(boardIsValid()) {
