@@ -2,6 +2,7 @@ MainMenuController = function() {
     var sender = this;
     var sudokuBoardController;
     var optionsController;
+    var voiceOverManager;
 
     var setContinueState = function() {
         var localStorage = new LocalStorageRepository();
@@ -14,6 +15,8 @@ MainMenuController = function() {
     
     var initMenuScreen = function() {
         var localStorage = new LocalStorageRepository();
+
+        voiceOverManager.OutputMessage("Main menu");
 
         setContinueState();
 
@@ -42,6 +45,8 @@ MainMenuController = function() {
                             newSelection.addClass("selected animated pulse");
                             menuItemAnimation = cleanUpAnimationAfterTimeout(newSelection, 400);
                             currentlySelected.removeClass("selected");
+
+                            voiceOverManager.OutputMessage(newSelection.text());
                         }
                         break;
                     case "down":
@@ -50,6 +55,8 @@ MainMenuController = function() {
                             newSelection.addClass("selected animated pulse");
                             menuItemAnimation = cleanUpAnimationAfterTimeout(newSelection, 400);
                             currentlySelected.removeClass("selected");
+
+                            voiceOverManager.OutputMessage(newSelection.text());
                         }
                         break
                     case "enter":
@@ -99,6 +106,8 @@ MainMenuController = function() {
                             $(".optionsMenu .menuItem").first().siblings(".leftArrow, .rightArrow").css("display", "inline-block");
 
                             $("#optionsScreen").addClass("animated bounceInLeft").show();
+
+                            voiceOverManager.OutputMessage("Options screen");
                             break;
 
                         case "help":
@@ -134,6 +143,8 @@ MainMenuController = function() {
 
             setContinueState();
 
+            voiceOverManager.OutputMessage("Main menu");
+
             //Show menu
             $(".screen:visible .back").first().addClass("animated bounceOutLeft");
             setTimeout(function() {
@@ -150,7 +161,8 @@ MainMenuController = function() {
     };
 
     var init = new function() {
-        optionsController = new OptionsController();
+        voiceOverManager = new VoiceOverManager("messageOutput");
+        optionsController = new OptionsController(voiceOverManager);
         sudokuBoardController = new SudokuBoardController();
         initMenuScreen();
         initMainMenuButton();

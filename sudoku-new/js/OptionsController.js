@@ -1,5 +1,6 @@
-OptionsController = function() {
+OptionsController = function(_voiceOverManager) {
     var sender = this;
+    var voiceOverManager = _voiceOverManager;
 
     var loadUserPreferences = function() {
         var localStorage = new LocalStorageRepository();
@@ -65,6 +66,8 @@ OptionsController = function() {
                             menuItemAnimation = cleanUpAnimationAfterTimeout(newSelection.parent("li"), 400);
                             currentlySelected.removeClass("selected");
                             currentlySelected.siblings(".leftArrow, .rightArrow").css("display", "none");
+
+                            voiceOverManager.OutputMessage(newSelection.find(".name").text());
                         }
                         break;
                     case "down":
@@ -76,6 +79,8 @@ OptionsController = function() {
                             menuItemAnimation = cleanUpAnimationAfterTimeout(newSelection.parent("li"), 400);
                             currentlySelected.removeClass("selected");
                             currentlySelected.siblings(".leftArrow, .rightArrow").css("display", "none");
+
+                            voiceOverManager.OutputMessage(newSelection.find(".name").text());
                         }
                         break
                     case "left":
@@ -127,6 +132,8 @@ OptionsController = function() {
                     } else { //is style setting
                         $("html").addClass(newKey);
                     }
+
+                    voiceOverManager.OutputMessage(currentlySelected.children(".name").text() + " - " + newValue);
 
                     if(direction == "left") {
                         var toAnimate = $(currentlySelected).siblings(".leftArrow");
