@@ -64,15 +64,15 @@
     				</ul>
         </section>
   	    
-        <section id="gameScreen" class="screen">
+        <section id="gameScreen" class="screen" aria-hidden="true">
           <header>
             <div class="back"><span class="visuallyHidden">Back to main menu</span></div>
             <h1 data-bind="text: GameTitle"></h1>
           </header>
           <div class="controls">
-            <div class="button" data-action="validate" data-bind="css: { disabled: IsComplete()}">Validate</div>
-            <div class="button" data-action="hint" data-bind="text: HintLabel, css: { disabled: AvailableHints() <= 0 || IsComplete()}"></div>
-            <div class="button" data-action="newGame">New Game</div>
+            <div class="button validateButton" data-action="validate" data-bind="css: { disabled: IsComplete()}">Validate</div>
+            <div class="button hintButton" data-action="hint" data-bind="text: HintLabel, css: { disabled: AvailableHints() <= 0 || IsComplete()}"></div>
+            <div class="button newGameButton" data-action="newGame">New Game</div>
           </div>
           <div class="gameGridWrapper">
             <div class="gameComplete" data-bind="visible: IsComplete()">
@@ -116,7 +116,7 @@
           </div>
         </section>
 
-        <section id="optionsScreen" class="screen">
+        <section id="optionsScreen" class="screen" aria-hidden="true">
           <header>
             <div class="back"><span class="visuallyHidden">Back to main menu</span></div>
             <h1>Options</h1>
@@ -158,7 +158,7 @@
           </ul>
         </section>
 
-        <section id="helpScreen" class="screen">
+        <section id="helpScreen" class="screen" aria-hidden="true">
           <header>
             <div class="back"><span class="visuallyHidden">Back to main menu</span></div>
             <h1>Help</h1>

@@ -34,6 +34,8 @@ OptionsController = function(_voiceOverManager) {
             $(this).children(".rightArrow, .leftArrow").css("display", "inline-block");
             $(this).children(".menuItem").addClass("selected");
 
+            voiceOverManager.OutputMessage($(this).children(".menuItem").find(".name").text());
+
             //Animation
             $(this).addClass("animated pulse");
             menuItemAnimation = cleanUpAnimationAfterTimeout($(this), 400);
@@ -44,8 +46,14 @@ OptionsController = function(_voiceOverManager) {
         $(".optionsMenu .leftArrow").click(function() {
             changeOption("left");
         });
+        $(".optionsMenu .leftArrow").mouseenter(function() {
+            voiceOverManager.OutputMessage("Previous");
+        });
         $(".optionsMenu .rightArrow").click(function() {
             changeOption("right");
+        });
+        $(".optionsMenu .rightArrow").mouseenter(function() {
+            voiceOverManager.OutputMessage("Next");
         });
 
         var menuItemAnimation;
@@ -133,7 +141,7 @@ OptionsController = function(_voiceOverManager) {
                         $("html").addClass(newKey);
                     }
 
-                    voiceOverManager.OutputMessage(currentlySelected.children(".name").text() + " - " + newValue);
+                    voiceOverManager.OutputMessage(currentlySelected.children(".name").text() + ", " + newValue);
 
                     if(direction == "left") {
                         var toAnimate = $(currentlySelected).siblings(".leftArrow");

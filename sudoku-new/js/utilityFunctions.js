@@ -87,6 +87,10 @@ function keyCodeToAction(keycode) {
 	switch(keycode) {
 		case 86: //v
 			return "v";
+		case 72: //h
+			return "h";
+		case 78: //n
+			return "n";
 
 		case 96: //keypad 0
 		case 48: //top 0

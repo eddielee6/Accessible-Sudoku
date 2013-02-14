@@ -1,7 +1,8 @@
-SudokuBoardController = function() {
+SudokuBoardController = function(_voiceOverManager) {
 	var sender = this;
 	var localStorage = new LocalStorageRepository();
 	var gameGenerator = new Generator();
+	var voiceOverManager = _voiceOverManager;
 	this.viewModel;
 
 	var initSudokuControls = function() {
@@ -35,7 +36,7 @@ SudokuBoardController = function() {
                                     randomCell.CurrentValue(randomCell.SolutionValue());
                                     randomCell.OriginalValue(randomCell.SolutionValue());
                                     sender.viewModel.NeedsSave(true);
-                                    break;
+                                    return true;
                               }
                               cellsChecked++;
                         }
@@ -72,17 +73,45 @@ SudokuBoardController = function() {
             //Keyboard input
 		$(window).keydown(function(evt) {
 			if ($("#gameScreen").is(":visible")) {
-                        if(sender.viewModel.IsComplete()) return;
-
 				var currentSelection = sender.viewModel.GetSelectedCell();
 				var square = currentSelection.square;
 				var cell = currentSelection.cell;
+
+				var validationTimeout;
+				var hintTimeOut;
+				var newGameTimeOut;
 
 				var handled = true;
 				switch(keyCodeToAction(evt.which)) {
 					//Validation
 					case "v":
+						if(sender.viewModel.IsComplete()) return;
                                     showBoardValidation();
+                                    $(".validateButton").addClass("pressed");
+                                    validationTimeout = setTimeout(function() {
+                                    	$(".validateButton").removeClass("pressed");
+                                    }, 150);
+						break;
+
+					case "h":
+						if(sender.viewModel.IsComplete()) return;
+                                    if(getHint()) {
+	                                    $(".hintButton").addClass("pressed");
+	                                    hintTimeOut = setTimeout(function() {
+	                                    	$(".hintButton").removeClass("pressed");
+	                                    }, 150);
+	                              }
+						break;
+
+					case "n":
+                                    sender.StartGame({
+                                          existingGame: null,
+                                          difficulty: $("html").attr("data-difficulty")
+                                    });
+                                    $(".newGameButton").addClass("pressed");
+                                    newGameTimeOut = setTimeout(function() {
+                                    	$(".newGameButton").removeClass("pressed");
+                                    }, 150);
 						break;
 
                               //Digit input
@@ -95,15 +124,18 @@ SudokuBoardController = function() {
 					case "7":
 					case "8":
 					case "9":
+						if(sender.viewModel.IsComplete()) return;
 						sender.viewModel.SetCellValue(square, cell, keyCodeToAction(evt.which));
 						break;
 
                               case "delete":
+                              	if(sender.viewModel.IsComplete()) return;
                                     sender.viewModel.SetCellValue(square, cell, "");
                                     break;
 
 					//MOVEMENT LOGIC
 					case "down":
+						if(sender.viewModel.IsComplete()) return;
 						//Wrap back to the first square
 						//(Remove if wrap round not required)
 						if (square == 8 && cell == 8) {
@@ -130,6 +162,7 @@ SudokuBoardController = function() {
 						}
 						break;
 					case "left":
+						if(sender.viewModel.IsComplete()) return;
 						if (square == 0 && cell == 0) {
 							square = 8;
 							cell = 8;
@@ -155,6 +188,7 @@ SudokuBoardController = function() {
 						}
 						break;
 					case "up":
+						if(sender.viewModel.IsComplete()) return;
 						if (cell == 2 && square == 2) {
 							square = 6;
 							cell = 6;
@@ -178,6 +212,7 @@ SudokuBoardController = function() {
 						}
 						break;
 					case "right":
+						if(sender.viewModel.IsComplete()) return;
 						//Do we need to wrap back to the first square?
 						//(Remove if wrap round not required)
 						if (square == 8 && cell == 8) {
@@ -204,6 +239,7 @@ SudokuBoardController = function() {
 							cell++;
 						}
 					default:
+						if(sender.viewModel.IsComplete()) return;
 						handled = false;
 						break;
 				}
@@ -547,6 +583,8 @@ SudokuBoardController = function() {
                   sender.viewModel.AvailableHints(sender.viewModel.InitialHints);
                   sender.viewModel.Difficulty(options.difficulty);
 			localStorage.SetValueForKey("gameSave", gameDataToJson(sender.viewModel));
+
+			voiceOverManager.OutputMessage("New " + options.difficulty + " game");
 		}
 		sender.viewModel.SetSelectedCell(0, 0);
 

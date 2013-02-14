@@ -28,6 +28,8 @@ MainMenuController = function() {
             $(".mainMenu .menuItem").removeClass("selected");
             $(this).addClass("selected animated pulse");
             menuItemAnimation = cleanUpAnimationAfterTimeout($(this), 400);
+
+            voiceOverManager.OutputMessage($(this).text());
         });
         $(".mainMenu .menuItem").click(function() {
             triggerSelectedAction();
@@ -112,6 +114,8 @@ MainMenuController = function() {
 
                         case "help":
                             $("#helpScreen").addClass("animated bounceInLeft").show();
+
+                            voiceOverManager.OutputMessage("Help screen");
                             break;
                     }
                 }, 400);
@@ -123,6 +127,9 @@ MainMenuController = function() {
         //Mouse input
         $(".screen header .back").click(function() {
             navigateToMenu();
+        });
+        $(".screen header .back").mouseenter(function() {
+            voiceOverManager.OutputMessage("Back to main menu");
         });
 
         //Keyboard input
@@ -163,7 +170,7 @@ MainMenuController = function() {
     var init = new function() {
         voiceOverManager = new VoiceOverManager("messageOutput");
         optionsController = new OptionsController(voiceOverManager);
-        sudokuBoardController = new SudokuBoardController();
+        sudokuBoardController = new SudokuBoardController(voiceOverManager);
         initMenuScreen();
         initMainMenuButton();
     };

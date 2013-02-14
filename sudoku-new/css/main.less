@@ -14,11 +14,12 @@
 
 //Mixins
 .visuallyHidden {
-    position: absolute; 
-    overflow: hidden; 
-    clip: rect(0 0 0 0); 
-    height: 1px; width: 1px; 
-    margin: -1px; padding: 0; border: 0; 
+    position:absolute;
+    left:-10000px;
+    top:auto;
+    width:1px;
+    height:1px;
+    overflow:hidden;
 }
 
 .mobile {
@@ -49,6 +50,10 @@
     box-sizing:border-box;
     -moz-box-sizing:border-box;
     -webkit-box-sizing:border-box;
+}
+
+.shortcut {
+    text-decoration: underline;
 }
 
 .animationTime(@duration) {
@@ -194,7 +199,7 @@ html {
         padding-bottom: 1.5em;
 
         #messageOutput {
-            
+            .visuallyHidden;
         }
 
         .ledge {
@@ -360,6 +365,10 @@ html {
                         background-color: @oriental_buttonBackground;
                         width: 33.33333333333333%;
                         border-right: 1px solid @oriental_lightText;
+
+                        &:first-letter {
+                            text-decoration: underline;
+                        }
 
                         &:last-child {
                             border-right: none;
@@ -607,6 +616,7 @@ html {
                 &#gameScreen {
                     .controls {
                         .button {
+                            &.pressed,
                             &:hover {
                                 color: @oriental_darkText;
                                 background-color: @oriental_buttonHover;
@@ -635,6 +645,7 @@ html {
 
                             &.disabled {
                                 background-color: @oriental_darkText;
+                                &.pressed,
                                 &:hover {
                                     color: inherit;
                                     &:before,
@@ -804,6 +815,7 @@ html {
                     &#gameScreen {
                         .controls {
                             .button {
+                                &.pressed,
                                 &:hover {
                                     color: @dark_darkText;
                                     background-color: @dark_buttonHover;
@@ -819,6 +831,7 @@ html {
                                 &.disabled {
                                     background-color: @dark_darkText;
 
+                                    &.pressed,
                                     &:hover {
                                         color: inherit;
                                     }
@@ -980,6 +993,7 @@ html {
                     &#gameScreen {
                         .controls {
                             .button {
+                                &.pressed,
                                 &:hover {
                                     color: @light_lightText;
                                     background-color: @light_buttonHover;
@@ -996,6 +1010,7 @@ html {
                                     background-color: @light_darkText;
                                     color: @light_lightText;
 
+                                    &.pressed,
                                     &:hover {
                                         color: @light_lightText;
                                     }
