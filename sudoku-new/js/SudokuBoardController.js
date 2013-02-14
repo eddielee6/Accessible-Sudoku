@@ -9,7 +9,11 @@ SudokuBoardController = function(_voiceOverManager) {
             var waitTimeout;
             var fadeTimeout;
             var showBoardValidation = function() {
-                  boardIsValid();
+                  if(!boardIsValid()) {
+                  	var invalidCellsCount = ($(".cell.editable").length - $(".cell.editable.markAsValid").length);
+                  	voiceOverManager.OutputMessage("There are " + invalidCellsCount + " invalid cells");
+                  }
+
                   clearTimeout(waitTimeout);
                   clearTimeout(fadeTimeout);
                   $(".valid, .invalid, .fadeOut").removeClass("valid, invalid fadeOut");
@@ -36,6 +40,8 @@ SudokuBoardController = function(_voiceOverManager) {
                                     randomCell.CurrentValue(randomCell.SolutionValue());
                                     randomCell.OriginalValue(randomCell.SolutionValue());
                                     sender.viewModel.NeedsSave(true);
+
+                                    voiceOverManager.OutputMessage("Column " + (randomCell.ColIndex() + 1) + ", row " + (randomCell.RowIndex() + 1) + ", value is " + randomCell.SolutionValue());
                                     return true;
                               }
                               cellsChecked++;
