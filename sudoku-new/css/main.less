@@ -854,9 +854,11 @@ html {
                 header {
                     .back {
                         background: url('../img/back_dark@1x.png') no-repeat;
+                        background-size: contain;
 
                         @media @highdensity {
                             background-image: url('../img/back_dark@2x.png');
+                            background-size: contain;
                         }
                     }
                 }
@@ -984,94 +986,101 @@ html {
             }
         }
     }
-}
 
-
-//Media queries
-@media screen and (max-width: 710px) {
-    .logo {
-        width: 90%;
-        margin: 20px auto 20px;
-        height: auto;
-    }
-
-    .screen {
-        header {
-            h1 {
-                font-size: 1.2em;
-                height: 22.4px;
-                line-height: 22.4px;
-            }
-            .back {
-                height: 22.4px;
-                width: 42px;
-                background-size: contain;
-            }
-        }
-        &#gameScreen {
-            .controls {
-                width: 100%;
-            }
-
-            .gameGridWrapper {
-                width: 100%;
-                .gameGrid {
-                    font-size: 1.2em;
-                }
-
-                .gameComplete {
-                    margin: 10% 10%;
-                }
-            }
-        }
-
-        &#helpScreen {
-            .keyboard {
+    //Media queries
+    @media screen and (max-width: 710px) {
+        .applicationWrapper {
+            .logo {
                 width: 90%;
+                margin: 20px auto 20px;
                 height: auto;
             }
-        }
 
-        .menu {
-            li {
-                .menuItem {
-                    font-size: 1.125em;
+            .screen {
+                header {
+                    h1 {
+                        font-size: 1.2em;
+                        height: 22.4px;
+                        line-height: 22.4px;
+                    }
+                    .back {
+                        height: 22.4px;
+                        width: 42px;
+                        background-size: contain;
+                    }
+                }
+                &#gameScreen {
+                    .controls {
+                        width: 100%;
+
+                        .button {
+                            padding: 0.6em 0.5em;
+                        }
+                    }
+
+                    .gameGridWrapper {
+                        width: 100%;
+                        .gameGrid {
+                            font-size: 1.2em;
+                        }
+
+                        .gameComplete {
+                            margin: 10% 10%;
+                        }
+                    }
                 }
 
-                .leftArrow {
-                    margin: 0.07500000000000001em 0.375em;
-                    border-top-width: 1.0499999999999998em;
-                    border-bottom-width: 1.0499999999999998em;
-                    border-right-width: 1.4249999999999998em;
+                &#helpScreen {
+                    .keyboard {
+                        width: 90%;
+                        height: auto;
+                    }
                 }
 
-                .rightArrow {
-                    margin: 0.07500000000000001em 0.375em;
-                    border-top-width: 1.0499999999999998em;
-                    border-bottom-width: 1.0499999999999998em;
-                    border-left-width: 1.4249999999999998em;
+                .menu {
+                    li {
+                        .menuItem {
+                            font-size: 1.125em;
+                        }
+
+                        .leftArrow {
+                            margin: 0.07500000000000001em 0.375em;
+                            border-top-width: 1.0499999999999998em;
+                            border-bottom-width: 1.0499999999999998em;
+                            border-right-width: 1.4249999999999998em;
+                        }
+
+                        .rightArrow {
+                            margin: 0.07500000000000001em 0.375em;
+                            border-top-width: 1.0499999999999998em;
+                            border-bottom-width: 1.0499999999999998em;
+                            border-left-width: 1.4249999999999998em;
+                        }
+                    }
                 }
             }
         }
     }
-}
 
-@media screen and (max-width: 500px) {
-    #menuScreen {
-        padding: 0.5em 0;
-    }
-
-    #gameScreen {
-        .controls {
-            font-size: 0.9em;
-            .button {
-                padding: 0.3em 0.5em;
+    @media screen and (max-width: 500px) {
+        .applicationWrapper {
+            #menuScreen {
+                padding: 0.5em 0;
             }
-        }
 
-        .gameGridWrapper {
-            .gameGrid {
-                font-size: 0.9em;
+            #gameScreen {
+                .controls {
+                    font-size: 0.9em;
+                    .button {
+                        padding: 0.3em 0.5em;
+                    }
+                }
+
+                .gameGridWrapper {
+                    .gameGrid {
+                        font-size: 0.9em;
+                    }
+                }
             }
         }
     }
