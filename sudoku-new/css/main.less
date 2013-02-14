@@ -507,53 +507,16 @@ body {
 }
 
 #helpScreen {
-	
-	section#info {
-		background: /*transparent*/ url('../img/help@1x.png') /*center center*/ no-repeat; //no need to specify W3C defaults
-		width: 700px;
-		height: 715px;
-	}
-	
-	@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) { 
-		section#info {
-			background: transparent url('../img/help@2x.png') center center no-repeat;
-			background-size: 700px 715px;
-		}
-	}
-	
-	section#info .keyboard {
-		margin: 0 auto;
-		background: transparent url('../img/keyboard@1x.png') center center no-repeat;
-		width: 566px;
-		height: 270px;
-	}
-	
-	@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-		section#info .keyboard {
-			background: transparent url('../img/keyboard@2x.png') center center no-repeat;
-			background-size: 566px 270px;
-		}
-	} 
-	
-	section#info .whitespace {
-		padding: 70px 50px 50px 50px;
-		color: #000;
-		line-height: 1.5;
-	}
-	
-	section#info .whitespace .limited {
-		width: 500px;
-		font-weight: bold;
-	}
-	
-	section#info .whitespace ul {
-		
-	}
-	
-	section#info .whitespace ul li {
-		margin-bottom: 10px;
-	}
-	
+    .keyboard {
+        width: 566px;
+        margin: 0.5em auto;
+        display: block;
+    }
+
+    .content {
+        width: 90%;
+        margin: 0 auto;
+    }
 }
 
 #menuScreen {
@@ -567,10 +530,7 @@ body {
 
 .logo {
     margin: 30px auto;
-
-    &.light {
-        display: block;
-    }
+    display: block;
 
     &.dark {
         display: none;
@@ -584,14 +544,11 @@ body {
     width: 100%;
     height: 412px;
     background: url('../img/shadow-backdrop@1x.png');
-}
 
-
-@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) { 
-   	.backdrop {
-		background: url('../img/shadow-backdrop@2x.png');
-		background-size: 1854px 412px;
-	}
+    @media @highdensity {
+        background: url('../img/shadow-backdrop@2x.png');
+        background-size: 1854px 412px;
+    }
 }
 
 .mobile {
@@ -924,6 +881,13 @@ html.mobile {
                 .gameComplete {
                     margin: 10% 10%;
                 }
+            }
+        }
+
+        &#helpScreen {
+            .keyboard {
+                width: 90%;
+                height: auto;
             }
         }
 
