@@ -70,6 +70,21 @@ SudokuBoardController = function(_voiceOverManager) {
                         }
                   }
             });
+            $(".controls .button").mouseenter(function() {
+                  switch($(this).attr("data-action")) {
+                        case "validate":
+                              if(sender.viewModel.IsComplete()) return;
+                              voiceOverManager.OutputMessage("Validate board");
+                              break;
+                        case "hint":
+                              if(sender.viewModel.IsComplete()) return;
+                              voiceOverManager.OutputMessage("Use a hint");
+                              break;
+                        case "newGame":
+                              voiceOverManager.OutputMessage("Start a new game");
+                              break;
+                  }
+            });
 
             //InputDigitPad Reset
             $(window).click(function(evt) {
@@ -87,6 +102,7 @@ SudokuBoardController = function(_voiceOverManager) {
 				var hintTimeOut;
 				var newGameTimeOut;
 
+				var hasMovedCell = false;
 				var handled = true;
 				switch(keyCodeToAction(evt.which)) {
 					//Validation
@@ -166,6 +182,8 @@ SudokuBoardController = function(_voiceOverManager) {
 						else {
 							cell += 3;
 						}
+
+						hasMovedCell = true;
 						break;
 					case "left":
 						if(sender.viewModel.IsComplete()) return;
@@ -192,6 +210,8 @@ SudokuBoardController = function(_voiceOverManager) {
 						else {
 							cell--;
 						}
+
+						hasMovedCell = true;
 						break;
 					case "up":
 						if(sender.viewModel.IsComplete()) return;
@@ -216,6 +236,8 @@ SudokuBoardController = function(_voiceOverManager) {
 						else {
 							cell -= 3;
 						}
+
+						hasMovedCell = true;
 						break;
 					case "right":
 						if(sender.viewModel.IsComplete()) return;
@@ -244,16 +266,25 @@ SudokuBoardController = function(_voiceOverManager) {
 						else {
 							cell++;
 						}
+
+						hasMovedCell = true;
+						break;
 					default:
 						if(sender.viewModel.IsComplete()) return;
 						handled = false;
 						break;
 				}
 
-				sender.viewModel.SetSelectedCell(square, cell);
-
 				if (handled) {
 					evt.preventDefault();
+					sender.viewModel.SetSelectedCell(square, cell);
+
+					if(hasMovedCell) {
+						var selectedCellLocation = sender.viewModel.GetSelectedCell();
+						var cell = sender.viewModel.Squares()[selectedCellLocation.square].Cells()[selectedCellLocation.cell];
+						var value = (cell.CurrentValue() == "") ? ", is blank" : (", value is " + cell.CurrentValue());
+						voiceOverManager.OutputMessage("Column " + (cell.ColIndex() + 1) + ", row " + (cell.RowIndex() + 1) + value);
+					}
 				}
 			}
 		});
