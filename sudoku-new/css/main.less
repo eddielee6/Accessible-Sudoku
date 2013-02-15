@@ -524,28 +524,7 @@ html {
                             }
                         }
 
-                        &.inprogress {
-                            .squareWrapper {
-                                .square {
-                                    .cellWrapper {
-                                        .cell {
-                                            &.selected {
-                                                z-index: 1000;
-                                                .grow;
-
-                                                &.hasInputPad {
-                                                    .removeAnimation;
-                                                }
-                                            }
-
-                                            &.editable {
-                                                cursor: pointer;
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
+                        
                     }
                 }
             }
@@ -651,6 +630,33 @@ html {
                                     &:before,
                                     &:after {
                                         border: none;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    .gameGridWrapper {
+                        .gameGrid {
+                            &.inprogress {
+                                .squareWrapper {
+                                    .square {
+                                        .cellWrapper {
+                                            .cell {
+                                                &.selected {
+                                                    z-index: 1000;
+                                                    .grow;
+
+                                                    &.hasInputPad {
+                                                        .removeAnimation;
+                                                    }
+                                                }
+
+                                                &.editable {
+                                                    cursor: pointer;
+                                                }
+                                            }
+                                        }
                                     }
                                 }
                             }
