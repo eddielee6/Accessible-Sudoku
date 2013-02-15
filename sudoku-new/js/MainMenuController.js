@@ -107,6 +107,9 @@ MainMenuController = function() {
                             $(".optionsMenu .menuItem").first().addClass("selected");
                             $(".optionsMenu .menuItem").first().siblings(".leftArrow, .rightArrow").css("display", "inline-block");
 
+                            //Show all arrows on mobile
+                            $(".mobile .optionsMenu .menuItem").siblings(".leftArrow, .rightArrow").css("display", "inline-block");
+
                             $("#optionsScreen").addClass("animated bounceInLeft").show();
 
                             voiceOverManager.OutputMessage("Options screen");

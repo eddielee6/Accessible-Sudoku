@@ -30,7 +30,7 @@ OptionsController = function(_voiceOverManager) {
         //Mouse input
         $(".optionsMenu li").mouseenter(function() {
             $(".optionsMenu .menuItem").removeClass("selected");
-            $(".optionsMenu .menuItem").siblings(".rightArrow, .leftArrow").css("display", "none");
+            $(".desktop .optionsMenu .menuItem").siblings(".rightArrow, .leftArrow").css("display", "none");
             $(this).children(".rightArrow, .leftArrow").css("display", "inline-block");
             $(this).children(".menuItem").addClass("selected");
 
