@@ -118,7 +118,13 @@ MainMenuController = function() {
                         case "help":
                             $("#helpScreen").addClass("animated bounceInLeft").show();
 
-                            voiceOverManager.OutputMessage("Help screen");
+                            var message = "Help screen. ";
+                            $("#helpScreen .desktop-only.content").each(function() {
+                                if($(this).text() != "") {
+                                    message += $(this).text();
+                                }
+                            });
+                            voiceOverManager.OutputMessage(message);
                             break;
                     }
                 }, 400);
