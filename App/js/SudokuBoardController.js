@@ -349,6 +349,9 @@ SudokuBoardController = function(_voiceOverManager) {
 	};
 
 	var boardIsValid = function() {
+
+		sender.viewModel.ResetAllValidationFlags();
+
 		var rows = validateRows();
 		var cols = validateCols();
 		var squares = validateSquares();

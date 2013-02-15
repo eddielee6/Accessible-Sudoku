@@ -91,6 +91,14 @@ var SudokuViewModel = function() {
 		};
 	};
 
+	this.ResetAllValidationFlags = function() {
+		for (var squareIndex = 0; squareIndex < sender.Squares().length; squareIndex++) {
+			for (var cellIndex = 0; cellIndex < sender.Squares()[squareIndex].Cells().length; cellIndex++) {
+				sender.Squares()[squareIndex].Cells()[cellIndex].IsValid(true);
+			};
+		};
+	};
+
 	this.RequestSave = function() {
 		sender.NeedsSave(true);
 	};
