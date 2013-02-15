@@ -344,15 +344,20 @@ html {
             }
 
             &#helpScreen {
-                .keyboard {
-                    width: 566px;
-                    margin: 0.5em auto;
-                    display: block;
-                }
-
                 .content {
+                    line-height: 1.4;
+                    .borderBox;
+                    padding: 1em 2em;
                     width: 90%;
-                    margin: 0 auto;
+                    margin: 1em auto;
+                    background-color: @oriental_buttonBackground;
+
+                    .keyboard {
+                        width: 120%;
+                        height: auto;
+                        margin: 2em -10% 1em;
+                        display: block;
+                    }
                 }
                 
                 ul li {
@@ -1082,13 +1087,6 @@ html {
                         .gameComplete {
                             margin: 10% 10%;
                         }
-                    }
-                }
-
-                &#helpScreen {
-                    .keyboard {
-                        width: 90%;
-                        height: auto;
                     }
                 }
 
