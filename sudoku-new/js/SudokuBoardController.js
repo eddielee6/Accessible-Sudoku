@@ -662,6 +662,8 @@ SudokuBoardController = function(_voiceOverManager) {
                   sender.viewModel.AvailableHints(loadedGame.AvailableHints());
                   sender.viewModel.Difficulty(loadedGame.Difficulty());
                   sender.viewModel.IsComplete(boardIsValid());
+
+                  voiceOverManager.OutputMessage("Loaded existing " + sender.viewModel.Difficulty() + " game");
 		} else {
 			sender.viewModel.Squares(gameGenerator.GenerateNewGame(options.difficulty).Squares());
                   sender.viewModel.IsComplete(false);
