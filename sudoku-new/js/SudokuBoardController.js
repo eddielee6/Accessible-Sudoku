@@ -11,7 +11,10 @@ SudokuBoardController = function(_voiceOverManager) {
             var showBoardValidation = function() {
                   if(!boardIsValid()) {
                   	var invalidCellsCount = ($(".cell.editable").length - $(".cell.editable.markAsValid").length);
-                  	voiceOverManager.OutputMessage("There are " + invalidCellsCount + " invalid cells");
+                  	var message = "There are " + invalidCellsCount + " invalid cells";
+                  	if(invalidCellsCount == 1) message = "There is 1 invalid cell";
+                  	voiceOverManager.OutputMessage(message);
+
                   }
 
                   clearTimeout(waitTimeout);
@@ -109,6 +112,9 @@ SudokuBoardController = function(_voiceOverManager) {
 
 			if ($("#gameScreen").is(":visible")) {
 				var currentSelection = sender.viewModel.GetSelectedCell();
+
+				if(!currentSelection) return;
+
 				var square = currentSelection.square;
 				var cell = currentSelection.cell;
 
@@ -663,7 +669,11 @@ SudokuBoardController = function(_voiceOverManager) {
                   sender.viewModel.Difficulty(loadedGame.Difficulty());
                   sender.viewModel.IsComplete(boardIsValid());
 
-                  voiceOverManager.OutputMessage("Loaded existing " + sender.viewModel.Difficulty() + " game");
+                  if(sender.viewModel.IsComplete()) {
+				voiceOverManager.OutputMessage("Loaded complete " + sender.viewModel.Difficulty() + " game. Press N to start a new game.");
+                  } else {
+	                  voiceOverManager.OutputMessage("Loaded existing " + sender.viewModel.Difficulty() + " game");
+	            }
 		} else {
 			sender.viewModel.Squares(gameGenerator.GenerateNewGame(options.difficulty).Squares());
                   sender.viewModel.IsComplete(false);
@@ -682,6 +692,7 @@ SudokuBoardController = function(_voiceOverManager) {
 
                         if(boardIsValid()) {
                               sender.viewModel.IsComplete(true);
+                              voiceOverManager.OutputMessage("Game Complete! Well done! Press N to start a new game.");
                         }
                   }
             });
