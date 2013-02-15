@@ -3,10 +3,8 @@
     <head>
         <meta charset="utf-8">
         <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
         <title>Sudoku</title>
 
@@ -15,14 +13,6 @@
         <link rel="apple-touch-icon-precomposed" sizes="114x114" href="img/apple-favicon-iphone.png" />
         <link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/apple-favicon-ipad.png" />
         <link rel="apple-touch-icon-precomposed" sizes="144x144" href="img/apple-favicon-ipad.png" />
-
-        <link href="img/splash/iphone_portrait@1x.png" media="(device-width: 320px) and (device-height: 480px) and (-webkit-device-pixel-ratio: 1)" rel="apple-touch-startup-image" />
-        <link href="img/splash/iphone_portrait@2x.png" media="(device-width: 320px) and (device-height: 480px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
-        <link href="img/splash/iphone5_portrait@2x.png" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
-        <link href="img/splash/ipad_portrait@1x.png" media="(device-width: 768px) and (device-height: 1024px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 1)" rel="apple-touch-startup-image" />
-        <link href="img/splash/ipad_landscape@1x.png" media="(device-width: 768px) and (device-height: 1024px) and (orientation: landscape) and (-webkit-device-pixel-ratio: 1)" rel="apple-touch-startup-image" />
-        <link href="img/splash/ipad_portrait@2x.png" media="(device-width: 768px) and (device-height: 1024px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
-        <link href="img/splash/ipad_landscape@2x.png" media="(device-width: 768px) and (device-height: 1024px) and (orientation: landscape) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
 
         <link rel="stylesheet" type="text/css" href="css/vendor/normalize.css" />
         <link rel="stylesheet" type="text/css" href="css/vendor/animate.css" />
@@ -103,7 +93,7 @@
                           <td class="inputButton" data-bind="event: { click: $root.SetValueFromInputPad.bind($data, '6') }, css: { current: (CurrentValue() == '6') }">6</td>
                         </tr>
                         <tr>
-                          <td class="inputButton" data-bind="event: { click: $root.SetValueFromInputPad.bind($data, '7') }, css: { current: (CurrentValue() == '7') }">7</div></td>
+                          <td class="inputButton" data-bind="event: { click: $root.SetValueFromInputPad.bind($data, '7') }, css: { current: (CurrentValue() == '7') }">7</td>
                           <td class="inputButton" data-bind="event: { click: $root.SetValueFromInputPad.bind($data, '8') }, css: { current: (CurrentValue() == '8') }">8</td>
                           <td class="inputButton" data-bind="event: { click: $root.SetValueFromInputPad.bind($data, '9') }, css: { current: (CurrentValue() == '9') }">9</td>
                         </tr>
@@ -178,7 +168,7 @@
               <li>The 'R' key can be used to prompt the screen-reader to read the contents of a row, the 'C' key for a column and the 'B' key for a box.</li>
               <li>The 'V' key can be used to validate the Sudoku grid, this highlights all valid cells in green and all invalid cells in red. The 'N' key creates a new game session and the 'H' key will provide a hint.</li>
             </ul>
-            <img src="img/keyboard@2x.png" width="566" height="270" class="keyboard" >
+            <img src="img/keyboard@2x.png" width="566" height="270" class="keyboard" alt="" />
           </div>
           
           <div class="mobile-only content">
