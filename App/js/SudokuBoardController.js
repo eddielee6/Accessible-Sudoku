@@ -37,7 +37,7 @@ SudokuBoardController = function(_voiceOverManager) {
                         sender.viewModel.AvailableHints(sender.viewModel.AvailableHints() - 1);
                         boardIsValid();
                         var cellsChecked = 0;
-                        while(cellsChecked < 81) {
+                        while(cellsChecked < 2000) { //Limit to stop inifinate loops
                               var randomCell = sender.viewModel.Squares()[Math.floor(Math.random() * 9)].Cells()[Math.floor(Math.random() * 9)];
                               if(!randomCell.IsValid() && randomCell.IsEditable()) {
                                     randomCell.CurrentValue(randomCell.SolutionValue());
