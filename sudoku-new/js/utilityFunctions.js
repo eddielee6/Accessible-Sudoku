@@ -91,6 +91,12 @@ function keyCodeToAction(keycode) {
 			return "h";
 		case 78: //n
 			return "n";
+		case 82: //r
+			return "r";
+		case 66:
+			return "b";
+		case 67:
+			return "c";
 
 		case 96: //keypad 0
 		case 48: //top 0

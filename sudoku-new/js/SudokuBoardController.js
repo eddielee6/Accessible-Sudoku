@@ -41,11 +41,15 @@ SudokuBoardController = function(_voiceOverManager) {
                                     randomCell.OriginalValue(randomCell.SolutionValue());
                                     sender.viewModel.NeedsSave(true);
 
-                                    voiceOverManager.OutputMessage("Column " + (randomCell.ColIndex() + 1) + ", row " + (randomCell.RowIndex() + 1) + ", value is " + randomCell.SolutionValue());
+                                    var remianingHintsText = sender.viewModel.AvailableHints() > 0 ? sender.viewModel.AvailableHints() + " hints" : "no hints";
+                                    if(sender.viewModel.AvailableHints() == 1) remianingHintsText = "1 hint";
+                                    voiceOverManager.OutputMessage("Added the number " + randomCell.SolutionValue() + " into, column " + (randomCell.ColIndex() + 1) + ", row " + (randomCell.RowIndex() + 1) + ". You have " + remianingHintsText + " remaining.");
                                     return true;
                               }
                               cellsChecked++;
                         }
+                  } else {
+                  	voiceOverManager.OutputMessage("No hints remaining");
                   }
             };
 
@@ -92,36 +96,43 @@ SudokuBoardController = function(_voiceOverManager) {
             });
 
             //Keyboard input
+            var isKeyDown = false;
+            var cellLocationTimeout;
 		$(window).keydown(function(evt) {
+			//Stop key holding
+			if(isKeyDown) return;
+			isKeyDown = true;
+			$(window).on("keyup.stopHold", function() {
+                  	isKeyDown = false;
+                  	$(window).off('keyup.stopHold');
+                  });
+
 			if ($("#gameScreen").is(":visible")) {
 				var currentSelection = sender.viewModel.GetSelectedCell();
 				var square = currentSelection.square;
 				var cell = currentSelection.cell;
 
-				var validationTimeout;
-				var hintTimeOut;
-				var newGameTimeOut;
-
 				var hasMovedCell = false;
 				var handled = true;
 				switch(keyCodeToAction(evt.which)) {
-					//Validation
 					case "v":
 						if(sender.viewModel.IsComplete()) return;
                                     showBoardValidation();
                                     $(".validateButton").addClass("pressed");
-                                    validationTimeout = setTimeout(function() {
+                                    $(window).on("keyup.validate", function() {
                                     	$(".validateButton").removeClass("pressed");
-                                    }, 150);
+                                    	$(window).off('keyup.validate');
+                                    });
 						break;
 
 					case "h":
 						if(sender.viewModel.IsComplete()) return;
                                     if(getHint()) {
 	                                    $(".hintButton").addClass("pressed");
-	                                    hintTimeOut = setTimeout(function() {
+	                                    $(window).on("keyup.hint", function() {
 	                                    	$(".hintButton").removeClass("pressed");
-	                                    }, 150);
+	                                    	$(window).off('keyup.hint');
+	                                    });
 	                              }
 						break;
 
@@ -131,9 +142,39 @@ SudokuBoardController = function(_voiceOverManager) {
                                           difficulty: $("html").attr("data-difficulty")
                                     });
                                     $(".newGameButton").addClass("pressed");
-                                    newGameTimeOut = setTimeout(function() {
+                                    $(window).on("keyup.newGame", function() {
                                     	$(".newGameButton").removeClass("pressed");
-                                    }, 150);
+                                    	$(window).off('keyup.newGame');
+                                    });
+						break;
+
+					case "b":
+						var message = "The current square contains: ";
+						var currentCell = sender.viewModel.GetSelectedCell();
+						var currentSquare = sender.viewModel.Squares()[currentCell.square].Cells();
+						for (var i = 0; i < currentSquare.length; i++) {
+							var value = currentSquare[i].CurrentValue() == "" ? "blank, " : (currentSquare[i].CurrentValue() + ", ");
+							message += value;
+						}
+						voiceOverManager.OutputMessage(message);
+						break;
+					case "r":
+						var message = "The current row contains ";
+						var currentRow = getRowArray();
+						for (var i = 0; i < currentRow.length; i++) {
+							var value = currentRow[i] == "" ? "blank, " : (currentRow[i] + ", ");
+							message += value;
+						}
+						voiceOverManager.OutputMessage(message);
+						break;
+					case "c":
+						var message = "The current column contains ";
+						var currentColumn = getColArray();
+						for (var i = 0; i < currentColumn.length; i++) {
+							var value = currentColumn[i] == "" ? "blank, " : (currentColumn[i] + ", ");
+							message += value;
+						}
+						voiceOverManager.OutputMessage(message);
 						break;
 
                               //Digit input
@@ -148,11 +189,13 @@ SudokuBoardController = function(_voiceOverManager) {
 					case "9":
 						if(sender.viewModel.IsComplete()) return;
 						sender.viewModel.SetCellValue(square, cell, keyCodeToAction(evt.which));
+						voiceOverManager.OutputMessage("Entered " + keyCodeToAction(evt.which) + " into selected cell");
 						break;
 
                               case "delete":
                               	if(sender.viewModel.IsComplete()) return;
                                     sender.viewModel.SetCellValue(square, cell, "");
+                                    voiceOverManager.OutputMessage("Cleared value in selected cell");
                                     break;
 
 					//MOVEMENT LOGIC
@@ -280,10 +323,15 @@ SudokuBoardController = function(_voiceOverManager) {
 					sender.viewModel.SetSelectedCell(square, cell);
 
 					if(hasMovedCell) {
-						var selectedCellLocation = sender.viewModel.GetSelectedCell();
-						var cell = sender.viewModel.Squares()[selectedCellLocation.square].Cells()[selectedCellLocation.cell];
-						var value = (cell.CurrentValue() == "") ? ", is blank" : (", value is " + cell.CurrentValue());
-						voiceOverManager.OutputMessage("Column " + (cell.ColIndex() + 1) + ", row " + (cell.RowIndex() + 1) + value);
+						isKeyDown = false; // Allows quick navigation of game grid
+
+						clearTimeout(cellLocationTimeout);
+						cellLocationTimeout = setTimeout(function() {
+							var selectedCellLocation = sender.viewModel.GetSelectedCell();
+							var cell = sender.viewModel.Squares()[selectedCellLocation.square].Cells()[selectedCellLocation.cell];
+							var value = (cell.CurrentValue() == "") ? ", is blank" : (", value is " + cell.CurrentValue());
+							voiceOverManager.OutputMessage("Column " + (cell.ColIndex() + 1) + ", row " + (cell.RowIndex() + 1) + value);
+						}, 500);
 					}
 				}
 			}
