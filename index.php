@@ -1,5 +1,5 @@
 <?php 
 	
-	header("Location: sudoku-new");
+	header("Location: App");
 	
 ?>
