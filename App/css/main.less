@@ -199,6 +199,19 @@ html {
         overflow-x: hidden; //stops animations creating scroll bars in firefox
     }
 
+    .fork-link {
+        display: block;
+        z-index: 999;
+        position: absolute;
+
+        .git-white {
+            display: none;
+        }
+        .git-black {
+            display: block;
+        }
+    }
+
     .applicationWrapper {
         position: relative;
         min-height: 100%;
@@ -727,6 +740,15 @@ html {
             background: @dark_backgroundSolid;
         }
 
+        .fork-link {
+            .git-white {
+                display: block;
+            }
+            .git-black {
+                display: none;
+            }
+        }
+
         .applicationWrapper {
             .ledge {
                 background: @dark_lightText;
@@ -1061,6 +1083,10 @@ html {
 
     //Media queries
     @media screen and (max-width: 710px) {
+        .fork-link {
+            display: none;
+        }
+
         .applicationWrapper {
             .logo {
                 width: 90%;
