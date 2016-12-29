@@ -1,4 +1,4 @@
-Accessible Sudoku
+# Accessible Sudoku
 
 Screen reader capable, single-page, sudoku web app, developed in JavaScript using KnockoutJS and jQuery.
 
